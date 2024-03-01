@@ -1,0 +1,28 @@
+---
+title: "The Bott Formula for Toric Varieties"
+date: 2002-04
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: Eberhard Karls Universität Tübingen
+        city: Tübingen    
+
+citation: 
+  type: article-journal
+  title: The Bott Formula for Toric Varieties
+  volume: 2
+  number: 1
+  issued: 2002
+  container-title: Moscow Mathematical Journal
+  page: 161-182
+  keyword: p-th Hilbert-Ehrhart polynomial, Zariski forms
+  doi: 10.17323/1609-4514-2002-2-1-161-182
+  url: http://www.mathjournals.org/mmj/vol2-1-2002/abst2-1-2002.html#materov_abstract
+  language: en
+---
+
+The purpose of this paper is to give an explicit formula which allows one to compute the dimension of the cohomology groups of the sheaf $\Omega_{\mathbb{P}}^p(D)= \Omega_{\mathbb{P}}^p\otimes {\mathcal{O}_\mathbb{P}}(D)$ of $p$-th differential forms Zariski twisted by an ample invertible sheaf on a complete simplicial toric variety. The formula involves some combinatorial sums of integer points over all faces of the support polytope for ${\mathcal{O}_\mathbb{P}}(D)$. Comparison of two versions of the Bott formula gives some elegant corollaries in the combinatorics of simple polytopes. Also, we obtain a generalization of the reciprocity law. Some applications of the Bott formula are discussed.

@@ -1,0 +1,34 @@
+---
+title: "Tate resolutions for Segre embeddings"
+date: 2008-05
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG, math.AC]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: Department of Mathematics and Statistics, University of Massachusetts, Amherst, USA
+        city: Amherst
+        state: MA
+        postal-code: 01003-9305
+  - name: David Cox
+    affiliations:
+      - name: Department of Mathematics and Computer Science, Amherst College, USA
+
+citation: 
+  type: article-journal
+  title: Tate resolutions for Segre embeddings
+  volume: 2
+  number: 5
+  issued: 2008
+  container-title: Algebra & Number Theory
+  publisher: MSP
+  page: 523-549
+  keyword: Segre embedding, Tate resolution, toric Jacobian
+  doi: 10.2140/ant.2008.2.523
+  url: https://projecteuclid.org/journals/algebra-and-number-theory/volume-2/issue-5/Tate-resolutions-for-Segre-embeddings/10.2140/ant.2008.2.523.full
+  language: en
+---
+
+We give an explicit description of the terms and differentials of the Tate resolution of sheaves arising from Segre embeddings of $\mathbb{P}^a\times\mathbb{P}^b$. We prove that the maps in this Tate resolution are either coming from Sylvester-type maps, or from Bezout-type maps arising from the so-called toric Jacobian.

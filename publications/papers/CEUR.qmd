@@ -1,0 +1,28 @@
+---
+title: "Using Tools of Intellectual Analysis in Area Safety Management"
+date: 2021-06
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, R]
+lang: en
+author:
+  - name: E. Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России    
+  - name: V. Nicheporchuk
+    orcid: 0000-0001-5365-1307
+    affiliation: Институт вычислительного моделирования СО РАН
+  
+citation: 
+  type: collection
+  title: Using Tools of Intellectual Analysis in Area Safety Management
+  container-title: SibDATA 2021. The 2nd Siberian Scientific Workshop on Data Analysis Technologies with Applications 2021
+  issued: 2021
+  page: 86-92
+  keyword: Data analysis, preprocessing, spatial visualization 
+  url: https://ceur-ws.org/Vol-3047/
+  doi: 10.47813/sibdata-2-2021-12
+---
+
+In this study, we explore various methods of analytical data processing employed to support information tasks in managing territory safety. Specifically, we investigate the challenge of data availability when utilizing data lakes technology for operational analytics. By leveraging Data Mining and Machine Learning techniques for processing extensive datasets encompassing monitoring data, hazard event catalogs, and territory characteristics, we are able to swiftly and effectively mitigate threats to human life. The findings of our spatial modeling of fire risks are presented, along with a novel approach for predicting time series utilizing artificial neural networks.

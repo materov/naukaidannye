@@ -1,0 +1,33 @@
+---
+title: "Weighted Lattice Point Sums in Lattice Polytopes, Unifying Dehn–Sommerville and Ehrhart–Macdonald"
+date: 2020-01
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG, math.CO]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России
+  - name: Paul Gunnels
+    affiliations:
+      - name: Department of Mathematics and Statistics, University of Massachusetts, Amherst, USA
+  - name: Matthias Beck
+    affiliations:
+      - name: Department of Mathematics, San Francisco State University, USA           
+
+citation: 
+  type: article-journal
+  title: Weighted Lattice Point Sums in Lattice Polytopes, Unifying Dehn–Sommerville and Ehrhart–Macdonald
+  volume: 65
+  issued: 2020
+  container-title: Discrete & Computational Geometry
+  page: 365–384
+  keyword: Ehrhart polynomial, lattice polytopes, Dehn–Sommerville relations, Euler–Maclaurin summation
+  doi: 10.1007/s00454-020-00175-2
+  url: https://link.springer.com/article/10.1007/s00454-020-00175-2
+  language: en
+---
+
+Let $V$ be a real vector space of dimension $n$ and let $M\subset V$ be a lattice. Let $P\subset V$ be an $n$-dimensional polytope with vertices in $M$, and let $\varphi\colon V\rightarrow \mathbb{C}$ be a homogeneous polynomial function of degree $d$.  For $q\in \mathbb{Z}_{>0}$ and any face $F$ of $P$, let $D_{\varphi, F}(q)$ be the sum of $\varphi$ over the lattice points in the dilate $qF$.  We define a generating function $G_{\varphi}(q,y) \in \mathbb{Q}[q][y]$ packaging together the various $D_{\varphi ,F}(q)$, and show that it satisfies a functional equation that simultaneously generalizes Ehrhart--Macdonald reciprocity and the Dehn--Sommerville relations.  When $P$ is a simple lattice polytope (i.e., each vertex meets $n$ edges), we show how $G_{\varphi}$ can be computed using an analogue of Brion--Vergne's Euler--Maclaurin summation formula.
+

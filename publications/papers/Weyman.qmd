@@ -1,0 +1,29 @@
+---
+title: "Tate Resolutions and Weyman Complexes"
+date: 2011-10
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG, math.AC]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России
+  - name: David Cox
+    affiliations:
+      - name: Department of Mathematics and Computer Science, Amherst College, USA       
+
+citation: 
+  type: article-journal
+  title: Tate Resolutions and Weyman Complexes
+  volume: 252
+  issued: 2011
+  container-title: Pacific Journal of Mathematics
+  page: 51-68
+  keyword: Tate resolution, Weyman complexes
+  doi: 10.2140/pjm.2011.252.51
+  url: https://msp.org/pjm/2011/252-1/p04.xhtml
+  language: en
+---
+
+We construct generalized Weyman complexes for coherent sheaves on projective space and describe explicitly how the diﬀerential depend on the diﬀerentials in the correpsonding Tate resolution. We apply this to deﬁne the Weyman complex of a coherent sheaf on a projective variety and explain how certain Weyman complexes can be regarded as Fourier-Mukai transforms.

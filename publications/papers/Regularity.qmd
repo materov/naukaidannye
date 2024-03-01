@@ -1,0 +1,32 @@
+---
+title: "Regularity and Segre-Veronese embeddings"
+date: 2009-01
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG, math.AC]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: Department of Mathematics and Statistics, University of Massachusetts, Amherst, USA
+        city: Amherst, USA
+        state: MA
+        postal-code: 01003-9305
+  - name: David Cox
+    affiliations:
+      - name: Department of Mathematics and Computer Science, Amherst College, USA       
+
+citation: 
+  type: article-journal
+  title: Regularity and Segre-Veronese embeddings
+  volume: 137
+  issued: 2009
+  container-title: Proceedings of the American Mathematical Society
+  publisher: AMS
+  page: 1883-1890
+  keyword: Regularity, Segre-Veronese embedding, Tate resolution
+  url: https://www.ams.org/journals/proc/2009-137-06/S0002-9939-09-09783-4/
+  language: en
+---
+
+This paper studies the regularity of certain coherent sheaves that arise naturally from Segre-Veronese embeddings of a product of projective spaces. We give an explicit formula for the regularity of these sheaves and show that their regularity is subadditive. We then apply our results to study the Tate resolutions of these sheaves.

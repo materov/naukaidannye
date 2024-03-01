@@ -1,0 +1,33 @@
+---
+title: "Toric residues and mirror symmetry"
+date: 2002-11
+date-format: "MMMM YYYY"
+comments: false
+categories: [статья, math.AG]
+author:
+  - name: Evgeny Materov
+    orcid: 0000-0002-3916-0613
+    affiliations:
+      - name: Eberhard Karls Universität Tübingen, Deutschland
+        city: Tübingen 
+  - name: Victor Batyrev
+    orcid: 0000-0003-0160-5370
+    affiliations:
+      - name: Eberhard Karls Universität Tübingen, Deutschland
+        city: Tübingen            
+
+citation: 
+  type: article-journal
+  title: Toric residues and mirror symmetry
+  volume: 2
+  number: 3
+  issued: 2002
+  container-title: Moscow Mathematical Journal
+  page: 435-475
+  keyword: residues, toric varieties, intersection numbers, mirror symmetry
+  doi: 10.17323/1609-4514-2002-2-3-435-475 
+  url: http://www.mathjournals.org/mmj/vol2-3-2002/abst2-3-2002.html#batyrev-materov_abstract 
+  language: en
+---
+
+We develop some ideas of Morrison and Plesser and formulate a precise mathematical conjecture which has close relations to toric mirror symmetry. Our conjecture, we call it Toric Residue Mirror Conjecture, claims that the generating functions of intersection numbers of divisors on a special sequence of simplicial toric varieties are power series expansions of some rational functions obtained as toric residues. We expect that this conjecture holds true for all Gorenstein toric Fano varieties associated with reflexive polytopes and give some evidences for that. The proposed conjecture suggests a simple method for computing Yukawa couplings for toric mirror Calabi-Yau hypersurfaces without solving systems of differential equations. We make several explicit computations for Calabi-Yau hypersurfaces in weighted projective spaces and in products of projective spaces.
