@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Е.Н. Матеров">
+
+<title>Наука и данные - Введение в библиотеку highcharter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/lord-icon-bundle-3.4.4/bundle.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1VWR791XRL"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-1VWR791XRL', { 'anonymize_ip': true});
+</script>
+<script src="../../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="../../../site_libs/proj4js-2.3.15/proj4.js"></script>
+<link href="../../../site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+<script src="../../../site_libs/highcharts-9.3.1/highcharts.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/stock.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/map.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/data.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/organization.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/vector.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/venn.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/custom/reset.js"></script>
+<script src="../../../site_libs/highcharts-9.3.1/modules/boost.js"></script>
+<script src="../../../site_libs/highchart-binding-0.9.4/highchart.js"></script>
+
+
+<meta property="og:title" content="Наука и данные - Введение в библиотеку highcharter">
+<meta property="og:description" content="Обзор библиотеки highcharter для визуализации интерактивной графики">
+<meta property="og:image" content="https://naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter/featured.png">
+<meta property="og:site_name" content="Наука и данные">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image:height" content="746">
+<meta property="og:image:width" content="1538">
+<meta name="twitter:title" content="Наука и данные - Введение в библиотеку highcharter">
+<meta name="twitter:description" content="Обзор библиотеки highcharter для визуализации интерактивной графики">
+<meta name="twitter:image" content="https://naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter/featured.png">
+<meta name="twitter:creator" content="@materov">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="746">
+<meta name="twitter:image-width" content="1538">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Наука и данные</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Блог</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../publications/index.html"> 
+<span class="menu-text">Публикации</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Об авторе</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/naukaidannye"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@materov" rel="me"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/materov"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Введение в библиотеку highcharter</h1>
+            <p class="subtitle lead">Обзор библиотеки highcharter для визуализации интерактивной графики</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">highcharter</div>
+                <div class="quarto-category">Rstats</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Автор</div>
+      <div class="quarto-title-meta-contents">
+               <p>Е.Н. Матеров </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">16 марта 2022 г.</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Обновлено</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">4 марта 2024 г.</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul class="collapse">
+  <li><a href="#библиотека-highcharter" id="toc-библиотека-highcharter" class="nav-link active" data-scroll-target="#библиотека-highcharter">Библиотека highcharter</a></li>
+  <li><a href="#примеры-использования-highcharter" id="toc-примеры-использования-highcharter" class="nav-link" data-scroll-target="#примеры-использования-highcharter">Примеры использования highcharter</a>
+  <ul class="collapse">
+  <li><a href="#географические-карты-в-highcharter" id="toc-географические-карты-в-highcharter" class="nav-link" data-scroll-target="#географические-карты-в-highcharter">Географические карты в highcharter</a></li>
+  <li><a href="#локализация-highcharter" id="toc-локализация-highcharter" class="nav-link" data-scroll-target="#локализация-highcharter">Локализация highcharter</a></li>
+  <li><a href="#отображение-биржевых-котировок" id="toc-отображение-биржевых-котировок" class="nav-link" data-scroll-target="#отображение-биржевых-котировок">Отображение биржевых котировок</a></li>
+  <li><a href="#примеры-применения-различных-тем-в-highcharter" id="toc-примеры-применения-различных-тем-в-highcharter" class="nav-link" data-scroll-target="#примеры-применения-различных-тем-в-highcharter">Примеры применения различных тем в highcharter</a></li>
+  <li><a href="#d-диаграммы" id="toc-d-диаграммы" class="nav-link" data-scroll-target="#d-диаграммы">3D-диаграммы</a></li>
+  </ul></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение">Заключение</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p><lord-icon speed="0.9" delay="1000" src="https://cdn.lordicon.com/unukghxb.json" trigger="loop"></lord-icon></p>
+<section id="библиотека-highcharter" class="level1">
+<h1>Библиотека highcharter</h1>
+<p>Для внедрения HTML-виджетов в отчеты как веб-приложения в языке <strong>R</strong> имеется большое количество различных инструментов, позволяющих создавать интерактивные графики, диаграммы и карты, например, <a href="https://echarts4r.john-coene.com/index.html" target="_blank">echarts4r</a>, <a href="http://rstudio.github.io/dygraphs/" target="_blank">dygraphs</a>, <a href="https://rstudio.github.io/leaflet/" target="_blank">Leaflet</a>, <a href="https://walker-data.com/mapboxapi/" target="_blank">mapboxapi</a>, <a href="https://plotly.com/r/" target="_blank">Plotly</a>.</p>
+<p>Больше примеров различных HTML-виджетов можно посмотреть на странице <a href="http://www.htmlwidgets.org/" target="_blank">www.htmlwidgets.org</a> или странице <a href="https://krzjoa.github.io/awesome-r-dataviz/#/?id=interactive-plots" target="_blank">Interactive plots</a>. Преимуществом этих средств визуализации является то, что они не требуют настройки серверной части как в <a href="https://shiny.rstudio.com/" target="_blank">Shiny</a>. К недостаткам можно отнести необходимость разбираться в “диалектах” каждого из инструментов.</p>
+<p>Библиотека <code>highcharter</code> является одним из эффективных средств для интерактивной визуализации данных. Это <em>обертка</em> для <strong>JavaScript</strong>-библиотеки <a href="https://www.highcharts.com/" target="_blank">Highcharts</a>, которая обладает гибкими настройками и мощным API. Отметим, что для коммерческого и правительственного использования <code>highcharts</code> не является бесплатным, при этом использование <code>highcharter</code> не предоставляет и не подразумевает лицензию для <code>highcharts</code>.</p>
+<p>Установить библиотеку возможно как с <a href="https://cran.r-project.org/web/packages/highcharter/index.html" target="_blank">CRAN</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"highcharter"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>так и с <a href="https://github.com/jbkunst/highcharter" target="_blank">GitHub</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"jbkunst/highcharter"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="примеры-использования-highcharter" class="level1 page-columns page-full">
+<h1>Примеры использования highcharter</h1>
+<p>Подключим библиотеку:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(highcharter)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Подключим дополнительные библиотеки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>highcharter</code> позволяет создавать графики с использованием двух основных функций:</p>
+<ul>
+<li><code>hchart()</code> – универсальная функция для создания диаграмм, представляющих собой объект <code>highchart</code> аналогично <code>qplot</code> в <code>ggplot2</code>;</li>
+<li><code>hc_add_series()</code>, которая добавляет данные к существующему <code>highchart</code> объекту в зависимости от типа (класса) данных аналогично <code>geom_</code> в <code>ggplot2</code>.</li>
+</ul>
+<p>Например, для отрисовки диаграммы в <code>hchart()</code>, используется структура</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hchart</span>(<span class="sc">&lt;</span>data.frame<span class="sc">&gt;</span>, <span class="sc">&lt;</span>type_of_chart<span class="sc">&gt;</span>, <span class="fu">hcaes</span>(<span class="sc">&lt;</span>aesthetics<span class="sc">&gt;</span>), ...)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>здесь:</p>
+<ul>
+<li><code>&lt;data.frame&gt;</code> – таблица данных для построения диаграммы;</li>
+<li><code>&lt;type_of_chart&gt;</code> представляет собой строку для указания типа диаграммы; это значение может быть: линия, сплайн, область, тепловая карта, и т.д;</li>
+<li><code>&lt;aesthetics&gt;</code> – используемое отображение для отрисовки данных;</li>
+<li><code>hcaes</code> работает подобно <code>aes</code> в <code>ggplot2</code>;</li>
+<li><code>...</code> – другие параметры настройки диаграммы.</li>
+</ul>
+<section id="географические-карты-в-highcharter" class="level2">
+<h2 class="anchored" data-anchor-id="географические-карты-в-highcharter">Географические карты в highcharter</h2>
+<p>Покажем, как можно визуализировать простейшие географические данные в <code>highcharter</code>. В качестве примера визуализируем на карте Российской Федерации города, население которых превышает 300 000 чел. Актуальные данные по городам РФ можно получить с сайта <a href="https://data.rcsi.science/data-catalog/datasets/160/" target="_blank">ИНИД</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. После простейшей предобработки таблица с данными выглядит следующим образом.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cities_300 </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 65 × 4
+   name             population   lon   lat
+   &lt;chr&gt;                 &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 Калининград          467289  20.4  54.7
+ 2 Пенза                522317  45    53.2
+ 3 Владимир             356168  40.4  56.1
+ 4 Иркутск              623479 104.   52.3
+ 5 Оренбург             561686  55.1  51.8
+ 6 Архангельск          348343  40.5  64.5
+ 7 Саранск              318578  45.2  54.2
+ 8 Набережные Челны     524444  52.4  55.7
+ 9 Ярославль            603961  39.9  57.6
+10 Чебоксары            492331  47.2  56.1
+# ℹ 55 more rows</code></pre>
+</div>
+</div>
+<p>Добавим цвет для визуального отображения количества населения в каждой точке.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cities_300 <span class="ot">&lt;-</span> cities_300 <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colors =</span> <span class="fu">colorize</span>(population))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Непосредственно подложка карты скачивается со <a href="https://code.highcharts.com/mapdata/" target="_blank">страницы Highcharts</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, затем добавляется слой с городами, параметр <code>tooltip</code> отвечает за всплывающие подсказки в коде для визуализации карты.</p>
+<details>
+<summary>
+Код
+</summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hcmap</span>(<span class="st">"countries/ru/custom/ru-all-disputed"</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">showInLegend =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> cities_300, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"mappoint"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hcaes</span>(<span class="at">color =</span> colors),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Город"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">tooltip =</span> <span class="fu">list</span>(<span class="at">pointFormat =</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>              <span class="st">"{point.name}: {point.population:,.0f} чел."</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">"Города с населением свыше 300 000 чел."</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_subtitle</span>(<span class="at">text =</span> <span class="st">"на 12.03.2021"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell">
+<iframe src="https://modest-wiles-9551a3.netlify.app/" width="672" height="500px" data-external="1">
+</iframe>
+</div>
+<p>Другой пример построения карт показывает как можно визуализировать глобальную карту. В качестве примера используем данные <a href="https://data.world/data-society/global-climate-change-data" target="_blank">Global Climate Change Data</a> (источник: <a href="http://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>AverageTemperature </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 169 × 3
+   country              aveT iso3 
+   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;
+ 1 Afghanistan            15 AFG  
+ 2 Albania                14 ALB  
+ 3 Algeria                24 DZA  
+ 4 Andorra                12 ADO  
+ 5 Antigua and Barbuda    27 ATG  
+ 6 Argentina              15 ARG  
+ 7 Armenia                10 ARM  
+ 8 Australia              22 AUS  
+ 9 Austria                 7 AUT  
+10 Azerbaijan             13 AZE  
+# ℹ 159 more rows</code></pre>
+</div>
+</div>
+<details>
+<summary>
+Код
+</summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hcmap</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"custom/world-robinson-lowres"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> AverageTemperature,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"температура"</span>, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"aveT"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># необходимо сделать join стандартных индексов карты "iso-a3"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># и индексов стран из данных -- переменной "iso3"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">joinBy        =</span> <span class="fu">c</span>(<span class="st">"iso-a3"</span>, <span class="st">"iso3"</span>), </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">borderWidth   =</span> <span class="dv">0</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">nullColor     =</span> <span class="st">"#d3d3d3"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">tooltip       =</span> <span class="fu">list</span>(<span class="at">valueSuffix =</span> <span class="st">"°C"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_colorAxis</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">stops =</span> <span class="fu">color_stops</span>(<span class="at">colors =</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                        viridisLite<span class="sc">::</span><span class="fu">inferno</span>(<span class="dv">10</span>, <span class="at">begin =</span> <span class="fl">0.1</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text    =</span> <span class="st">"Средняя температура земной поверхности"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_subtitle</span>(<span class="at">text =</span> <span class="st">"за период 2000-2013 гг."</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell">
+<iframe src="https://wonderful-williams-b10928.netlify.app/" width="672" height="500px" data-external="1">
+</iframe>
+</div>
+</section>
+<section id="локализация-highcharter" class="level2">
+<h2 class="anchored" data-anchor-id="локализация-highcharter">Локализация highcharter</h2>
+<p>Идея переопределения языковых опций в <code>highcharter</code> основана на ответах <a href="https://stackoverflow.com/questions/25266392/how-to-set-highchart-global-options-in-r" target="_blank">Stack Overflow 1</a>, <a href="https://stackoverflow.com/questions/7419358/highcharts-datetime-localization" target="_blank">Stack Overflow 2</a>, а также <a href="https://api.highcharts.com/highstock/lang" target="_blank">Highcharts Configuration options</a>. Сначала необходимо получить текущие настройки локализации в переменную <code>lang</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lang <span class="ot">&lt;-</span> <span class="fu">getOption</span>(<span class="st">"highcharter.lang"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Например, для сокращений дней недели переопределение значений выглядит так:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>shortWeekdays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Сб"</span>, <span class="st">"Вс"</span>, <span class="st">"Пн"</span>, <span class="st">"Вт"</span>, <span class="st">"Ср"</span>, <span class="st">"Чт"</span>, <span class="st">"Пт"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Полный код локализации</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>contextButtonTitle <span class="ot">&lt;-</span> <span class="st">"Контекстное меню диаграммы"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>decimalPoint <span class="ot">&lt;-</span> <span class="st">","</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadCSV  <span class="ot">&lt;-</span> <span class="st">"Загрузить CSV"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadJPEG <span class="ot">&lt;-</span> <span class="st">"Загрузить JPEG"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadPDF  <span class="ot">&lt;-</span> <span class="st">"Загрузить PDF"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadPNG  <span class="ot">&lt;-</span> <span class="st">"Загрузить PNG"</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadSVG  <span class="ot">&lt;-</span> <span class="st">"Загрузить SVG"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>downloadXLS  <span class="ot">&lt;-</span> <span class="st">"Загрузить XLS"</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>drillUpText <span class="ot">&lt;-</span> <span class="st">"◁ Назад к {series.name}"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>exitFullscreen <span class="ot">&lt;-</span> <span class="st">"Выход из полноэкранного режима"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>exportData<span class="sc">$</span>annotationHeader <span class="ot">&lt;-</span> <span class="st">"Аннотации"</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>exportData<span class="sc">$</span>categoryHeader <span class="ot">&lt;-</span> <span class="st">"Категория"</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>hideData <span class="ot">&lt;-</span> <span class="st">"Скрыть таблицу данных"</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>loading <span class="ot">&lt;-</span> <span class="st">"Загрузка..."</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Январь"</span>, <span class="st">"Февраль"</span>, <span class="st">"Март"</span>, <span class="st">"Апрель"</span>, <span class="st">"Май"</span>, <span class="st">"Июнь"</span>, <span class="st">"Июль"</span>, <span class="st">"Август"</span>, <span class="st">"Сентябрь"</span>, <span class="st">"Октябрь"</span>, <span class="st">"Ноябрь"</span>, <span class="st">"Декабрь"</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>noData <span class="ot">&lt;-</span> <span class="st">"Нет данных для отображения"</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>printChart <span class="ot">&lt;-</span> <span class="st">"Печать диаграммы"</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>resetZoom <span class="ot">&lt;-</span> <span class="st">"Сброс масштабирования"</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>resetZoomTitle <span class="ot">&lt;-</span> <span class="st">"Сброс масштабирования к 1:1"</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>shortMonths <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Янв"</span>, <span class="st">"Фев"</span>, <span class="st">"Мар"</span>, <span class="st">"Апр"</span>, <span class="st">"Май"</span>, <span class="st">"Июн"</span>, <span class="st">"Июл"</span>, <span class="st">"Авг"</span>, <span class="st">"Сен"</span>, <span class="st">"Окт"</span>, <span class="st">"Ноя"</span>, <span class="st">"Дек"</span>)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>shortWeekdays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Сб"</span>, <span class="st">"Вс"</span>, <span class="st">"Пн"</span>, <span class="st">"Вт"</span>, <span class="st">"Ср"</span>, <span class="st">"Чт"</span>, <span class="st">"Пт"</span>)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>thousandsSep <span class="ot">&lt;-</span> <span class="st">" "</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>viewData <span class="ot">&lt;-</span> <span class="st">"Просмотр таблицы данных"</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>viewFullscreen <span class="ot">&lt;-</span> <span class="st">"Просмотр в полноэкранном режиме"</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>lang<span class="sc">$</span>weekdays <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Воскресенье"</span>, <span class="st">"Понедельник"</span>, <span class="st">"Вторник"</span>, <span class="st">"Среда"</span>, <span class="st">"Четверг"</span>, <span class="st">"Пятница"</span>, <span class="st">"Суббота"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>После переопределения настроек их необходимо сохранить.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">highcharter.lang =</span> lang)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="отображение-биржевых-котировок" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="отображение-биржевых-котировок">Отображение биржевых котировок</h2>
+<p>Библиотека <code>highcharter</code> может служить для отображения актуальных биржевых котировок на основе API библиотеки <code>quantmod</code>. Ниже приведен пример для отображения графика стоимости акций <strong>Apple</strong>.</p>
+<div class="column-body-inset-right">
+<div class="cell">
+<details class="code-fold">
+<summary>Код</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"quantmod"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://itecnote.com/tecnote/r-convert-between-zoo-object-and-data-frame-results-inconsistent-for-different-numbers-of-columns/</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>zooToDf <span class="ot">&lt;-</span> <span class="cf">function</span>(z) {</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(z) </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">time</span>(z)   <span class="co">#create a Date column</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(df) <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co">#so row names not filled with dates</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[,<span class="fu">c</span>(<span class="fu">ncol</span>(df), <span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(df)<span class="sc">-</span><span class="dv">1</span>))] <span class="co">#reorder columns so Date first</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>AAPL <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"AAPL"</span>, </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">from =</span> <span class="fu">Sys.Date</span>() <span class="sc">-</span> lubridate<span class="sc">::</span><span class="fu">years</span>(<span class="dv">1</span>), </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">auto.assign =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>AAPL <span class="ot">&lt;-</span> AAPL <span class="sc">|&gt;</span> <span class="fu">na.omit</span>()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>AAPL.ave <span class="ot">&lt;-</span> <span class="fu">SMA</span>(<span class="fu">Cl</span>(AAPL), <span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>AAPL_df <span class="ot">&lt;-</span> <span class="fu">zooToDf</span>(AAPL) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>data_flags <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2023-06-05"</span>, <span class="st">"2023-09-12"</span>, <span class="st">"2023-10-30"</span>)),</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="fu">c</span>(<span class="st">"WWDC 2023"</span>, <span class="st">"Apple event '23"</span>, <span class="st">"Scary fast event"</span>),</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Apple Vision Pro"</span>, <span class="st">"iPhone 15"</span>, <span class="st">"M3 chips"</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="fu">highchart</span>(<span class="at">type =</span> <span class="st">"stock"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_theme</span>(<span class="fu">hc_theme_hcrt</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(AAPL, </span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>                <span class="at">id =</span> <span class="dv">1</span>,</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">yAxis =</span> <span class="dv">0</span>, </span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>                <span class="at">name  =</span> <span class="st">"AAPL"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(AAPL.ave, </span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>                <span class="at">yAxis =</span> <span class="dv">0</span>, </span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>                <span class="at">name  =</span> <span class="st">"скользящее среднее AAPL"</span>,</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="fu">hex_to_rgba</span>(<span class="st">"blue"</span>, <span class="fl">0.6</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_tooltip</span>(<span class="at">valueDecimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">labels =</span> <span class="fu">list</span>(<span class="at">format =</span> <span class="st">"${value}"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#hc_title(text = "Котировки Apple за последний год") %&gt;% </span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hc_exporting</span>(</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">enabled =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    data_flags, </span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hcaes</span>(<span class="at">x =</span> date),</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"flags"</span>, </span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">onSeries =</span> <span class="dv">1</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-3f1f12e2ec03609f641d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-3f1f12e2ec03609f641d">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":null},"labels":{"format":"${value}"}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[1677628800000,146.8300018310547,147.2299957275391,145.0099945068359,145.3099975585938],[1677715200000,144.3800048828125,146.7100067138672,143.8999938964844,145.9100036621094],[1677801600000,148.0399932861328,151.1100006103516,147.3300018310547,151.0299987792969],[1678060800000,153.7899932861328,156.3000030517578,153.4600067138672,153.8300018310547],[1678147200000,153.6999969482422,154.0299987792969,151.1300048828125,151.6000061035156],[1678233600000,152.8099975585938,153.4700012207031,151.8300018310547,152.8699951171875],[1678320000000,153.5599975585938,154.5399932861328,150.2299957275391,150.5899963378906],[1678406400000,150.2100067138672,150.9400024414062,147.6100006103516,148.5],[1678665600000,147.8099975585938,153.1399993896484,147.6999969482422,150.4700012207031],[1678752000000,151.2799987792969,153.3999938964844,150.1000061035156,152.5899963378906],[1678838400000,151.1900024414062,153.25,149.9199981689453,152.9900054931641],[1678924800000,152.1600036621094,156.4600067138672,151.6399993896484,155.8500061035156],[1679011200000,156.0800018310547,156.7400054931641,154.2799987792969,155],[1679270400000,155.0700073242188,157.8200073242188,154.1499938964844,157.3999938964844],[1679356800000,157.3200073242188,159.3999938964844,156.5399932861328,159.2799987792969],[1679443200000,159.3000030517578,162.1399993896484,157.8099975585938,157.8300018310547],[1679529600000,158.8300018310547,161.5500030517578,157.6799926757812,158.9299926757812],[1679616000000,158.8600006103516,160.3399963378906,157.8500061035156,160.25],[1679875200000,159.9400024414062,160.7700042724609,157.8699951171875,158.2799987792969],[1679961600000,157.9700012207031,158.4900054931641,155.9799957275391,157.6499938964844],[1680048000000,159.3699951171875,161.0500030517578,159.3500061035156,160.7700042724609],[1680134400000,161.5299987792969,162.4700012207031,161.2700042724609,162.3600006103516],[1680220800000,162.4400024414062,165,161.9100036621094,164.8999938964844],[1680480000000,164.2700042724609,166.2899932861328,164.2200012207031,166.1699981689453],[1680566400000,166.6000061035156,166.8399963378906,165.1100006103516,165.6300048828125],[1680652800000,164.7400054931641,165.0500030517578,161.8000030517578,163.7599945068359],[1680739200000,162.4299926757812,164.9600067138672,162,164.6600036621094],[1681084800000,161.4199981689453,162.0299987792969,160.0800018310547,162.0299987792969],[1681171200000,162.3500061035156,162.3600006103516,160.5099945068359,160.8000030517578],[1681257600000,161.2200012207031,162.0599975585938,159.7799987792969,160.1000061035156],[1681344000000,161.6300048828125,165.8000030517578,161.4199981689453,165.5599975585938],[1681430400000,164.5899963378906,166.3200073242188,163.8200073242188,165.2100067138672],[1681689600000,165.0899963378906,165.3899993896484,164.0299987792969,165.2299957275391],[1681776000000,166.1000061035156,167.4100036621094,165.6499938964844,166.4700012207031],[1681862400000,165.8000030517578,168.1600036621094,165.5399932861328,167.6300048828125],[1681948800000,166.0899963378906,167.8699951171875,165.5599975585938,166.6499938964844],[1682035200000,165.0500030517578,166.4499969482422,164.4900054931641,165.0200042724609],[1682294400000,165,165.6000061035156,163.8899993896484,165.3300018310547],[1682380800000,165.1900024414062,166.3099975585938,163.7299957275391,163.7700042724609],[1682467200000,163.0599975585938,165.2799987792969,162.8000030517578,163.7599945068359],[1682553600000,165.1900024414062,168.5599975585938,165.1900024414062,168.4100036621094],[1682640000000,168.4900054931641,169.8500061035156,167.8800048828125,169.6799926757812],[1682899200000,169.2799987792969,170.4499969482422,168.6399993896484,169.5899963378906],[1682985600000,170.0899963378906,170.3500061035156,167.5399932861328,168.5399932861328],[1683072000000,169.5,170.9199981689453,167.1600036621094,167.4499969482422],[1683158400000,164.8899993896484,167.0399932861328,164.3099975585938,165.7899932861328],[1683244800000,170.9799957275391,174.3000030517578,170.7599945068359,173.5700073242188],[1683504000000,172.4799957275391,173.8500061035156,172.1100006103516,173.5],[1683590400000,173.0500030517578,173.5399932861328,171.6000061035156,171.7700042724609],[1683676800000,173.0200042724609,174.0299987792969,171.8999938964844,173.5599975585938],[1683763200000,173.8500061035156,174.5899963378906,172.1699981689453,173.75],[1683849600000,173.6199951171875,174.0599975585938,171,172.5700073242188],[1684108800000,173.1600036621094,173.2100067138672,171.4700012207031,172.0700073242188],[1684195200000,171.9900054931641,173.1399993896484,171.8000030517578,172.0700073242188],[1684281600000,171.7100067138672,172.9299926757812,170.4199981689453,172.6900024414062],[1684368000000,173,175.2400054931641,172.5800018310547,175.0500030517578],[1684454400000,176.3899993896484,176.3899993896484,174.9400024414062,175.1600036621094],[1684713600000,173.9799957275391,174.7100067138672,173.4499969482422,174.1999969482422],[1684800000000,173.1300048828125,173.3800048828125,171.2799987792969,171.5599975585938],[1684886400000,171.0899963378906,172.4199981689453,170.5200042724609,171.8399963378906],[1684972800000,172.4100036621094,173.8999938964844,171.6900024414062,172.9900054931641],[1685059200000,173.3200073242188,175.7700042724609,173.1100006103516,175.4299926757812],[1685404800000,176.9600067138672,178.9900054931641,176.5700073242188,177.3000030517578],[1685491200000,177.3300018310547,179.3500061035156,176.7599945068359,177.25],[1685577600000,177.6999969482422,180.1199951171875,176.9299926757812,180.0899963378906],[1685664000000,181.0299987792969,181.7799987792969,179.2599945068359,180.9499969482422],[1685923200000,182.6300048828125,184.9499969482422,178.0399932861328,179.5800018310547],[1686009600000,179.9700012207031,180.1199951171875,177.4299926757812,179.2100067138672],[1686096000000,178.4400024414062,181.2100067138672,177.3200073242188,177.8200073242188],[1686182400000,177.8999938964844,180.8399963378906,177.4600067138672,180.5700073242188],[1686268800000,181.5,182.2299957275391,180.6300048828125,180.9600067138672],[1686528000000,181.2700042724609,183.8899993896484,180.9700012207031,183.7899932861328],[1686614400000,182.8000030517578,184.1499938964844,182.4400024414062,183.3099975585938],[1686700800000,183.3699951171875,184.3899993896484,182.0200042724609,183.9499969482422],[1686787200000,183.9600067138672,186.5200042724609,183.7799987792969,186.0099945068359],[1686873600000,186.7299957275391,186.9900054931641,184.2700042724609,184.9199981689453],[1687219200000,184.4100036621094,186.1000061035156,184.4100036621094,185.0099945068359],[1687305600000,184.8999938964844,185.4100036621094,182.5899963378906,183.9600067138672],[1687392000000,183.7400054931641,187.0500030517578,183.6699981689453,187],[1687478400000,185.5500030517578,187.5599975585938,185.0099945068359,186.6799926757812],[1687737600000,186.8300018310547,188.0500030517578,185.2299957275391,185.2700042724609],[1687824000000,185.8899993896484,188.3899993896484,185.6699981689453,188.0599975585938],[1687910400000,187.9299926757812,189.8999938964844,187.6000061035156,189.25],[1687996800000,189.0800018310547,190.0700073242188,188.9400024414062,189.5899963378906],[1688083200000,191.6300048828125,194.4799957275391,191.2599945068359,193.9700012207031],[1688342400000,193.7799987792969,193.8800048828125,191.7599945068359,192.4600067138672],[1688515200000,191.5700073242188,192.9799957275391,190.6199951171875,191.3300018310547],[1688601600000,189.8399963378906,192.0200042724609,189.1999969482422,191.8099975585938],[1688688000000,191.4100036621094,192.6699981689453,190.2400054931641,190.6799926757812],[1688947200000,189.2599945068359,189.9900054931641,187.0399932861328,188.6100006103516],[1689033600000,189.1600036621094,189.3000030517578,186.6000061035156,188.0800018310547],[1689120000000,189.6799926757812,191.6999969482422,188.4700012207031,189.7700042724609],[1689206400000,190.5,191.1900024414062,189.7799987792969,190.5399932861328],[1689292800000,190.2299957275391,191.1799926757812,189.6300048828125,190.6900024414062],[1689552000000,191.8999938964844,194.3200073242188,191.8099975585938,193.9900054931641],[1689638400000,193.3500061035156,194.3300018310547,192.4199981689453,193.7299957275391],[1689724800000,193.1000061035156,198.2299957275391,192.6499938964844,195.1000061035156],[1689811200000,195.0899963378906,196.4700012207031,192.5,193.1300048828125],[1689897600000,194.1000061035156,194.9700012207031,191.2299957275391,191.9400024414062],[1690156800000,193.4100036621094,194.9100036621094,192.25,192.75],[1690243200000,193.3300018310547,194.4400024414062,192.9199981689453,193.6199951171875],[1690329600000,193.6699981689453,195.6399993896484,193.3200073242188,194.5],[1690416000000,196.0200042724609,197.1999969482422,192.5500030517578,193.2200012207031],[1690502400000,194.6699981689453,196.6300048828125,194.1399993896484,195.8300018310547],[1690761600000,196.0599975585938,196.4900054931641,195.2599945068359,196.4499969482422],[1690848000000,196.2400054931641,196.7299957275391,195.2799987792969,195.6100006103516],[1690934400000,195.0399932861328,195.1799926757812,191.8500061035156,192.5800018310547],[1691020800000,191.5700073242188,192.3699951171875,190.6900024414062,191.1699981689453],[1691107200000,185.5200042724609,187.3800048828125,181.9199981689453,181.9900054931641],[1691366400000,182.1300048828125,183.1300048828125,177.3500061035156,178.8500061035156],[1691452800000,179.6900024414062,180.2700042724609,177.5800018310547,179.8000030517578],[1691539200000,180.8699951171875,180.9299926757812,177.0099945068359,178.1900024414062],[1691625600000,179.4799957275391,180.75,177.6000061035156,177.9700012207031],[1691712000000,177.3200073242188,178.6199951171875,176.5500030517578,177.7899932861328],[1691971200000,177.9700012207031,179.6900024414062,177.3099975585938,179.4600067138672],[1692057600000,178.8800048828125,179.4799957275391,177.0500030517578,177.4499969482422],[1692144000000,177.1300048828125,178.5399932861328,176.5,176.5700073242188],[1692230400000,177.1399993896484,177.5099945068359,173.4799957275391,174],[1692316800000,172.3000030517578,175.1000061035156,171.9600067138672,174.4900054931641],[1692576000000,175.0700073242188,176.1300048828125,173.7400054931641,175.8399963378906],[1692662400000,177.0599975585938,177.6799926757812,176.25,177.2299957275391],[1692748800000,178.5200042724609,181.5500030517578,178.3300018310547,181.1199951171875],[1692835200000,180.6699981689453,181.1000061035156,176.0099945068359,176.3800048828125],[1692921600000,177.3800048828125,179.1499938964844,175.8200073242188,178.6100006103516],[1693180800000,180.0899963378906,180.5899963378906,178.5500030517578,180.1900024414062],[1693267200000,179.6999969482422,184.8999938964844,179.5,184.1199951171875],[1693353600000,184.9400024414062,187.8500061035156,184.7400054931641,187.6499938964844],[1693440000000,187.8399963378906,189.1199951171875,187.4799957275391,187.8699951171875],[1693526400000,189.4900054931641,189.9199981689453,188.2799987792969,189.4600067138672],[1693872000000,188.2799987792969,189.9799957275391,187.6100006103516,189.6999969482422],[1693958400000,188.3999938964844,188.8500061035156,181.4700012207031,182.9100036621094],[1694044800000,175.1799926757812,178.2100067138672,173.5399932861328,177.5599975585938],[1694131200000,178.3500061035156,180.2400054931641,177.7899932861328,178.1799926757812],[1694390400000,180.0700073242188,180.3000030517578,177.3399963378906,179.3600006103516],[1694476800000,179.4900054931641,180.1300048828125,174.8200073242188,176.3000030517578],[1694563200000,176.5099945068359,177.3000030517578,173.9799957275391,174.2100067138672],[1694649600000,174,176.1000061035156,173.5800018310547,175.7400054931641],[1694736000000,176.4799957275391,176.5,173.8200073242188,175.0099945068359],[1694995200000,176.4799957275391,179.3800048828125,176.1699981689453,177.9700012207031],[1695081600000,177.5200042724609,179.6300048828125,177.1300048828125,179.0700073242188],[1695168000000,179.2599945068359,179.6999969482422,175.3999938964844,175.4900054931641],[1695254400000,174.5500030517578,176.3000030517578,173.8600006103516,173.9299926757812],[1695340800000,174.6699981689453,177.0800018310547,174.0500030517578,174.7899932861328],[1695600000000,174.1999969482422,176.9700012207031,174.1499938964844,176.0800018310547],[1695686400000,174.8200073242188,175.1999969482422,171.6600036621094,171.9600067138672],[1695772800000,172.6199951171875,173.0399932861328,169.0500030517578,170.4299926757812],[1695859200000,169.3399963378906,172.0299987792969,167.6199951171875,170.6900024414062],[1695945600000,172.0200042724609,173.0700073242188,170.3399963378906,171.2100067138672],[1696204800000,171.2200012207031,174.3000030517578,170.9299926757812,173.75],[1696291200000,172.2599945068359,173.6300048828125,170.8200073242188,172.3999938964844],[1696377600000,171.0899963378906,174.2100067138672,170.9700012207031,173.6600036621094],[1696464000000,173.7899932861328,175.4499969482422,172.6799926757812,174.9100036621094],[1696550400000,173.8000030517578,177.9900054931641,173.1799926757812,177.4900054931641],[1696809600000,176.8099975585938,179.0500030517578,175.8000030517578,178.9900054931641],[1696896000000,178.1000061035156,179.7200012207031,177.9499969482422,178.3899993896484],[1696982400000,178.1999969482422,179.8500061035156,177.6000061035156,179.8000030517578],[1697068800000,180.0700073242188,182.3399963378906,179.0399932861328,180.7100067138672],[1697155200000,181.4199981689453,181.9299926757812,178.1399993896484,178.8500061035156],[1697414400000,176.75,179.0800018310547,176.5099945068359,178.7200012207031],[1697500800000,176.6499938964844,178.4199981689453,174.8000030517578,177.1499938964844],[1697587200000,175.5800018310547,177.5800018310547,175.1100006103516,175.8399963378906],[1697673600000,176.0399932861328,177.8399963378906,175.1900024414062,175.4600067138672],[1697760000000,175.3099975585938,175.4199981689453,172.6399993896484,172.8800048828125],[1698019200000,170.9100036621094,174.0099945068359,169.9299926757812,173],[1698105600000,173.0500030517578,173.6699981689453,171.4499969482422,173.4400024414062],[1698192000000,171.8800048828125,173.0599975585938,170.6499938964844,171.1000061035156],[1698278400000,170.3699951171875,171.3800048828125,165.6699981689453,166.8899993896484],[1698364800000,166.9100036621094,168.9600067138672,166.8300018310547,168.2200012207031],[1698624000000,169.0200042724609,171.1699981689453,168.8699951171875,170.2899932861328],[1698710400000,169.3500061035156,170.8999938964844,167.8999938964844,170.7700042724609],[1698796800000,171,174.2299957275391,170.1199951171875,173.9700012207031],[1698883200000,175.5200042724609,177.7799987792969,175.4600067138672,177.5700073242188],[1698969600000,174.2400054931641,176.8200073242188,173.3500061035156,176.6499938964844],[1699228800000,176.3800048828125,179.4299926757812,176.2100067138672,179.2299957275391],[1699315200000,179.1799926757812,182.4400024414062,178.9700012207031,181.8200073242188],[1699401600000,182.3500061035156,183.4499969482422,181.5899963378906,182.8899993896484],[1699488000000,182.9600067138672,184.1199951171875,181.8099975585938,182.4100036621094],[1699574400000,183.9700012207031,186.5700073242188,183.5299987792969,186.3999938964844],[1699833600000,185.8200073242188,186.0299987792969,184.2100067138672,184.8000030517578],[1699920000000,187.6999969482422,188.1100006103516,186.3000030517578,187.4400024414062],[1700006400000,187.8500061035156,189.5,187.7799987792969,188.0099945068359],[1700092800000,189.5700073242188,190.9600067138672,188.6499938964844,189.7100067138672],[1700179200000,190.25,190.3800048828125,188.5700073242188,189.6900024414062],[1700438400000,189.8899993896484,191.9100036621094,189.8800048828125,191.4499969482422],[1700524800000,191.4100036621094,191.5200042724609,189.7400054931641,190.6399993896484],[1700611200000,191.4900054931641,192.9299926757812,190.8300018310547,191.3099975585938],[1700784000000,190.8699951171875,190.8999938964844,189.25,189.9700012207031],[1701043200000,189.9199981689453,190.6699981689453,188.8999938964844,189.7899932861328],[1701129600000,189.7799987792969,191.0800018310547,189.3999938964844,190.3999938964844],[1701216000000,190.8999938964844,192.0899963378906,188.9700012207031,189.3699951171875],[1701302400000,189.8399963378906,190.3200073242188,188.1900024414062,189.9499969482422],[1701388800000,190.3300018310547,191.5599975585938,189.2299957275391,191.2400054931641],[1701648000000,189.9799957275391,190.0500030517578,187.4499969482422,189.4299926757812],[1701734400000,190.2100067138672,194.3999938964844,190.1799926757812,193.4199981689453],[1701820800000,194.4499969482422,194.7599945068359,192.1100006103516,192.3200073242188],[1701907200000,193.6300048828125,195,193.5899963378906,194.2700042724609],[1701993600000,194.1999969482422,195.9900054931641,193.6699981689453,195.7100067138672],[1702252800000,193.1100006103516,193.4900054931641,191.4199981689453,193.1799926757812],[1702339200000,193.0800018310547,194.7200012207031,191.7200012207031,194.7100067138672],[1702425600000,195.0899963378906,198,194.8500061035156,197.9600067138672],[1702512000000,198.0200042724609,199.6199951171875,196.1600036621094,198.1100006103516],[1702598400000,197.5299987792969,198.3999938964844,197,197.5700073242188],[1702857600000,196.0899963378906,196.6300048828125,194.3899993896484,195.8899993896484],[1702944000000,196.1600036621094,196.9499969482422,195.8899993896484,196.9400024414062],[1703030400000,196.8999938964844,197.6799926757812,194.8300018310547,194.8300018310547],[1703116800000,196.1000061035156,197.0800018310547,193.5,194.6799926757812],[1703203200000,195.1799926757812,195.4100036621094,192.9700012207031,193.6000061035156],[1703548800000,193.6100006103516,193.8899993896484,192.8300018310547,193.0500030517578],[1703635200000,192.4900054931641,193.5,191.0899963378906,193.1499938964844],[1703721600000,194.1399993896484,194.6600036621094,193.1699981689453,193.5800018310547],[1703808000000,193.8999938964844,194.3999938964844,191.7299957275391,192.5299987792969],[1704153600000,187.1499938964844,188.4400024414062,183.8899993896484,185.6399993896484],[1704240000000,184.2200012207031,185.8800048828125,183.4299926757812,184.25],[1704326400000,182.1499938964844,183.0899963378906,180.8800048828125,181.9100036621094],[1704412800000,181.9900054931641,182.7599945068359,180.1699981689453,181.1799926757812],[1704672000000,182.0899963378906,185.6000061035156,181.5,185.5599975585938],[1704758400000,183.9199981689453,185.1499938964844,182.7299957275391,185.1399993896484],[1704844800000,184.3500061035156,186.3999938964844,183.9199981689453,186.1900024414062],[1704931200000,186.5399932861328,187.0500030517578,183.6199951171875,185.5899963378906],[1705017600000,186.0599975585938,186.7400054931641,185.1900024414062,185.9199981689453],[1705363200000,182.1600036621094,184.2599945068359,180.9299926757812,183.6300048828125],[1705449600000,181.2700042724609,182.9299926757812,180.3000030517578,182.6799926757812],[1705536000000,186.0899963378906,189.1399993896484,185.8300018310547,188.6300048828125],[1705622400000,189.3300018310547,191.9499969482422,188.8200073242188,191.5599975585938],[1705881600000,192.3000030517578,195.3300018310547,192.2599945068359,193.8899993896484],[1705968000000,195.0200042724609,195.75,193.8300018310547,195.1799926757812],[1706054400000,195.4199981689453,196.3800048828125,194.3399963378906,194.5],[1706140800000,195.2200012207031,196.2700042724609,193.1100006103516,194.1699981689453],[1706227200000,194.2700042724609,194.7599945068359,191.9400024414062,192.4199981689453],[1706486400000,192.0099945068359,192.1999969482422,189.5800018310547,191.7299957275391],[1706572800000,190.9400024414062,191.8000030517578,187.4700012207031,188.0399932861328],[1706659200000,187.0399932861328,187.1000061035156,184.3500061035156,184.3999938964844],[1706745600000,183.9900054931641,186.9499969482422,183.8200073242188,186.8600006103516],[1706832000000,179.8600006103516,187.3300018310547,179.25,185.8500061035156],[1707091200000,188.1499938964844,189.25,185.8399963378906,187.6799926757812],[1707177600000,186.8600006103516,189.3099975585938,186.7700042724609,189.3000030517578],[1707264000000,190.6399993896484,191.0500030517578,188.6100006103516,189.4100036621094],[1707350400000,189.3899993896484,189.5399932861328,187.3500061035156,188.3200073242188],[1707436800000,188.6499938964844,189.9900054931641,188,188.8500061035156],[1707696000000,188.4199981689453,188.6699981689453,186.7899932861328,187.1499938964844],[1707782400000,185.7700042724609,186.2100067138672,183.5099945068359,185.0399932861328],[1707868800000,185.3200073242188,185.5299987792969,182.4400024414062,184.1499938964844],[1707955200000,183.5500030517578,184.4900054931641,181.3500061035156,183.8600006103516],[1708041600000,183.4199981689453,184.8500061035156,181.6699981689453,182.3099975585938],[1708387200000,181.7899932861328,182.4299926757812,180,181.5599975585938],[1708473600000,181.9400024414062,182.8899993896484,180.6600036621094,182.3200073242188],[1708560000000,183.4799957275391,184.9600067138672,182.4600067138672,184.3699951171875],[1708646400000,185.0099945068359,185.0399932861328,182.2299957275391,182.5200042724609],[1708905600000,182.2400054931641,182.7599945068359,180.6499938964844,181.1600036621094],[1708992000000,181.1000061035156,183.9199981689453,179.5599975585938,182.6300048828125],[1709078400000,182.5099945068359,183.1199951171875,180.1300048828125,181.4199981689453],[1709164800000,181.2700042724609,182.5700073242188,179.5299987792969,180.75]],"name":"AAPL","type":"candlestick","id":1,"yAxis":0,"name.1":"AAPL"},{"data":[[1677628800000,null],[1677715200000,null],[1677801600000,null],[1678060800000,null],[1678147200000,149.5360015869141],[1678233600000,151.0480010986328],[1678320000000,151.9839996337891],[1678406400000,151.4779998779297],[1678665600000,150.8059997558594],[1678752000000,151.0039978027344],[1678838400000,151.0279998779297],[1678924800000,152.0800018310547],[1679011200000,153.3800018310547],[1679270400000,154.7660003662109],[1679356800000,156.1040008544922],[1679443200000,157.0720001220703],[1679529600000,157.6879974365234],[1679616000000,158.7379974365234],[1679875200000,158.9139984130859],[1679961600000,158.5879974365234],[1680048000000,159.1759979248047],[1680134400000,159.8619995117188],[1680220800000,160.7919982910156],[1680480000000,162.3699981689453],[1680566400000,163.9660003662109],[1680652800000,164.5639984130859],[1680739200000,165.0239990234375],[1681084800000,164.45],[1681171200000,163.3760009765625],[1681257600000,162.2700012207031],[1681344000000,162.6300018310547],[1681430400000,162.7400024414063],[1681689600000,163.3800018310547],[1681776000000,164.5140014648437],[1681862400000,166.0200012207031],[1681948800000,166.2380004882812],[1682035200000,166.2],[1682294400000,166.2200012207031],[1682380800000,165.6800018310547],[1682467200000,164.9059997558594],[1682553600000,165.2580017089844],[1682640000000,166.1899993896484],[1682899200000,167.0419982910156],[1682985600000,167.99599609375],[1683072000000,168.7339965820312],[1683158400000,168.2099945068359],[1683244800000,168.9879974365234],[1683504000000,169.7699981689453],[1683590400000,170.4160003662109],[1683676800000,171.6380004882812],[1683763200000,173.2300018310547],[1683849600000,173.0300018310547],[1684108800000,172.7440032958984],[1684195200000,172.80400390625],[1684281600000,172.6300048828125],[1684368000000,172.8900054931641],[1684454400000,173.4080047607422],[1684713600000,173.8340026855469],[1684800000000,173.7320007324219],[1684886400000,173.5619995117187],[1684972800000,173.15],[1685059200000,173.2039978027344],[1685404800000,173.8239990234375],[1685491200000,174.9619995117187],[1685577600000,176.6119995117188],[1685664000000,178.2039978027344],[1685923200000,179.0339996337891],[1686009600000,179.4160003662109],[1686096000000,179.5300018310547],[1686182400000,179.6260040283203],[1686268800000,179.6280059814453],[1686528000000,180.4700042724609],[1686614400000,181.2900024414062],[1686700800000,182.5160003662109],[1686787200000,183.6039978027344],[1686873600000,184.39599609375],[1687219200000,184.6399963378906],[1687305600000,184.7699981689453],[1687392000000,185.3799987792969],[1687478400000,185.5139984130859],[1687737600000,185.5839996337891],[1687824000000,186.1940002441406],[1687910400000,187.2519989013672],[1687996800000,187.7699981689453],[1688083200000,189.2279998779297],[1688342400000,190.6660003662109],[1688515200000,191.3200012207031],[1688601600000,191.8320007324219],[1688688000000,192.05],[1688947200000,190.9779998779297],[1689033600000,190.1019989013672],[1689120000000,189.7899993896484],[1689206400000,189.5359985351562],[1689292800000,189.5380004882813],[1689552000000,190.6140014648437],[1689638400000,191.7440002441406],[1689724800000,192.8100006103516],[1689811200000,193.3280029296875],[1689897600000,193.5780029296875],[1690156800000,193.3300018310547],[1690243200000,193.3080017089844],[1690329600000,193.1880004882813],[1690416000000,193.2059997558594],[1690502400000,193.9839996337891],[1690761600000,194.7239990234375],[1690848000000,195.1220001220703],[1690934400000,194.7380004882812],[1691020800000,194.3279998779297],[1691107200000,191.5600006103516],[1691366400000,188.0400024414062],[1691452800000,184.8780029296875],[1691539200000,182.0000030517578],[1691625600000,179.3600036621094],[1691712000000,178.5200012207031],[1691971200000,178.6420013427734],[1692057600000,178.1720001220703],[1692144000000,177.8480010986328],[1692230400000,177.0540008544922],[1692316800000,176.3940032958984],[1692576000000,175.6700012207031],[1692662400000,175.6260009765625],[1692748800000,176.5359985351562],[1692835200000,177.0119995117188],[1692921600000,177.8359985351562],[1693180800000,178.7059997558594],[1693267200000,180.0839996337891],[1693353600000,181.3899993896484],[1693440000000,183.6879974365234],[1693526400000,185.8579986572266],[1693872000000,187.7599975585937],[1693958400000,187.5179992675781],[1694044800000,185.5],[1694131200000,183.5619995117187],[1694390400000,181.5419982910156],[1694476800000,178.8619995117188],[1694563200000,177.1220001220703],[1694649600000,176.7580017089844],[1694736000000,176.1240020751953],[1694995200000,175.8460021972656],[1695081600000,176.4000030517578],[1695168000000,176.6560028076172],[1695254400000,176.2940002441406],[1695340800000,176.25],[1695600000000,175.8720001220703],[1695686400000,174.45],[1695772800000,173.4379974365234],[1695859200000,172.7899993896484],[1695945600000,172.0740020751953],[1696204800000,171.6080017089844],[1696291200000,171.6959991455078],[1696377600000,172.3420013427734],[1696464000000,173.1860015869141],[1696550400000,174.4420013427734],[1696809600000,175.4900024414063],[1696896000000,176.6880035400391],[1696982400000,177.9160034179687],[1697068800000,179.0760040283203],[1697155200000,179.3480041503906],[1697414400000,179.2940032958984],[1697500800000,179.0460021972656],[1697587200000,178.2540008544922],[1697673600000,177.2040008544922],[1697760000000,176.0100006103516],[1698019200000,174.8660003662109],[1698105600000,174.1240020751953],[1698192000000,173.1760040283203],[1698278400000,171.4620025634766],[1698364800000,170.5300018310547],[1698624000000,169.9880004882812],[1698710400000,169.4540008544922],[1698796800000,170.0279998779297],[1698883200000,172.1640014648438],[1698969600000,173.85],[1699228800000,175.6380004882812],[1699315200000,177.8480010986328],[1699401600000,179.6320007324219],[1699488000000,180.6],[1699574400000,182.55],[1699833600000,183.6640014648438],[1699920000000,184.7880004882813],[1700006400000,185.8119995117187],[1700092800000,187.2720001220703],[1700179200000,187.9300018310547],[1700438400000,189.2600006103516],[1700524800000,189.9],[1700611200000,190.5600006103516],[1700784000000,190.6119995117188],[1701043200000,190.6319976806641],[1701129600000,190.4219970703125],[1701216000000,190.1679962158203],[1701302400000,189.89599609375],[1701388800000,190.1499969482422],[1701648000000,190.0779968261719],[1701734400000,190.6819976806641],[1701820800000,191.2720001220703],[1701907200000,192.1360015869141],[1701993600000,193.0300018310547],[1702252800000,193.7800018310547],[1702339200000,194.0380035400391],[1702425600000,195.1660034179687],[1702512000000,195.9340026855469],[1702598400000,196.3060028076172],[1702857600000,196.8480041503906],[1702944000000,197.2940032958984],[1703030400000,196.6680023193359],[1703116800000,195.9820007324219],[1703203200000,195.1880004882813],[1703548800000,194.6200012207031],[1703635200000,193.8619995117188],[1703721600000,193.6119995117188],[1703808000000,193.1820007324219],[1704153600000,191.5899993896484],[1704240000000,189.8299987792969],[1704326400000,187.5820007324219],[1704412800000,185.1019989013672],[1704672000000,183.7079986572266],[1704758400000,183.6079986572266],[1704844800000,183.9959991455078],[1704931200000,184.7319976806641],[1705017600000,185.6799987792969],[1705363200000,185.2940002441406],[1705449600000,184.8019989013672],[1705536000000,185.2899993896484],[1705622400000,186.4839996337891],[1705881600000,188.0779998779297],[1705968000000,190.3879974365234],[1706054400000,192.7519989013672],[1706140800000,193.8599975585938],[1706227200000,194.0319976806641],[1706486400000,193.5999969482422],[1706572800000,192.1719970703125],[1706659200000,190.1519958496094],[1706745600000,188.6899963378906],[1706832000000,187.3759979248047],[1707091200000,186.5659973144531],[1707177600000,186.8179992675781],[1707264000000,187.8200012207031],[1707350400000,188.1120025634766],[1707436800000,188.7120025634766],[1707696000000,188.6060028076172],[1707782400000,187.7540008544922],[1707868800000,186.7019989013672],[1707955200000,185.8099975585938],[1708041600000,184.5019958496094],[1708387200000,183.3839965820312],[1708473600000,182.8399993896484],[1708560000000,182.8839996337891],[1708646400000,182.6160003662109],[1708905600000,182.3860015869141],[1708992000000,182.6000030517578],[1709078400000,182.4200012207031],[1709164800000,181.6960021972656]],"yAxis":0,"name":"скользящее среднее AAPL","color":"rgba(0,0,255,0.6)"},{"group":"group","data":[{"date":"2023-06-05","title":"WWDC 2023","text":"Apple Vision Pro","x":1685923200000},{"date":"2023-09-12","title":"Apple event '23","text":"iPhone 15","x":1694476800000},{"date":"2023-10-30","title":"Scary fast event","text":"M3 chips","x":1698624000000}],"type":"flags","onSeries":1}],"tooltip":{"valueDecimals":2}},"theme":{"colors":["#47475c","#61BC7B","#508CC8","#F49952","#9C9EDB","#6699a1"],"chart":{"style":{"fontFamily":"IBM Plex Sans","color":"#666666"}},"title":{"align":"left","style":{"fontFamily":"Alegreya Sans SC","fontSize":"24px"}},"subtitle":{"align":"left","style":{"fontFamily":"Alegreya Sans","fontSize":"16px"}},"caption":{"style":{"fontFamily":"Alegreya Sans","fontSize":"14px"}},"credits":{"style":{"fontFamily":"Roboto","fontSize":"10px"}},"legend":{"align":"right","verticalAlign":"bottom","itemStyle":{"fontWeight":"normal","color":"#A2A39C"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"plotOptions":{"line":{"marker":{"enabled":false}},"spline":{"marker":{"enabled":false}},"area":{"marker":{"enabled":false}},"areaspline":{"marker":{"enabled":false}},"arearange":{"marker":{"enabled":false}},"bubble":{"maxSize":"10%"}}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Контекстное меню диаграммы","decimalPoint":",","downloadCSV":"Загрузить CSV","downloadJPEG":"Загрузить JPEG","downloadPDF":"Загрузить PDF","downloadPNG":"Загрузить PNG","downloadSVG":"Загрузить SVG","downloadXLS":"Загрузить XLS","drillUpText":"◁ Назад к {series.name}","exitFullscreen":"Выход из полноэкранного режима","exportData":{"annotationHeader":"Аннотации","categoryDatetimeHeader":"DateTime","categoryHeader":"Категория"},"hideData":"Скрыть таблицу данных","invalidDate":null,"loading":"Загрузка...","months":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"noData":"Нет данных для отображения","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Печать диаграммы","resetZoom":"Сброс масштабирования","resetZoomTitle":"Сброс масштабирования к 1:1","shortMonths":["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"],"shortWeekdays":["Сб","Вс","Пн","Вт","Ср","Чт","Пт"],"thousandsSep":" ","viewData":"Просмотр таблицы данных","viewFullscreen":"Просмотр в полноэкранном режиме","weekdays":["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}},"type":"stock","fonts":["IBM+Plex+Sans","Alegreya+Sans+SC","Alegreya+Sans","Roboto"],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</section>
+<section id="примеры-применения-различных-тем-в-highcharter" class="level2">
+<h2 class="anchored" data-anchor-id="примеры-применения-различных-тем-в-highcharter">Примеры применения различных тем в highcharter</h2>
+<p>Загрузим данные <a href="https://data.giss.nasa.gov/cgi-bin/gistemp/stdata_show_v4.cgi?id=RSM00029570&amp;ds=14&amp;dt=1" target="_blank">GISS Surface Temperature Analysis</a> по средним температурам для оценки глобального изменения температуры земной поверхности за последние несколько лет в г. Красноярске. Графики и таблицы обновлялись примерно в середине каждого месяца с использованием текущих файлов данных <strong>NOAA GHCN v4</strong> для метеорологических станций.</p>
+<p>Нас будут интересовать средние температуры в каждом месяце начиная с 2013 года.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>weather_long</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 72 × 3
+    year month temp_ave
+   &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;
+ 1  2013 ЯНВ     -16.3 
+ 2  2013 ФЕВ     -14.3 
+ 3  2013 МАР      -6.45
+ 4  2013 АПР       4.71
+ 5  2013 МАЙ       8.81
+ 6  2013 ИЮН      15.7 
+ 7  2013 ИЮЛ      18.1 
+ 8  2013 АВГ      16.5 
+ 9  2013 СЕН       7.9 
+10  2013 ОКТ       2.4 
+# ℹ 62 more rows</code></pre>
+</div>
+</div>
+<p>Сформируем из этих данных временной ряд и спрогнозируем значения временного ряда на 2 года (24 месяца) вперед (см. <a href="https://otexts.com/fpp2/ets-forecasting.html" target="_blank">Forecasting with ETS models</a>).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Код</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>weather_month_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(weather_long[<span class="st">"temp_ave"</span>], </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2013</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>weather_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(<span class="fu">ets</span>(weather_month_ts), </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">h =</span> <span class="dv">24</span>, <span class="at">level =</span> <span class="dv">95</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>weather_forecast <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$model
+ETS(A,N,A) 
+
+Call:
+ ets(y = weather_month_ts) 
+
+  Smoothing parameters:
+    alpha = 1e-04 
+    gamma = 1e-04 
+
+  Initial states:
+    l = 2.7551 
+    s = -12.3157 -10.3952 -0.9107 6.561 14.5926 16.6841
+           15.0192 6.8878 2.8664 -5.9789 -14.7177 -18.2929
+
+  sigma:  2.958
+
+     AIC     AICc      BIC 
+478.5228 487.0943 512.6728 
+
+$mean
+            Jan        Feb        Mar        Apr        May        Jun
+2019 -15.537883 -11.962662  -3.223877   5.621412   9.642804  17.774297
+2020 -15.537883 -11.962662  -3.223877   5.621412   9.642804  17.774297
+            Jul        Aug        Sep        Oct        Nov        Dec
+2019  19.439087  17.347607   9.316062   1.844221  -7.640216  -9.560651
+2020  19.439087  17.347607   9.316062   1.844221  -7.640216  -9.560651
+
+$level
+[1] 95</code></pre>
+</div>
+</div>
+<p>Теперь создадим базовый <code>highcharter</code>-график.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Код</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hc_weather <span class="ot">&lt;-</span> <span class="fu">hchart</span>(weather_forecast) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="st">"Прогноз средних температур в г. Красноярске (в °C)"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">labels =</span> <span class="fu">list</span>(<span class="at">format =</span> <span class="st">"{value} °C"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_tooltip</span>(<span class="at">shared =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">valueDecimals =</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Отобразим полученный результат используя стилизованную тему.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>hc_weather <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_theme</span>(<span class="fu">hc_theme_smpl</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-41d2a14c858811a457db" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-41d2a14c858811a457db">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Прогноз средних температур в г. Красноярске (в °C)"},"yAxis":{"title":{"text":null},"labels":{"format":"{value} °C"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"type":"datetime"},"series":[{"data":[[1356998400000,-16.27],[1359676800000,-14.26],[1362096000000,-6.45],[1364774400000,4.71],[1367366400000,8.81],[1370044800000,15.7],[1372636800000,18.1],[1375315200000,16.5],[1377993600000,7.9],[1380585600000,2.4],[1383264000000,-1.15],[1385856000000,-5.75],[1388534400000,-12.8],[1391212800000,-16.9],[1393632000000,-1.5],[1396310400000,7],[1398902400000,7.2],[1401580800000,16.3],[1404172800000,19.5],[1406851200000,16.4],[1409529600000,7.1],[1412121600000,0.5],[1414800000000,-7.5],[1417392000000,-7.3],[1420070400000,-9.449999999999999],[1422748800000,-8.5],[1425168000000,-3.7],[1427846400000,5.9],[1430438400000,11.61],[1433116800000,17.55],[1435708800000,20.37],[1438387200000,17.83],[1441065600000,9.050000000000001],[1443657600000,3.62],[1446336000000,-11.51],[1448928000000,-5.9],[1451606400000,-21.78],[1454284800000,-8.6],[1456790400000,-2.39],[1459468800000,5.08],[1462060800000,8.960000000000001],[1464739200000,18.52],[1467331200000,20.71],[1470009600000,17.17],[1472688000000,12.18],[1475280000000,-3.81],[1477958400000,-11.23],[1480550400000,-10.23],[1483228800000,-13.53],[1485907200000,-9.57],[1488326400000,-0.54],[1491004800000,6.59],[1493596800000,11.99],[1496275200000,19.68],[1498867200000,19.38],[1501545600000,17.28],[1504224000000,8.789999999999999],[1506816000000,1.95],[1509494400000,-5.86],[1512086400000,-9.35],[1514764800000,-19.84],[1517443200000,-13.55],[1519862400000,-5.05],[1522540800000,4.59],[1525132800000,8.91],[1527811200000,20.14],[1530403200000,17.99],[1533081600000,18.65],[1535760000000,11.07],[1538352000000,5.78],[1541030400000,-8.51],[1543622400000,-18.92]],"name":"ETS(A,N,A)","zIndex":3},{"data":[[1546300800000,-15.53788261741555],[1548979200000,-11.9626623011215],[1551398400000,-3.223876804267333],[1554076800000,5.621412103930908],[1556668800000,9.642803652101428],[1559347200000,17.77429735602945],[1561939200000,19.43908710414262],[1564617600000,17.34760739684069],[1567296000000,9.316062064712836],[1569888000000,1.844221331982035],[1572566400000,-7.64021584553622],[1575158400000,-9.560650978699186],[1577836800000,-15.53788261741555],[1580515200000,-11.9626623011215],[1583020800000,-3.223876804267333],[1585699200000,5.621412103930908],[1588291200000,9.642803652101428],[1590969600000,17.77429735602945],[1593561600000,19.43908710414262],[1596240000000,17.34760739684069],[1598918400000,9.316062064712836],[1601510400000,1.844221331982035],[1604188800000,-7.64021584553622],[1606780800000,-9.560650978699186]],"name":"ETS(A,N,A)","zIndex":2,"id":"viy3wvt1ix"},{"data":[[1546300800000,-21.33549649219635,-9.740268742634743],[1548979200000,-17.76027620526119,-6.165048396981804],[1551398400000,-9.021490737765921,2.573737129231255],[1554076800000,-0.1762018589265724,11.41902606678839],[1556668800000,3.845189659885055,15.4404176443178],[1559347200000,11.97668333445419,23.57191137760471],[1561939200000,13.64147305320846,25.23670115507678],[1564617600000,11.54999331654764,23.14522147713373],[1567296000000,3.518447955060896,15.11367617436478],[1569888000000,-3.953392807028798,7.641835470992867],[1572566400000,-13.43783001390594,-1.842601677166496],[1575158400000,-15.35826526381131,-3.763036693587066],[1577836800000,-21.33549693188656,-9.740268302944536],[1580515200000,-17.7602766449514,-6.165047957291598],[1583020800000,-9.021491177456124,2.573737568921458],[1585699200000,-0.1762022986167731,11.41902650647859],[1588291200000,3.845189220194857,15.440418084008],[1590969600000,11.97668289476399,23.57191181729491],[1593561600000,13.64147261351827,25.23670159476697],[1596240000000,11.54999287685744,23.14522191682393],[1598918400000,3.518447515370706,15.11367661405497],[1601510400000,-3.953393246718986,7.641835910683056],[1604188800000,-13.43783045359613,-1.842601237476312],[1606780800000,-15.35826570350148,-3.763036253896891]],"name":"ETS(A,N,A) level 95","type":"arearange","fillOpacity":0.1,"zIndex":1,"lineWidth":0,"linkedTo":"viy3wvt1ix"}],"tooltip":{"shared":true,"valueDecimals":1}},"theme":{"colors":["#d35400","#2980b9","#2ecc71","#f1c40f","#2c3e50","#7f8c8d"],"chart":{"style":{"fontFamily":"Roboto","color":"#666666"}},"title":{"align":"left","style":{"fontFamily":"Roboto Condensed","fontWeight":"bold"}},"subtitle":{"align":"left","style":{"fontFamily":"Roboto Condensed"}},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"plotOptions":{"line":{"marker":{"enabled":false}},"spline":{"marker":{"enabled":false}},"area":{"marker":{"enabled":false}},"areaspline":{"marker":{"enabled":false}},"arearange":{"marker":{"enabled":false}},"bubble":{"maxSize":"10%"}}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Контекстное меню диаграммы","decimalPoint":",","downloadCSV":"Загрузить CSV","downloadJPEG":"Загрузить JPEG","downloadPDF":"Загрузить PDF","downloadPNG":"Загрузить PNG","downloadSVG":"Загрузить SVG","downloadXLS":"Загрузить XLS","drillUpText":"◁ Назад к {series.name}","exitFullscreen":"Выход из полноэкранного режима","exportData":{"annotationHeader":"Аннотации","categoryDatetimeHeader":"DateTime","categoryHeader":"Категория"},"hideData":"Скрыть таблицу данных","invalidDate":null,"loading":"Загрузка...","months":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"noData":"Нет данных для отображения","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Печать диаграммы","resetZoom":"Сброс масштабирования","resetZoomTitle":"Сброс масштабирования к 1:1","shortMonths":["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"],"shortWeekdays":["Сб","Вс","Пн","Вт","Ср","Чт","Пт"],"thousandsSep":" ","viewData":"Просмотр таблицы данных","viewFullscreen":"Просмотр в полноэкранном режиме","weekdays":["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}},"type":"chart","fonts":["Roboto","Roboto+Condensed"],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Визуализируем тот же график используя другие темы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>hc_weather <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_theme</span>(<span class="fu">hc_theme_google</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-f98c49ee53b23fd90d98" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f98c49ee53b23fd90d98">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Прогноз средних температур в г. Красноярске (в °C)"},"yAxis":{"title":{"text":null},"labels":{"format":"{value} °C"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"type":"datetime"},"series":[{"data":[[1356998400000,-16.27],[1359676800000,-14.26],[1362096000000,-6.45],[1364774400000,4.71],[1367366400000,8.81],[1370044800000,15.7],[1372636800000,18.1],[1375315200000,16.5],[1377993600000,7.9],[1380585600000,2.4],[1383264000000,-1.15],[1385856000000,-5.75],[1388534400000,-12.8],[1391212800000,-16.9],[1393632000000,-1.5],[1396310400000,7],[1398902400000,7.2],[1401580800000,16.3],[1404172800000,19.5],[1406851200000,16.4],[1409529600000,7.1],[1412121600000,0.5],[1414800000000,-7.5],[1417392000000,-7.3],[1420070400000,-9.449999999999999],[1422748800000,-8.5],[1425168000000,-3.7],[1427846400000,5.9],[1430438400000,11.61],[1433116800000,17.55],[1435708800000,20.37],[1438387200000,17.83],[1441065600000,9.050000000000001],[1443657600000,3.62],[1446336000000,-11.51],[1448928000000,-5.9],[1451606400000,-21.78],[1454284800000,-8.6],[1456790400000,-2.39],[1459468800000,5.08],[1462060800000,8.960000000000001],[1464739200000,18.52],[1467331200000,20.71],[1470009600000,17.17],[1472688000000,12.18],[1475280000000,-3.81],[1477958400000,-11.23],[1480550400000,-10.23],[1483228800000,-13.53],[1485907200000,-9.57],[1488326400000,-0.54],[1491004800000,6.59],[1493596800000,11.99],[1496275200000,19.68],[1498867200000,19.38],[1501545600000,17.28],[1504224000000,8.789999999999999],[1506816000000,1.95],[1509494400000,-5.86],[1512086400000,-9.35],[1514764800000,-19.84],[1517443200000,-13.55],[1519862400000,-5.05],[1522540800000,4.59],[1525132800000,8.91],[1527811200000,20.14],[1530403200000,17.99],[1533081600000,18.65],[1535760000000,11.07],[1538352000000,5.78],[1541030400000,-8.51],[1543622400000,-18.92]],"name":"ETS(A,N,A)","zIndex":3},{"data":[[1546300800000,-15.53788261741555],[1548979200000,-11.9626623011215],[1551398400000,-3.223876804267333],[1554076800000,5.621412103930908],[1556668800000,9.642803652101428],[1559347200000,17.77429735602945],[1561939200000,19.43908710414262],[1564617600000,17.34760739684069],[1567296000000,9.316062064712836],[1569888000000,1.844221331982035],[1572566400000,-7.64021584553622],[1575158400000,-9.560650978699186],[1577836800000,-15.53788261741555],[1580515200000,-11.9626623011215],[1583020800000,-3.223876804267333],[1585699200000,5.621412103930908],[1588291200000,9.642803652101428],[1590969600000,17.77429735602945],[1593561600000,19.43908710414262],[1596240000000,17.34760739684069],[1598918400000,9.316062064712836],[1601510400000,1.844221331982035],[1604188800000,-7.64021584553622],[1606780800000,-9.560650978699186]],"name":"ETS(A,N,A)","zIndex":2,"id":"viy3wvt1ix"},{"data":[[1546300800000,-21.33549649219635,-9.740268742634743],[1548979200000,-17.76027620526119,-6.165048396981804],[1551398400000,-9.021490737765921,2.573737129231255],[1554076800000,-0.1762018589265724,11.41902606678839],[1556668800000,3.845189659885055,15.4404176443178],[1559347200000,11.97668333445419,23.57191137760471],[1561939200000,13.64147305320846,25.23670115507678],[1564617600000,11.54999331654764,23.14522147713373],[1567296000000,3.518447955060896,15.11367617436478],[1569888000000,-3.953392807028798,7.641835470992867],[1572566400000,-13.43783001390594,-1.842601677166496],[1575158400000,-15.35826526381131,-3.763036693587066],[1577836800000,-21.33549693188656,-9.740268302944536],[1580515200000,-17.7602766449514,-6.165047957291598],[1583020800000,-9.021491177456124,2.573737568921458],[1585699200000,-0.1762022986167731,11.41902650647859],[1588291200000,3.845189220194857,15.440418084008],[1590969600000,11.97668289476399,23.57191181729491],[1593561600000,13.64147261351827,25.23670159476697],[1596240000000,11.54999287685744,23.14522191682393],[1598918400000,3.518447515370706,15.11367661405497],[1601510400000,-3.953393246718986,7.641835910683056],[1604188800000,-13.43783045359613,-1.842601237476312],[1606780800000,-15.35826570350148,-3.763036253896891]],"name":"ETS(A,N,A) level 95","type":"arearange","fillOpacity":0.1,"zIndex":1,"lineWidth":0,"linkedTo":"viy3wvt1ix"}],"tooltip":{"shared":true,"valueDecimals":1}},"theme":{"colors":["#0266C8","#F90101","#F2B50F","#00933B"],"chart":{"style":{"fontFamily":"Roboto","color":"#444444"}},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Контекстное меню диаграммы","decimalPoint":",","downloadCSV":"Загрузить CSV","downloadJPEG":"Загрузить JPEG","downloadPDF":"Загрузить PDF","downloadPNG":"Загрузить PNG","downloadSVG":"Загрузить SVG","downloadXLS":"Загрузить XLS","drillUpText":"◁ Назад к {series.name}","exitFullscreen":"Выход из полноэкранного режима","exportData":{"annotationHeader":"Аннотации","categoryDatetimeHeader":"DateTime","categoryHeader":"Категория"},"hideData":"Скрыть таблицу данных","invalidDate":null,"loading":"Загрузка...","months":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"noData":"Нет данных для отображения","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Печать диаграммы","resetZoom":"Сброс масштабирования","resetZoomTitle":"Сброс масштабирования к 1:1","shortMonths":["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"],"shortWeekdays":["Сб","Вс","Пн","Вт","Ср","Чт","Пт"],"thousandsSep":" ","viewData":"Просмотр таблицы данных","viewFullscreen":"Просмотр в полноэкранном режиме","weekdays":["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>hc_weather <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_theme</span>(<span class="fu">hc_theme_538</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-0c84acdb22685eb5e653" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0c84acdb22685eb5e653">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Прогноз средних температур в г. Красноярске (в °C)"},"yAxis":{"title":{"text":null},"labels":{"format":"{value} °C"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"type":"datetime"},"series":[{"data":[[1356998400000,-16.27],[1359676800000,-14.26],[1362096000000,-6.45],[1364774400000,4.71],[1367366400000,8.81],[1370044800000,15.7],[1372636800000,18.1],[1375315200000,16.5],[1377993600000,7.9],[1380585600000,2.4],[1383264000000,-1.15],[1385856000000,-5.75],[1388534400000,-12.8],[1391212800000,-16.9],[1393632000000,-1.5],[1396310400000,7],[1398902400000,7.2],[1401580800000,16.3],[1404172800000,19.5],[1406851200000,16.4],[1409529600000,7.1],[1412121600000,0.5],[1414800000000,-7.5],[1417392000000,-7.3],[1420070400000,-9.449999999999999],[1422748800000,-8.5],[1425168000000,-3.7],[1427846400000,5.9],[1430438400000,11.61],[1433116800000,17.55],[1435708800000,20.37],[1438387200000,17.83],[1441065600000,9.050000000000001],[1443657600000,3.62],[1446336000000,-11.51],[1448928000000,-5.9],[1451606400000,-21.78],[1454284800000,-8.6],[1456790400000,-2.39],[1459468800000,5.08],[1462060800000,8.960000000000001],[1464739200000,18.52],[1467331200000,20.71],[1470009600000,17.17],[1472688000000,12.18],[1475280000000,-3.81],[1477958400000,-11.23],[1480550400000,-10.23],[1483228800000,-13.53],[1485907200000,-9.57],[1488326400000,-0.54],[1491004800000,6.59],[1493596800000,11.99],[1496275200000,19.68],[1498867200000,19.38],[1501545600000,17.28],[1504224000000,8.789999999999999],[1506816000000,1.95],[1509494400000,-5.86],[1512086400000,-9.35],[1514764800000,-19.84],[1517443200000,-13.55],[1519862400000,-5.05],[1522540800000,4.59],[1525132800000,8.91],[1527811200000,20.14],[1530403200000,17.99],[1533081600000,18.65],[1535760000000,11.07],[1538352000000,5.78],[1541030400000,-8.51],[1543622400000,-18.92]],"name":"ETS(A,N,A)","zIndex":3},{"data":[[1546300800000,-15.53788261741555],[1548979200000,-11.9626623011215],[1551398400000,-3.223876804267333],[1554076800000,5.621412103930908],[1556668800000,9.642803652101428],[1559347200000,17.77429735602945],[1561939200000,19.43908710414262],[1564617600000,17.34760739684069],[1567296000000,9.316062064712836],[1569888000000,1.844221331982035],[1572566400000,-7.64021584553622],[1575158400000,-9.560650978699186],[1577836800000,-15.53788261741555],[1580515200000,-11.9626623011215],[1583020800000,-3.223876804267333],[1585699200000,5.621412103930908],[1588291200000,9.642803652101428],[1590969600000,17.77429735602945],[1593561600000,19.43908710414262],[1596240000000,17.34760739684069],[1598918400000,9.316062064712836],[1601510400000,1.844221331982035],[1604188800000,-7.64021584553622],[1606780800000,-9.560650978699186]],"name":"ETS(A,N,A)","zIndex":2,"id":"viy3wvt1ix"},{"data":[[1546300800000,-21.33549649219635,-9.740268742634743],[1548979200000,-17.76027620526119,-6.165048396981804],[1551398400000,-9.021490737765921,2.573737129231255],[1554076800000,-0.1762018589265724,11.41902606678839],[1556668800000,3.845189659885055,15.4404176443178],[1559347200000,11.97668333445419,23.57191137760471],[1561939200000,13.64147305320846,25.23670115507678],[1564617600000,11.54999331654764,23.14522147713373],[1567296000000,3.518447955060896,15.11367617436478],[1569888000000,-3.953392807028798,7.641835470992867],[1572566400000,-13.43783001390594,-1.842601677166496],[1575158400000,-15.35826526381131,-3.763036693587066],[1577836800000,-21.33549693188656,-9.740268302944536],[1580515200000,-17.7602766449514,-6.165047957291598],[1583020800000,-9.021491177456124,2.573737568921458],[1585699200000,-0.1762022986167731,11.41902650647859],[1588291200000,3.845189220194857,15.440418084008],[1590969600000,11.97668289476399,23.57191181729491],[1593561600000,13.64147261351827,25.23670159476697],[1596240000000,11.54999287685744,23.14522191682393],[1598918400000,3.518447515370706,15.11367661405497],[1601510400000,-3.953393246718986,7.641835910683056],[1604188800000,-13.43783045359613,-1.842601237476312],[1606780800000,-15.35826570350148,-3.763036253896891]],"name":"ETS(A,N,A) level 95","type":"arearange","fillOpacity":0.1,"zIndex":1,"lineWidth":0,"linkedTo":"viy3wvt1ix"}],"tooltip":{"shared":true,"valueDecimals":1}},"theme":{"colors":["#FF2700","#008FD5","#77AB43","#636464","#C4C4C4"],"chart":{"backgroundColor":"#F0F0F0","plotBorderColor":"#606063","style":{"fontFamily":"Roboto","color":"#3C3C3C"}},"title":{"align":"left","style":{"fontWeight":"bold"}},"subtitle":{"align":"left"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#D7D7D8","labels":{"style":{"fontFamily":"Unica One, sans-serif","color":"#3C3C3C"}},"lineColor":"#D7D7D8","minorGridLineColor":"#505053","tickColor":"#D7D7D8","tickWidth":1,"title":{"style":{"color":"#A0A0A3"}}},"yAxis":{"gridLineColor":"#D7D7D8","labels":{"style":{"fontFamily":"Unica One, sans-serif","color":"#3C3C3C"}},"lineColor":"#D7D7D8","minorGridLineColor":"#505053","tickColor":"#D7D7D8","tickWidth":1,"title":{"style":{"color":"#A0A0A3"}}},"tooltip":{"backgroundColor":"rgba(0, 0, 0, 0.85)","style":{"color":"#F0F0F0"}},"legend":{"itemStyle":{"color":"#3C3C3C"},"itemHiddenStyle":{"color":"#606063"}},"credits":{"style":{"color":"#666"}},"labels":{"style":{"color":"#D7D7D8"}},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Контекстное меню диаграммы","decimalPoint":",","downloadCSV":"Загрузить CSV","downloadJPEG":"Загрузить JPEG","downloadPDF":"Загрузить PDF","downloadPNG":"Загрузить PNG","downloadSVG":"Загрузить SVG","downloadXLS":"Загрузить XLS","drillUpText":"◁ Назад к {series.name}","exitFullscreen":"Выход из полноэкранного режима","exportData":{"annotationHeader":"Аннотации","categoryDatetimeHeader":"DateTime","categoryHeader":"Категория"},"hideData":"Скрыть таблицу данных","invalidDate":null,"loading":"Загрузка...","months":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"noData":"Нет данных для отображения","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Печать диаграммы","resetZoom":"Сброс масштабирования","resetZoomTitle":"Сброс масштабирования к 1:1","shortMonths":["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"],"shortWeekdays":["Сб","Вс","Пн","Вт","Ср","Чт","Пт"],"thousandsSep":" ","viewData":"Просмотр таблицы данных","viewFullscreen":"Просмотр в полноэкранном режиме","weekdays":["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}},"type":"chart","fonts":["Roboto","Unica+One"],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="d-диаграммы" class="level2">
+<h2 class="anchored" data-anchor-id="d-диаграммы">3D-диаграммы</h2>
+<p>Довольно эффектно выглядят 3D-диаграммы в <code>highcharter</code>. Покажем, как выглядит диаграмма средних температур на основе набора данных <code>weather_long</code> выше в г. Красноярске за 3 выбранных года.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># данные</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>weather_hc <span class="ot">&lt;-</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>weather_long <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2016"</span>,<span class="st">"2017"</span>, <span class="st">"2018"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ave =</span> <span class="fu">round</span>(<span class="fu">mean</span>(temp_ave, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>weather_hc</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 3
+    year month   ave
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
+ 1  2016 ЯНВ   -21.8
+ 2  2016 ФЕВ    -8.6
+ 3  2016 МАР    -2.4
+ 4  2016 АПР     5.1
+ 5  2016 МАЙ     9  
+ 6  2016 ИЮН    18.5
+ 7  2016 ИЮЛ    20.7
+ 8  2016 АВГ    17.2
+ 9  2016 СЕН    12.2
+10  2016 ОКТ    -3.8
+# ℹ 26 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Код исходной диаграммы</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># базовая диаграмма</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">highchart</span>() <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">categories =</span> weather_hc<span class="sc">$</span>month) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"2016"</span>, </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tooltip =</span> <span class="fu">list</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">valueSuffix =</span> <span class="st">"°C"</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> (weather_hc <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">"2016"</span>))<span class="sc">$</span>ave</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">categories =</span> weather_hc<span class="sc">$</span>month) <span class="sc">|&gt;</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"2017"</span>, </span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">tooltip =</span> <span class="fu">list</span>(</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">valueSuffix =</span> <span class="st">"°C"</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> (weather_hc <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">"2017"</span>))<span class="sc">$</span>ave</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">categories =</span> weather_hc<span class="sc">$</span>month) <span class="sc">|&gt;</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_series</span>(</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"2018"</span>, </span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">tooltip =</span> <span class="fu">list</span>(</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">valueSuffix =</span> <span class="st">"°C"</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> (weather_hc <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">"2018"</span>))<span class="sc">$</span>ave</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">labels =</span> <span class="fu">list</span>(<span class="at">format =</span> <span class="st">"{value} °C"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_add_theme</span>(<span class="fu">hc_theme_bloom</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_credits</span>(</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="st">"Диаграмма создана при использовании R и highcharter"</span>,</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">href =</span> <span class="st">"https://jkunst.com/highcharter/"</span>,</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">enabled =</span> <span class="cn">TRUE</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  )  <span class="sc">|&gt;</span></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="st">"Средние температуры в г. Красноярске в 2016-2018 гг."</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>3D-версия диаграммы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>hc <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_chart</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"column"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">options3d =</span> <span class="fu">list</span>(</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">enabled =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">beta =</span> <span class="dv">15</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> <span class="dv">15</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-244630666988694dc340" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-244630666988694dc340">{"x":{"hc_opts":{"chart":{"reflow":true,"type":"column","options3d":{"enabled":true,"beta":15,"alpha":15}},"title":{"text":"Средние температуры в г. Красноярске в 2016-2018 гг."},"yAxis":{"title":{"text":null},"labels":{"format":"{value} °C"}},"credits":{"enabled":true,"text":"Диаграмма создана при использовании R и highcharter","href":"https://jkunst.com/highcharter/"},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"categories":["ЯНВ","ФЕВ","МАР","АПР","МАЙ","ИЮН","ИЮЛ","АВГ","СЕН","ОКТ","НОЯ","ДЕК","ЯНВ","ФЕВ","МАР","АПР","МАЙ","ИЮН","ИЮЛ","АВГ","СЕН","ОКТ","НОЯ","ДЕК","ЯНВ","ФЕВ","МАР","АПР","МАЙ","ИЮН","ИЮЛ","АВГ","СЕН","ОКТ","НОЯ","ДЕК"]},"series":[{"data":[-21.8,-8.6,-2.4,5.1,9,18.5,20.7,17.2,12.2,-3.8,-11.2,-10.2],"name":"2016","tooltip":{"valueSuffix":"°C"}},{"data":[-13.5,-9.6,-0.5,6.6,12,19.7,19.4,17.3,8.800000000000001,2,-5.9,-9.300000000000001],"name":"2017","tooltip":{"valueSuffix":"°C"}},{"data":[-19.8,-13.6,-5,4.6,8.9,20.1,18,18.6,11.1,5.8,-8.5,-18.9],"name":"2018","tooltip":{"valueSuffix":"°C"}}]},"theme":{"colors":["#E10033","#000000","#767676","#E4E4E4"],"chart":{"backgroundColor":"#FFFFFF","style":{"fontFamily":"Roboto","color":"#000000"}},"title":{"align":"left","style":{"fontFamily":"Roboto","color":"#000000","fontWeight":"bold"}},"subtitle":{"align":"left","style":{"fontFamily":"Roboto","color":"#000000","fontWeight":"bold"}},"xAxis":{"lineColor":"#000000","lineWidth":2,"tickColor":"#000000","tickWidth":2,"labels":{"style":{"color":"black"}},"title":{"style":{"color":"black"}}},"yAxis":{"opposite":true,"gridLineWidth":2,"gridLineColor":"#F3F3F3","lineColor":"#CEC6B9","minorGridLineColor":"#CEC6B9","labels":{"align":"left","style":{"color":"black"},"x":0,"y":-2},"tickLength":0,"tickColor":"#CEC6B9","tickWidth":1,"title":{"style":{"color":"black"}}},"tooltip":{"backgroundColor":"#FFFFFF","borderColor":"#76c0c1","style":{"color":"#000000"}},"legend":{"layout":"horizontal","align":"left","verticalAlign":"top","itemStyle":{"color":"#3C3C3C"},"itemHiddenStyle":{"color":"#606063"}},"credits":{"style":{"color":"#666"}},"labels":{"style":{"color":"#D7D7D8"}},"drilldown":{"activeAxisLabelStyle":{"color":"#F0F0F3"},"activeDataLabelStyle":{"color":"#F0F0F3"}},"navigation":{"buttonOptions":{"symbolStroke":"#DDDDDD","theme":{"fill":"#505053"}}},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Контекстное меню диаграммы","decimalPoint":",","downloadCSV":"Загрузить CSV","downloadJPEG":"Загрузить JPEG","downloadPDF":"Загрузить PDF","downloadPNG":"Загрузить PNG","downloadSVG":"Загрузить SVG","downloadXLS":"Загрузить XLS","drillUpText":"◁ Назад к {series.name}","exitFullscreen":"Выход из полноэкранного режима","exportData":{"annotationHeader":"Аннотации","categoryDatetimeHeader":"DateTime","categoryHeader":"Категория"},"hideData":"Скрыть таблицу данных","invalidDate":null,"loading":"Загрузка...","months":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"noData":"Нет данных для отображения","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Печать диаграммы","resetZoom":"Сброс масштабирования","resetZoomTitle":"Сброс масштабирования к 1:1","shortMonths":["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек"],"shortWeekdays":["Сб","Вс","Пн","Вт","Ср","Чт","Пт"],"thousandsSep":" ","viewData":"Просмотр таблицы данных","viewFullscreen":"Просмотр в полноэкранном режиме","weekdays":["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]}},"type":"chart","fonts":"Roboto","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="заключение" class="level1 page-columns page-full">
+<h1>Заключение</h1>
+<p>В статье были рассмотрены некоторые простейшие примеры создания визуализаций на основе <code>highcharter</code> и локализации библиотеки.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+
+<!-- add the button style & script -->
+<link rel="stylesheet" href="../../../dist/applause-button.css">
+<script src="../../../dist/applause-button.js"></script>
+
+
+<!-- add the button! -->
+<applause-button style="width: 58px; height: 58px;">
+
+</applause-button></div></div><p>Больше различных примеров визуализаций в библиотеке <code>highcharter</code> можно найти на <a href="https://jkunst.com/highcharter/" target="_blank">странице библиотеки</a>, в блоге <a href="https://jkunst.com/blog/#category:highcharter" target="_blank">Joshua Kunst</a>, в блоге <a href="https://dataand.me/index.html#category:highcharter" target="_blank">Mara Averick</a>, а также в видео доклада</p>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/l_U3hQ6mm60" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Session Info
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       macOS Monterey 12.1
+ system   aarch64, darwin20
+ ui       X11
+ language (EN)
+ collate  ru_RU.UTF-8
+ ctype    ru_RU.UTF-8
+ tz       Asia/Krasnoyarsk
+ date     2024-03-01
+ pandoc   2.18 @ /Users/materov/opt/miniconda3/envs/ox/bin/ (via rmarkdown)
+ quarto   1.4.550
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package     * version date (UTC) lib source
+ dplyr       * 1.1.4   2023-11-17 [1] CRAN (R 4.3.1)
+ forcats     * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ forecast    * 8.21.1  2023-08-31 [1] CRAN (R 4.3.0)
+ ggplot2     * 3.5.0   2024-02-23 [1] CRAN (R 4.3.1)
+ highcharter * 0.9.4   2022-01-03 [1] CRAN (R 4.3.0)
+ htmlwidgets * 1.6.4   2023-12-06 [1] CRAN (R 4.3.1)
+ lubridate   * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
+ magrittr    * 2.0.3   2022-03-30 [1] CRAN (R 4.3.0)
+ purrr       * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
+ quantmod    * 0.4.26  2024-02-14 [1] CRAN (R 4.3.1)
+ readr       * 2.1.5   2024-01-10 [1] CRAN (R 4.3.1)
+ sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ stringr     * 1.5.1   2023-11-14 [1] CRAN (R 4.3.1)
+ tibble      * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr       * 1.3.1   2024-01-24 [1] CRAN (R 4.3.1)
+ tidyverse   * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ TTR         * 0.24.4  2023-11-28 [1] CRAN (R 4.3.1)
+ widgetframe * 0.3.1   2017-12-20 [1] CRAN (R 4.3.0)
+ xts         * 0.13.2  2024-01-21 [1] CRAN (R 4.3.1)
+ zoo         * 1.8-12  2023-04-13 [1] CRAN (R 4.3.0)
+
+ [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Сноски</h2>
+
+<ol>
+<li id="fn1"><p>Дата обновления: <em>12.03.2021</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Если карты не скачиваются, см. <a href="https://github.com/jbkunst/highcharter/issues/797" target="_blank">Bugs in highcharter maps</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{матеров2022,
+  author = {Матеров, Е.Н.},
+  title = {Введение в библиотеку highcharter},
+  date = {2022-03-16},
+  url = {https://www.naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter},
+  langid = {ru}
+}
+</code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">Матеров Е.Н. Введение в библиотеку highcharter
+[Electronic resource]. 2022. URL: <a href="https://www.naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter">https://www.naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="materov/materov-quarto-blog-giscus" data-repo-id="R_kgDOJLuBsA" data-category="Announcements" data-category-id="DIC_kwDOJLuBsM4CU_m7" data-mapping="pathname" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+© 2021–<span id="year"></span> ❘ Е.Н. Матеров ❘ <i class="fa-brands fa-telegram" aria-label="telegram"></i> Telegram <a href="https://t.me/naukaidannye" class="external" target="_blank">Наука и данные</a>
+<script>document.getElementById('year').innerHTML= new Date().getFullYear();</script>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Создано с помощью <i class="fa-brands fa-r-project" aria-label="r-project"></i> и <a href="https://quarto.org/">Quarto</a> | Размещено на <i class="fa-brands fa-chrome" aria-label="chrome"></i> <a href="https://www.netlify.com">Netlify</a></span></p>
+</div>
+  </div>
+</footer>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://naukaidannye.netlify.app/&amp;text=классная публикация" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://t.me/share/url?url=https://naukaidannye.netlify.app/&amp;title=классная публикация" target="_blank" class="telegram"><i class="fa-brands fa-telegram fa-fw fa-lg"></i></a>  <a href="mailto:?subject=классная публикация&amp;body=Check out this link:https://naukaidannye.netlify.app/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Введите название сервера Mastodon'); if(typeof mastodon_instance==='string' &amp;&amp; mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=классная публикация https://naukaidannye.netlify.app/'}else{return false;}" target="_blank" class="mastodon"><i class="fa-brands fa-mastodon fa-fw fa-lg"></i></a></div></div>
+
+
+
+
+</body></html>
