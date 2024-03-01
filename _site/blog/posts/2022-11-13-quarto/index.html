@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Е.Н. Матеров">
+
+<title>Наука и данные - Научно-издательская система Quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/lord-icon-bundle-3.4.4/bundle.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1VWR791XRL"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-1VWR791XRL', { 'anonymize_ip': true});
+</script>
+
+
+<meta property="og:title" content="Наука и данные - Научно-издательская система Quarto">
+<meta property="og:description" content="Обзор научно-издательской системы Quarto">
+<meta property="og:image" content="https://naukaidannye.netlify.app/blog/posts/2022-11-13-quarto/qaurto_logo.png">
+<meta property="og:site_name" content="Наука и данные">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image:height" content="163">
+<meta property="og:image:width" content="310">
+<meta name="twitter:title" content="Наука и данные - Научно-издательская система Quarto">
+<meta name="twitter:description" content="Обзор научно-издательской системы Quarto">
+<meta name="twitter:image" content="https://naukaidannye.netlify.app/blog/posts/2022-11-13-quarto/qaurto_logo.png">
+<meta name="twitter:creator" content="@materov">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="163">
+<meta name="twitter:image-width" content="310">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Наука и данные</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Блог</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../publications/index.html"> 
+<span class="menu-text">Публикации</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Об авторе</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/naukaidannye"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@materov" rel="me"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/materov"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Научно-издательская система Quarto</h1>
+            <p class="subtitle lead">Обзор научно-издательской системы Quarto</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Quarto</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Автор</div>
+      <div class="quarto-title-meta-contents">
+               <p>Е.Н. Матеров </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">13 ноября 2022 г.</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Обновлено</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">4 марта 2024 г.</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p><lord-icon speed="0.9" delay="1000" src="https://cdn.lordicon.com/ghhwiltn.json" trigger="loop"></lord-icon></p>
+<section id="что-такое-quarto" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Что такое Quarto?</h1>
+<p>Многим из тех, кто работает на языке программирования <strong>R</strong> в области Data Science, известен такой инструмент как <a href="https://rmarkdown.rstudio.com/" target="_blank">R Markdown</a>, позволяющий объединить повествовательный текст и код для создания отформатированных выходных данных в виде веб-страниц, записей в блогах, книг, бизнес-отчетов и других документов. <strong>R Markdown</strong> существует уже более 10 лет и объединяет большое количество библиотек для создания и публикации научного, технического и бизнес-контента. Тем не менее, один из создателей <strong>R Markdown</strong> и основателей <a href="https://www.rstudio.com/" target="_blank">RStudio</a> (теперь уже <a href="https://posit.co/" target="_blank">Posit</a>) <a href="https://github.com/jjallaire/" target="_blank">J.J. Allaire</a> в своем <a href="https://youtu.be/9jGc0TxoRco" target="_blank">интервью</a> признал, что развитие <strong>R Markdown</strong> приходит в тупик и около трех лет тому назад (на момент написания данной статьи) они с коллегами начали проект <a href="https://quarto.org/" target="_blank">Quarto</a>, который стал попыткой обобщить экосистему <strong>R Markdown</strong> таким образом, чтобы все полезные функции для создания и публикации технического контента могли быть доступны более широкому миру за пределами языка <strong>R</strong>.</p>
+<p><a href="https://quarto.org/" target="_blank">Quarto</a>® – это научно-техническая издательская система с открытым исходным кодом, построенная на основе <a href="https://pandoc.org/" target="_blank">Pandoc</a> и использующая <a href="https://www.markdownguide.org/" target="_blank">Markdown</a> для разметки. Напомним, что <a href="https://pandoc.org/" target="_blank">Pandoc</a> – это универсальный конвертер для работы с текстовыми документами для форматирования научных и технических текстов, поддерживающий более 40 различных форматов, написанный на языке программирования <a href="https://www.lua.org/" target="_blank">Lua</a>. <a href="https://quarto.org/" target="_blank">Quarto</a> – это универсальный инструмент для тех, кто пишет на <a href="https://www.r-project.org/" target="_blank">R</a>, <a href="https://www.python.org/" target="_blank">Python</a>, <a href="https://julialang.org/" target="_blank">Julia</a> и <a href="https://observablehq.com/@observablehq/observables-not-javascript" target="_blank">Observable JavaScript</a> и использует <strong>Markdown</strong> для форматирования документов.</p>
+<p>Таким образом, многие из тех возможностей <strong>R Markdown</strong>, которые были доступны только для пользователей <strong>R</strong>, теперь также обобщены и для тех, кто программирует на <strong>Python</strong> и <strong>Julia</strong> и занимается анализом данных, научной и преподавательской деятельностью. В данной обзорной статье мы, в частности, попробуем разобраться, какие есть отличия <strong>Quarto</strong> от <strong>R Markdown</strong>, стоит ли полностью отказываться от <strong>R Markdown</strong> в пользу <strong>Quarto</strong>, есть ли у <strong>Quarto</strong> преимущества?</p>
+<section id="название-quarto" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="название-quarto"><span class="header-section-number">1.1</span> Название Quarto</h2>
+<p>Авторы научно-технической издательской системы <a href="https://quarto.org/docs/faq/#why-the-name-quarto" target="_blank">хотели использовать название</a>, которое имело значение в истории издательского дела, и остановились на <strong>Quarto</strong>.</p>
+<p><strong>Quarto</strong> (от латинского <strong>quārtō</strong>, сокращенно <strong>Qto</strong>, <strong>4to</strong> или <strong>4</strong>º) – это книга или брошюра, изготовленная из полных листов, напечатанных с восемью страницами текста, по четыре на одну сторону, а затем сложенных дважды, чтобы получить четыре листа (не нужно путать с настольной абстрактной игрой <a href="https://www.gigamic.com/jeu/quarto" target="_blank">Quarto</a> или издательством <a href="https://www.quarto.com/" target="_blank">The Quarto Group</a>, которое продает иллюстрированные книги). Затем листы обрезаются, чтобы получить восемь страниц книги. <a href="https://wiki5.ru/wiki/Book_size" target="_blank">Размер</a> каждой напечатанной страницы составляет одну четвертую полного листа.</p>
+<div id="fig-history-of-book-sizes-min" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-history-of-book-sizes-min-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/history-of-book-sizes-min.jpg" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-history-of-book-sizes-min-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1: Сравнение форматов книг
+</figcaption>
+</figure>
+</div>
+<p>Самыми ранними из сохранившихся книг, напечатанных Гутенбергом подвижным шрифтом, являются <em>кварто</em> (примерно 1452–53 гг.), которые были напечатаны до <a href="https://hmn.wiki/de/Gutenberg_Bible" target="_blank">Библии Гутенберга</a>. Самый ранний из известных – это фрагмент средневековой поэмы «Сибилленбух» (<a href="https://hmn.wiki/de/4to" target="_blank">Sibyllenbuch</a>).</p>
+</section>
+<section id="quarto-позволяет" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="quarto-позволяет"><span class="header-section-number">1.2</span> Quarto позволяет</h2>
+<ul>
+<li><p>Представлять анализ данных в доступном и наглядном виде.</p></li>
+<li><p>Иметь возможность вывода в различных форматах: HTML, pdf, ePub, Word, PowerPoint и т.д. для единого источника публикации.</p></li>
+<li><p>Использовать разметку, включающую формулы, цитаты, перекрестные ссылки, расширенные макеты и многое другое.</p></li>
+<li><p>Иметь возможность публикации веб-документов в сети Интернет через различные сервисы.</p></li>
+<li><p>Включать интерактивные приложения и виджеты в HTML-документы.</p></li>
+<li><p>Создавать документы с включением кода для воспроизводимых вычислений.</p></li>
+</ul>
+</section>
+<section id="с-помощью-quarto-можно-создавать" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="с-помощью-quarto-можно-создавать"><span class="header-section-number">1.3</span> С помощью Quarto можно создавать</h2>
+<ul>
+<li><p>Статьи как для веб-публикации, так и подготовленные для научных издательств.</p></li>
+<li><p>Презентации.</p></li>
+<li><p>Веб-страницы, включая блоги и техническую документацию.</p></li>
+<li><p>Интерактивные книги, которые можно переводить различные форматы, пригодные для печати и электронных носителей.</p></li>
+</ul>
+</section>
+<section id="примеры-разработок-на-quarto" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="примеры-разработок-на-quarto"><span class="header-section-number">1.4</span> Примеры разработок на Quarto</h2>
+<p>Большим источником идей для создания рабочих материалов, сайтов, презентаций, статей, документации и другого похожего содержимого может служить <a href="https://quarto.org/docs/gallery/" target="_blank">Галерея примеров Quarto</a>.</p>
+<div id="fig-Gallery" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Gallery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Gallery.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Gallery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;2: Галерея примеров <strong>Quarto</strong>
+</figcaption>
+</figure>
+</div>
+<p>Два примера мини-блогов на <strong>Quarto</strong> показаны ниже.</p>
+<ol type="1">
+<li>Первый пример – это <a href="https://materov.github.io/R-sources/" target="_blank">набор ссылок на полезные ресурсы</a> по языку программирования <strong>R</strong>, опубликованный как <strong>GitHub Pages</strong>.</li>
+</ol>
+<div id="fig-Rесурсы" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Rесурсы-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Rесурсы.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Rесурсы-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3: Набор ссылок на полезные ресурсы по языку программирования <strong>R</strong>
+</figcaption>
+</figure>
+</div>
+<ol start="2" type="1">
+<li>Мини-блог по визуализации данных <a href="https://data-visualization-blog.netlify.app/" target="_blank">Графики на досуге</a> также сделан на <strong>Quarto</strong> и опубликован через <a href="https://www.netlify.com/" target="_blank">Netlify</a>.</li>
+</ol>
+<div id="fig-Graphs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Graphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Graphs.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Graphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4: Мини-блог по визуализации данных
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="как-начать-работу-с-quarto" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Как начать работу с Quarto?</h1>
+<section id="установка-quarto" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="установка-quarto"><span class="header-section-number">2.1</span> Установка Quarto</h2>
+<p>Для установки <strong>Quarto</strong>, необходимо зайти на начальную страницу проекта <a href="https://quarto.org/" class="uri">https://quarto.org/</a> и перейти по адресу <a href="https://quarto.org/docs/get-started/" target="_blank">Get Started</a>.</p>
+<div id="fig-Quarto_start" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Quarto_start-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Quarto start.png" class="img-fluid figure-img" style="width:1000.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Quarto_start-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5: Начальная страница Quarto
+</figcaption>
+</figure>
+</div>
+<p>Установка происходит в два этапа.</p>
+<ul>
+<li><p><strong>Шаг 1</strong>. Установка интерфейса командной строки (CLI) для актуальной операционной системы (<strong>Windows</strong>, <strong>Linux</strong> или <strong>Mac OS</strong>). Рекомендуется устанавливать стабильную версию <strong>Current Release</strong> со <a href="https://quarto.org/docs/download/" target="_blank">страницы загрузки</a>, а не <strong>Release Candidate</strong>.</p></li>
+<li><p><strong>Шаг 2</strong>. Установка плагина для рабочей интегрированной среды разработки (IDE). Это может быть, например, <a href="https://quarto.org/docs/get-started/hello/vscode.html" target="_blank">VS Code</a>, <a href="https://quarto.org/docs/get-started/hello/rstudio.html" target="_blank">RStudio</a>, <a href="https://quarto.org/docs/get-started/hello/jupyter.html" target="_blank">Jupyter</a> или иной <a href="https://quarto.org/docs/get-started/hello/text-editor.html" target="_blank">текстовый редактор</a>. Можно также установить <strong>Quarto</strong>-плагин, например, для <a href="https://github.com/quarto-dev/quarto-sublime" target="_blank">Sublime Text</a> или <a href="https://github.com/quarto-dev/quarto-emacs" target="_blank">Emacs</a>.</p></li>
+</ul>
+</section>
+<section id="ide-инструменты" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ide-инструменты"><span class="header-section-number">2.2</span> IDE-инструменты</h2>
+<section id="rstudio" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="rstudio"><span class="header-section-number">2.2.1</span> RStudio</h3>
+<p>Если <strong>Quarto</strong> CLI уже установлен, то <strong>RStudio</strong> обнаружит это и автоматически включит функции <strong>Quarto</strong>. В качестве альтернативы существует версия <strong>Quarto</strong> встроенная в <strong>RStudio</strong>, которую можно <a href="https://quarto.org/docs/tools/rstudio.html" target="_blank">активировать в настройках</a> <strong>R Markdown</strong>.</p>
+<p>Создание нового <strong>Quarto</strong>-документа в <strong>RStudio</strong> с расширением .qmd происходит как <em>File</em> -&gt; <em>New File</em> -&gt; <em>Quarto document…</em>, что открывает новый документ на основе шаблона.</p>
+<div id="fig-pinguiny" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pinguiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pinguiny.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pinguiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6: Вид визуального редактора <strong>Quarto</strong> в <strong>RStudio</strong>
+</figcaption>
+</figure>
+</div>
+<p>Отметим, что переключение кнопки <strong>Source</strong> на <strong>Visual</strong> позволяет перейти в режим визуального редактирования, который близок к WYSIWYG-редактору и может быть особенно полезен для создания таблиц в документах. Подробно о работе в <strong>RStudio</strong> можно посмотреть на соотетствующей <a href="https://quarto.org/docs/tools/rstudio.html" target="_blank">странице документации</a>. Для остановки фонового задания необходимо перейти на панель <em>Background Jobs</em> и нажать значок <em>Stop</em>.</p>
+</section>
+<section id="visual-studio-code" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="visual-studio-code"><span class="header-section-number">2.2.2</span> Visual Studio Code</h3>
+<p>Альтернативно, <strong>VS Code</strong> предлагает возможность редактировать документы как с .qmd, так и с .ipynb-ноутбуками. Помимо предварительного просмотра документов, также работает подсветка синтаксиса для встроенных языков, автоматические подсказки, автозавершение для языков программирования, клавиатурные сочетания, сниппеты, предварительный просмотр в реальном времени для LaTeX, а также диаграмм Mermaid и Graphviz.</p>
+<div id="fig-VS_Code" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-VS_Code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/VS Code.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-VS_Code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7: Вид визуального редактора в <strong>VS Code</strong>
+</figcaption>
+</figure>
+</div>
+<p>Преимущество <strong>VS Code</strong> состоит в большом количестве полезных плагинов, которые позволяют, например, работать с Git-системой управления версиями. Удобный проводник, мини-карта и диагностика для опций YAML делает <strong>VS Code</strong> отличным инструментом для создания больших проектов, например, книг. Работа <strong>VS Code</strong> в <strong>Quarto</strong> описана на <a href="https://quarto.org/docs/tools/vscode.html" target="_blank">странице документации</a>.</p>
+</section>
+<section id="jupyter" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="jupyter"><span class="header-section-number">2.2.3</span> Jupyter</h3>
+<p>Для тех, кто программирует на <strong>Julia</strong> или <strong>Python</strong> более привычным инструментом является система <strong>Jupyter</strong>-ноутбуков. Для того, чтобы создать <strong>Quarto</strong>-пример в <strong>Jupyter</strong>, необходимо в преамбулу документа добавить YAML-вставку и затем отрендерить .ipynb-ноутбук так, как это будет показано ниже. Если вместо <strong>Python</strong> используется <strong>Julia</strong>, то в преамбуле необходимо в качестве ядра указать <code>jupyter: julia-1.10</code>.</p>
+<div id="fig-Python-notebook" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Python-notebook-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Python-notebook.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Python-notebook-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;8: Пример <strong>Jupyter</strong>-ноутбука в <strong>Quarto</strong> на языке <strong>Python</strong>
+</figcaption>
+</figure>
+</div>
+<div id="fig-Python-notebook2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Python-notebook2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Python-notebook2.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Python-notebook2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9: Пример результата рендеринга ноутбука
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="работа-с-проектами" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="работа-с-проектами"><span class="header-section-number">2.3</span> Работа с проектами</h2>
+<section id="создание-нового-проекта" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="создание-нового-проекта"><span class="header-section-number">2.3.1</span> Создание нового проекта</h3>
+<p>Есть несколько вариантов для создания проекта.</p>
+<ol type="1">
+<li>Создание проекта из командной строки.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># веб-сайт</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project mysite <span class="at">--type</span> website</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># блог</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project myblog <span class="at">--type</span> website:blog</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># книга</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project mybook <span class="at">--type</span> book</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>В <strong>VS Code</strong> или в <strong>RStudio</strong></li>
+</ol>
+<p>Например, в <strong>RStudio</strong>: <em>File -&gt; New Project… -&gt; New Directory</em>.</p>
+<div id="fig-new-project" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-new-project-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/new-project.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-new-project-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10: Пример создания <strong>Quarto</strong>-проекта в <strong>RStudio</strong>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="как-quarto-организует-рендеринг-документов" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="как-quarto-организует-рендеринг-документов"><span class="header-section-number">2.3.2</span> Как Quarto организует рендеринг документов</h3>
+<p>Сначала Knitr (в <strong>R</strong>) или <strong>Jupyter</strong> (в <strong>Pyhton</strong> или <strong>Julia</strong>) выполняет все фрагменты кода .qmd-файла и создает новый markdown (.md) документ, который включает в себя код и его выходные данные.</p>
+<div id="fig-working-diagram" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-working-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/working-diagram.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-working-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11: Организация рендеринга документов в <strong>Quarto</strong> (<a href="https://jthomasmock.github.io/quarto-in-two-hours/materials/01-intro-quarto.html#/quarto-more-than-just-knitr" target="_blank">источник</a>)
+</figcaption>
+</figure>
+</div>
+<p>Созданный markdown-файл затем обрабатывается <strong>Pandoc</strong> для преобразования в различные форматы файлов, включая HTML, PDF, Word и другие форматы.</p>
+</section>
+<section id="возможности-для-рендеринга" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="возможности-для-рендеринга"><span class="header-section-number">2.3.3</span> Возможности для рендеринга</h3>
+<ol type="1">
+<li>Можно использовать кнопку Render в <strong>RStudio</strong> IDE или <strong>Visual Studio Code</strong> для рендеринга файла и предварительного просмотра выходных данных.</li>
+</ol>
+<div id="fig-rstudio-render" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rstudio-render-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/rstudio-render.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rstudio-render-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;12: Кнопка Render в IDE
+</figcaption>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><strong>Quarto</strong> в командной строке.</li>
+</ol>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="Terminal"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render <span class="op">&lt;</span>input<span class="op">&gt;</span> --to <span class="op">&lt;</span>format<span class="op">&gt;</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Например:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="Terminal"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render document.qmd <span class="at">--to</span> docx</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Quarto</strong> как R-библиотека.</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="at">input =</span> ___, <span class="at">output_format =</span> ___)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Например:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_render</span>(<span class="st">"document.qmd"</span>, <span class="at">output_format =</span> <span class="st">"pdf"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="структура-документов-в-quarto" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="структура-документов-в-quarto"><span class="header-section-number">2.4</span> Структура документов в Quarto</h2>
+<section id="общая-структура-документов-в-quarto" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="общая-структура-документов-в-quarto"><span class="header-section-number">2.4.1</span> Общая структура документов в Quarto</h3>
+<p>Условно, документ в <strong>Quarto</strong> состоит из трех базовых частей.</p>
+<ol type="1">
+<li><p>Метаданные.</p></li>
+<li><p>Текст и Markdown.</p></li>
+<li><p>Исполняемый код.</p></li>
+</ol>
+<div id="fig-structure" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/structure.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;13: Структура <strong>Quarto</strong>-документа (<a href="https://jthomasmock.github.io/quarto-in-two-hours/materials/02-authoring.html#/literate-programming" target="_blank">источник</a>)
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="основы-синтаксиса" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="основы-синтаксиса"><span class="header-section-number">2.4.2</span> Основы синтаксиса</h3>
+<p><strong>Quarto</strong> основан на <strong>Pandoc</strong> и использует разновидность markdown в качестве базового синтаксиса документа. <strong>Pandoc</strong> markdown – это расширенная и слегка переработанная версия синтаксиса markdown. <a href="https://quarto.org/docs/authoring/markdown-basics.html" target="_blank">Синтаксис</a> включает в себя форматирование текста, заголовки, ссылки и рисунки, списки и таблицы.</p>
+<p>Исполняемый код записывается в специальные блоки (ячейки), в начале которых указывается язык программирования (<strong>Pandoc</strong> поддерживает более 140 языков) для выделения.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">print("Goodbye, World!")</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Если мы хотим сделать код неисполняемым – нужно поставить точку перед указанием языка программирования.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ss">```{.julia}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ss">using Plots</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">plot(sin, x-&gt;sin(2x), 0, 2π, leg=false, fill=(0,:lavender))</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">```</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Внутри ячейки в комментариях в верхней части блока можно указывать параметры. <a href="https://quarto.org/docs/reference/cells/cells-knitr.html" target="_blank">Параметры ячейки</a> влияют на выполнение и вывод блоков исполняемого кода. Например:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># метка для указания ссылки на рисунок</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-polar</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># выключение визуализированного вывода кода</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># подпись к рисунку</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "График функции"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-parameters" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/parameters.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;14: Пример оформления ячейки кода с параметрами
+</figcaption>
+</figure>
+</div>
+<p>При необходимости можно выделить элементы кода либо скрыть код, сделав развертывающийся блок.</p>
+<div id="fig-highlight" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-highlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/highlight.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-highlight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;15: Пример выделения элементов кода в <strong>Quarto</strong>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="расширенные-макеты" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="расширенные-макеты"><span class="header-section-number">2.4.3</span> Расширенные макеты</h3>
+<p>Одним из лучших нововведений <strong>Quarto</strong> стали <a href="https://quarto.org/docs/authoring/article-layout.html" target="_blank">новые возможности для макетирования</a>, например <strong>Quarto</strong> позволяет делать на полях сноски, библиографию, названия для рисунков, рисунки и даже таблицы. Кроме того, обновлены возможности компоновки блоков (например, рисунков или таблиц) как подэлементов (например, как подрисунков), работающих с перекрестными ссылками, а также работа с табами.</p>
+<div id="fig-mult_figures" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mult_figures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/mult_figures.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mult_figures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;16: Пример компоновки рисунков в <strong>Quarto</strong>
+</figcaption>
+</figure>
+</div>
+<p>В случае, если содержимое выходит за пределы области основного текста, его <a href="https://quarto.org/docs/authoring/article-layout.html#overflowing-content" target="_blank">можно продолжить</a>, используя правую и левую версии столбцов основного текста, страницы и экрана для компоновки содержимого. Например, как ниже:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| column: screen-inset-right</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="in">1 + 1</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-extend_content" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-extend_content-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/extend_content.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-extend_content-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;17: Примеры параметров для определения содержимого, выходящего за фиксированную ширину справа
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="выносные-блоки" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="выносные-блоки"><span class="header-section-number">2.4.4</span> Выносные блоки</h3>
+<p>Интересной новинкой <strong>Quarto</strong> являются <a href="https://quarto.org/docs/authoring/callouts.html" target="_blank">выносные блоки</a>, которые служат способом привлечения дополнительного внимания к определенным концепциям или указанием, что определенное содержимое является дополнительным или применимо только к некоторым сценариям. Выносные блоки работают в HTML, PDF, MS Word, ePub и Revealjs.</p>
+<div id="fig-blocks" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/blocks.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;18: Примеры выносных блоков
+</figcaption>
+</figure>
+</div>
+<p>Ниже показан пример кода для оформления блока.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">:::</span>{.callout<span class="sc">-</span>tip}</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Совет</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Этот элемент будет использоваться для рекомендаций и советов.</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="sc">:::</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="диаграммы" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="диаграммы"><span class="header-section-number">2.4.5</span> Диаграммы</h3>
+<p><a href="https://quarto.org/docs/authoring/diagrams.html" target="_blank">Вставка диаграмм</a> – еще одно ноу-хау в <strong>Quarto</strong>, имеющее встроенную поддержку <a href="https://mermaid-js.github.io/mermaid/" target="_blank">Mermaid</a> и <a href="https://graphviz.org/" target="_blank">Graphviz</a> диаграмм. Это позволяет создавать блок-схемы, диаграммы последовательностей, диаграммы состояний, диаграммы Ганта и многое другое, используя синтаксис обычного текста, мотивированный markdown.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="in">flowchart LR</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">  A[Прямоугольник] --&gt; B(Скругленные края)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="in">  B --&gt; C{Решение}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="in">  C --&gt; D[Первый результат]</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="in">  C --&gt; E[Второй результат]</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-Mermaid" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Mermaid.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Mermaid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;19: Пример диаграммы
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="метаданные-yaml" class="level3" data-number="2.4.6">
+<h3 data-number="2.4.6" class="anchored" data-anchor-id="метаданные-yaml"><span class="header-section-number">2.4.6</span> Метаданные YAML</h3>
+<p>Метаданные могут быть включены в <strong>Quarto</strong>-документ с помощью <a href="https://ru.wikipedia.org/wiki/YAML" target="_blank">YAML</a> либо в преамбуле в начале файла, либо отдельным <code>_quarto.yml</code>-файлом. С помощью YAML мы задаем, например, название документу, дату, автора, устанавливаем те параметры, которые необходимы при рендеринге документа, чтобы не писать их в командной строке и т.д.</p>
+<p>Очень обзорно, как используется структура YAML в <strong>Quarto</strong>:</p>
+<ul>
+<li><p>установите параметр как <code>key: value</code> (ключ: значение);</p></li>
+<li><p>строки с <code>:</code> должны быть в кавычках;</p></li>
+<li><p>включайте несколько значений в список с помощью <code>-</code>;</p></li>
+<li><p>вкладывайте пары ключ-значение с помощью отступа;</p></li>
+<li><p>многострочные строки следуют за <code>|</code>.</p></li>
+</ul>
+<p>Приведем простой пример YAML-части документа.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Документ в Quarto"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">author:</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> И.О. Исполнитель</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> А.М. Заместитель</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">format:</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">html:</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">toc:</span> true</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">abstract:</span> <span class="kw">|</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">Это</span> аннотация.</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="ex">Это</span> второй параграф.</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Также, приведем пример <code>_quarto.yml</code>-файла, соответствующего книге.</p>
+<details>
+<summary>
+Пример YAML для книги (развернуть)
+</summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># тип проекта - книга</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">project:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">type:</span> book</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># язык документа</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">lang:</span> ru</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># вид подсветки кода</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">highlight-style:</span> github</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="ex">book:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># название (заголовок) книги</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">title:</span> <span class="st">"Анализ и моделирование данных"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># подзаголовок</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">subtitle:</span> <span class="st">"с использованием языка программирования R"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># аннотация</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="ex">abstract:</span> <span class="st">"В книге рассмотрены современные подходы к практическим задачам."</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL проекта</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">site-url:</span> <span class="st">"https://book.netlify.app/"</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL репозитория</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="ex">repo-url:</span> <span class="st">"https://github.com/book"</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># иесто издания</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="ex">publisher-place:</span> <span class="st">"Москва, Красноярский край"</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># URL</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="ex">url:</span> <span class="st">"https://book.netlify.app/"</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># имя автора</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="ex">author:</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> name:</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>      <span class="ex">given:</span> Евгений</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>      <span class="ex">family:</span> Матеров</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>      <span class="ex">literal:</span> Е.Н. Матеров</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ORCID-индекс идентификации научных авторов (https://orcid.org/)</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="ex">orcid:</span> 0000-0001-1111-0111</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># e-mail авторов</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">email:</span> moskva@gmail.com</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># организация</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">affiliation:</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: МГУ имени М.В. Ломоносова</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># дата на титульном листе проекта</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="ex">date:</span> today</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># фавикон</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="ex">favicon:</span> <span class="st">"favicon.png"</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># картинка обложки</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>  <span class="ex">cover-image:</span> generate.png</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># код сервиса Google Analytics</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>  <span class="ex">google-analytics:</span> <span class="st">"G-XXXXXXXXXX"</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># панель навигации</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>  <span class="ex">navbar:</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># цвет фона панели навигации</span></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="ex">background:</span> <span class="st">"#2860a1"</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="ex">collapse-below:</span> lg</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># боковая панель</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sidebar:</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="ex">collapse-level:</span> 0</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>    <span class="ex">style:</span> <span class="st">"floating"</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>    <span class="ex">background:</span> white</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>    <span class="ex">foreground:</span> dark</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>    <span class="ex">logo:</span> sidebar_logo.jpg</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># нижний колонтитул страницы</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>  <span class="ex">page-footer:</span></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    <span class="ex">border:</span> true</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    <span class="ex">background:</span> light</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">left:</span> </span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>      <span class="kw">|</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>      <span class="ex">МГУ</span> имени М.В. Ломоносова</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>  <span class="co"># главы</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>  <span class="ex">chapters:</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> index.qmd</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># раздел</span></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> part: <span class="st">"Введение"</span></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>      <span class="ex">chapters:</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Intro Chapter/intro.qmd</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> part: <span class="st">"Работа с табличными данными"</span></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>      <span class="ex">chapters:</span></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Table data Chapter/tidy data.qmd</span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Table data Chapter/base table.qmd</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Table data Chapter/deep table.qmd</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> part: <span class="st">"Визуализация данных"</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>      <span class="ex">chapters:</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Visualization Chapter/visualization.qmd</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a>        <span class="ex">-</span> Visualization Chapter/color.qmd</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> Conclusion Chapter/Conclusion.qmd        </span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> references.qmd</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>  <span class="co"># приложения</span></span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>  <span class="ex">appendices:</span></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> Appendicies/R install.qmd</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-</span> Appendicies/Samples.qmd          </span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="co"># расположение сносок</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="co"># https://quarto.org/docs/reference/formats/pdf.html#footnotes</span></span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="ex">reference-location:</span> margin</span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="co"># файл библиографии</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="ex">bibliography:</span> references.bib</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a><span class="ex">format:</span></span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>  <span class="ex">html:</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># тема</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>    <span class="ex">theme:</span> pulse</span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a>    <span class="co"># свертка кода в HTML</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a>    <span class="ex">code-fold:</span> false</span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a>    <span class="co"># содержание</span></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a>    <span class="ex">toc:</span> true</span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="co"># опции для исполняемого кода</span></span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="ex">execute:</span></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a>  <span class="ex">execute_notebooks:</span> force</span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a>  <span class="ex">allow_errors:</span> true</span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a>  <span class="co"># разрешить кэширование</span></span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a>  <span class="ex">cache:</span> true    </span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="co"># ключи перекрестных ссылок метаданных</span></span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="ex">crossref:</span></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a>  <span class="co"># название приложений</span></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>  <span class="ex">appendix-title:</span> <span class="st">"Приложение"</span></span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a>  <span class="ex">appendix-delim:</span> <span class="st">":"</span></span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="ex">crossref-apx-prefix:</span> <span class="st">"Приложение"</span></span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="co"># цитирование, см. также</span></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="co"># https://quarto.org/docs/authoring/create-citeable-articles.html</span></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="ex">citation:</span></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a>  <span class="ex">url:</span> https://book-training.netlify.app/</span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a><span class="co"># переопределение перевода</span></span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a><span class="ex">language:</span></span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>  <span class="ex">title-block-affiliation-single:</span> <span class="st">"Организация"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="формулы-в-quarto" class="level3" data-number="2.4.7">
+<h3 data-number="2.4.7" class="anchored" data-anchor-id="формулы-в-quarto"><span class="header-section-number">2.4.7</span> Формулы в Quarto</h3>
+<p><a href="https://quarto.org/docs/authoring/markdown-basics.html#equations" target="_blank">Математические формулы</a> в <strong>Quarto</strong> используют разделители <code>$</code> для встроенных математических элементов текста и разделители <code>$$</code> для выносной математики на основе <a href="https://www.latex-project.org/" target="_blank">LaTeX</a>-синтаксиса. Для математической обработки HTML с использованием <a href="https://www.mathjax.org/" target="_blank">MathJax</a> (по умолчанию) можно использовать команды <code>\def</code>, <code>\newcommand</code>, <code>\renewcommand</code>, <code>\newenvironment</code>, <code>\renewenvironment</code> и <code>\let</code> для создания собственных макросов и сред. Также доступны, например, <a href="https://quarto.org/docs/output-formats/html-basics.html#latex-equations" target="_blank">форматы</a> <a href="https://github.com/Khan/KaTeX" target="_blank">KaTeX</a>, <a href="https://humenda.github.io/GladTeX/" target="_blank">GladTeX</a>, <a href="https://www.w3.org/Math/" target="_blank">MathML</a> или просто <code>plain</code>-формат. В визуальном редакторе происходит автоматический предосмотр формул.</p>
+<div id="fig-LaTeX" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-LaTeX-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/LaTeX.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-LaTeX-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;20: Пример оформления LaTeX-формулы в визуальном редакторе
+</figcaption>
+</figure>
+</div>
+<p>Форматы журнальных статей часто требуют детального контроля создаваемых выходных данных, а также возможности использования специфичных для журнала команд и директив. Это может быть достигнуто для форматов <strong>Quarto</strong> путем предоставления <a href="https://quarto.org/docs/journals/templates.html#templates" target="_blank">пользовательских шаблонов</a> <strong>Pandoc</strong> (например, LaTeX). Часто эти шаблоны представляют собой смесь специфичного для журнала стиля LaTeX и стандартных директив, требуемых <strong>Pandoc</strong>.</p>
+<p>Предоставляя свой собственный пользовательский шаблон, используемый при рендеринге, мы получаем полный контроль над конечным результатом. Пользовательский шаблон задается подобным образом через YAML:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">format:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">pdf:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">template:</span> mytemplate.tex</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span>    </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>В пользу <strong>Quarto</strong> можно отметить то, что с уходом <strong>MS Equation</strong> и дороговизной <a href="https://www.wiris.com/en/mathtype/" target="_blank">MathType</a>, создание несложных документов с математическими формулами в <strong>MS Word</strong>, не использующими полного погружения в LaTeX, можно осуществить как связку <em>.qmd -&gt; .docx</em>.</p>
+</section>
+</section>
+<section id="локализация" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="локализация"><span class="header-section-number">2.5</span> Локализация</h2>
+<p>В <strong>Quarto</strong> достаточно указать в YAML-части документа нужный язык, и документ будет локализован должным образом, например, “Figure” будет заменено на “Рисунок” и т.д. Локализацию можно отнести к преимуществам <strong>Quarto</strong>, например, в <code>blogdown</code> уже нет такого простого подхода для перевода названия рисунков.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Документ"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">lang:</span> ru</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Тем не менее, бывают случаи когда нужно переопределить перевод того или иного термина. Это делается следующим образом. Скажем, пусть мы хотим, чтобы <code>affiliation</code> в YAML-фрагменте кода ниже соответствовало “ОРГАНИЗАЦИЯ” в образе документа, а не “ПРИНАДЛЕЖНОСТЬ”, как это сделано по умолчанию.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">book:</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">author:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">affiliation:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> name: МГУ имени М.В.Ломоносова</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span>      </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>На <a href="https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/language" target="_blank">странице локализации</a> указаны .yml-файлы с языками, например <code>_language-ru.yml</code> содержит перевод понятий на русский язык, в частности, строка <code>title-block-affiliation-single: "принадлежность"</code> содержит нужный перевод. Переопределить перевод можно добавив в конце YAML-файла строки:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">language:</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">title-block-affiliation-single:</span> <span class="st">"организация"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span>      </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Один из способов получения .pdf-документа на локализованном (не английском) языке, это цепочка <em>.qmd -&gt; .docx -&gt; .pdf</em>. При этом, для создания <strong>MS Word</strong>-документов можно <a href="https://quarto.org/docs/output-formats/ms-word-templates.html" target="_blank">использовать шаблоны</a>. Другой способ локализации .pdf-вывода автору подсказал <a href="https://sibpsa.ru/portfolio/?bx=1&amp;idS=808" target="_blank">Сергей Валерьевич Бабёнышев</a>. Для этого необходимо скачать <a href="https://github.com/materov/quarto-rus-latex" target="_blank">файл с TeX-заготовкой</a> и поместить в папку с проектом. Пример .qmd документа показан ниже.</p>
+<details>
+<summary>
+Пример документа с элементами LaTeX-формул для рендеринга в PDF (развернуть)
+</summary>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> ru</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Задания"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">    pdf:</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">        toc: true</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">        number-sections: true</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">        color-links: true</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">        keep-tex: false</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">        template: template.tex</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    echo: false</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># jupyter: python3</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="an">mainfont:</span><span class="co"> "Times New Roman"</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># Найти матрицу обратную к заданной</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>\text{</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>a) $\begin{pmatrix}</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  3 &amp; -1 &amp;  3 <span class="sc">\\</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a> -2 &amp; -2 &amp;  3 <span class="sc">\\</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  4 &amp;  0 &amp;  1 <span class="sc">\\</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}$;</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>\ \ \ \ \ </span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>б) $\begin{pmatrix}</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a> -1 &amp; -1 &amp;  2 <span class="sc">\\</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  2 &amp; -2 &amp;  2 <span class="sc">\\</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  4 &amp;  4 &amp;  3 <span class="sc">\\</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}$.</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># Кривые второго порядка</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>а) Написать каноническое уравнение эллипса, если его большая полуось равна 5, а фокусы расположены в точках  $(\pm4, 0)$.</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Найти наклонные асимптоты графика функции</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>\text{</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>а) $\displaystyle y=\frac{\sqrt{x}}{3+2\sqrt{x}}$.\ \ \ \ \ </span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>б) $\displaystyle y=\frac{2\sqrt{x}}{1+2x}$.}</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="fu"># Вычислить двойной интеграл</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>a) $\displaystyle\iint\limits_{G}{{{({{x}^{2}}+{{y}^{2}})}^{6}}dx}dy$,</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>где $G$ – сектор круга радиуса 1 с центром в начале координат, лежащий во II квадранте.</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br> Откройте терминал, перейдите в папку проекта и наберите команду</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb21" data-filename="Terminal"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render your_file_name.qmd <span class="at">--to</span> pdf</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Еще один способ локализации описан в статье <a href="https://habr.com/ru/articles/781136/" target="_blank">Как рендерить R Markdown в PDF на кириллице</a>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Cyrillic markdown"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">format:</span> pdf</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pdf-engine:</span> lualatex</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mainfont:</span> Segoe UI</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">sansfont:</span> Segoe UI</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="ex">monofont:</span> Cascadia Mono PL Light</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="ex">editor:</span> visual</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| r include = F</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(showtext)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="in">showtext_auto()</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="публикация-веб-документов" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Публикация веб-документов</h1>
+<p><strong>Quarto</strong> поддерживает множество различных веб-сервисов для публикации:</p>
+<ul>
+<li><p><a href="https://quarto.org/docs/publishing/github-pages.html" target="_blank">GitHub Pages</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/netlify.html" target="_blank">Netlify</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/rstudio-connect.html" target="_blank">Posit Connect</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/other.html#google-firebase" target="_blank">Firebase</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/other.html#site44" target="_blank">Site44</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/other.html#amazon-s3" target="_blank">Amazon S3</a></p></li>
+<li><p><a href="https://azure.microsoft.com/en-us/services/devops/" target="_blank">Azure DevOps</a></p></li>
+<li><p><a href="https://quarto.org/docs/publishing/quarto-pub.html" target="_blank">Quarto Pub</a> – новый сервис от создателей <strong>Quarto</strong>.</p></li>
+</ul>
+<ol type="1">
+<li>Перед публикацией вы должны сделать рендер всего вашего <strong>Quarto</strong>-проекта следующей командой.</li>
+</ol>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="Terminal"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В результате рендеринга должна должна быть сформирована папка <code>_site</code> (либо, например, <code>_book</code>, в зависимости от назначения проекта), которая понадобится в дальнейшем.</p>
+<ol start="2" type="1">
+<li>Создайте, например, <a href="https://github.com/" target="_blank">GitHub</a>-репозиторий, куда поместите проект.</li>
+</ol>
+<div id="fig-git-example" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-git-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/git-example.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;21: Пример <strong>GitHub</strong>-репозитория
+</figcaption>
+</figure>
+</div>
+<p>Наиболее простыми и быстрыми способами публикации веб-документов можно считать сервисы <strong>Netlify</strong> и <strong>GitHub Pages</strong>. Рассмотрим обзор публикации документов на основе этих платформ. Создание и публикация персональных веб-сайтов на базе <strong>Quarto</strong> также хорошо рассмотрена на страницах авторов <a href="https://ucsb-meds.github.io/creating-quarto-websites/" target="_blank">Samantha Csik</a>, <a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide" target="_blank">Albert Rapp</a>, <a href="https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/" target="_blank">Beatriz Milz</a>.</p>
+<section id="этапы-публикации-в-netlify" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="этапы-публикации-в-netlify"><span class="header-section-number">3.1</span> Этапы публикации в Netlify</h2>
+<p>Удобство работы с <strong>Netlify</strong> состоит в автоматизации рабочего процесса путем интеграции с Git-сервисами. На главной странице <a href="https://netlify.app/" target="_blank">Netlify</a> необходимо сделать <em>Log in</em>, затем выбрать <em>Add new site</em>, где нужно выбрать <em>Import an existing project</em>.</p>
+<div id="fig-Netlify" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Netlify-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Netlify.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Netlify-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;22: Страница импорта проекта Netlify
+</figcaption>
+</figure>
+</div>
+<p>Затем необходимо указать репозиторий <strong>GitHub</strong> который был создан ранее.</p>
+<div id="fig-Netlify2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Netlify2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Netlify2.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Netlify2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;23: Страница импорта проекта в Netlify из GitHub-репозитория
+</figcaption>
+</figure>
+</div>
+<p>После того, как был выбран репозиторий, нужно указать рабочую папку проекта (в нашем случае это <code>_site</code>).</p>
+<div id="fig-Netlify3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Netlify3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Netlify3.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Netlify3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;24: Пример добавления папки проекта
+</figcaption>
+</figure>
+</div>
+<p>Окончательно, нужно нажать на кнопку <em>Deploy site</em> и в настройках переименовать название сайта.</p>
+<p>Теперь каждый раз, когда делается <strong>push</strong> командой Git (например, в терминале или в <strong>RStudio</strong>), через некоторый короткий промежуток времени обновляется и веб-страница.</p>
+<p>Если необходимо быстро опубликовать материал (например, презентацию), который не будет обновляться с течением времени или нет необходимости работать с Git, то достаточно воспользоваться сервисом <a href="https://app.netlify.com/drop" target="_blank">Netlify Drop</a>: перетащите папку <code>_site</code> в соответствующую область экрана, при этом переименуйте основной .html-файл в index.html.</p>
+<div id="fig-Netlify_drop" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Netlify_drop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Netlify_drop.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Netlify_drop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;25: Сервис Netlify Drop
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="этапы-публикации-в-github-pages" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="этапы-публикации-в-github-pages"><span class="header-section-number">3.2</span> Этапы публикации в GitHub Pages</h2>
+<p>Подробно публикация на <strong>GitHub Pages</strong> описана на странице <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank">GitHub Docs</a>. Для публикации <strong>Quarto</strong>-репозитория как страницы на <strong>GitHub</strong> достаточно зайти в раздел <em>Settings</em> и выбрать слева <em>Pages</em> для настройки.</p>
+<div id="fig-github-pages" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-github-pages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/github-pages.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-github-pages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;26: Настройка GitHub Pages
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="этапы-публикации-в-quarto-pub" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="этапы-публикации-в-quarto-pub"><span class="header-section-number">3.3</span> Этапы публикации в Quarto Pub</h2>
+<p><a href="https://quartopub.com/" target="_blank">Quarto Pub</a> – это новый сервис для публикации статических HTML-документов, который был внедрен одновременно с <strong>Quarto</strong>. Процесс публикации в <strong>Quarto Pub</strong> описан на <a href="https://quarto.org/docs/publishing/quarto-pub.html" target="_blank">странице документации</a>. Сделаем краткий обзор <strong>Quarto Pub</strong>.</p>
+<p>После того, как был создан проект, необходимо открыть терминал с директорией проекта и набрать в терминале команду как написано ниже.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="Terminal"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish quarto-pub</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь в терминале необходимо ответить на вопросы, которые будут заданы в процессе публикации и сайт будет опубликован на <a href="https://your-account.quarto.pub/site-name/" target="_blank">https://your-account.quarto.pub/site-name/</a>.</p>
+<p>Совет: в качестве <code>site-name</code> <strong>Quarto Pub</strong> будет предлагать сокращенное название блога или иного документа, которое может быть на русском языке, не используйте кириллицу для сокращенного названия сайта, замените на иное название.</p>
+<div id="fig-quarto_terminal" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto_terminal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/quarto_terminal.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto_terminal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;27: Этапы публикации в Quarto Pub в терминале
+</figcaption>
+</figure>
+</div>
+<p>Опубликованными сайтами можно управлять на <a href="https://quartopub.com" target="_blank">https://quartopub.com</a>. Нажмите на мини-образ сайта, чтобы перейти на страницу администратора, которая позволяет вам изменить краткое название сайта, сделать сайт по умолчанию для вашей учетной записи или полностью удалить сайт.</p>
+<div id="fig-quarto_pub" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto_pub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/quarto_pub.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto_pub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;28: Страница администрирования в <strong>Quarto Pub</strong>
+</figcaption>
+</figure>
+</div>
+<p>Сервис <strong>Quarto Pub</strong> публикует материалы очень быстро, поддерживает <a href="https://quarto.org/docs/publishing/quarto-pub.html" target="_blank">GitHub Actions</a>, однако у него меньше функциональных возможностей чем у <strong>Netlify</strong> или <strong>GitHub Pages</strong>.</p>
+</section>
+</section>
+<section id="сравнение-инструментов-r-markdown-с-quarto" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Сравнение инструментов R Markdown с Quarto</h1>
+<p><strong>Quarto</strong> привнесло множество достоинств <strong>R Markdown</strong> для программистов на <strong>Python</strong> или <strong>Julia</strong>. Для пользователей <strong>R</strong> возникает естественный вопрос: “стоит ли полностью отказаться от <strong>R Markdown</strong> в пользу <strong>Quarto</strong>?”</p>
+<div id="fig-Mike_Sulley" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Mike_Sulley-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Mike_Sulley.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Mike_Sulley-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;29: Майк: «<em>Что ты думаешь</em>?» Салли: «<em>Что было не так с твоей старой машиной</em>?» (<a href="https://youtu.be/0ddLrw8BG-Q"><em>Новая машина Майка</em></a>, Disney)
+</figcaption>
+</figure>
+</div>
+<p><strong>R Markdown</strong> предлагает огромный спектр библиотек: <a href="https://pkgs.rstudio.com/bookdown/" target="_blank">bookdown</a> для написания книг и отчетов, <a href="https://rstudio.github.io/distill/" target="_blank">distill</a> и <a href="https://pkgs.rstudio.com/blogdown/" target="_blank">blogdown</a> для создания блогов, <a href="http://frederikaust.com/papaja_man/">papaja</a> и <a href="https://pkgs.rstudio.com/rticles/" target="_blank">rticles</a> для публикации научных статей, <a href="https://cran.r-project.org/web/packages/workflowr/vignettes/wflow-01-getting-started.html" target="_blank">workflowr</a> для эффективного управления проектами, воспроизводимости и обмену результатами исследования, <a href="https://github.com/yihui/xaringan" target="_blank">xaringan</a> для создания презентаций и т.д. В планах авторов <strong>Quarto</strong> сделать аналоги для <a href="https://github.com/rstudio/pagedown" target="_blank">pagedown</a> для создания документов разбитых на страницы и <a href="https://pkgs.rstudio.com/flexdashboard/" target="_blank">flexdashboard</a>, который отлично подходит для интерактивных дэшбордов и прототипирования сайтов.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Наиболее полное сравнение инструментов в виде таблицы представлено на <a href="https://quarto.org/docs/faq/rmarkdown.html#i-use-x-bookdown-blogdown-etc..-what-is-the-quarto-equivalent" target="_blank">странице аналогов</a>. Отметим, что все документы в <strong>R Markdown</strong> можно компилировать в <strong>Quarto</strong> практически без изменений.</p>
+<p><a href="https://quarto.org/docs/faq/rmarkdown.html#should-i-switch-from-r-markdown-to-quarto" target="_blank">Нужно ли переходить с <strong>R Markdown</strong> на <strong>Quarto</strong>?</a> Возможно, только ради новых функций (которые в основном будут делаться для <strong>Quarto</strong>), расширенных макетов, Bootstrap-тем, возможности использовать редактор <strong>VS Code</strong> и т.д. Профессиональные пользователи отмечают некоторую разницу в подходах, где-то не в пользу <strong>Quarto</strong>, например, при передаче параметров переменных, рендеринге большого объема документов и т.д., однако для непрофессионалов <strong>Quarto</strong> остается идеальным простым вариантом для введения в создание отчетов, интерактивных книг и блогов. Тем не менее, например, <code>blogdown</code> может обладать гораздо большим функционалом чем <strong>Quarto</strong>, это библиотека, в которой можно провести ряд тестовых проверок перед созданием нового поста в блоге, <code>xaringan</code> служит прекрасным и достаточно легким (обладающим небольшим размером выходного файла по отношению к <a href="https://quarto.org/docs/presentations/revealjs/" target="_blank">reveal.js</a> в <strong>Quarto</strong>) средством создания HTML-презентаций, поэтому пользуйтесь тем инструментом, который лучше подходит для тех или иных задач. О разнице между подходами <strong>R Markdown</strong> и <strong>Quarto</strong> можно также почитать в статьях <a href="https://yihui.org/en/2022/04/quarto-r-markdown/" target="_blank">With Quarto Coming, is R Markdown Going Away? No.</a> автора <a href="https://twitter.com/xieyihui" target="_blank"><span class="citation" data-cites="Yihui">@Yihui</span> Xie</a> и <a href="https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/" target="_blank">We don’t talk about Quarto / Until now!</a>, которую написала <a href="https://github.com/apreshill" target="_blank"><span class="citation" data-cites="Alison">@Alison</span> Hill</a>.</p>
+</section>
+<section id="расширения" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Расширения</h1>
+<p><a href="https://quarto.org/docs/extensions/" target="_blank">Расширения</a> – это мощный способ изменить и расширить поведение <strong>Quarto</strong>. В настоящий момент для реализации расширений нужно обновить <strong>Quarto</strong> до версии &gt; 1.2x. Перечислим некоторые виды расширений.</p>
+<section id="виды-расширений" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="виды-расширений"><span class="header-section-number">5.1</span> Виды расширений</h2>
+<ul>
+<li><p><a href="https://quarto.org/docs/extensions/shortcodes.html" target="_blank">Shortcodes</a> – это специальные директивы markdown, которые генерируют различные типы контента.</p></li>
+<li><p><a href="https://quarto.org/docs/extensions/filters.html" target="_blank">Filters</a> – это гибкий инструмент для внедрения новых глобальных моделей поведения и/или новых моделей рендеринга markdown.</p></li>
+<li><p><a href="https://quarto.org/docs/extensions/formats.html" target="_blank">Custom Formats</a> позволяют создавать новые форматы вывода, объединяя параметры документа, шаблоны, таблицы стилей и другое содержимое.</p></li>
+</ul>
+<p>Каждый тип расширения имеет свои собственные требования к разработке: в некоторых случаях расширение может быть создано только с использованием метаданных YAML, однако во многих случаях необходимо выполнять некоторые пользовательские сценарии с использованием <strong>Lua</strong>.</p>
+<p>По категориям, расширения можно отнести к следующим типам.</p>
+<ul>
+<li><p><a href="https://quarto.org/docs/extensions/listing-filters.html" target="_blank">Shortcodes and Filters</a></p></li>
+<li><p><a href="https://quarto.org/docs/extensions/listing-journals.html" target="_blank">Journal Articles</a></p></li>
+<li><p><a href="https://quarto.org/docs/extensions/listing-formats.html" target="_blank">Custom Formats</a></p></li>
+<li><p><a href="https://quarto.org/docs/extensions/listing-revealjs.html" target="_blank">Revealjs Extensions</a></p></li>
+</ul>
+<p>Что умеют расширения? Например, создавать новые форматы вывода, объединяя параметры документа, шаблоны, таблицы стилей и другое содержимое; создавать элементы кода для вставки твитов или видео в документ или значков <a href="https://fontawesome.com/" target="_blank">Fontawesome</a>, служить шаблонами-заготовками для научных статей и т.д.</p>
+</section>
+<section id="расширение-shinylive-для-quarto" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="расширение-shinylive-для-quarto"><span class="header-section-number">5.2</span> Расширение Shinylive для Quarto</h2>
+<p>Большой интерес вызывает развитие нового проекта <a href="https://shiny.rstudio.com/py/" target="_blank">Shiny for Python</a>, который позволяет добавлять интерактивность в документы с помощью <strong>Python</strong>-кода. <a href="https://github.com/quarto-ext/shinylive" target="_blank">Расширение Shinylive</a> позволяет встраивать приложения <strong>Shiny</strong> для <strong>Python</strong> в документы <strong>Quarto</strong>, которые полностью запускаются в браузере с использованием <a href="https://pyodide.org/en/stable/" target="_blank">Pyodide</a> (<strong>Python</strong>, скомпилированный в <strong>WebAssembly</strong>). В настоящий момент <strong>Shinylive</strong> (как и <strong>Shiny for Python</strong>) является экспериментальным проектом, для работы <strong>Shinylive</strong> требуется:</p>
+<ul>
+<li><strong>Quarto</strong> Release Candidate версии 1.2.x;</li>
+<li><strong>Python</strong> версии 3.8 или выше;</li>
+<li>текущая версия <strong>Python</strong>-библиотеки <code>shinylive</code>, которая может быть установлена как:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Terminal</strong></pre>
+</div>
+<div class="sourceCode" id="cb26" data-filename="Terminal"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pip install shinylive <span class="op">--</span>upgrade</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-PyShiny" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-PyShiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/PyShiny.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-PyShiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;30: Пример Shiny for Python в Quarto
+</figcaption>
+</figure>
+</div>
+<p>За дальнейшим развитием проекта можно следить на странице <a href="https://github.com/quarto-ext/shinylive" target="_blank">Shinylive</a>, автором которой является <a href="https://twitter.com/winston_chang" target="_blank"><span class="citation" data-cites="Winston">@Winston</span> Chang</a>, см. также <a href="https://hosting.analythium.io/containerizing-shiny-for-python-and-shinylive-applications/" target="_blank">статью</a>. Также, вызывает интерес <a href="https://github.com/coatless/quarto-webr" target="_blank">расширение</a> <strong>Quarto</strong> для WebR.</p>
+</section>
+</section>
+<section id="возможности-для-автоматизации" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Возможности для автоматизации</h1>
+<section id="docker-и-dev-container-features" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="docker-и-dev-container-features"><span class="header-section-number">6.1</span> Docker и Dev Container Features</h2>
+<p><a href="https://hosting.analythium.io/author/peter/" target="_blank">Peter Solymos</a> написал две статьи касающиеся работы <strong>Docker</strong> с <strong>Quarto</strong>:</p>
+<ol type="1">
+<li><p><a href="https://hosting.analythium.io/how-to-set-up-quarto-with-docker-part-1-static-content/" target="_blank">How to Set Up Quarto with Docker, Part 1: Static Content</a>.</p></li>
+<li><p><a href="https://hosting.analythium.io/how-to-set-up-quarto-with-docker-part-2-dynamic-content/" target="_blank">How to Set Up Quarto with Docker, Part 2: Dynamic Content</a>.</p></li>
+</ol>
+<p><a href="https://jamesgoldie.dev/" target="_blank">James Goldie</a> опубликовал статью <a href="https://jamesgoldie.dev/writing/dev-containers-in-r/" target="_blank">Dev containers with R and Quarto</a>.</p>
+<p><a href="https://code.visualstudio.com/blogs/2022/09/15/dev-container-features" target="_blank">Dev Container Features</a> – это автономные блоки установочного кода, конфигурации контейнера и/или настроек и расширений, предназначенные для включения новых возможностей разработки в вашем dev-контейнере. Они могут быть созданы для работы с широким спектром изображений базовых контейнеров и предоставляют быстрый способ связать метаданные контейнеров с некоторыми шагами установки. Вы можете добавить их в свои контейнеры с помощью простой ссылки. Например, <a href="https://github.com/rocker-org/devcontainer-features" target="_blank">Dev Container Features (for R)</a> теперь включают в себя установку <a href="https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md" target="_blank">Quarto CLI</a>.</p>
+</section>
+<section id="github-actions-и-continuous-integration-ci" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="github-actions-и-continuous-integration-ci"><span class="header-section-number">6.2</span> GitHub Actions и Continuous Integration (CI)</h2>
+<p>Работа с системой контроля версий (CI) описана на <a href="https://quarto.org/docs/publishing/ci.html" target="_blank">странице документации Quarto</a> и относится к практике автоматической публикации содержимого из кода, при этом уделяется особое внимание к проверке отображаемых выходных данных в системе управления версиями, где происходит выполнение кода и рендеринг – локально или на сервере, в зависимости от различных сценариев и записи зависимостей в <strong>R</strong>, <strong>Python</strong> или <strong>Julia</strong>.</p>
+<ul>
+<li><p>Статья <a href="https://tarleb.com/posts/quarto-with-gh-pages/" target="_blank">Quarto Website with GitHub Actions</a> рассматривает использование действий <strong>GitHub</strong> для рендеринга и публикации веб-сайта <strong>Quarto</strong>.</p></li>
+<li><p><a href="https://twitter.com/BeaMilz" target="_blank"><span class="citation" data-cites="Beatriz">@Beatriz</span> Milz</a> написала статью <a href="https://beamilz.com/posts/series-gha/2022-series-gha-2-creating-your-first-action/en/" target="_blank">Monitoring quarto-dev repositories: Creating a workflow with GitHub Actions for R users</a> о том, как можно создать рабочий процесс для мониторинга репозиториев на <strong>GitHub</strong>.</p></li>
+<li><p><a href="https://github.com/quarto-dev/quarto-actions" target="_blank">Github Actions for Quarto</a> – В этом репозитории хранятся действия <strong>GitHub</strong>, полезные для создания и публикации документов <strong>Quarto</strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="дополнительные-ресурсы-по-quarto" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Дополнительные ресурсы по Quarto</h1>
+<p>Основным источником для официальных новинок, выходящих для <strong>Quarto</strong> можно считать блог <a href="https://quarto.org/docs/blog/">Quarto</a>, а для расширений <strong>Quarto</strong> – публикации, которые делает <a href="https://github.com/mcanouil/awesome-quarto">Mickaël Canouil</a>.</p>
+<section id="подробное-руководство-по-использованию-quarto" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="подробное-руководство-по-использованию-quarto"><span class="header-section-number">7.1</span> Подробное руководство по использованию Quarto</h2>
+<p>Для <strong>Quarto</strong> существует хорошее <a href="https://quarto.org/docs/get-started/hello/jupyter.html" target="_blank">введение</a> на странице документации и достаточно подробное <a href="https://quarto.org/docs/guide/" target="_blank">руководство</a>, описывающее практически все аспекты работы с <strong>Quarto</strong>.</p>
+<div id="fig-Guide" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Guide.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Guide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;31: Страница руководства по использованию <strong>Quarto</strong>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="советы-дня-по-quarto" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="советы-дня-по-quarto"><span class="header-section-number">7.2</span> Советы дня по Quarto</h2>
+<p>К началу конференции <a href="https://www.rstudio.com/blog/rstudio-2022-conf-schedule/" target="_blank">rstudio::conf(2022)</a> <a href="https://twitter.com/minebocek" target="_blank"><span class="citation" data-cites="Mine">@Mine</span> Çetinkaya-Rundel</a> запустила проект <a href="https://mine-cetinkaya-rundel.github.io/quarto-tip-a-day/" target="_blank">Советы дня по Quarto</a>, включающий короткие заметки с советами по использованию <strong>Quarto</strong>. Здесь можно найти множество полезных идей начиная от аннотирования слайдов до включения темной темы.</p>
+<div id="fig-Tip_a_day" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Tip_a_day-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Tip_a_day.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Tip_a_day-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;32: Страница “Советы дня по <strong>Quarto</strong>”
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="практический-семинар-от-r-markdown-до-quarto" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="практический-семинар-от-r-markdown-до-quarto"><span class="header-section-number">7.3</span> Практический семинар “От R Markdown до Quarto”</h2>
+<p>Также, в качестве сателлита к <a href="https://www.rstudio.com/blog/rstudio-2022-conf-schedule/" target="_blank">rstudio::conf(2022)</a>, проходил практический семинар <a href="https://rstudio-conf-2022.github.io/rmd-to-quarto/" target="_blank">From R Markdown to Quarto</a>, материалы которого доступны на <a href="https://github.com/rstudio-conf-2022/rmd-to-quarto" target="_blank">GitHub странице</a>. В частности, на странице <a href="https://rstudio-conf-2022.github.io/rmd-to-quarto/materials/" target="_blank">Materials</a> можно найти несколько подробных презентаций по введению в <strong>Quarto</strong>.</p>
+<div id="fig-RMD_to_Quarto" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RMD_to_Quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/RMD_to_Quarto.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-RMD_to_Quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;33: Страница практического семинара “От <strong>R Markdown</strong> к <strong>Quarto</strong>”
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="практический-семинар-приступая-к-работе-с-quarto" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="практический-семинар-приступая-к-работе-с-quarto"><span class="header-section-number">7.4</span> Практический семинар “Приступая к работе с Quarto”</h2>
+<p><a href="https://twitter.com/thomas_mock" target="_blank"><span class="citation" data-cites="Tom">@Tom</span> Mock</a> провел более чем двухчасовую YouTube-презентацию <a href="https://youtu.be/yvi5uXQMvu4" target="_blank">Welcome to Quarto Workshop!</a>, слайды которой <a href="https://jthomasmock.github.io/quarto-in-two-hours/" target="_blank">Getting Started with Quarto</a> также имеются в открытом доступе.</p>
+<div id="fig-getting_started" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-getting_started-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/getting_started.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-getting_started-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;34: Страница практического семинара “Приступая к работе с <strong>Quarto</strong>”
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="создание-блога-в-quarto" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="создание-блога-в-quarto"><span class="header-section-number">7.5</span> Создание блога в Quarto</h2>
+<p><a href="https://twitter.com/ivelasq3" target="_blank"><span class="citation" data-cites="Isabella">@Isabella</span> Velásquez</a> провела YouTube-презентацию <a href="https://youtu.be/CVcvXfRyfE0" target="_blank">Building a Blog with Quarto</a>, материалы которой можно найти на странице как <a href="https://ivelasq.quarto.pub/building-a-blog-with-quarto/" target="_blank">RStudio Enterprise Community Meetup</a>. Основу составила хорошо оформленная <a href="https://quarto.org/docs/websites/website-blog.html" target="_blank">документация по созданию блога</a>.</p>
+<div id="fig-blog" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/blog.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;35: Страница практического семинара “Построение блога с <strong>Quarto</strong>”
+</figcaption>
+</figure>
+</div>
+<p>Кроме того, можно порекомендовать статью <a href="https://ucsb-meds.github.io/creating-quarto-websites/" target="_blank">Creating your personal website using Quarto</a> автора <a href="https://twitter.com/samanthacsik" target="_blank"><span class="citation" data-cites="Samantha">@Samantha</span> Csik</a> по созданию собственных веб-страниц и блогов в <strong>Quarto</strong>.</p>
+<p>Отметим, что при создании новых записей в блогах может возникнуть вопрос о совместимости библиотек из старых сообщений с обновленными. Кроме того, нет смысла в рендеринге старых сообщений, которые уже опубликованы. Решение этих проблем в <strong>Quarto</strong> заключается в <a href="https://quarto.org/docs/websites/website-blog.html#freezing-posts" target="_blank">замораживании вывода вычислительных сообщений</a> в блоге. Подробно про опцию <code>freeze</code> можно почитать на <a href="https://quarto.org/docs/projects/code-execution.html#freeze" target="_blank">странице документации</a>.</p>
+</section>
+<section id="страница-awesome-quarto" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="страница-awesome-quarto"><span class="header-section-number">7.6</span> Страница Awesome Quarto</h2>
+<p><a href="https://twitter.com/MickaelCanouil" target="_blank"><span class="citation" data-cites="Mickaël">@Mickaël</span> Canouil</a> ведет страницу <a href="https://github.com/mcanouil/awesome-quarto" target="_blank">Awesome Quarto</a> на <strong>GitHub</strong>, где собраны список документов, инструментов, примеров и статей по <strong>Quarto</strong>.</p>
+<div id="fig-awesome" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-awesome-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/awesome.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-awesome-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;36: Страница Awesome <strong>Quarto</strong>
+</figcaption>
+</figure>
+</div>
+<p>На данном сайте можно найти много шаблонов документов и расширений <strong>Quarto</strong>.</p>
+</section>
+<section id="дополнительные-материалы" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="дополнительные-материалы"><span class="header-section-number">7.7</span> Дополнительные материалы</h2>
+<p>Сейчас существует очень большое количество различных интересного содержательного материала, касающегося <strong>Quarto</strong>. Ниже указан лишь небольшой список, где каждый найдет что-то интересное для себя.</p>
+<p><strong>Видео-материалы</strong>:</p>
+<ul>
+<li><p><a href="https://youtu.be/9jGc0TxoRco" target="_blank">Quarto - J.J. Allaire (интервью)</a></p></li>
+<li><p><a href="https://youtu.be/Y1uKNO32H_I" target="_blank">Reproducible Publications with Julia and Quarto | J.J. Allaire | JuliaCon 2022</a></p></li>
+<li><p><a href="https://youtu.be/p7Hxu4coDl8" target="_blank">Mine Çetinkaya-Rundel &amp; Julia Stewart Lowndes | Hello Quarto: Share, Collaborate, Teach, Reimagine</a></p></li>
+<li><p><a href="https://youtube.com/playlist?list=PL9HYL-VRX0oRupficE2l5DGgVIzpypTHs" target="_blank">Quarto | Posit PBS</a></p></li>
+<li><p><a href="https://youtu.be/KnwQFph3s94" target="_blank">Reproducible Medical Research with Quarto (Thomas Mock)</a></p></li>
+<li><p><a href="https://youtu.be/mrvhk2XUfWo" target="_blank">Tom Mock | Quarto for the Curious | RStudio (2022)</a></p></li>
+<li><p><a href="https://youtu.be/C8kDPmb_IKU" target="_blank">Hamel Husain | Literate Programming With Jupyter Notebooks and Quarto | RStudio (2022)</a></p></li>
+<li><p><a href="https://youtu.be/YoKjBcuUP0s" target="_blank">Blogging with Quarto: a 10 minute getting started tutorial</a></p></li>
+<li><p><a href="https://youtu.be/shVSmYna3GM" target="_blank">R-Ladies Freiburg (English) - Getting to know Quarto</a></p></li>
+<li><p><a href="https://youtube.com/playlist?list=PL4Brb3wh2n0wbAONByKD6mfGihKoTk6kf" target="_blank">Quarto | Dr Lyndon Walker</a></p></li>
+<li><p><a href="https://youtu.be/ErRX8plZpQE" target="_blank">How to style your Quarto blog without knowing a lot of HTML/CSS</a></p></li>
+<li><p><a href="https://youtu.be/azVAl343CIU" target="_blank">Openscapes Community Call 06: Hello Quarto! Co-hosted with RLadies Santa Barbara</a></p></li>
+</ul>
+<p><strong>Презентации</strong>:</p>
+<ul>
+<li><p><a href="https://jeremy-allen.github.io/quarto-demo/#/section" target="_blank">Quarto as reveal.js Slides</a></p></li>
+<li><p><a href="https://thomasmock.quarto.pub/quarto-curious/#/TitleSlide" target="_blank">Quarto for the curious</a></p></li>
+<li><p><a href="https://hrbrmstr.github.io/2022-10-nycdh/2022-10-nydh.html#/title-slide" target="_blank">Democratizing Data Science Teams / With Quarto</a></p></li>
+</ul>
+<p><strong>Веб-материалы</strong>:</p>
+<ul>
+<li><p><a href="https://www.rstudio.com/blog/6-productivity-hacks-for-quarto/" target="_blank">6 Productivity Hacks for Quarto</a></p></li>
+<li><p><a href="https://jimjam-slam.github.io/quarto-experiments/" target="_blank">Quarto experiments</a></p></li>
+</ul>
+</section>
+</section>
+<section id="некоторые-преимущества-и-недостатки-quarto" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Некоторые преимущества и недостатки Quarto</h1>
+<p>Отметим некоторые интересные возможности <strong>Quarto</strong>.</p>
+<ul>
+<li><p>Простота локализации: необходима одна строка в YAML-части документа для русификации HTML-документов. Недоработки перевода можно легко исправить самостоятельно.</p></li>
+<li><p>Простота перехода от одного формата вывода документа к другому: имея единый источник, можно быстро указать тип документа (.docx, .pdf или даже <a href="https://quarto.org/docs/extensions/formats.html" target="_blank">собственный формат</a>). Тем не менее, если явно указать шрифты в .html-документе, а затем сменить формат на .docx, не стоит ожидать что семейство шрифтов также будет изменено.</p></li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Мой документ"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">format:</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>   <span class="ex">html:</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="ex">mainfont:</span> cursive</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Работа с большими проектами (например, книгами), кэширование. Теперь при повторном рендеринге больших проектов (книг) с воспроизводимыми элементами кода, результат предыдущего вычисления сохраняется в кэше. Однако, при некоторых незначительных изменениях кода изменения могут не сработать, поэтому рекомендуется удалять кэш при чистовом прогоне проекта. Также, необходимо не забывать о кэше в папках <code>_freeze</code> при <a href="https://quarto.org/docs/projects/code-execution.html#freeze" target="_blank"><em>заморозке</em> кэша</a> при размещении проекта на Git или на сайте.</li>
+</ul>
+<div id="fig-cache" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/cache.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;37: Кэширование в Quarto
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Лучшая организация цитирования (как в визуальном редакторе в <strong>RStudio</strong>, так и организация ссылок через <a href="http://www.bibtex.org/" target="_blank">BibTEX</a>, <a href="https://www.citedrive.com/" target="_blank">CiteDrive</a>, <a href="https://www.zotero.org/" target="_blank">Zotero</a> и т.д.). Например, в статье <a href="https://bibtex.eu/blog/how-to-format-citations-and-bibliographies-in-rstudio-with-citedrive-and-quarto/" target="_blank">How to Format Citations and Bibliographies in RStudio with CiteDrive and Quarto</a> описано, как правильно создать отформатированное цитирование и библиографии. <a href="http://www.bibtex.org/" target="_blank">BibTeX</a> использует метаданные для автоматической организации цитирования с помощью ключей, однако результат рендеринга не всегда работает корректно.</li>
+</ul>
+<div id="fig-bibtex" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bibtex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/bibtex.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bibtex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;38: Пример BibTeX-файла
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><a href="https://quarto.org/docs/authoring/article-layout.html" target="_blank">Расширенные макеты</a> для размещения элементов документа на странице для регулировки ширины объекта, размещения объектов на полях, размещение рисунков рядом и т.д. Некоторые проблемы возникали при указании форматов ширины рисунков из воспроизводимых ячеек кода в блогах, возможно, это уже поправлено на сегодняшний момент. Для размещения, например, двух рисунков разных исходных размеров так, чтобы они имели одну высоту, необходимо гораздо больше действий, как если бы редактирование происходило в MS Word, описание такого случая в документации или примера нужно хорошо поискать.</p></li>
+<li><p><a href="https://quarto.org/docs/output-formats/html-themes.html" target="_blank">Темы на основе Bootstrap 5</a> выглядят отлично. Простой и легкий стиль документов понравится большинству. Использование CSS и <a href="https://sass-scss.ru/" target="_blank">Sass</a> для <a href="https://quarto.org/docs/presentations/revealjs/themes.html#creating-themes" target="_blank">создания стилей документа</a> можно отнести как к преимуществам (гибкой кастомизации), так и к недостаткам, поскольку, скажем, для изменения шрифтов в <code>reveal.js</code>-презентации потребуется создать свой стилевой файл.</p></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># пример указания Sass-стиля в YAML </span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">theme:</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">light:</span> theme.scss</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-Sass" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Sass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Sass.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Sass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;39: Пример Sass-файла для кастомизации презентации
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Создание презентаций на основе <a href="https://revealjs.com/" target="_blank">reveal.js</a> представляет новинку <strong>Quarto</strong>. Большим плюсом является наличие режима, аналогичного <em>Режиму докладчика</em> в MS Power Point с указанием времени с начала презентации, заметок и следующих слайдов. Также, презентации <strong>Quarto</strong> включает в себя встроенную версию <a href="https://github.com/reveal/multiplex" target="_blank">Reveal Multiplex plugin</a>. Плагин позволяет вашей аудитории следить за слайдами презентации, которой вы управляете, со своего телефона, планшета или ноутбука.</li>
+</ul>
+<div id="fig-reveal_js" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reveal_js-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reveal_js.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reveal_js-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;40: Пример режима докладчика в <strong>Quarto</strong>-презентации
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Встраивание <a href="https://learningapps.org/" target="_blank">LearningApps.org</a>-приложений, которое работает не только в <strong>Quarto</strong>, но и в <strong>R Markdown</strong>. Такого рода приложения, включенные как HTML-фреймы в учебные материалы или интерактивные книги, позволяют делать простые тесты для самопроверки усвоения учебного материала.</li>
+</ul>
+<div id="fig-learningapps" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-learningapps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/learningapps.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-learningapps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;41: Пример LearningApps-<a href="https://learningapps.org/16015431">теста</a>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="заключение" class="level1 page-columns page-full" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Заключение</h1>
+<p>В статье был дан обзор научно-издательской системы <strong>Quarto</strong>: базовые возможности <strong>Quarto</strong>, основы работы с <strong>Quarto</strong>, сравнение с <strong>R Markdown</strong>, возможности для публикации веб-документов. Кроме того, были рассмотрены некоторые эксклюзивные функции <strong>Quarto</strong> и недостатки. Даже очень поверхностное знакомство с <strong>Quarto</strong> получилось очень объемным.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+
+<!-- add the button style & script -->
+<link rel="stylesheet" href="../../../dist/applause-button.css">
+<script src="../../../dist/applause-button.js"></script>
+
+
+<!-- add the button! -->
+<applause-button style="width: 58px; height: 58px;">
+
+</applause-button></div></div><p>Система не лишена недостатков. Например, поскольку <strong>Quarto</strong> написан с использованием фреймвока <a href="https://deno.land/" target="_blank">Deno</a>, в одно время <strong>Quarto</strong> не компилировал документы у пользователей <em>Apple Silicon</em>-компьютеров. <a href="https://github.com/quarto-dev/quarto-cli/issues" target="_blank">Возможные баги</a> авторы стараются оперативно исправлять, идеи новых возможностей можно предлагать в <a href="https://github.com/quarto-dev/quarto-cli/discussions" target="_blank">разделе <em>дискуссии</em></a>.</p>
+<p>Будем надеяться, что проект <strong>Quarto</strong> будет успешно развиваться, например, будут добавлены другие языки программирования кроме присутствующих, это могут быть любые другие языки поддерживающие <em>Jupyter kernels</em> (возможно <strong>Mojo</strong>), при этом хотелось бы, чтобы <strong>Quarto</strong> не превратится в неповоротливый медиакомбайн аналогичный тому, что представлял из себя когда-то <strong>iTunes</strong>.</p>
+<p>Автор благодарит С.В. Бабёнышева и О.С. Малютина за полезные обсуждения по <strong>Quarto</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Session Info
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       macOS Monterey 12.1
+ system   aarch64, darwin20
+ ui       X11
+ language (EN)
+ collate  ru_RU.UTF-8
+ ctype    ru_RU.UTF-8
+ tz       Asia/Krasnoyarsk
+ date     2024-03-01
+ pandoc   2.18 @ /Users/materov/opt/miniconda3/envs/ox/bin/ (via rmarkdown)
+ quarto   1.4.550
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package     * version date (UTC) lib source
+ sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+
+ [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Сноски</h2>
+
+<ol>
+<li id="fn1"><p>В настоящий момент в <strong>Quarto</strong> реализован <a href="https://quarto.org/docs/dashboards/" target="_blank">вариант интерактивных дэшбордов</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{матеров2022,
+  author = {Матеров, Е.Н.},
+  title = {Научно-издательская система Quarto},
+  date = {2022-11-13},
+  url = {https://www.naukaidannye.netlify.app/blog/posts/2022-11-13-quarto},
+  langid = {ru}
+}
+</code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">Матеров Е.Н. Научно-издательская система Quarto
+[Electronic resource]. 2022. URL: <a href="https://www.naukaidannye.netlify.app/blog/posts/2022-11-13-quarto">https://www.naukaidannye.netlify.app/blog/posts/2022-11-13-quarto</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="materov/materov-quarto-blog-giscus" data-repo-id="R_kgDOJLuBsA" data-category="Announcements" data-category-id="DIC_kwDOJLuBsM4CU_m7" data-mapping="pathname" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+© 2021–<span id="year"></span> ❘ Е.Н. Матеров ❘ <i class="fa-brands fa-telegram" aria-label="telegram"></i> Telegram <a href="https://t.me/naukaidannye" class="external" target="_blank">Наука и данные</a>
+<script>document.getElementById('year').innerHTML= new Date().getFullYear();</script>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Создано с помощью <i class="fa-brands fa-r-project" aria-label="r-project"></i> и <a href="https://quarto.org/">Quarto</a> | Размещено на <i class="fa-brands fa-chrome" aria-label="chrome"></i> <a href="https://www.netlify.com">Netlify</a></span></p>
+</div>
+  </div>
+</footer>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://naukaidannye.netlify.app/&amp;text=классная публикация" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://t.me/share/url?url=https://naukaidannye.netlify.app/&amp;title=классная публикация" target="_blank" class="telegram"><i class="fa-brands fa-telegram fa-fw fa-lg"></i></a>  <a href="mailto:?subject=классная публикация&amp;body=Check out this link:https://naukaidannye.netlify.app/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Введите название сервера Mastodon'); if(typeof mastodon_instance==='string' &amp;&amp; mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=классная публикация https://naukaidannye.netlify.app/'}else{return false;}" target="_blank" class="mastodon"><i class="fa-brands fa-mastodon fa-fw fa-lg"></i></a></div></div>
+
+
+
+
+</body></html>
