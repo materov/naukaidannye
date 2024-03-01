@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Е.Н. Матеров">
+
+<title>Наука и данные - Визуализация трехмерных моделей земной поверхности</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/lord-icon-bundle-3.4.4/bundle.js"></script>
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1VWR791XRL"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-1VWR791XRL', { 'anonymize_ip': true});
+</script>
+
+
+<meta property="og:title" content="Наука и данные - Визуализация трехмерных моделей земной поверхности">
+<meta property="og:description" content="Примеры 3D-визуализаций цифровой модели рельефа местности средствами библиотеки rayvista">
+<meta property="og:image" content="https://naukaidannye.netlify.app/blog/posts/2024-02-02 rayvista/rayvista.png">
+<meta property="og:site_name" content="Наука и данные">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image:height" content="1558">
+<meta property="og:image:width" content="2472">
+<meta name="twitter:title" content="Наука и данные - Визуализация трехмерных моделей земной поверхности">
+<meta name="twitter:description" content="Примеры 3D-визуализаций цифровой модели рельефа местности средствами библиотеки rayvista">
+<meta name="twitter:image" content="https://naukaidannye.netlify.app/blog/posts/2024-02-02 rayvista/rayvista.png">
+<meta name="twitter:creator" content="@materov">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1558">
+<meta name="twitter:image-width" content="2472">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Наука и данные</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Блог</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../publications/index.html"> 
+<span class="menu-text">Публикации</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Об авторе</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/naukaidannye"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@materov" rel="me"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/materov"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Визуализация трехмерных моделей земной поверхности</h1>
+            <p class="subtitle lead">Примеры 3D-визуализаций цифровой модели рельефа местности средствами библиотеки rayvista</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">rayvista</div>
+                <div class="quarto-category">spatial</div>
+                <div class="quarto-category">Rstats</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Автор</div>
+      <div class="quarto-title-meta-contents">
+               <p>Е.Н. Матеров </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">4 марта 2024 г.</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul class="collapse">
+  <li><a href="#библиотека-rayvista" id="toc-библиотека-rayvista" class="nav-link active" data-scroll-target="#библиотека-rayvista">Библиотека rayvista</a>
+  <ul class="collapse">
+  <li><a href="#базовая-работа-с-3d-моделями" id="toc-базовая-работа-с-3d-моделями" class="nav-link" data-scroll-target="#базовая-работа-с-3d-моделями">Базовая работа с 3D-моделями</a></li>
+  <li><a href="#нанесение-дополнительных-географических-данных-на-3d-визуализации" id="toc-нанесение-дополнительных-географических-данных-на-3d-визуализации" class="nav-link" data-scroll-target="#нанесение-дополнительных-географических-данных-на-3d-визуализации">Нанесение дополнительных географических данных на 3D-визуализации</a></li>
+  </ul></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение">Заключение</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p><lord-icon speed="0.9" delay="1000" src="https://cdn.lordicon.com/pbbsmkso.json" trigger="loop"></lord-icon></p>
+<section id="библиотека-rayvista" class="level1 page-columns page-full">
+<h1>Библиотека rayvista</h1>
+<p>В <strong>R</strong> есть множество совершенно изумительных библиотек с открытым кодом, одна из них – <a href="https://github.com/tylermorganwall/rayshader" target="_blank">rayshader</a>, которая позволяет делать потрясающие 3D-изображения на основе матрицы высот и различных алгоритмов отмывки теней и трассировки лучей. Помимо создания 3D-картографических моделей, в <code>rayshader</code> можно преобразовывать объекты <code>ggplot2</code> в красивые трехмерные визуализации данных. Полученные <strong>модели можно вращать и исследовать в интерактивном режиме</strong>, а движение камеры можно запрограммировать для создания анимации. Подробно работу с <code>rayshader</code>, функции, руководства и результаты работы можно посмотреть на <a href="https://www.rayshader.com/" target="_blank">сайте библиотеки</a>, на персональном сайте автора библиотеки <a href="https://www.tylermw.com/" target="_blank">Rayverse Blog</a> и в главе <a href="https://tsamsonov.github.io/r-geo-course/12-3DModels.html" target="_blank">Трехмерные модели</a> интерактивной книги <a href="https://tsamsonov.github.io/r-geo-course/" target="_blank">Визуализация и анализ географических данных на языке R</a>.</p>
+<p>Библиотека <a href="https://github.com/h-a-graham/rayvista" target="_blank">rayvista</a> создана как плагин к <code>rayshader</code> и содержит основную функцию <code>plot_3d_vista()</code> для создания 3D-визуализации практически любого местоположения на Земле по географическим координатам. Так были созданы альбомы <a href="https://data-visualization-blog.netlify.app/posts/mountains%20russia/" target="_blank">Горы России</a> и <a href="https://data-visualization-blog.netlify.app/posts/peaks/" target="_blank">Непокоренные вершины мира</a>. Для создания цифровой модели рельефа местности на основе высот над уровнем моря в <code>rayvista</code> используется библиотека <a href="https://github.com/jhollist/elevatr" target="_blank">elevatr</a>. Для создания карт, которые накладываются на 3D-основу высот, используется библиотека <a href="https://github.com/riatelab/maptiles" target="_blank">maptiles</a>, которая позволяет загружать, комбинировать и отображать карты различных провайдеров (по умолчанию это <em>Esri</em>, а также <em>OpenStreetMap</em>, <em>CARTO</em> и <em>Thunderforest</em>).</p>
+<p>Полученные модели можно комбинировать с командами <code>rayshader</code>, накладывать объекты <em>OpenStreetMap</em>, и т.д. Установить библиотеку можно с помощью команды</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"h-a-graham/rayvista"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>При создании модели открывается <strong>RGL</strong>-окно, например, в <strong>macOS</strong> необходимо установить <a href="https://www.xquartz.org/" target="_blank">XQuartz</a>.</p>
+<section id="базовая-работа-с-3d-моделями" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="базовая-работа-с-3d-моделями">Базовая работа с 3D-моделями</h2>
+<p>Создадим простейшую 3D-модель. В качестве исходной визуализации выберем модель вершины <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BC%D0%B0%D0%B4%D0%B0%D0%B1%D0%BB%D0%B0%D0%BC" target="_blank">Амадаблам</a> – вершины в Гималаях, высота главного пика которой равна 6 814 м.</p>
+<div id="fig-Amadablam" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-Amadablam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="Amadablam.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="Amadablam.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Amadablam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1: Пример 3D-модели в <code>rayvista</code> – вершина Амадаблам
+</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>Amadablam <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat =</span> <span class="fl">27.8599</span>,</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">long =</span> <span class="fl">86.8614</span>, </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">zscale =</span> <span class="dv">6</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">zoom =</span> <span class="fl">0.6</span>,</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">soliddepth =</span> <span class="dv">4000</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">radius =</span> <span class="dv">5000</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">theta =</span> <span class="sc">-</span><span class="dv">65</span>, <span class="at">phi =</span> <span class="dv">25</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-2-9" class="code-annotation-target"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">windowsize =</span> <span class="dv">1200</span>,</span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">background =</span> <span class="st">"grey10"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">широта и долгота, выраженная в <em>WGS84</em>;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">при условии, что <em>x</em> = <em>y</em>, <code>zscale</code> показывает соотношение между <em>x</em> и <em>z</em> (либо <em>y</em> и <em>z</em>), по умолчанию <code>zscale</code> = 2;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="3">коэффициент масштабирования, по умолчанию равен 1;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="4">радиус, определяющий ограничивающую область;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">число между 0 и 20, отвечающее за масштаб в <code>maptiles::get_tiles()</code>, уровни масштабирования можно посмотреть в <a href="https://wiki.openstreetmap.org/wiki/Zoom_levels" target="_blank">OpenStreetMap wiki</a>, по умолчанию значение равно 13;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="6">угол вращения и азимутальный угол соответственно;</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="7">положение, ширина и высота устройства <strong>RGL</strong>, отображающего модель.</span>
+</dd>
+</dl>
+<p>В библиотеке <code>rayvista</code> возможно использовать карты-подложки различных провайдеров (например, <em>OpenStreetMap</em>, <em>Esri</em>, <em>CARTO</em> или <em>Thunderforest</em>, также, см. <a href="https://stamen.com/here-comes-the-future-of-stamen-maps/" target="_blank">статью</a> по поводу доступности карт <em>Stamen</em>). Все возможные слои показывает команда</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>?maptiles<span class="sc">::</span>get_tiles </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>В примере ниже покажем различные варианты для визуализации острова Татышев, г. Красноярск.</p>
+<div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>Krasnoyarsk <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat =</span> <span class="fl">56.01986</span>, </span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">long =</span> <span class="fl">92.932413</span>, </span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">zscale =</span> <span class="dv">3</span>, </span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">zoom =</span> <span class="fl">0.5</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">img_provider =</span> <span class="st">"Thunderforest.Landscape"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-6" class="code-annotation-target"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">api_key =</span> <span class="st">"your_api_key_value"</span>,</span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>,  </span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">phi =</span> <span class="dv">25</span>,</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">windowsize =</span> <span class="dv">1300</span>,</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>                             <span class="at">soliddepth =</span> <span class="dv">50</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-12" class="code-annotation-target"><a href="#annotated-cell-4-12" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># outlier_filter = 0.0001,</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-4-13" class="code-annotation-target"><a href="#annotated-cell-4-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fill_holes =</span> <span class="cn">TRUE</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="1">вид картографической подолжки;</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="6" data-code-annotation="2">значение API-ключа для <a href="https://www.thunderforest.com/maps/" target="_blank">Thunderforest</a>-карт, можно получить <a href="https://www.thunderforest.com/docs/apikeys/" target="_blank">на сайте</a>, для других карт API-ключ не требуется;</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="12" data-code-annotation="3">если в модели появляются артефакты, это значит что возвращаемые данные о рельефе имеют ошибочно низкие значения, тогда нужно выставить значение от 0 до 1, ближе к 0;</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="13" data-code-annotation="4">заполняет значения <code>NA</code> полученные в цифровой модели рельефа местности.</span>
+</dd>
+</dl>
+<div id="fig-Thunderforest.Landscape" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-Thunderforest.Landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="Thunderforest.Landscape.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="Thunderforest.Landscape.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Thunderforest.Landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;2: Пример 3D-модели с картой <code>Thunderforest.Landscape</code>, где показаны топографические особенности
+</figcaption>
+</figure>
+</div>
+<p>Отметим, что если в предыдущем коде, который формирует 3D-изображение, добавить <code>show_vista = FALSE</code> (в команде <code>plot_3d_vista()</code>), то мы не увидим <strong>RGL</strong>-окно, а сохраним объект, у которого будут атрибуты <code>dem_matrix</code> и <code>texture</code>. Теперь восстановить изображение на рисунке (см. <a href="#fig-Thunderforest.Landscape" class="quarto-xref">рис.&nbsp;2</a>) можно так:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Krasnoyarsk<span class="sc">$</span>dem_matrix <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">height_shade</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overlay</span>(., Krasnoyarsk<span class="sc">$</span>texture,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">rescale_original =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_3d</span>(., Krasnoyarsk<span class="sc">$</span>dem_matrix, <span class="at">zscale =</span> <span class="dv">3</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">windowsize =</span> <span class="dv">1300</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">soliddepth =</span> <span class="dv">50</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">zoom =</span> <span class="fl">0.5</span>, <span class="at">phi =</span> <span class="dv">25</span>, <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Сравним предыдущую карту с другими картами-подложками.</p>
+<div id="fig-Thunderforest.Outdoors" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-Thunderforest.Outdoors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="Thunderforest.Outdoors.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="Thunderforest.Outdoors.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Thunderforest.Outdoors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3: Пример 3D-модели с картой <code>Thunderforest.Outdoors</code>
+</figcaption>
+</figure>
+</div>
+<div id="fig-OpenTopoMap" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-OpenTopoMap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="OpenTopoMap.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="OpenTopoMap.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-OpenTopoMap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4: Пример 3D-модели с картой <code>OpenTopoMap</code>
+</figcaption>
+</figure>
+</div>
+<div id="fig-OSM" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-OSM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="OSM.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="OSM.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-OSM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5: Пример 3D-модели с картой <code>OpenStreetMap</code>
+</figcaption>
+</figure>
+</div>
+<p>Для лучшего восприятия можно оставить только 3D-поверхность модели, указав <code>solid = FALSE</code> как в следующем примере.</p>
+<details>
+<summary>
+Код
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>MalySemyachik <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat  =</span> <span class="fl">54.119</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">long =</span> <span class="fl">159.656</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">zscale =</span> <span class="dv">3</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">zoom =</span> <span class="fl">0.6</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">radius =</span> <span class="dv">5000</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">theta =</span> <span class="sc">-</span><span class="dv">50</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">phi =</span> <span class="dv">30</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                               <span class="at">windowsize =</span> <span class="dv">1100</span>, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">solid =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fill_holes =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-MalySemyachik" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-MalySemyachik-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="MalySemyachik.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6"><img src="MalySemyachik.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MalySemyachik-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6: Стратовулкан <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D1%8B%D0%B9_%D0%A1%D0%B5%D0%BC%D1%8F%D1%87%D0%B8%D0%BA" target="_blank">Малый Семячик</a> с горным озером на Камчатке
+</figcaption>
+</figure>
+</div>
+<p>Для имитации эффекта размытия можно использовать функцию <code>render_depth()</code>.</p>
+<details>
+<summary>
+Код
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>HopkinsNZ <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat =</span> <span class="sc">-</span><span class="fl">44.042238</span>, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">long =</span> <span class="fl">169.860985</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">radius =</span> <span class="dv">5000</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">elevation_detail =</span> <span class="dv">13</span>, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">zscale =</span> <span class="dv">5</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">theta =</span> <span class="dv">25</span>, <span class="at">phi=</span><span class="dv">25</span>, <span class="at">zoom =</span> <span class="fl">0.6</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">windowsize =</span> <span class="dv">1200</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">solid =</span> T, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">background =</span> <span class="st">'white'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">render_depth</span>(<span class="at">focus =</span> <span class="fl">0.6</span>, <span class="at">focallength =</span> <span class="dv">15</span>, <span class="at">clear=</span><span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-HopkinsNZ" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-HopkinsNZ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="HopkinsNZ.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7"><img src="HopkinsNZ.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HopkinsNZ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7: Mount Hopkins (Новая Зеландия)
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="нанесение-дополнительных-географических-данных-на-3d-визуализации" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="нанесение-дополнительных-географических-данных-на-3d-визуализации">Нанесение дополнительных географических данных на 3D-визуализации</h2>
+<section id="поднятие-плоскости-воды" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="поднятие-плоскости-воды">Поднятие плоскости воды</h3>
+<p>Одна из интересных возможностей, для которой может быть полезна библиотека <code>rayvista</code> – это <em>оценка природных рисков наводнений локальных территорий путем параллельного поднятия плоскости воды</em>. В качестве примера рассмотрим г. Улан-Удэ. Выберем точку внутри города с определенными географическими координатами и найдем оценочную высоту над уровнем моря с помощью сервиса <a href="https://www.freemaptools.com/elevation-finder.htm" target="_blank">Elevation Finder</a>, в нашем случае это 490 м (в <code>rayshader</code> также существует команда <code>detect_water()</code>). Получим модель местности и поднимем уровень на 20 м до 510 м, чтобы сделать оценку риска затопления.</p>
+<div id="fig-OSM" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-OSM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="UlanUde.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8"><img src="UlanUde.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-OSM-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;8: Оценка риска затопления с помощью 3D-моделирования для г. Улан-Удэ увеличением уровня воды на +20 м, возможный уровень затопления показан красным цветом
+</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="annotated-cell-8"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a>UlanUde <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat  =</span> <span class="fl">51.834</span>, </span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">long =</span> <span class="fl">107.5696</span>, </span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">zscale =</span> <span class="dv">2</span>, </span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">zoom =</span> <span class="fl">0.5</span>,</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">theta =</span> <span class="sc">-</span><span class="dv">65</span>, </span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">radius =</span> <span class="dv">5500</span>,</span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">img_provider =</span> <span class="st">"Thunderforest.Outdoors"</span>,</span>
+<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">api_key =</span> <span class="st">"your_api_key"</span>,</span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">windowsize =</span> <span class="dv">1400</span>, </span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">soliddepth =</span> <span class="dv">300</span>,</span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">phi =</span> <span class="dv">25</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-13" class="code-annotation-target"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">water =</span> <span class="cn">TRUE</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-14" class="code-annotation-target"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">waterdepth =</span> <span class="dv">510</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-8-15" class="code-annotation-target"><a href="#annotated-cell-8-15" aria-hidden="true" tabindex="-1"></a>                         <span class="at">wateralpha =</span> <span class="fl">0.3</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-8-16" class="code-annotation-target"><a href="#annotated-cell-8-16" aria-hidden="true" tabindex="-1"></a>                         <span class="at">watercolor =</span> <span class="st">"red"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-8-17" class="code-annotation-target"><a href="#annotated-cell-8-17" aria-hidden="true" tabindex="-1"></a>                         <span class="at">waterlinecolor =</span> <span class="st">"white"</span>,</span>
+<span id="annotated-cell-8-18"><a href="#annotated-cell-8-18" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill_holes =</span> <span class="cn">TRUE</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="13" data-code-annotation="1">добавление слоя воды;</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="14" data-code-annotation="2">уровень воды;</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="15" data-code-annotation="3">прозрачность слоя воды;</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="16" data-code-annotation="4">цвет слоя воды;</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="17" data-code-annotation="5">цвет линий по краям слоя воды.</span>
+</dd>
+</dl>
+<p>Код ниже добавляет маркеры и метки к текущему 3D-образу.</p>
+<details>
+<summary>
+Код
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_label</span>(<span class="at">heightmap =</span> UlanUde,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">lat  =</span> <span class="fl">51.824</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">long =</span> <span class="fl">107.525</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">altitude =</span> <span class="dv">140</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">text =</span> <span class="st">"Улан-Удэ (+20 метров)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">extent =</span> <span class="fu">attr</span>(UlanUde, <span class="st">'extent'</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">textsize =</span> <span class="fl">1.6</span>, <span class="at">linewidth =</span> <span class="dv">4</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">textcolor =</span> <span class="st">"grey20"</span>, <span class="at">linecolor =</span> <span class="st">"grey20"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+<section id="нанеcение-данных-openstreetmap" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="нанеcение-данных-openstreetmap">Нанеcение данных <em>OpenStreetMap</em></h3>
+<p>На 3D-образы можно наносить помимо маркеров, например, растровые данные или данные из <em>OpenStreetMap</em>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предостережение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Практически все сервисы стандарта <em>Web Map Tile Service</em>, такие как <em>OSM</em>, <em>Stamen</em>, <em>GoogleMaps</em> и т.д., предоставляют тайлы в системе координат (CRS) EPSG:3857 (WebMercator). Это означает, что если объект нового слоя находится в другой проекции CRS, который не является EPSG:3857 (например, EPSG:4326), необходимо привести наносимый объект (<strong>sf</strong> или растр) и подложку к единой проекции путем перепроектирования, иначе модель будет будет выглядеть деформированной.</p>
+</div>
+</div>
+<p>В качестве примера покажем, как сделать дополнительный слой на 3D-модели, который представляет собой данные по дорогам, загруженным из сервиса <em>OpenStreetMap</em>. Выберем Сан-Франциско (Калифорния, США), для которого характерен сложный рельеф местности; по некоторым сведениям в Сан-Франциско насчитывают около пятидесяти возвышенностей.</p>
+<p>Загрузим 3D-модель.</p>
+<div id="fig-SanFrancisco1" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-SanFrancisco1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="SanFrancisco1.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9"><img src="SanFrancisco1.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SanFrancisco1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9: Модель Сан-Франциско
+</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>SanFrancisco <span class="ot">&lt;-</span> <span class="fu">plot_3d_vista</span>(<span class="at">lat =</span> <span class="fl">37.75</span>, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">long =</span> <span class="sc">-</span><span class="fl">122.45</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">zscale =</span> <span class="dv">3</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">zoom =</span> <span class="fl">0.5</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">img_provider =</span> <span class="st">"Thunderforest.Outdoors"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">api_key =</span> <span class="st">"your_api_key"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">overlay_detail =</span> <span class="dv">14</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">phi =</span> <span class="dv">25</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">windowsize =</span> <span class="dv">1300</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">show_vista =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Определим прямоугольник, ограничивающий область.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>bbox <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(<span class="fu">c</span>(<span class="at">xmin =</span> <span class="sc">-</span><span class="fl">122.5129</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> <span class="fl">37.70026</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">xmax =</span> <span class="sc">-</span><span class="fl">122.3871</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> <span class="fl">37.79975</span>),  </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь загрузим дорожную сеть из <em>OpenStreetMap</em>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(osmdata)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>SanFrancisco_highway <span class="ot">&lt;-</span> <span class="fu">opq</span>(bbox) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="st">"highway"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Следующий этап – определение новых проекций, без этого график будет искажен.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>SanFrancisco_lines <span class="ot">=</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(SanFrancisco_highway<span class="sc">$</span>osm_lines, <span class="dv">3857</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>bbox_transformed <span class="ot">=</span> <span class="fu">st_bbox</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_as_sfc</span>(bbox), </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3857</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">librarary</span>(raster)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>extent_zoomed <span class="ot">=</span> <span class="fu">extent</span>(bbox_transformed)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Окончательно:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>SanFrancisco<span class="sc">$</span>dem_matrix <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">height_shade</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overlay</span>(., SanFrancisco<span class="sc">$</span>texture,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">rescale_original =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># дороги</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overlay</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_line_overlay</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      SanFrancisco_lines, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">extent =</span> extent_zoomed,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">heightmap =</span> SanFrancisco<span class="sc">$</span>dem_matrix)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_3d</span>(., SanFrancisco<span class="sc">$</span>dem_matrix, </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">zscale =</span> <span class="dv">3</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">windowsize =</span> <span class="dv">1300</span>, </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">zoom =</span> <span class="fl">0.5</span>, <span class="at">phi =</span> <span class="dv">25</span>, <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Теперь можно сравнить модель после нанесения дорожной сети на образ.</p>
+<div id="fig-SanFrancisco2" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-SanFrancisco2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="SanFrancisco2.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10"><img src="SanFrancisco2.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SanFrancisco2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10: Модель Сан-Франциско с нанесенными OSM-дорогами
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="нанесение-дополнительных-слоев-на-3d-модели" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="нанесение-дополнительных-слоев-на-3d-модели">Нанесение дополнительных слоев на 3D-модели</h3>
+<p>Несомненно, на модели можно накладывать и другие слои с исходными данными или результатами моделирования, что делает технологию весьма привлекательной (см., например, статью <a href="https://rpubs.com/Linh-LTP/891261" target="_blank">Adding Open Street Map Data to Rayshader Maps</a>). Приведем еще один пример, сделаем слой на 3D-модели, показывающий происшествия, на которые отреагировала пожарная служба Сан-Франциско. Отметим, соответствующий <a href="https://data.sfgov.org/Public-Safety/Fire-Incidents/wr8u-xric/about_data" target="_blank">набор данных</a> также содержит географические координаты.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data_sf <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">`</span><span class="at">Incident Date</span><span class="st">`</span>, point)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 616,630 × 2
+   `Incident Date`     point                            
+   &lt;dttm&gt;              &lt;chr&gt;                            
+ 1 2008-04-01 00:00:00 POINT (-122.41837339 37.74208979)
+ 2 2008-04-01 00:00:00 POINT (-122.39489 37.756291)     
+ 3 2008-04-01 00:00:00 POINT (-122.407468 37.78008)     
+ 4 2008-04-01 00:00:00 POINT (-122.42684908 37.77612642)
+ 5 2008-04-01 00:00:00 POINT (-122.4863941 37.77428492) 
+ 6 2008-04-01 00:00:00 POINT (-122.4481912 37.7597267)  
+ 7 2008-04-01 00:00:00 POINT (-122.405223 37.788694)    
+ 8 2008-04-01 00:00:00 POINT (-122.416457 37.739056)    
+ 9 2008-04-01 00:00:00 POINT (-122.392082 37.781846)    
+10 2008-04-01 00:00:00 POINT (-122.46678342 37.75300898)
+# ℹ 616,620 more rows</code></pre>
+</div>
+</div>
+<p>Сделаем небольшую предобработку данных.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data_sf<span class="sc">$</span>coordinates <span class="ot">&lt;-</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(data_sf<span class="sc">$</span>point, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"(?&lt;=</span><span class="sc">\\</span><span class="st">()([^()]*?)(?=</span><span class="sc">\\</span><span class="st">)[^()]*$)"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>data_sf <span class="ot">&lt;-</span> data_sf <span class="sc">|&gt;</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(coordinates, <span class="st">" "</span>, </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"lon"</span>, <span class="st">"lat"</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>data_sf<span class="sc">$</span>lat <span class="sc">%&lt;&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>data_sf<span class="sc">$</span>lon <span class="sc">%&lt;&gt;%</span> <span class="fu">as.numeric</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В качестве примера, выделим точки вызовов, отвечающие 2022 году.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> data_sf <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">`</span><span class="at">Incident Date</span><span class="st">`</span>, lat, lon) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(<span class="st">`</span><span class="at">Incident Date</span><span class="st">`</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lon"</span>, <span class="st">"lat"</span>), <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="dv">3857</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>points_sf</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 33260 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -13685560 ymin: 0 xmax: 13627530 ymax: 4555811
+Projected CRS: WGS 84 / Pseudo-Mercator
+# A tibble: 33,260 × 3
+   `Incident Date`      year            geometry
+ * &lt;dttm&gt;              &lt;dbl&gt;         &lt;POINT [m]&gt;
+ 1 2022-01-16 00:00:00  2022 (-13625484 4548073)
+ 2 2022-01-16 00:00:00  2022 (-13626605 4547332)
+ 3 2022-01-21 00:00:00  2022 (-13625214 4547874)
+ 4 2022-01-21 00:00:00  2022 (-13629079 4549058)
+ 5 2022-01-23 00:00:00  2022 (-13628711 4551584)
+ 6 2022-01-30 00:00:00  2022 (-13627494 4538682)
+ 7 2022-02-08 00:00:00  2022 (-13625338 4547751)
+ 8 2022-02-08 00:00:00  2022 (-13627882 4549346)
+ 9 2022-02-08 00:00:00  2022 (-13627827 4546331)
+10 2022-02-10 00:00:00  2022 (-13627366 4548730)
+# ℹ 33,250 more rows</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>SanFrancisco<span class="sc">$</span>dem_matrix <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">height_shade</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overlay</span>(., SanFrancisco<span class="sc">$</span>texture,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">rescale_original =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># пожары</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overlay</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate_point_overlay</span>(</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      points_sf, <span class="at">extent =</span> extent_zoomed,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"#C11317"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">heightmap =</span> SanFrancisco<span class="sc">$</span>dem_matrix)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_3d</span>(., SanFrancisco<span class="sc">$</span>dem_matrix, </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">zscale =</span> <span class="dv">3</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">windowsize =</span> <span class="dv">1300</span>, </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">zoom =</span> <span class="fl">0.5</span>, <span class="at">phi =</span> <span class="dv">25</span>, <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-SanFrancisco_fire" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-SanFrancisco_fire-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="SanFrancisco_fires.png" class="lightbox page-columns page-full" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11"><img src="SanFrancisco_fires.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-SanFrancisco_fire-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11: 3D-модель с нанесенными происшествиями, на которые отреагировала пожарная служба Сан-Франциско в 2022 году
+</figcaption>
+</figure>
+</div>
+<p>Как видно на рисунке (см. <a href="#fig-SanFrancisco_fire" class="quarto-xref">рис.&nbsp;11</a>), наибольшее количество происшествий приходится на деловой центр северо-востока города.</p>
+</section>
+</section>
+</section>
+<section id="заключение" class="level1 page-columns page-full">
+<h1>Заключение</h1>
+<p>Библиотека <code>rayvista</code> позволяет довольно легко формировать 3D-визуализацию для различных мест планеты Земля и, при необходимости, моделировать различные физические процессы, что делает ее весьма перспективным решением. Мы рассмотрели некоторые примеры применения библиотеки, дополнительные возможности и нанесение дополнительной географической информации на слои.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+
+<!-- add the button style & script -->
+<link rel="stylesheet" href="../../../dist/applause-button.css">
+<script src="../../../dist/applause-button.js"></script>
+
+
+<!-- add the button! -->
+<applause-button style="width: 58px; height: 58px;">
+
+</applause-button></div></div><p>Хорошим руководством по <code>rayvista</code> может также стать видео <a href="https://www.youtube.com/watch?v=kGadI6_ZIR4&amp;t=1s&amp;ab_channel=MilosMakesMaps" target="_blank">3D digital elevation maps with elevatr, rayshader and rayvista in R</a>, в котором <strong>Milos Popovic</strong> рассказывает этапы создания реалистичных цифровых 3D-карт высот любого местоположения, области или страны в мире с использованием библиотек <code>elevatr</code>, <code>rayshader</code> и <code>rayvista</code> в <strong>R</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Session Info
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       macOS Monterey 12.1
+ system   aarch64, darwin20
+ ui       X11
+ language (EN)
+ collate  ru_RU.UTF-8
+ ctype    ru_RU.UTF-8
+ tz       Asia/Krasnoyarsk
+ date     2024-03-01
+ pandoc   2.18 @ /Users/materov/opt/miniconda3/envs/ox/bin/ (via rmarkdown)
+ quarto   1.4.550
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package     * version date (UTC) lib source
+ dplyr       * 1.1.4   2023-11-17 [1] CRAN (R 4.3.1)
+ forcats     * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2     * 3.5.0   2024-02-23 [1] CRAN (R 4.3.1)
+ lubridate   * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
+ magrittr    * 2.0.3   2022-03-30 [1] CRAN (R 4.3.0)
+ purrr       * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
+ readr       * 2.1.5   2024-01-10 [1] CRAN (R 4.3.1)
+ sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ sf          * 1.0-15  2023-12-18 [1] CRAN (R 4.3.1)
+ stringr     * 1.5.1   2023-11-14 [1] CRAN (R 4.3.1)
+ tibble      * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr       * 1.3.1   2024-01-24 [1] CRAN (R 4.3.1)
+ tidyverse   * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+
+ [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Рисунок&nbsp;1: Пример 3D-модели в <code>rayvista</code> – вершина Амадаблам</span>
+<span class="glightbox-desc lightbox-desc-2">Рисунок&nbsp;2: Пример 3D-модели с картой <code>Thunderforest.Landscape</code>, где показаны топографические особенности</span>
+<span class="glightbox-desc lightbox-desc-3">Рисунок&nbsp;3: Пример 3D-модели с картой <code>Thunderforest.Outdoors</code></span>
+<span class="glightbox-desc lightbox-desc-4">Рисунок&nbsp;4: Пример 3D-модели с картой <code>OpenTopoMap</code></span>
+<span class="glightbox-desc lightbox-desc-5">Рисунок&nbsp;5: Пример 3D-модели с картой <code>OpenStreetMap</code></span>
+<span class="glightbox-desc lightbox-desc-6">Рисунок&nbsp;6: Стратовулкан <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D1%8B%D0%B9_%D0%A1%D0%B5%D0%BC%D1%8F%D1%87%D0%B8%D0%BA" target="_blank">Малый Семячик</a> с горным озером на Камчатке</span>
+<span class="glightbox-desc lightbox-desc-7">Рисунок&nbsp;7: Mount Hopkins (Новая Зеландия)</span>
+<span class="glightbox-desc lightbox-desc-8">Рисунок&nbsp;8: Оценка риска затопления с помощью 3D-моделирования для г. Улан-Удэ увеличением уровня воды на +20 м, возможный уровень затопления показан красным цветом</span>
+<span class="glightbox-desc lightbox-desc-9">Рисунок&nbsp;9: Модель Сан-Франциско</span>
+<span class="glightbox-desc lightbox-desc-10">Рисунок&nbsp;10: Модель Сан-Франциско с нанесенными OSM-дорогами</span>
+<span class="glightbox-desc lightbox-desc-11">Рисунок&nbsp;11: 3D-модель с нанесенными происшествиями, на которые отреагировала пожарная служба Сан-Франциско в 2022 году</span>
+</div>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{матеров2024,
+  author = {Матеров, Е.Н.},
+  title = {Визуализация трехмерных моделей земной поверхности},
+  date = {2024-02-02},
+  url = {https://www.naukaidannye.netlify.app/blog/posts/2024-02-02-rayvista},
+  langid = {ru}
+}
+</code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">Матеров Е.Н. Визуализация трехмерных моделей
+земной поверхности [Electronic resource]. 2024. URL: <a href="https://www.naukaidannye.netlify.app/blog/posts/2024-02-02-rayvista">https://www.naukaidannye.netlify.app/blog/posts/2024-02-02-rayvista</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="materov/materov-quarto-blog-giscus" data-repo-id="R_kgDOJLuBsA" data-category="Announcements" data-category-id="DIC_kwDOJLuBsM4CU_m7" data-mapping="pathname" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+© 2021–<span id="year"></span> ❘ Е.Н. Матеров ❘ <i class="fa-brands fa-telegram" aria-label="telegram"></i> Telegram <a href="https://t.me/naukaidannye" class="external" target="_blank">Наука и данные</a>
+<script>document.getElementById('year').innerHTML= new Date().getFullYear();</script>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Создано с помощью <i class="fa-brands fa-r-project" aria-label="r-project"></i> и <a href="https://quarto.org/">Quarto</a> | Размещено на <i class="fa-brands fa-chrome" aria-label="chrome"></i> <a href="https://www.netlify.com">Netlify</a></span></p>
+</div>
+  </div>
+</footer>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://naukaidannye.netlify.app/&amp;text=классная публикация" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://t.me/share/url?url=https://naukaidannye.netlify.app/&amp;title=классная публикация" target="_blank" class="telegram"><i class="fa-brands fa-telegram fa-fw fa-lg"></i></a>  <a href="mailto:?subject=классная публикация&amp;body=Check out this link:https://naukaidannye.netlify.app/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Введите название сервера Mastodon'); if(typeof mastodon_instance==='string' &amp;&amp; mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=классная публикация https://naukaidannye.netlify.app/'}else{return false;}" target="_blank" class="mastodon"><i class="fa-brands fa-mastodon fa-fw fa-lg"></i></a></div></div>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+</body></html>
