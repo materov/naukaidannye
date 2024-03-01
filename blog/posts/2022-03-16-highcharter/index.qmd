@@ -1,0 +1,579 @@
+---
+title: "Введение в библиотеку highcharter"
+subtitle: "Обзор библиотеки highcharter для визуализации интерактивной графики"
+author: "Е.Н. Матеров"
+date: "2022-03-16"
+date-modified: "2024-03-04"
+categories: [highcharter, Rstats]
+draft: false
+image: "featured.png"
+csl: "../../../gost-r-7-0-5-2008-numeric.csl"
+lang: ru
+
+filters:
+  - social-share
+
+share:
+  permalink: "https://naukaidannye.netlify.app/"
+  description: "классная публикация"
+  twitter: true
+  email: true
+  telegram: true
+  mastodon: true
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    toc-location: left
+
+citation: 
+  url: https://www.naukaidannye.netlify.app/blog/posts/2022-03-16-highcharter
+  citation-key: Materov-highcharter
+  language: ru
+  issued: "2022-03-16"
+---
+
+{{< li unukghxb trigger=loop speed=0.9 delay=1000 >}}
+
+# Библиотека highcharter
+
+Для внедрения HTML-виджетов в отчеты как веб-приложения в языке **R** имеется большое количество различных инструментов, позволяющих создавать интерактивные графики, диаграммы и карты, например, [echarts4r](https://echarts4r.john-coene.com/index.html){target="_blank"}, [dygraphs](http://rstudio.github.io/dygraphs/){target="_blank"}, [Leaflet](https://rstudio.github.io/leaflet/){target="_blank"}, [mapboxapi](https://walker-data.com/mapboxapi/){target="_blank"}, [Plotly](https://plotly.com/r/){target="_blank"}.
+
+Больше примеров различных HTML-виджетов можно посмотреть на странице  [www.htmlwidgets.org](http://www.htmlwidgets.org/){target="_blank"} или странице [Interactive plots](https://krzjoa.github.io/awesome-r-dataviz/#/?id=interactive-plots){target="_blank"}. Преимуществом этих средств визуализации является то, что они не требуют настройки серверной части как в [Shiny](https://shiny.rstudio.com/){target="_blank"}. К недостаткам можно отнести необходимость разбираться в "диалектах" каждого из инструментов.
+
+Библиотека `highcharter` является одним из эффективных средств для интерактивной визуализации данных. Это *обертка* для **JavaScript**-библиотеки [Highcharts](https://www.highcharts.com/){target="_blank"}, которая обладает гибкими настройками и мощным API. Отметим, что для коммерческого и правительственного использования `highcharts` не является бесплатным, при этом использование `highcharter` не предоставляет и не подразумевает лицензию для `highcharts`.
+
+Установить библиотеку возможно как с [CRAN](https://cran.r-project.org/web/packages/highcharter/index.html){target="_blank"}:
+
+```{.r}
+install.packages("highcharter")
+```
+
+так и с [GitHub](https://github.com/jbkunst/highcharter){target="_blank"}:
+
+```{.r}
+remotes::install_github("jbkunst/highcharter")
+```
+
+# Примеры использования highcharter
+
+Подключим библиотеку:
+
+```{r}
+#| warning: false
+#| message: false
+library(highcharter)
+```
+
+Подключим дополнительные библиотеки:
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(widgetframe)
+library(htmlwidgets)
+```
+
+
+```{r}
+#| warning: false
+#| message: false
+library(tidyverse)
+library(magrittr)
+```
+
+`highcharter` позволяет создавать графики с использованием двух основных функций:
+
+- `hchart()` -- универсальная функция для создания диаграмм, представляющих собой объект `highchart` аналогично `qplot` в `ggplot2`;
+- `hc_add_series()`, которая добавляет данные к существующему `highchart` объекту в зависимости от типа (класса) данных аналогично `geom_` в `ggplot2`.
+
+Например, для отрисовки диаграммы в `hchart()`, используется структура
+
+```{.r}
+hchart(<data.frame>, <type_of_chart>, hcaes(<aesthetics>), ...)
+```
+
+здесь:
+
+- `<data.frame>` -- таблица данных для построения диаграммы;
+- `<type_of_chart>` представляет собой строку для указания типа диаграммы; это значение может быть: линия, сплайн, область, тепловая карта, и т.д;
+- `<aesthetics>` -- используемое отображение для отрисовки данных;
+- `hcaes` работает подобно `aes` в `ggplot2`;
+- `...` -- другие параметры настройки диаграммы.
+
+## Географические карты в highcharter
+
+Покажем, как можно визуализировать простейшие географические данные в `highcharter`. В качестве примера визуализируем на карте Российской Федерации города, население которых превышает 300 000 чел. Актуальные данные по городам РФ можно получить с сайта [ИНИД](https://data.rcsi.science/data-catalog/datasets/160/){target="_blank"}[^update]. После простейшей предобработки таблица с данными выглядит следующим образом.
+
+[^update]: Дата обновления: *12.03.2021*
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+cities_large_set <- read_csv("/Users/materov/@данные/@блог_naukaidannye/2022-03-16-highcharter/data.csv")
+# cities_large_set <- read_csv(here("data", "data.csv"))
+
+cities_large_set <- cities_large_set |>
+  dplyr::select(-latitude_dms, -longitude_dms)
+
+cities_MSK_SpB <- 
+cities_large_set |>
+  dplyr::filter(settlement %in% c("Санкт-Петербург",
+                                  "Москва") &
+                region %in% c("Санкт-Петербург",
+                              "Москва"),
+                type == "г") |>
+  group_by(settlement) |>
+  summarise(population = sum(population)) |>
+  rename(name = settlement) |>
+  mutate(lon = c(37.3656, 30.1850),
+         lat = c(55.4507, 59.5619))
+
+cities_300_without_MSK_SpB <-
+  cities_large_set %>% 
+  filter(settlement != "Москва",
+         settlement != "Санкт-Петербург",
+         region != "Москва",
+         region != "Санкт-Петербург") %>% 
+  filter(population > 3*10^5) %>% 
+  select(name = settlement,
+         population = population,
+         lon = longitude_dd,
+         lat = latitude_dd)
+
+cities_300 <- bind_rows(cities_300_without_MSK_SpB, cities_MSK_SpB)
+```
+
+```{r}
+cities_300 
+```
+
+Добавим цвет для визуального отображения количества населения в каждой точке.
+
+```{r}
+cities_300 <- cities_300 |>
+  mutate(colors = colorize(population))
+```
+
+Непосредственно подложка карты скачивается со [страницы Highcharts](https://code.highcharts.com/mapdata/){target="_blank"}[^issue], затем добавляется слой с городами, параметр `tooltip` отвечает за всплывающие подсказки в коде для визуализации карты.
+
+[^issue]: Если карты не скачиваются, см. [Bugs in highcharter maps](https://github.com/jbkunst/highcharter/issues/797){target="_blank"}
+
+<details>
+<summary>Код</summary>
+
+```{.r}
+hcmap("countries/ru/custom/ru-all-disputed", 
+       showInLegend = FALSE) |>
+  hc_add_series(
+    data = cities_300, 
+    type = "mappoint",
+    hcaes(color = colors),
+    name = "Город",
+    tooltip = list(pointFormat = 
+              "{point.name}: {point.population:,.0f} чел.")
+  ) |>
+  hc_title(text = "Города с населением свыше 300 000 чел.") |>
+  hc_subtitle(text = "на 12.03.2021")
+```
+
+</details>
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+knitr::include_url("https://modest-wiles-9551a3.netlify.app/", height = "500px")
+```
+
+Другой пример построения карт показывает как можно визуализировать глобальную карту. В качестве примера используем данные [Global Climate Change Data](https://data.world/data-society/global-climate-change-data){target="_blank"} (источник: [Berkeley Earth](http://berkeleyearth.org/data/){target="_blank"}).
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+AverageTemperature <- read_csv("/Users/materov/@данные/@блог_naukaidannye/2022-03-16-highcharter/AverageTemperature.csv")
+```
+
+```{r}
+AverageTemperature 
+```
+
+<details>
+<summary>Код</summary>
+
+```{.r}
+hcmap(
+  "custom/world-robinson-lowres", 
+  data = AverageTemperature,
+  name = "температура", 
+  value = "aveT",
+  # необходимо сделать join стандартных индексов карты "iso-a3"
+  # и индексов стран из данных -- переменной "iso3"
+  joinBy        = c("iso-a3", "iso3"), 
+  borderWidth   = 0,
+  nullColor     = "#d3d3d3",
+  tooltip       = list(valueSuffix = "°C")
+  ) |>
+  hc_colorAxis(
+    stops = color_stops(colors = 
+                        viridisLite::inferno(10, begin = 0.1))
+  ) |>
+  hc_title(text    = "Средняя температура земной поверхности") |> 
+  hc_subtitle(text = "за период 2000-2013 гг.")
+```
+
+</details>
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+knitr::include_url("https://wonderful-williams-b10928.netlify.app/", height = "500px")
+```
+
+## Локализация highcharter
+
+Идея переопределения языковых опций в `highcharter` основана на ответах [Stack Overflow 1](https://stackoverflow.com/questions/25266392/how-to-set-highchart-global-options-in-r){target="_blank"}, [Stack Overflow 2](https://stackoverflow.com/questions/7419358/highcharts-datetime-localization){target="_blank"}, а также [Highcharts Configuration options](https://api.highcharts.com/highstock/lang){target="_blank"}. Сначала необходимо получить текущие настройки локализации в переменную `lang`.
+
+```{r}
+lang <- getOption("highcharter.lang")
+```
+
+Например, для сокращений дней недели переопределение значений выглядит так:
+
+```{r}
+lang$shortWeekdays <- c("Сб", "Вс", "Пн", "Вт", "Ср", "Чт", "Пт")
+```
+
+```{r}
+#| code-overflow: wrap
+#| code-fold: true
+#| code-summary: Полный код локализации
+#| warning: false
+#| message: false
+lang$contextButtonTitle <- "Контекстное меню диаграммы"
+
+lang$decimalPoint <- ","
+
+lang$downloadCSV  <- "Загрузить CSV"
+lang$downloadJPEG <- "Загрузить JPEG"
+lang$downloadPDF  <- "Загрузить PDF"
+lang$downloadPNG  <- "Загрузить PNG"
+lang$downloadSVG  <- "Загрузить SVG"
+lang$downloadXLS  <- "Загрузить XLS"
+
+lang$drillUpText <- "◁ Назад к {series.name}"
+
+lang$exitFullscreen <- "Выход из полноэкранного режима"
+
+lang$exportData$annotationHeader <- "Аннотации"
+
+lang$exportData$categoryHeader <- "Категория"
+
+lang$hideData <- "Скрыть таблицу данных"
+
+lang$loading <- "Загрузка..."
+
+lang$months <- c("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь")
+
+lang$noData <- "Нет данных для отображения"
+
+lang$printChart <- "Печать диаграммы"
+
+lang$resetZoom <- "Сброс масштабирования"
+
+lang$resetZoomTitle <- "Сброс масштабирования к 1:1"
+
+lang$shortMonths <- c("Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек")
+
+lang$shortWeekdays <- c("Сб", "Вс", "Пн", "Вт", "Ср", "Чт", "Пт")
+
+lang$thousandsSep <- " "
+
+lang$viewData <- "Просмотр таблицы данных"
+
+lang$viewFullscreen <- "Просмотр в полноэкранном режиме"
+
+lang$weekdays <- c("Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота")
+```
+
+После переопределения настроек их необходимо сохранить.
+
+```{r}
+options(highcharter.lang = lang)
+```
+
+## Отображение биржевых котировок
+
+Библиотека `highcharter` может служить для отображения актуальных биржевых котировок на основе API библиотеки `quantmod`. Ниже приведен пример для отображения графика стоимости акций **Apple**.
+
+::: {.column-body-inset-right}
+
+```{r}
+#| code-overflow: wrap
+#| code-fold: true
+#| warning: false
+#| message: false
+library("quantmod")
+
+# https://itecnote.com/tecnote/r-convert-between-zoo-object-and-data-frame-results-inconsistent-for-different-numbers-of-columns/
+zooToDf <- function(z) {
+  df <- as.data.frame(z) 
+  df$Date <- time(z)   #create a Date column
+  rownames(df) <- NULL #so row names not filled with dates
+  df <- df[,c(ncol(df), 1:(ncol(df)-1))] #reorder columns so Date first
+  return(df)
+}
+
+AAPL <- getSymbols("AAPL", 
+                  from = Sys.Date() - lubridate::years(1), 
+                  auto.assign = FALSE)
+
+AAPL <- AAPL |> na.omit()
+
+AAPL.ave <- SMA(Cl(AAPL), n = 5)
+
+AAPL_df <- zooToDf(AAPL) |> as_tibble()
+
+data_flags <- tibble(
+  date = as.Date(c("2023-06-05", "2023-09-12", "2023-10-30")),
+  title = c("WWDC 2023", "Apple event '23", "Scary fast event"),
+  text = c("Apple Vision Pro", "iPhone 15", "M3 chips")
+)
+
+highchart(type = "stock") |>
+  hc_add_theme(hc_theme_hcrt()) |>
+  hc_add_series(AAPL, 
+                id = 1,
+                yAxis = 0, 
+                name  = "AAPL") |>
+  hc_add_series(AAPL.ave, 
+                yAxis = 0, 
+                name  = "скользящее среднее AAPL",
+                color = hex_to_rgba("blue", 0.6)) |>
+  hc_tooltip(valueDecimals = 2) |>
+  hc_yAxis(labels = list(format = "${value}")) |>
+  #hc_title(text = "Котировки Apple за последний год") %>% 
+    hc_exporting(
+    enabled = TRUE
+  ) |> 
+  hc_add_series(
+    data_flags, 
+    hcaes(x = date),
+    type = "flags", 
+    onSeries = 1
+    )
+```
+
+:::
+
+
+## Примеры применения различных тем в highcharter
+
+Загрузим данные [GISS Surface Temperature Analysis](https://data.giss.nasa.gov/cgi-bin/gistemp/stdata_show_v4.cgi?id=RSM00029570&ds=14&dt=1){target="_blank"} по средним температурам для оценки глобального изменения температуры земной поверхности за последние несколько лет в г. Красноярске. Графики и таблицы обновлялись примерно в середине каждого месяца с использованием текущих файлов данных **NOAA GHCN v4** для метеорологических станций.
+
+```{r} 
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+weather_raw <- read_csv("/Users/materov/@данные/@блог_naukaidannye/2022-03-16-highcharter/station.csv")
+
+weather_long <- 
+weather_raw |>
+  dplyr::filter(YEAR >= 2013, 
+                YEAR <= 2018) |> 
+  select(YEAR, JAN:DEC) |>
+  pivot_longer(!YEAR, names_to = "MONTH", values_to = "TEMP") |>
+  rename(year = YEAR,
+         month = MONTH,
+         temp_ave = TEMP)
+
+weather_long$month <- factor(weather_long$month, 
+                        levels = c("JAN", "FEB", "MAR",
+                                   "APR", "MAY", "JUN",
+                                   "JUL", "AUG", "SEP",
+                                   "OCT", "NOV", "DEC"),
+                        labels = c("ЯНВ", "ФЕВ", "МАР", 
+                                   "АПР", "МАЙ", "ИЮН",
+                                   "ИЮЛ", "АВГ", "СЕН", 
+                                   "ОКТ", "НОЯ", "ДЕК"))
+```
+
+Нас будут интересовать средние температуры в каждом месяце начиная с 2013 года.
+
+```{r}
+weather_long
+```
+
+Сформируем из этих данных временной ряд и спрогнозируем значения временного ряда на 2 года (24 месяца) вперед (см. [Forecasting with ETS models](https://otexts.com/fpp2/ets-forecasting.html){target="_blank"}).
+
+```{r}
+#| warning: FALSE
+#| message: FALSE
+#| code-fold: true
+library(forecast)
+
+weather_month_ts <- ts(weather_long["temp_ave"], 
+                       start = c(2013, 1), frequency = 12)
+
+weather_forecast <- forecast(ets(weather_month_ts), 
+                             h = 24, level = 95)
+
+weather_forecast |> head(3)
+```
+
+Теперь создадим базовый `highcharter`-график.
+
+```{r}
+#| code-fold: true
+#| code-overflow: wrap
+hc_weather <- hchart(weather_forecast) |>
+  hc_title(
+    text = "Прогноз средних температур в г. Красноярске (в °C)"
+  ) |>
+  hc_yAxis(labels = list(format = "{value} °C")) |>
+  hc_tooltip(shared = TRUE, 
+             valueDecimals = 1)
+```
+
+Отобразим полученный результат используя стилизованную тему.
+
+```{r}
+hc_weather |>
+  hc_add_theme(hc_theme_smpl())
+```
+
+Визуализируем тот же график используя другие темы.
+
+```{r}
+hc_weather |>
+  hc_add_theme(hc_theme_google())
+```
+
+```{r}
+hc_weather |>
+  hc_add_theme(hc_theme_538())
+```
+
+## 3D-диаграммы
+
+Довольно эффектно выглядят 3D-диаграммы в `highcharter`. Покажем, как выглядит диаграмма средних температур на основе набора данных `weather_long` выше в г. Красноярске за 3 выбранных года.
+
+```{r} 
+#| warning: FALSE 
+#| message: FALSE
+# данные
+weather_hc <-
+weather_long |>
+  filter(year %in% c("2016","2017", "2018")) |>
+  group_by(year, month) |>
+  summarise(ave = round(mean(temp_ave, na.rm = TRUE), 1)) |>
+  ungroup()
+
+weather_hc
+```
+
+
+
+```{r}
+#| code-fold: true
+#| code-overflow: wrap
+#| code-summary: Код исходной диаграммы
+# базовая диаграмма
+hc <- highchart() |>
+  hc_xAxis(categories = weather_hc$month) |>
+  hc_add_series(
+    name = "2016", 
+    tooltip = list(
+      valueSuffix = "°C"
+    ), 
+    data = (weather_hc |> dplyr::filter(year == "2016"))$ave
+  ) |>
+  hc_xAxis(categories = weather_hc$month) |>
+  hc_add_series(
+    name = "2017", 
+    tooltip = list(
+      valueSuffix = "°C"
+    ),
+    data = (weather_hc |> dplyr::filter(year == "2017"))$ave
+  ) |>
+  hc_xAxis(categories = weather_hc$month) |>
+  hc_add_series(
+    name = "2018", 
+    tooltip = list(
+      valueSuffix = "°C"
+    ),
+    data = (weather_hc |> dplyr::filter(year == "2018"))$ave
+  ) |>
+  hc_yAxis(labels = list(format = "{value} °C")) |>
+  hc_add_theme(hc_theme_bloom()) %>% 
+  hc_credits(
+    text = "Диаграмма создана при использовании R и highcharter",
+    href = "https://jkunst.com/highcharter/",
+    enabled = TRUE
+  )  |>
+  hc_title(
+    text = "Средние температуры в г. Красноярске в 2016-2018 гг."
+  )
+```
+
+3D-версия диаграммы.
+
+```{r}
+hc |>
+  hc_chart(
+    type = "column",
+    options3d = list(
+      enabled = TRUE, 
+      beta = 15,
+      alpha = 15
+    )
+  )
+```
+
+# Заключение
+
+В статье были рассмотрены некоторые простейшие примеры создания визуализаций на основе `highcharter` и локализации библиотеки. 
+
+::: {.column-margin}
+
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="../../../dist/applause-button.css" />
+  <script src="../../../dist/applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>
+
+:::
+
+Больше различных примеров визуализаций в библиотеке `highcharter` можно найти на [странице библиотеки](https://jkunst.com/highcharter/){target="_blank"}, в блоге [Joshua Kunst](https://jkunst.com/blog/#category:highcharter){target="_blank"}, в блоге [Mara Averick](https://dataand.me/index.html#category:highcharter){target="_blank"}, а также в видео доклада
+
+{{< youtube l_U3hQ6mm60 >}}
+
+:::{.callout-tip collapse="true"}
+## Session Info
+```{r}
+#| echo: false
+
+library(sessioninfo)
+
+pkg_sesh <- session_info(pkgs = "attached")
+
+quarto_version <- system("quarto --version", intern = TRUE)
+
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE)
+  )
+
+pkg_sesh
+```
+
+:::
