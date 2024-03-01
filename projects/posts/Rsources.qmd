@@ -1,0 +1,11 @@
+---
+title: "Rесурсы"
+description: "полезные ссылки на источники по языку программирования R"
+date: 2022-04-02
+image: intro.png
+comments: false
+---
+
+:::{.column-page}
+[![](images/resursy.png)](https://materov.github.io/R-sources/){target="_blank" fig-align="center"}
+:::

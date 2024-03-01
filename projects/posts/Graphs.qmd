@@ -1,0 +1,11 @@
+---
+title: "Графики на досуге"
+description: "мини-блог по визуализации данных"
+date: 2022-07-10
+image: Elbrus.png
+comments: false
+---
+
+:::{.column-page}
+[![](images/grafiki.png)](https://data-visualization-blog.netlify.app/){target="_blank" fig-align="center"}
+:::

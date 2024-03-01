@@ -1,0 +1,16 @@
+---
+listing:
+  contents: posts
+  sort: "date asc"
+  type: grid
+  categories: false
+  page-size: 5
+  feed: true
+  fields: [title, description, image]
+page-layout: full
+title-block-banner: true
+comments: false
+format: html
+  #  fontsize: 1.1em
+  #  theme: cosmo
+---

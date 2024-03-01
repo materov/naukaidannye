@@ -1,0 +1,11 @@
+---
+title: "Введение в Quarto"
+description: "серия митапов по основным навыкам работы в Quarto"
+date: 2023-02-28
+comments: false
+image: quarto.png
+---
+
+:::{.column-page}
+[![](images/Quarto_meetup.png)](https://quarto-meetup-begin.netlify.app/){target="_blank" fig-align="center"}
+:::
