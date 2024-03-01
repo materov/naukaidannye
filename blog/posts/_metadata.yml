@@ -1,0 +1,24 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+#comments: 
+#    utterances:
+#      repo: materov/quarto-meetup-begin-comments
+
+comments:
+  giscus:
+    repo:  materov/materov-quarto-blog-giscus
+    repo-id: "R_kgDOJLuBsA"
+    category: "Announcements"
+    category-id: "DIC_kwDOJLuBsM4CU_m7"
+    mapping: "pathname"
+    reactions-enabled: false
+    loading: lazy
+    input-position: "bottom"
+    theme: "light"
