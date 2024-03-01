@@ -1,0 +1,997 @@
+---
+title: "Анализ географически распределенных объектов городской инфраструктуры"
+subtitle: "Обзор возможностей языка программирования R в применении к анализу расстояний между объектами городской инфраструктуры"
+author: "Е.Н. Матеров"
+date: "2021-11-22"
+date-modified: "2024-03-04"
+categories: [spatial, Rstats]
+image: "spatial.png"
+csl: "../../../gost-r-7-0-5-2008-numeric.csl"
+lang: ru
+
+filters:
+  - social-share
+
+share:
+  permalink: "https://naukaidannye.netlify.app/"
+  description: "классная публикация"
+  twitter: true
+  email: true
+  telegram: true
+  mastodon: true
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    toc-location: left
+    
+citation: 
+  url: https://www.naukaidannye.netlify.app/blog/posts/2021-11-22-spatial
+  citation-key: Materov-spatial
+  issued: "2021-11-22"
+  language: ru
+---
+
+{{< li surcxhka trigger=loop speed=0.9 delay=1000 >}}
+
+# Работа с данными OpenStreetMap
+
+Создание картографической основы важно для многих исследований, использующих географические карты городской инфраструктуры. Одной из самых полных баз данных местоположений является некоммерческий проект [OpenStreetMap](https://www.openstreetmap.org/){target="_blank"} (сокращенно *OSM*). Здесь мы покажем, как можно самостоятельно загружать карты, отображать на картах объекты, а также изучим вопрос о степени достижимости возможных объектов пожара пожарно-спасательными подразделениями для оценки рисков. Отметим, что особое внимание при оценке расстояния и времени прибытия подразделениями должно уделяться социально значимым объектам и объектам с массовым пребыванием людей.
+Аналогом библиотек, использованных здесь, является библиотека [OSMnx](https://github.com/gboeing/osmnx){target="_blank"} языка **Python**, которую разрабатывает [Geoff Boeing](https://geoffboeing.com/){target="_blank"}.
+
+## Создание картографической основы
+
+Идея создания карты такого рода рассмотрена в [блоге](https://taraskaduk.com/posts/2021-01-18-print-street-maps/){target="_blank"}, ее автор -- [Taras Kaduk](https://twitter.com/taraskaduk){target="_blank"}.
+
+Загрузим необходимые для работы библиотеки. Для получения данных с *OpenStreetMap* используется библиотека `osmdata`, для работы с географическими данными на основе стандарта [Simple Features](https://en.wikipedia.org/wiki/Simple_Features){target="_blank"} -- библиотека `sf`, библиотека `osrm` является связующим звеном между **R** и сервисом [OSRM](https://project-osrm.org/){target="_blank"} для определения расстояния между объектами, времени движения и кратчайшего пути. Следует отметить, что альтернативный подход для доступа к данным, лежащим в основе *OpenStreetMap* использует библиотека [osmdata](https://docs.ropensci.org/osmdata/){target="_blank"}, а для массовых извлечений больших наборов данных *OSM* в сжатом `pbf`-формате -- библиотека [osmextract](https://docs.ropensci.org/osmextract/){target="_blank"}.
+
+```{r}
+#| message: false
+#| warning: false
+# общие библиотеки
+library(tidyverse)
+library(magrittr)
+
+# работа с географическими данными
+library(osmdata)
+library(osrm)
+library(sf)
+
+# шкала масштаба на карте
+library(ggspatial)
+```
+
+Зафиксируем географический объект, в нашем случае -- город Красноярск.
+
+```{r}
+# здесь можно указать любой другой город
+my_place <- "Krasnojarsk Russia"
+```
+
+::: {#fig-KRSK_city_roads .column-body-inset-right}
+
+![](KRSK_city_roads.png){.lightbox}
+
+Пример карты дорожной сети города Красноярска в сервисе [city roads](https://anvaka.github.io/city-roads/){target="_blank"}
+:::
+
+Сделаем запрос из *OSM* для нахождения географических границ города.
+
+```{.r}
+# загрузим все границы, связанные с объектом
+all_boundaries <- opq(my_place, timeout = 300) |> # <1>
+  add_osm_feature(key = "boundary", # <2>
+                  value = "administrative") |>
+  osmdata_sf() |> # <3>
+  unname_osmdata_sf() %>% # <4>
+  .$osm_multipolygons
+```
+1. делает [Overpass](https://wiki.openstreetmap.org/wiki/Overpass_API){target="_blank"}-запрос; увеличение параметра `timeout` позволяет делать большие запросы, поскольку время ожидания сервера может истечь до того, как будут доставлены все данные[^global_option];
+2. добавляет функции в запрос *Overpass*, которые задаются парами `key-value`; подробное описание значений представлено на [wiki OSM](https://wiki.openstreetmap.org/wiki/RU:%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B_%D0%BA%D0%B0%D1%80%D1%82%D1%8B){target="_blank"}, для получения полного списка значений можно использовать команду `available_features()`, в нашем случае это административные границы: областей, районов, округов и т.д.;
+3. возвращает `sf`-объект;
+4. удаляет имена из `osmdata` геометрических объектов.
+
+[^global_option]: Можно также установить глобальную опцию `options(timeout = max(300, getOption("timeout")))`.
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| output: false
+#| include: false
+
+all_boundaries <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/all_boundaries.gpkg")
+```
+
+Выясним, где могут содержаться потенциально возможные границы города.
+
+```{.r}
+all_boundaries |> 
+  as_tibble() |> 
+  dplyr::select(osm_id, name, geom) |> 
+  dplyr::filter(grepl("Красноярск", name))
+```
+
+:::{style="font-size: 95%;"}
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+
+all_boundaries |> 
+  as_tibble() |> 
+  dplyr::select(osm_id, name, geom) |> 
+  dplyr::filter(grepl("Красн", name))
+```
+
+:::
+
+Выделим из полученного множества границ только нужную нам, соответствующую границе городского округа.
+
+```{r}
+boundary_KRSK <- all_boundaries |> 
+                   dplyr::filter(osm_id == 1157393)
+```
+
+Другой простой способ получения границы города -- воспользоваться [библиотекой](https://dieghernan.github.io/nominatimlite/){target="_blank"} `nominatimlite` для (обратного) геокодирования на основе [Nominatim API](https://nominatim.org/release-docs/latest/){target="_blank"}.
+
+```{.r}
+boundary_KRSK <- nominatimlite::geo_lite_sf(my_place, points_only = FALSE)
+```
+
+Теперь получим картографические данные, включающие в себя дорожную сеть улиц, железные дороги и водные объекты -- реки и озера. Фиксируем значения ключа `highway`.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Код: типы загружаемых дорог"
+
+# типы загружаемых дорог и толщина линий на карте
+highway_sizes <- tibble::tribble(
+  ~highway, ~highway_group,
+  "motorway",      "large",
+  "trunk",         "large",
+  "motorway_link", "large",
+  "primary",       "large",
+  "primary_link",  "large",
+  "secondary",     "medium",
+  "secondary_link","medium",
+  "tertiary",      "medium",
+  "tertiary_link", "medium",
+  "trunk_link",    "medium",
+  "residential",   "small",
+  "living_street", "small",
+  "unclassified",  "small",
+  "service",       "small",
+  "road",          "small",
+)
+```
+
+Загрузим дорожную сеть города.[^artifacts]
+
+[^artifacts]: Данные по дорожной сети из *OSM* могут содержать некорректные объекты, например, объектам могут соответствовать неверные координаты, что может приводит к смещениям объектов. В этом случае все неточности можно исправить с помощью функций библиотеки `sf`.
+
+```{.r}
+# streets (улицы)
+streets_osm <- opq(my_place, timeout = 300) |>
+  add_osm_feature(key = "highway", 
+                  value = highway_sizes$highway) |>
+  osmdata_sf() |> 
+  unname_osmdata_sf()
+```
+
+Выделим только типы линий `osm_lines` и оставим только улицы, находящиеся внутри границы `boundary_KRSK`.
+
+```{.r}
+streets <- streets_osm$osm_lines %>%
+  mutate(length = as.numeric(st_length(.))) |>
+  left_join(highway_sizes, by = "highway") |> 
+  st_intersection(boundary_KRSK)
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| output: false
+#| include: false
+
+streets <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/streets.gpkg")
+```
+
+```{r}
+streets |>
+  dplyr::select(osm_id, name, highway, 
+                maxspeed, oneway, surface) |>
+  head(5)
+```
+
+Загрузим данные соответствующие железным дорогам.
+
+<details>
+<summary>Код: железные дороги</summary>
+
+```{.r}
+# railways (железные дороги)
+railways_osm <- opq(my_place, timeout = 300) |>
+  add_osm_feature(key = "railway", 
+                  value = "rail") |>
+  osmdata_sf() |> 
+  unname_osmdata_sf()
+
+railways <- railways_osm$osm_lines |> 
+  dplyr::select()
+```
+
+</details>
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| output: false
+#| include: false
+
+# railways <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/railways.gpkg")
+```
+
+Получим данные по водным объектам.
+
+<details>
+<summary>Код: водные объекты</summary>
+
+```{.r}
+# water (водные объекты)
+water_osm <- opq(my_place, timeout = 300) |>
+  add_osm_feature(key = "natural", 
+                  value = "water") |>
+  osmdata_sf() |> 
+  unname_osmdata_sf()
+
+river_osm <- opq(my_place, timeout = 300) |>
+  add_osm_feature(key = "waterway", 
+                  value = c("river", 
+                            "riverbank")) |>
+  osmdata_sf() |> 
+  unname_osmdata_sf()
+
+water <- 
+  c(water_osm, river_osm) %>%
+  .$osm_multipolygons |>
+  dplyr::select(osm_id, name)
+```
+
+</details>
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| output: false
+#| include: false
+
+# water <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/water.gpkg")
+```
+
+Создадим базовую карту, нанеся на нее соответствующие объекты.
+
+<details>
+<summary>Код: базовая карта</summary>
+
+```{.r}
+base_map <- ggplot() +
+  # дорожная сеть
+  geom_sf(data = streets |>
+          dplyr::filter(highway_group == "large"),
+          linewidth = 0.4,
+          color = "grey30") +
+  geom_sf(data = streets |>
+          dplyr::filter(highway_group == "medium"),
+          linewidth = 0.2,
+          color = "grey35") +
+  geom_sf(data = streets |>
+          dplyr::filter(highway_group == "small"),
+          linewidth = 0.1,
+          color = "grey40") +
+  # железные дороги
+  geom_sf(data = railways,
+          color = "grey30",
+          linewidth = 0.3,
+          linetype = "dotdash",
+          alpha = 0.6) +
+  # водные объекты
+  geom_sf(data = water,
+          fill = "steelblue",
+          lwd = 0,
+          alpha = 0.3) +
+  hrbrthemes::theme_ipsum() +
+  theme(plot.margin = ggplot2::margin(0.01, 0.01, 0.01, 0.01, "cm"))
+```
+
+</details>
+
+Карта-подложка готова, теперь можно использовать ее элементы для отображения всего города или его части. Варьируя границы, мы можем получить карту достаточно подробного масштаба.
+
+```{.r}
+base_map +
+  # границы города
+  geom_sf(data = boundary_KRSK, 
+          color = "red",
+          alpha = 0.1) +
+  # ограничения
+  coord_sf(xlim = c(92.64, 93.19), 
+           ylim = c(55.90, 56.14),
+           expand = FALSE)
+```
+
+::: {#fig-KRSK_map .column-body-inset-right}
+
+![](KRSK_map.png){.lightbox}
+
+*OpenStreetMap*-карта дорожной сети города Красноярска
+:::
+
+## Дополнительные данные из OpenStreetMap
+
+Напомним, что базовая карта состоит из трех основных составляющих: `streets`, `railways` и `water`. Мы можем использовать информацию из *OpenStreetMap* для дальнейшего анализа. В частности, переменная `speed` объекта `streets` отвечает за максимальную разрешенную [скорость](https://wiki.openstreetmap.org/wiki/RU:Key:maxspeed){target="_blank"} для различных транспортных средств. 
+
+<details>
+<summary>Код: максимальные разрешенные скорости движения</summary>
+
+```{.r}
+# максимальные разрешенные скорости движения из OpenStreetMap
+streets_speed <- streets |> 
+  # рассмотрим только данные без пропусков
+  dplyr::filter(!is.na(maxspeed)) |> 
+  # заменим коды значениями из OSM
+  mutate(maxspeed_new = 
+           case_when(
+             maxspeed == "RU:living_street" ~ "20",
+             maxspeed == "RU:rural" ~ "90",
+             maxspeed == "RU:urban" ~ "60",
+             .default = maxspeed
+             )
+           ) 
+
+# преобразуем переменные
+streets_speed$maxspeed_new <- 
+  as.numeric(streets_speed$maxspeed_new)
+
+# создадим факторную переменную для скорости
+streets_speed$max_speed_factor <-
+  factor(streets_speed$maxspeed_new,
+         levels = c(5, 8, 10, 20, 30, 40, 49, 50, 60, 70, 90),
+         labels = c("5 км/ч", "8 км/ч", 
+                    "10 км/ч", "20 км/ч", 
+                    "30 км/ч", "40 км/ч", 
+                    "49 км/ч", "50 км/ч", 
+                    "60 км/ч", "70 км/ч", 
+                    "90 км/ч"))
+```
+
+</details>
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+#| echo: false
+
+streets_speed <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/streets_speed.gpkg")
+```
+
+```{r}
+streets_speed |> 
+  st_drop_geometry() %>% 
+  count(., max_speed_factor, sort = TRUE)
+```
+
+<details>
+<summary>Код: максимальные разрешенные скорости движения (карта)</summary>
+
+```{.r}
+# карта: максимальная разрешенная скорость движения
+base_map +
+  # дорожная сеть
+  geom_sf(data = streets_speed,
+          linewidth = 0.67,
+          aes(color = max_speed_factor)) +
+  viridis::scale_color_viridis(discrete = TRUE,
+                               option = "turbo") +
+  # географические границы части города
+  coord_sf(xlim = c(92.8002, 93.0407), 
+           ylim = c(55.9823, 56.1003),
+           expand = FALSE) +
+  labs(color = "максимальная \nразрешенная \nскорость") +
+  theme_void() +
+  theme(text = element_text(size = 14))
+```
+
+</details>
+
+::: {#fig-KRSK_max_speed .column-body-inset-right}
+
+![](KRSK_max_speed.png){.lightbox}
+
+*OpenStreetMap*-карта дорожной сети города Красноярска с данными по максимально разрешенным скоростям движения
+:::
+
+Как видно из рисунка, база *OpenStreetMap* содержит неполную информацию по каждому участку дорог. Аналогично можно рассмотреть и визуализировать другие характеристики: дороги с односторонним движением (переменная `oneway`), тип дорожного покрытия (переменная `surface`), количество полос движения (переменная `lanes`) и т.д. 
+
+## Нанесение на карту города различных объектов и ограниченных зон
+
+Нанесем на карту города границы районов. Для этого нужно предварительно загрузить границы из *OpenStreetMap*, указав значение для ключа `admin_level`, в нашем случае значение равно 9 в соответствии с кодированием в [таблице](https://wiki.openstreetmap.org/wiki/RU:Key:admin_level){target="_blank"} деления на административные единицы для *OpenStreetMap*.
+
+```{.r}
+# получение данных по районам города из OSM
+districts_osm <- opq(my_place) |>
+  add_osm_feature(key = "admin_level", value = 9) |>
+  osmdata_sf() |>
+  unname_osmdata_sf()
+```
+
+Получим данные по районам, также выделив площадь каждого района.[^polygons]
+
+[^polygons]: Отметим, что для некоторых населенных пунктов также следует рассмотреть `.$osm_polygons` при нахождении границ районов.
+
+```{.r}
+# границы районов с площадями
+districts <- districts_osm %>% 
+  .$osm_multipolygons |>
+  dplyr::select(osm_id, name) %>% 
+  mutate(area = st_area(.),
+         region_area = as.numeric(area))
+```
+
+Найдем центроиды районов.
+
+```{.r}
+# центроиды районов
+regions <- cbind(districts, 
+                 st_coordinates(st_centroid(districts))) |>
+  rename(c_lon = X, c_lat = Y)
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| include: false
+
+# районы Красноярска
+regions <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/regions.gpkg")
+```
+
+```{r}
+# районы города
+regions
+```
+
+Приведем карту районов города.[^regions_division]
+
+[^regions_division]: Для некоторых городов (например, Новосибирска) районы могут быть разделены на несколько компонентов, что нужно учитывать при нахождении центроидов и нанесение их на карты.
+
+<details>
+<summary>Код: карта районов города</summary>
+
+```{.r}
+# удалим "район" из названия
+regions$name <- str_remove(regions$name, " район")
+
+set.seed(2024)
+
+base_map +
+  # районы города
+  geom_sf(data = regions, 
+          aes(fill = region_area / 1000000), 
+          color = "black", 
+          alpha = 0.5) + 
+  # цвет
+  viridis::scale_fill_viridis(option = "plasma", 
+                              direction = 1) +
+  labs(fill = "площадь района (в кв. км):", 
+       x = "", y = "") +
+  theme(legend.key.size = unit(0.4,"cm"),
+        legend.key.width = unit(1.8,"cm"),
+        legend.position = "top") +
+  # названия районов
+  ggrepel::geom_text_repel(data = regions, 
+                           aes(c_lon, c_lat,
+                               label = name, 
+                               color = I("black")), 
+                           color = "white",     
+                           bg.color = "grey30", 
+                           bg.r = 0.15,          
+                           size = 5, alpha = 0.9) +
+  # ограничения
+  coord_sf(xlim = c(92.64, 93.19), 
+           ylim = c(55.90, 56.14),
+           expand = FALSE) 
+```
+
+</details>
+
+::: {#fig-KRSK_regions .column-body-inset-right}
+
+![](KRSK_regions.png){.lightbox}
+
+*OpenStreetMap*-карта дорожной сети города Красноярска с районами
+:::
+
+Аналогично можно загрузить и отобразить на карте информацию по зданиям и сооружениям.
+
+```{.r}
+# buildings (здания)
+buildings_osm <- opq(my_place, timeout = 300) |>
+  add_osm_feature(key = "building") |>
+  osmdata_sf()
+```
+
+```{.r}
+buildings_polygons <- buildings_osm %>% 
+  .$osm_polygons
+
+buildings_multipolygons <- buildings_osm %>% 
+  .$osm_multipolygons
+
+buildings <- bind_rows(buildings_polygons, 
+                       buildings_multipolygons)
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| include: false
+
+buildings <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/buildings.gpkg")
+```
+
+Рассмотрим количество объектов, которые принадлежат улицам города.
+
+```{r}
+count(buildings |> 
+        st_drop_geometry() |> 
+        as_tibble(), 
+      addr.street, sort = TRUE) |>
+  na.omit()
+```
+
+<details>
+<summary>Код: улицы города</summary>
+
+```{.r}
+base_map +
+  geom_sf(data = buildings, linewidth = 0.15, 
+          aes(fill = `addr:street`, 
+              color = `addr:street`)) +
+  # географические границы части города
+  coord_sf(xlim = c(92.8492, 93.0487), 
+           ylim = c(55.9863, 56.0603),
+           expand = FALSE) +
+  theme_void() +
+  theme(legend.position = "none")
+```
+
+</details>
+
+::: {#fig-KRSK_buildings .column-body-inset-right}
+
+![](KRSK_buildings.png){.lightbox}
+
+Карта дорожной сети, а также зданий и строений города Красноярска, цвет соответствует принадлежности объектов улицам города
+:::
+
+Другой пример -- построим карту, учитывающую этажность зданий.
+
+<details>
+<summary>Код: этажность зданий</summary>
+
+```{.r}
+# этажность
+base_map +
+  geom_sf(data = buildings |>
+            dplyr::filter(as.numeric(`building:levels`) >= 0) |>
+            mutate(`building:levels` = factor(`building:levels`, 
+                                              levels = c(0:26, 29, 30))), 
+          linewidth = 0.1,
+          aes(fill = `building:levels`,
+              color = `building:levels`)) +
+  # географические границы города
+  coord_sf(xlim = c(92.88, 92.95), 
+           ylim = c(56.02, 56.06),
+           expand = FALSE) +
+  # шкала аннотаций
+  annotation_scale(location = "br", 
+                   width_hint = 0.5, 
+                   style = "ticks") +
+  theme(legend.position = "right") +
+  viridis::scale_fill_viridis(option = "turbo", 
+                              discrete = T) +
+  labs(fill = "этажность") +
+  guides(color = "none") +
+  hrbrthemes::theme_ipsum()
+```
+
+</details>
+
+::: {#fig-KRSK_building_levels .column-body-inset-right}
+
+![](KRSK_building_levels.png){.lightbox}
+
+Карта города Красноярска, цвет соответствует этажности зданий
+:::
+
+# Анализ зон транспортной доступности
+
+Рассмотрим транспортную достижимость объектов по времени движения по транспортной сети. Задачи, связанные с построением зон доступностей, рассмотрены, например, в главе [Сетевой анализ](https://tsamsonov.github.io/r-geo-course/16-NetworkAnalysis.html){target="_blank"} курса [[Т.Е. Самсонов](https://tsamsonov.github.io/r-geo-course/){target="_blank"}]. В частности, Федеральный закон от 22.07.2008 № 123-ФЗ (ред. от 25.12.2023) "*Технический регламент о требованиях пожарной безопасности*" в статье 76 *Требования пожарной безопасности по размещению зданий пожарных депо на территориях населенных пунктов* говорит о том, что здания пожарных депо на территориях населенных пунктов следует размещать исходя из условия, что время прибытия первого подразделения к месту вызова в городских населенных пунктах не должно превышать **10 минут**, в сельских населенных пунктах **20 минут**. В связи с этим, актуальным является вопрос достижимости объектов с массовым пребыванием людей (т.е. зданий или сооружений (кроме жилых домов), в котором может одновременно находиться 50 и более человек) из пожарно-спасательных подразделений.
+
+## Точки исследования
+
+Помимо карты-подложки нам понадобятся объекты исследования, пусть это будут *пожарно-спасательные подразделения*, дислоцируемые на территории местного пожарно-спасательного гарнизона (сокращенно ПСЧ). Сформируем точки, которые им соответствуют, это можно сделать случайным образом, например, с помощью команды `sf::st_sample()`, либо приписать заданным значениям как в нашем случае -- центроидам районов города.
+
+```{.r}
+# пожарные части
+# точки выбраны как центроиды районов
+fire_stations <-
+regions |>
+  mutate(name = c(paste("ПСЧ", 1:7, sep = "-"))) |>
+  dplyr::select(name, c_lon, c_lat) |>
+  st_drop_geometry() |>
+  as_tibble()
+```
+
+```{r}
+#| echo: false
+#| include: false
+fire_stations <-
+  tribble(
+    ~name, ~c_lon, ~c_lat,
+    "ПСЧ-1", 92.82686, 56.01383,
+    "ПСЧ-2", 92.96615, 55.98596,
+    "ПСЧ-3", 93.02779, 56.02276,
+    "ПСЧ-4", 92.73413, 56.01672,
+    "ПСЧ-5", 92.84575, 55.96372,
+    "ПСЧ-6", 92.97927, 56.07533,
+    "ПСЧ-7", 92.88060, 56.04314
+  )
+```
+
+```{r}
+fire_stations
+```
+
+Отметим, что в картографии объекты должны рассматриваться в соответствующей [географической проекции](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D0%B9){target="_blank"}, которая учитывает искажения Земли. В **R** библиотека `sf` позволяет сделать перевод в географическую систему координат *CRS* (*coordinate reference system*).
+
+```{r}
+# CRS (coordinate reference system) проекция в EPSG:4326
+fire_stations_sf <- fire_stations |>
+  st_as_sf(coords = c("c_lon", "c_lat"), 
+           crs = 4326)
+
+fire_stations_sf
+```
+
+Предположим, что нам необходимо решить задачу распределения районов выезда пожарных частей в терминах евклидова расстояния, без учета движения вдоль дорог и времени движения пожарного автомобиля. Тогда  задача решалась бы используя [диаграммы Вороного](https://ru.wikipedia.org/wiki/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%BE%D0%B3%D0%BE){target="_blank"}. Напомним, что диаграмма Вороного конечного множества точек *S* на плоскости представляет такое разбиение плоскости на ячейки, при котором каждая область этого разбиения образует множество точек, более близких к одному из элементов множества *S*, чем к любому другому элементу множества. Ниже показан пример такого разбиения, альтернативный вариант можно осуществить с помощью библиотеки [ggforce](https://ggforce.data-imaginist.com/reference/geom_delvor.html){target="_blank"}.
+
+<details>
+<summary>Код: диаграммы Вороного</summary>
+
+```{.r}
+# диаграммы Вороного
+base_map +
+  geom_sf(data = fire_stations_sf |>
+            st_combine() |>
+            st_voronoi() |> 
+            st_collection_extract() |> 
+            st_intersection(boundary_KRSK), 
+          color = "darkblue",
+          linewidth = 0.7,
+          alpha = 0.01) +
+  # точки с ПСЧ
+  geom_sf(data = fire_stations_sf,
+          color = "magenta4", 
+          alpha = 1, 
+          shape = 8, 
+          size = 3, 
+          stroke = 1.2) +
+  # маркеры
+  ggrepel::geom_label_repel(data = fire_stations, 
+                            aes(c_lon, c_lat, label = name), 
+                            fontface = "bold",
+                            size = 4, alpha = 0.9) +
+  # географические границы части города
+  coord_sf(xlim = c(92.72, 93.04), 
+           ylim = c(55.96, 56.09),
+           expand = FALSE) +
+  # шкала аннотаций
+  annotation_scale(location = "tl", 
+                   width_hint = 0.5, 
+                   style = "ticks") +
+  labs(x = "", y = "")
+```
+</details>
+
+::: {#fig-KRSK_Voronoi.column-body-inset-right}
+
+![](KRSK_Voronoi.png){.lightbox}
+
+Пример разбиения Вороного для пожарно-спасательных подразделений города Красноярска
+:::
+
+Выберем учебные заведений города Красноярска в качестве примера объектов исследования и проанализируем, все ли из этих зданий находятся в 10-минутной зоне доступности из ПСЧ.
+
+```{.r}
+# школы, находящиеся внутри границы города
+schools <- buildings |> 
+  dplyr::filter(building %in% c("school")) |> 
+  st_intersection(boundary_KRSK)
+```
+
+Вместо самих зданий мы выберем их центроиды.
+
+```{.r}
+# центроиды объектов
+schools_points_KRSK <- st_coordinates(st_centroid(schools)) |>
+  rename(sch_lon = X, sch_lat = Y) |>
+  dplyr::select(sch_lon, sch_lat) |>
+  st_drop_geometry() |>
+  st_as_sf(coords = c("sch_lon", "sch_lat"), crs = 4326)
+```
+
+## Достижимость объектов на основе матрицы расстояний
+
+Получим матрицу расстояний между ПСЧ и учебными заведениями города с использованием библиотеки [osrm](https://github.com/riatelab/osrm){target="_blank"}, являющейся интерфейсом между **R** и сервисом маршрутизации [OSRM](https://project-osrm.org/){target="_blank"} на основе *OSRM API*.
+
+```{.r}
+# матрица расстояний между объектами
+distancetable = osrmTable(src = fire_stations_sf, 
+                          dst = schools_points_KRSK)
+```
+
+Преобразуем таблицу расстояний.
+
+```{.r}
+schools_distances <-
+  schools_points_KRSK |>
+  mutate(mintime = distancetable$durations |>
+           as_tibble() |> 
+           summarise(across(where(is.numeric), min)) |>
+           t() %>% 
+           as.vector(.))
+```
+
+::: {.callout-note appearance="simple"}
+Отметим, что альтернативным подходом для нахождения матрицы, которая отражает расстояния либо время движения между объектами является использование [библиотеки](https://ipeagit.github.io/r5r/){target="_blank"} `r5r` -- интерфейсу к сервису $R^5$, что расшифровывается как [Rapid Realistic Routing on Real-world and Reimagined networks](https://github.com/conveyal/r5){target="_blank"} и библиотеки [accessibility](https://ipeagit.github.io/accessibility/){target="_blank"}, которые взяты в основу книги [[R.H.M. Pereira, D. Herszenhut](https://ipeagit.github.io/intro_access_book/){target="_blank"}].
+:::
+
+Нанесем на карту результат, выделив цветом расчетное время прибытия и формой значка те учебные заведения, где время прибытия превысит расчетные 10 минут (треугольник).
+
+<details>
+<summary>Код: достижимость объектов</summary>
+
+```{.r}
+set.seed(2024)
+base_map + 
+  # нанесение школ
+  geom_sf(data = schools_distances, 
+          aes(fill = mintime, 
+              # форма значка
+              shape = I(ifelse(mintime >= 10, 24, 22))),
+          alpha = 0.95, size = 3.7
+  ) +
+  # цвет
+  viridis::scale_fill_viridis(option = "turbo", 
+                              breaks = c(1, 5, 10, 15),
+                              labels = c("1 мин", "5 мин", 
+                                         "10 мин", "15 мин"),
+           limits = c(0, max(schools_distances$mintime))) +
+  # точки с ПСЧ
+  geom_sf(data = fire_stations_sf,
+          color = "magenta4", 
+          alpha = 1, 
+          shape = 8, 
+          size = 3, 
+          stroke = 1.2)  +
+  # маркеры
+  ggrepel::geom_label_repel(data = fire_stations, 
+                            aes(c_lon, c_lat, label = name), 
+                            fontface = "bold",
+                            size = 4, alpha = 0.9) +
+  # географические границы части города
+  coord_sf(xlim = c(92.79, 93.04), 
+           ylim = c(55.97, 56.08),
+           expand = FALSE) +
+  # шкала аннотаций
+  annotation_scale(location = "tl", 
+                   width_hint = 0.5, 
+                   style = "ticks")  +
+  # оформление темы
+  theme(legend.key.size = unit(0.5,"cm"),
+        legend.key.width = unit(2,"cm"),
+        legend.position = "top",
+        plot.margin = ggplot2::margin(0.01, 0.01, 0.01, 0.01, "cm")) +
+  labs(x = "", y = "",
+       fill = "время прибытия:")
+```
+
+</details>
+
+::: {#fig-KRSK_reachability .column-body-inset-right}
+
+![](KRSK_reachability.png){.lightbox}
+
+Достижимость общеобразовательных учебных заведений из пожарно-спасательных подразделений г. Красноярска, цвет соответствует времени прибытия, значки соответствуют временному порогу > 10 минут
+:::
+
+Очевидно, что не все учебные заведения города при данной условной расстановке ПСЧ являются достижимыми за отведенное время 10 минут.
+
+```{r}
+#| echo: false
+#| include: false
+#| message: false
+#| warning: false
+
+schools_distances <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/schools_distances.gpkg")
+```
+
+```{r}
+schools_distances |>
+  mutate(
+    late_category = case_when(
+      mintime >  10 ~ "> 10 мин",
+      mintime <= 10 ~ "<= 10 мин"
+    )
+  ) |>
+  janitor::tabyl(late_category) |>
+  janitor::adorn_pct_formatting(digits = 0) |>
+  purrr::set_names("категория", "количество", "процент")
+```
+
+::: {.callout-note appearance="simple"}
+Несмотря на то, что мы решили задачу по анализу и визуализации доступности объектов относительно выбраанных объектов, наше решение обладает рядом существенных недостатков. Во-первых, для большого количества объектов мы не сможем осуществить большой объем запросов (максимум -- [один запрос в секунду](https://routing.openstreetmap.de/about.html){target="_blank"}, никакого веб-скреппинга и т.д.). Кроме того, здесь мы не можем самостоятельно настраивать скорости движения автомобиля по различным типам дорог. 
+
+Одним из оптимальных решений является упрощение дорожной сети с помощью библиотек [sfnetworks](https://luukvdmeer.github.io/sfnetworks/){target="_blank"}, [dodgr](https://urbananalyst.github.io/dodgr/){target="_blank"}, либо [OSMnx](https://osmnx.readthedocs.io/en/stable/){target="_blank"} в **Python** до графа дорожной сети, что делает настройки более гибкими и позволяет использовтаь алгоритмы теории графов. Этот подход будет рассмотрен в другой статье.
+:::
+
+## Построение оптимальных маршрутов
+
+Покажем, как можно строить оптимальные маршруты с помощью библиотеке `osrm`. Выберем две произвольных точки, которые будут соответствовать учебному заведению и пожарной части.
+
+```{.r}
+set.seed(2024)
+fire_stations_sample <- fire_stations_sf |>
+  sample_n(1)
+
+schools_sample <- schools_points_KRSK |>
+  mutate(id = row_number()) |>
+  sample_n(1)
+```
+
+Построим оптимальный маршрут движения между от первой до второй выбранной точки пользуясь командой `osrmRoute`.
+
+```{.r}
+route <- osrmRoute(src = fire_stations_sample, 
+                   dst = schools_sample,
+                   overview = "full")
+```
+
+```{r}
+#| echo: false
+#| include: false
+#| message: false
+#| warning: false
+
+# routing 
+# https://rpubs.com/mbeckett/running-in-circles
+
+route <- st_read("/Users/materov/@данные/@блог_naukaidannye/2021-11-22-reachability/route.gpkg")
+```
+
+```{r}
+route
+```
+
+Мы видим, что команда `osrmRoute()` нашла расчетное время движения `duration` и длину`distance` маршрута. На карте ниже можно увидеть построенный маршрут.
+
+<details>
+<summary>Код: построение маршрута</summary>
+
+```{.r}
+# построение маршрута
+set.seed(2024)
+base_map + 
+  # здания
+  geom_sf(data = buildings, linewidth = 0.05) +
+  # маршрут
+  geom_sf(data = route, 
+          color = "red", 
+          linewidth = 1) +
+  # ПСЧ -- исходная точка
+  geom_sf(data = fire_stations_sample,
+          color = "magenta4", 
+          alpha = 1, 
+          shape = 8, 
+          size = 3, 
+          stroke = 1.3) +
+  # школа -- конечная точка
+  geom_sf(data = schools_sample,
+          color = "darkblue", 
+          alpha = 1, 
+          shape = 8, 
+          size = 3,
+          stroke = 1.3) +
+  # ярлык
+  geom_sf_label(data = fire_stations_sample, 
+                aes(label = name),
+                nudge_y = -0.003, 
+                fontface = "bold",
+                size = 4, alpha = 0.9) +
+  # географические границы города
+  coord_sf(xlim = c(92.77, 92.99), 
+           ylim = c(55.97, 56.03),
+           expand = FALSE) +
+  theme_void() +
+  labs(x = "", y = "")
+```
+
+</details>
+
+::: {#fig-KRSK_routing .column-body-inset-right}
+
+![](KRSK_routing.png){.lightbox}
+
+Пример построения оптимального маршрута
+
+:::
+
+::: {.callout-caution appearance="simple"}
+Заметим, что фукция `osrmIsochrone()` в `osrm` позволяет находить *изохроны* (области, ограниченные фиксированным временем движения), тем не менее, она обладает теми же недостатками, о которых говорилось выше; кроме того, область построения изохроны может быть неодносвязной, некорректно вычисляться и т.д., даже несмотря на варьирования параметра `res` отвечающего за разрешение.
+:::
+
+# Заключение
+
+В статье были кратко рассмотрены следующие вопросы в применении к географическим данным городской инфраструктуры:
+
+::: {.column-margin}
+
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="../../../dist/applause-button.css" />
+  <script src="../../../dist/applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>
+
+:::
+
+- построение *OpenStreetMap* карт городской структуры дорог, нанесение точечных объектов и ограниченных областей на карты;
+- достижимость объектов из пожарно-спасательных подразделений по временному показателю;
+- построение оптимальных маршрутов движения автомобиля.
+
+Все представленные здесь результаты являются воспроизводимыми, заменив соответствующие значения, легко рассмотреть подобные карты для других городов.
+
+Существует множество инструментов для решения такого рода задач как на языке **R**, так и на языке **Python**, и библиотека `osrm` является не единственной библиотекой в этом классе. 
+
+:::{.callout-tip collapse="true"}
+## Session Info
+```{r}
+#| echo: false
+
+library(sessioninfo)
+
+pkg_sesh <- session_info(pkgs = "attached")
+
+quarto_version <- system("quarto --version", intern = TRUE)
+
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE)
+  )
+
+pkg_sesh
+```
+
+:::

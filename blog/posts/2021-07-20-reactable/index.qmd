@@ -1,0 +1,860 @@
+---
+title: "Интерактивные таблицы средствами языка R"
+subtitle: "Примеры создания интерактивных таблиц на основе библиотеки reactable"
+author: "Е.Н. Матеров"
+date: "2021-07-20"
+date-modified: "2024-03-04"
+categories: [reactable, Rstats]
+image: "reactable.png"
+csl: "../../../gost-r-7-0-5-2008-numeric.csl"
+lang: ru
+
+filters:
+  - social-share
+
+share:
+  permalink: "https://naukaidannye.netlify.app/"
+  description: "классная публикация"
+  twitter: true
+  email: true
+  telegram: true
+  mastodon: true
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    toc-location: left
+
+citation: 
+  url: https://www.naukaidannye.netlify.app/blog/posts/2021-07-20-reactable
+  citation-key: Materov-reactable
+  issued: "2021-07-20"
+  language: ru
+---
+
+{{< li xucwtynk trigger=loop speed=0.9 delay=1000 >}}
+
+# Введение
+
+Табличный способ является одним из основных способов структурирования и представления данных. В отличие от графиков, таблицы, как правило, не дают быстрого визуального представления о данных. Тем не менее, таблицы используются для того, чтобы показать точные значения данных. Правильно созданная таблица позволяет построить описательную статистику, обобщить модели регрессии или получить статистические данные отчета. 
+
+Мы рассмотрим представление данных средствами языка программирования **R** в виде интерактивных таблиц. 
+Одним из самых простых способов для формирования интерактивных таблиц в **R** является библиотека [DT](https://rstudio.github.io/DT/){target="_blank"}, которая позволяет делать удобную сортировку и фильтрацию данных, а также предоставляет массу других дополнительных возможностей. Таблицы, которые мы рассмотрим здесь, построены в достаточно насыщенной возможностями [библиотеке](https://glin.github.io/reactable/){target="_blank"} `reactable`, основанной на **JavaScript**-библиотеке [React Table](https://github.com/tannerlinsley/react-table){target="_blank"} и разработанной с помощью [reactR](https://github.com/react-R/reactR){target="_blank"}.
+
+В качестве основного примера рассмотрим данные по техногенным и бытовым пожарам[^ref_fires], нормированные на численность населения в соответствующем субъекте Российской Федерации[^ref_estimate]. 
+
+[^ref_fires]: Здесь рассмотрены пожары, учет которых ведется на основании [Приказа МЧС России](http://www.consultant.ru/document/cons_doc_LAW_317860/){target="_blank"} от 24.12.2018 №625 «О формировании электронных баз данных учета пожаров и их последствий» (утратил силу).
+[^ref_estimate]: Нормирование по отношению к численности населения производилось на основе статистических данных [statdata.ru](http://www.statdata.ru/largest_regions_russia){target="_blank"} на 1 января 2021 года. Оценку численности постоянного населения РФ можно также посмотреть на странице [ИНИД: Демографическая ситуация по субъектам РФ](https://data.rcsi.science/data-catalog/datasets/122/){target="_blank"}.
+
+:::{.column-page-inset-right .smaller}
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| code-fold: true
+#| code-overflow: wrap
+
+library(tidyverse)
+library(magrittr)
+library(reactable)
+library(htmltools)
+
+fires_reactable <- read_csv("/Users/materov/@данные/@блог_naukaidannye/2021-07-20-reactable/reactable_main.csv")
+
+year_cols <- c("2017", "2018", "2019", "2020")
+
+my_style <- function(value) {value
+  if (!is.numeric(value)) return()
+  normalized <- (value - min_val) / (max_val - min_val)
+  color <- good_color(normalized)
+  list(background = color)
+}
+
+# Render a bar chart with a label on the left
+bar_chart <- function(label, 
+                      width = "100%", 
+                      height = "15px", 
+                      fill = "#00bfc4", 
+                      background = NULL) {
+  bar <- div(style = list(background = fill, 
+                          width = width, 
+                          height = height))
+  chart <- div(style = list(flexGrow = 1, 
+                            marginLeft = "8px", 
+                            background = background), bar)
+  div(style = list(display = "flex", 
+                   alignItems = "center"), 
+      label, chart)
+}
+
+# функция цвета
+make_color_pal <- function(colors, bias = 1) {
+  get_color <- colorRamp(colors, bias = bias)
+  function(x) rgb(get_color(x), maxColorValue = 255)
+}
+
+# наша палитра
+good_color <- make_color_pal(rev(c("#E76254FF", 
+                                   "#EF8A47FF", 
+                                   "#F7AA58FF", 
+                                   "#FFD06FFF", 
+                                   "#FFE6B7FF", 
+                                   "#AADCE0FF", 
+                                   "#72BCD5FF", 
+                                   "#528FADFF", 
+                                   "#376795FF", 
+                                   "#1E466EFF")), bias = 2)
+
+# максимум и минимум значений в таблице
+max_val <-
+  fires_reactable %>%
+  summarise(across(where(is.numeric), ~ max(.x, na.rm = TRUE)))
+max_val <- max(max_val |> dplyr::select(-total))
+
+min_val <-
+  fires_reactable %>%
+  summarise(across(where(is.numeric), ~ min(.x, na.rm = TRUE)))
+min_val <- min(min_val |> dplyr::select(-total))
+
+options(reactable.language = reactableLang(
+  pageSizeOptions = "{rows} значений",
+  pageInfo = "Диапазон: с {rowStart} по {rowEnd} из {rows} регионов",
+  pagePrevious = "назад",
+  pageNext = "вперед",
+  searchPlaceholder = "Поиск...",
+  noData = "Значения не найдены"
+))
+
+reactable(fires_reactable,
+          compact = TRUE,
+          # группировка и название объединенных столбцов
+          columnGroups = list(
+            colGroup(name = "Количество пожаров приведенное на 10 000 человек населения", columns = year_cols)
+          ),
+          # возможность поиска
+          searchable = TRUE,
+          # сортировка по умолчанию
+          defaultSortOrder = "desc",
+          # возможность изменять количество строк на странице
+          showPageSizeOptions = TRUE,
+          # подсветка при наведении на строку
+          highlight = TRUE,
+          # границы между строками
+          borderless = TRUE,
+          # не на всю ширину
+          fullWidth = TRUE,
+          # исходная сортировка столбцов
+          defaultSorted = list(FO = "asc"),
+          # исходное количество строк
+          defaultPageSize = 25,
+          # стилизация заголовков столбцов
+          theme = reactableTheme(
+            headerStyle = list(
+              "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+              "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+              borderColor = "#555"
+            )
+          ),
+          # стилизация: разграничивание между группами при сортировке по ФО
+          rowStyle = JS("
+                function(rowInfo, state) {
+                        // Ignore padding rows
+                        if (!rowInfo) return
+                        
+                        // Add horizontal separators between groups when sorting by school
+                        var firstSorted = state.sorted[0]
+                        if (firstSorted && firstSorted.id === 'FO') {
+                        var nextRow = state.pageRows[rowInfo.viewIndex + 1]
+                        if (nextRow && rowInfo.row['FO'] !== nextRow['FO']) {
+                        // Use box-shadow to add a 2px border without taking extra space
+                        return { boxShadow: 'inset 0 -2px 0 rgba(0, 0, 0, 0.3)' }
+                        }
+                        }
+                        }
+                        "),
+          columns = list(
+            `2017` = colDef(
+              maxWidth = 75,
+              style = my_style),
+            `2018` = colDef(
+              maxWidth = 75,
+              style = my_style),
+            `2019` = colDef(
+              maxWidth = 75,
+              style = my_style),
+            `2020` = colDef(
+              maxWidth = 75,
+              style = my_style),
+            regions  = colDef(name = "Субъект РФ", # заголовок для субъекта РФ
+                              footer = "Общее количество",
+                              minWidth = 170,
+                              maxWidth = 370,
+                              defaultSortOrder = "asc",
+                              cell = function(value) {
+                                img_src <- knitr::image_uri(sprintf("/Users/materov/@из Dropbox/Big Data/reactable/images/%s.png", value))
+                                image <- img(src = img_src, style = "height: 24px;", alt = value)
+                                tagList(
+                                  div(style = "display: inline-block; width: 45px", image),
+                                  value
+                                )
+                              }
+            ),
+            FO       = colDef(name = "ФО",      # заголовок для ФО
+                              align = "center", # выравнивание по центру
+                              maxWidth = 80,
+                              defaultSortOrder = "asc",
+                              # добавление границы
+                              class = "border-left"
+            ),
+            # столбец по динамике роста пожаров 
+            total = colDef(name  = "Сумма",
+                           align = "left", 
+                           cell  = function(value) {
+                             width <- paste0(value / max(fires_reactable$total) * 100, "%")
+                             bar_chart(value, width = width)
+                           },
+                           # добавление границы
+                           class = "border-left",
+                           format = colFormat(locales = "ru-RU", separators = TRUE), 
+                           # динамическая сумма для "Общее количество"
+                           footer = JS("function(colInfo) {var total = 0
+                                          colInfo.data.forEach(function(row) {
+                                          total += row[colInfo.column.id]
+                                          })
+                                          return total.toLocaleString('ru-RU')
+                                          }")
+            )
+          ),
+          # глобальный стиль: шрифт для подстрочной суммы
+          defaultColDef = colDef(
+            footerStyle = list(fontWeight = "bold"), 
+            # разделитель для тысяч пробелом
+            format      = colFormat(locales = "ru-RU", separators = TRUE))
+)
+```
+
+:::
+
+:::{.callout-warning appearance="simple"}
+
+Отметим, что таблица выше не является официальным статистическим отчетом и служит исключительно для демонстрации работы библиотеки. Основные показатели, характеризующие состояние пожарной безопасности в Российской Федерации, ежегодно публикуются [ФГБУ ВНИИПО МЧС РОССИИ](http://vniipo.ru/){target="_blank"} в статистических сборниках [ПОЖАРЫ И ПОЖАРНАЯ БЕЗОПАСНОСТЬ](http://vniipo.ru/institut/informatsionnye-sistemy-reestry-bazy-i-banki-danny/federalnyy-bank-dannykh-pozhary/){target="_blank"}.
+
+:::
+
+## Некоторые особенности и возможности интерактивных таблиц
+
+Отметим преимущества интерактивных таблиц.
+
+- Возможность *интерактивной сортировки* значений по столбцам (при необходимости можно указать исходное направление сортировки).
+
+- *Живой поиск*, позволяющий выделять только строки с нужными значениями и делать автоматический пересчет итоговых суммарных значений.
+
+- Регулировка количества строк на странице и диапазона значений.
+
+- *Группировка* и *агрегирование* строк с автоматическим выделением границ группы.
+
+- Возможность *условного форматирования*: выделение шрифтом и цветом значений на основе условных критериев, построения тепловых карт и т.д.
+
+- Использование **JavaScript** для улучшения стилизации и внедрение **HTML**-виджетов в таблицы.
+
+- Использование **CSS**-стилей.
+
+- Богатые возможности для локализации.
+
+- Интегрирование с [Shiny](https://shiny.rstudio.com/){target="_blank"} (интерактивной средой для создания веб-приложений и дэшбордов) и [Leaflet](https://rstudio.github.io/leaflet/){target="_blank"} (библиотекой предназначенной для отображения интерактивных карт на веб-сайтах).
+
+В перспективе планируется интеграция с [WebR](https://docs.r-wasm.org/webr/latest/){target="_blank"}.
+
+# Посторение интерактивных таблиц
+
+Код для построения рассмотренной выше таблицы по пожарам довольно большой, поэтому вместо полного листинга приведем основные идеи и принципы создания интерактивных таблиц в `reactable` на основе небольших примеров описанных на [странице библиотеки](https://glin.github.io/reactable/articles/examples.html){target="_blank"}.
+
+Загрузим необходимые библиотеки.
+
+```{r}
+#| message: FALSE
+#| warning: FALSE
+library(tidyverse)
+library(magrittr)
+library(reactable)
+```
+
+## Базовая таблица
+
+Пусть модельные данные представляют собой упрощенную таблицу, содержащую название региона, федерального округа, данные за определенный период и столбец с некоторыми суммарными значениями.
+
+```{r}
+#| message: FALSE
+#| warning: FALSE
+#| echo: false
+
+fires_reactable <- read_csv("/Users/materov/@данные/@блог_naukaidannye/2021-07-20-reactable/reactable_main.csv")
+```
+
+:::{.column-body-inset-right}
+
+```{r}
+#| message: FALSE
+#| warning: FALSE
+
+fires_reactable
+```
+
+:::
+
+Для отображения интерактивной таблицы служит команда `reactable()`. Столбцы такой таблицы можно сортировать нажатием (или кликом) на них.
+
+```{.r}
+reactable(fires_reactable)
+```
+
+:::{.column-page-inset-right .smaller}
+
+```{r}
+#| message: FALSE
+#| warning: FALSE
+#| echo: false
+
+reactable(fires_reactable |> arrange(regions),
+  compact = TRUE,
+  columns = list(
+    regions = colDef(minWidth = 240),
+    FO = colDef(minWidth = 70)
+  )
+  )
+```
+
+:::
+
+## Локализация таблиц
+
+Одна из ключевых возможностей отличающих `reacable` это, несомненно, возможность [настройки языковых опций](https://glin.github.io/reactable/reference/reactableLang.html){target="_blank"} таблицы.[^DT_loc]
+
+[^DT_loc]: Например, в библиотеке `DT` русификация делается [несколько сложнее](https://rstudio.github.io/DT/004-i18n.html){target="_blank"}, что также описано на странице [Stack Overflow](https://stackoverflow.com/questions/54181350/datatables-internationalization-with-local-language-file-in-shiny){target="_blank"}.
+
+```{r}
+#| code-overflow: wrap
+#| warning: false
+# русификация reactable таблиц
+options(reactable.language = reactableLang(
+  pageSizeOptions   = "показано {rows} значений",
+  pageInfo          = "Диапазон: с {rowStart} по {rowEnd} из {rows} регионов",
+  pagePrevious      = "назад",
+  pageNext          = "вперед",
+  searchPlaceholder = "Поиск...",
+  noData            = "Значения не найдены"
+))
+```
+
+<details>
+<summary>Пример локализации</summary>
+
+```{.r}
+reactableLang(
+  sortLabel = "Сортировать {name}",
+  filterPlaceholder = "",
+  filterLabel = "Фильтровать {name}",
+  searchPlaceholder = "Найти",
+  searchLabel = "Найти",
+  noData = "Строки не найдены",
+  pageNext = "Далее",
+  pagePrevious = "Назад",
+  pageNumbers = "{page} из {pages}",
+  pageInfo = "{rowStart}\u2013{rowEnd} из {rows} строк",
+  pageSizeOptions = "Показать {rows}",
+  pageNextLabel = "Следующая страница",
+  pagePreviousLabel = "Предыдущая страница",
+  pageNumberLabel = "Страница {page}",
+  pageJumpLabel = "Перейти на страницу",
+  pageSizeOptionsLabel = "Строк на странице",
+  groupExpandLabel = "Группировка",
+  detailsExpandLabel = "Детальный вид",
+  selectAllRowsLabel = "Выбрать все строки",
+  selectAllSubRowsLabel = "Выбрать все строки в группе",
+  selectRowLabel = "Выбрать строку",
+  defaultGroupHeader = NULL,
+  detailsCollapseLabel = NULL,
+  deselectAllRowsLabel = NULL,
+  deselectAllSubRowsLabel = NULL,
+  deselectRowLabel = NULL
+)
+```
+
+</details>
+
+## Глобальные настройки таблицы
+
+Таблицы в `reactable` имеют огромное количество разнообразных настроек, причем для более глубокой настройки используется **JavaScript**. Приведем ниже некоторые возможности на примере.
+
+:::{.column-page-inset-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+year_cols <- c("2017", "2018", "2019", "2020")
+
+reactable(fires_reactable,
+          compact = TRUE,
+          columns = list(
+            regions = colDef(minWidth = 280, name = "Субъект РФ"),
+            FO = colDef(minWidth = 70, name = "ФО"),
+            total = colDef(name = "Сумма")
+          ),
+          # группировка и название объединенных столбцов
+          columnGroups = list(
+            colGroup(name = "Количество пожаров приведенное на 10 000 человек населения", 
+                     columns = year_cols)
+          ),
+          # строка поиска
+          searchable = TRUE,
+          # исходная глобальная сортировка по умолчанию
+          defaultSortOrder = "desc",
+          # возможность изменять количество строк на странице
+          showPageSizeOptions = TRUE,
+          # подсветка при наведении на строку
+          highlight = TRUE,
+          # отстутствие границы между строками
+          borderless = TRUE,
+          # на всю ширину / фиксированная ширина
+          fullWidth = TRUE,
+          # столбцы исходной сортировки и направление сортировки столбцов
+          defaultSorted = list(FO = "asc"),
+          # исходное количество строк на странице
+          defaultPageSize = 12,
+          # стилизация заголовков столбцов
+          theme = reactableTheme(
+            headerStyle = list(
+              "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+              "&[aria-sort='ascending'], 
+               &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+              borderColor = "#555"
+            )
+          ),
+          # стилизация: разграничивание между группами при сортировке по ФО
+          rowStyle = JS("
+                function(rowInfo, state) {
+                        // игнорирование строк заполнения
+                        if (!rowInfo) return
+                        
+                        // горизонтальные разделители между группами
+                        var firstSorted = state.sorted[0]
+                        if (firstSorted && firstSorted.id === 'FO') {
+                        var nextRow = state.pageRows[rowInfo.viewIndex + 1]
+                        if (nextRow && rowInfo.row['FO'] !== nextRow['FO']) {
+                        // добавление прямоугольной тени, 
+                        // чтобы добавить границу 2 пикселя 
+                        return { boxShadow: 'inset 0 -2px 0 rgba(0, 0, 0, 0.1)' }
+                        }
+                        }
+                        }
+                        "),
+          # глобальный стиль: шрифт для подстрочной суммы
+          defaultColDef = colDef(
+            footerStyle = list(fontWeight = "bold"), 
+          # разделитель для тысяч пробелом
+            format      = colFormat(locales = "ru-RU", separators = TRUE))
+         )
+```
+
+:::
+
+
+## Настройка столбцов в таблицах
+
+Для настройки столбцов в `reactable`-таблицах (например, изменения имени, настройки поиска по столбцу) используется функция `colDef()`, подробно описанная на соответствующей [странице](https://glin.github.io/reactable/reference/colDef.html){target="_blank"}. Приведем простой пример настройки столбцов на базе известного набора данных [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/){target="_blank"}.
+
+:::{.column-body-inset-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+library(palmerpenguins)
+
+reactable(
+  sample_n(penguins |> 
+             na.omit() |> 
+             dplyr::select(-sex, -year, -island, -body_mass_g), 10),
+  compact = TRUE,
+  columns = list(
+    species = colDef(name = "Вид", filterable = TRUE),
+    bill_length_mm = colDef(name = "Длина клюва (мм)"),
+    bill_depth_mm  = colDef(name = "Высота клюва (мм)"),
+    flipper_length_mm = colDef(name = "Длина плавника (мм)")
+  )
+)
+```
+
+:::
+
+Возможности `colDef()` очень богатые: можно менять выравнивание конкретного столбца, его ширину, указав значение `maxWidth`, изменить форматирование столбца, добавив **CSS**-стиль и т.д.
+
+## Тепловые карты
+
+Известно, что цвет воспринимается гораздо эффективнее, чем численные значения, поэтому иногда имеет смысл представлять данные в виде так называемых *тепловых карт*. Для создания тепловой карты необходима сначала определить стиль столбцов.
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+#| code-summary: "Код: определение стиля столбцов"
+# функция цвета
+make_color_pal <- function(colors, bias = 1) {
+  get_color <- colorRamp(colors, bias = bias)
+  function(x) rgb(get_color(x), maxColorValue = 255)
+}
+
+# наша палитра
+good_color <- make_color_pal(rev(c("#E76254FF", "#EF8A47FF", "#F7AA58FF", "#FFD06FFF", "#FFE6B7FF", "#AADCE0FF", "#72BCD5FF", "#528FADFF", "#376795FF", "#1E466EFF")), bias = 2)
+
+# максимум и минимум значений в таблице
+max_val <-
+fires_reactable %>%
+  summarise(across(where(is.numeric), ~ max(.x, na.rm = TRUE)))
+max_val <- max(max_val |> dplyr::select(-total))
+
+min_val <-
+  fires_reactable %>%
+  summarise(across(where(is.numeric), ~ min(.x, na.rm = TRUE)))
+min_val <- min(min_val |> dplyr::select(-total))
+
+# стиль столбца с учетом цвета
+my_style_fires <- function(value) {
+              if (!is.numeric(value)) return()
+              normalized <- (value - min_val) / (max_val - min_val)
+              color <- good_color(normalized)
+              list(background = color)
+            }
+```
+
+:::{.column-body-inset-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+#| code-summary: "Код: таблица"
+reactable(
+  fires_reactable |> dplyr::select(-`2017`, -total)  %>% 
+  mutate(total = rowSums(.[3:5])),
+  compact = TRUE,
+  columns = list(
+    regions = colDef(name = "Субъект РФ",       # заголовок для субъекта РФ
+                              minWidth = 280,
+                              defaultSortOrder = "asc"),
+    FO      = colDef(name = "ФО",               # заголовок для ФО
+                              align = "center", # выравнивание по центру
+                              minWidth = 70,
+                              defaultSortOrder = "asc"),
+    total   = colDef(name = "Сумма",
+                     defaultSortOrder = "desc"),
+    `2018`  = colDef(style = my_style_fires),
+    `2019`  = colDef(style = my_style_fires),
+    `2020`  = colDef(style = my_style_fires)
+  )
+)
+```
+
+:::
+
+## Группировка ячеек
+
+Для компактного представления больших таблиц имеет смысл делать группировку показателей по выбранной переменной с раскрывающимся списком. В примере ниже группировка сделана по федеральным округам. Кроме того, в такого рода таблице можно показать агрегированные значения, такие как максимум по столбцу, минимум, среднее значение, медиану, количество элементов, уникальные значения и т.д. 
+
+:::{.column-page-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+
+set.seed(123)
+reactable(fires_reactable |> slice_sample(n = 30), 
+          compact = TRUE,
+          groupBy = "FO",
+          columns = list(
+          `2017`  = colDef(aggregate = "count",
+                           name = "2017 (кол-во)"),
+          `2018`  = colDef(aggregate = "unique",
+                           name = "2018 (уник)"),
+          `2019`  = colDef(aggregate = "median",
+                           name = "2019 (медиан)"),
+          `2020`  = colDef(show = FALSE),
+          total   = colDef(name = "Сумма (макс)", 
+                           aggregate = "max"),
+          FO      = colDef(name = "Фед. округ"),
+          regions = colDef(name = "Субъект РФ")
+          )
+)
+```
+
+:::
+
+## Динамический пересчет суммы
+
+Библиотека `reactable` путем удачного сочетания с **JavaScript** позволяет делать таблицы с динамической визуализацией в виде итоговой сноски, например, при наборе фильтрующего значения может происходить автоматический пересчет суммы. Скажем, если в поле поиска таблицы ниже ввести **область**, то останутся субъекты РФ, соответствующие областям.
+
+:::{.column-body-inset-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+set.seed(123)
+reactable(
+  compact = TRUE,
+  fires_reactable |> 
+  dplyr::select(-FO) |>
+  slice_sample(n = 20),
+  searchable      = TRUE,
+  highlight       = TRUE,
+  borderless      = TRUE,
+  defaultPageSize = 5,
+  theme = reactableTheme(searchInputStyle = list(width = "100%")),
+  columns = list(
+    regions = colDef(name     = "Субъект РФ",
+                     minWidth = 200,
+                     footer   = "Всего:"),
+    total = colDef(name = "Сумма",
+      # разделитель для тысяч пробелом
+      format = colFormat(locales = "ru-RU", separators = TRUE),
+      # динамический пересчет суммы при поиске
+      footer = JS("function(colInfo) {var total = 0
+                                          colInfo.data.forEach(function(row) {
+                                          total += row[colInfo.column.id]
+                                          })
+                                          return total.toLocaleString('ru-RU')
+                                          }")
+    )
+  ),
+  # глобальный стиль: шрифт для подстрочной суммы
+  defaultColDef = colDef(
+    footerStyle = list(fontWeight = "bold"),
+    # разделитель для тысяч пробелом
+    format      = colFormat(locales = "ru-RU", separators = TRUE)
+  )
+)
+```
+
+:::
+
+## Условное форматирование
+
+Зачастую в таблице необходимо отобразить динамику изменения показателя. Для этого удобно применять условное форматирование, например, выделив цветом разности между конечным и исходным значениями и т.д.
+
+:::{.column-body-inset-right .smaller}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-overflow: wrap
+#| code-fold: true
+set.seed(123)
+fires_change <- 
+fires_reactable |>
+  mutate(change = `2020` - `2017`) |>
+  select(-c(`2018`:`2019`), 
+         -total)
+
+reactable(fires_change |> slice_sample(n = 30), 
+          highlight     = TRUE,
+          compact       = TRUE,
+          defaultSorted = list(regions = "asc"),
+          columns       = list(
+  regions = colDef(name       = "Субъект РФ",
+                     minWidth = 170),
+    FO    = colDef(name       = "Фед. округ",      
+                     align    = "center", 
+                     minWidth = 80),
+  change = colDef(
+    name = "Динамика",
+    defaultSortOrder = "desc",
+    cell = function(value) {
+      if (value > 0) paste0("+", value) else value
+    },
+    style = function(value) {
+      color <- if (value > 0) {
+        "#e00000"
+      } else if (value < 0) {
+        "#008000"
+      }
+      list(fontWeight = 600, color = color)
+    }
+  )
+))
+```
+
+:::
+
+## Стилизация и форматирование
+
+Для дополнительных возможностей оптимизации и улучшения стиля и форматирования таблиц, созданных с помощью `reactable`, можно воспользоваться библиотекой `reactablefmtr`. В дополнении к огромным возможностям `reactable`, мы получаем множество средств условного форматирования, интерактивные спарклайны, пользовательские темы таблиц, встраивание изображений в таблицы, использование `crosstalk` и `shiny`, темы, и многое другое. Больше примеров можно посмотреть на [сайте библиотеки](https://kcuilla.github.io/reactablefmtr/index.html){target="_blank"} `reactablefmtr`.
+
+:::{.column-body-inset-right}
+
+```{r}
+#| warning: false
+#| message: false
+#| code-fold: true
+
+library(reactablefmtr)
+
+my_pal <- viridis::viridis_pal(option = "plasma")(10)
+
+fires_reactablefmtr <- fires_reactable |>
+  dplyr::select(-FO, -`2017`, -total) |>
+  arrange(regions) |>
+  head(10)
+
+fires_reactablefmtr <- fires_reactablefmtr %>% 
+  mutate(total = rowSums(.[2:4]))
+
+fires_reactablefmtr %>% 
+  reactable(
+    theme = fivethirtyeight(),
+    highlight = TRUE,
+    defaultSorted = list(total = "desc"),
+    columns = list(
+      regions = colDef(name = "Субъект РФ",
+                       minWidth = 170),
+      `2018` = colDef(cell = 
+                        color_tiles(., box_shadow = TRUE, 
+                                    colors = my_pal)),
+      `2019` = colDef(cell = 
+                        color_tiles(., box_shadow = TRUE, 
+                                    colors = my_pal)),
+      `2020` = colDef(cell = 
+                        color_tiles(., box_shadow = TRUE, 
+                                    colors = my_pal)),
+      total = colDef(name = "Сумма", 
+                     cell = data_bars(., text_position = "above"))
+    )
+  ) %>% 
+  add_legend(fires_reactablefmtr |>
+               arrange(regions) |>
+               head(10), 
+             col_name = "2018", 
+             title = "Значения", 
+             align = "right", 
+             colors = my_pal,
+             footer = "Данные на 2020 г.", 
+             bins = 5)
+```
+
+:::
+
+Приведем простой пример использования спарклайнов.
+
+```{r}
+# таблица для отображения
+fires_table_reactable <- 
+fires_reactable |>
+  dplyr::select(-total) |>
+  pivot_longer(!c(regions, FO), 
+               names_to = "year", 
+               values_to = "value") |>
+  arrange(regions) |>
+  # группировка по необходимым категориям
+  group_by(year) |>
+  summarize(fire_num = list(value))
+
+fires_table_reactable
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| code-fold: true
+# цвет для sparkline-графиков
+fires_table_reactable <- fires_table_reactable |>
+  mutate(
+    cols = case_when(
+      year == "2017" ~ "#1b9e77",
+      year == "2018" ~ "#d95f02",
+      year == "2019" ~ "#7570b3",
+      year == "2020" ~ "#e7298a",
+      .default = "grey"
+    )
+  )
+
+reactable(
+  fires_table_reactable,
+  defaultPageSize = 4,
+  columns = list(
+    year = colDef(maxWidth = 100,
+                  name = "Год"),
+    cols = colDef(show = FALSE),
+    fire_num = colDef(name = "Приведенное количество пожаров",
+                      cell = react_sparkbar(
+                        fires_table_reactable,
+                        height = 90,
+                        fill_color_ref = "cols",
+                        tooltip_type = 2,
+                        bandline = "innerquartiles",
+                        statline = "mean"
+                      )
+                      )
+  )
+)
+```
+
+# Заключение
+
+В статье был сделан краткий обзор некоторых инструментов по созданию таблиц в библиотеке `reactable`: 
+
+- формирование интерактивной таблицы;
+- возможности глобальных настроек и настроек столбцов;
+- дополнительные возможности для создания тепловых карт;
+- группировка и аггрегирование ячеек;
+- некоторые **JavaScript** опции;
+- стилизация таблиц.
+
+:::{.column-margin}
+
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="../../../dist/applause-button.css" />
+  <script src="../../../dist/applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>
+
+:::
+
+Всесторонне описать все возможности создания интерактивных таблиц в `reactable` в рамках одной статьи очень сложно. Например, мы не затронули **CSS**-стили, изображения, **HTML**-виджеты, внедрение `reactable` в **Shiny** и **Leaflet** и многое другое. Как было сказано, [страница библиотеки](https://glin.github.io/reactable/index.html){target="_blank"} содержит большое количество материала с примерами и замечательными демонстрациями, включая полный код и описание.
+
+Подводя итог, отметим что базовые принципы построения эффективных таблиц, которые можно взять за основу для презентации своих данных, описаны во многих источниках, например, в статье [Ten Guidelines for Better Tables](https://www.cambridge.org/core/journals/journal-of-benefit-cost-analysis/article/abs/ten-guidelines-for-better-tables/74C6FD9FEB12038A52A95B9FBCA05A12){target="_blank"}. Основные тезисы этой статьи можно посмотреть в твите (на английском языке) ниже.
+
+[![Jon Schwabish (@jschwabish)](tweet.png)](https://twitter.com/jschwabish/status/1290323804212822018/photo/1){target="_blank"}
+
+:::{.callout-tip collapse="true"}
+## Session Info
+```{r}
+#| echo: false
+
+library(sessioninfo)
+
+pkg_sesh <- session_info(pkgs = "attached")
+
+quarto_version <- system("quarto --version", intern = TRUE)
+
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE)
+  )
+
+pkg_sesh
+```
+
+:::
