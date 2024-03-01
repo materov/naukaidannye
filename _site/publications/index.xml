@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Наука и данные</title>
+<link>https://naukaidannye.netlify.app/publications/</link>
+<atom:link href="https://naukaidannye.netlify.app/publications/index.xml" rel="self" type="application/rss+xml"/>
+<description>Персональный блог Евгения Матерова.</description>
+<generator>quarto-1.4.550</generator>
+<lastBuildDate>Thu, 30 Nov 2023 17:00:00 GMT</lastBuildDate>
+<item>
+  <title>Информационные технологии поддержки принятия решений в чрезвычайных ситуациях</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/books/IT.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Учебное пособие содержит методически систематизированный материал, охватывающий темы учебной программы дисциплины «Информационные технологии поддержки принятия решений в чрезвычайных ситуациях». В нем особое внимание уделено действующей нормативной базе, на основе которой происходит принятие решений в области чрезвычайных ситуаций (ЧС), тенденциям законодательных изменений, применению свободно распространяемых программных средств, имеющимся информационным системам поддержки принятия решений. Пособие предназначено для использования в образовательном процессе Сибирской пожарно-спасательной академии ГПС МЧС России при изучении учебной дисциплины «Информационные технологии поддержки принятия решений в ЧС» обучающимися по направлению подготовки 38.03.04 Государственное и муниципальное управление.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@book{матеров2023,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В.},
+  publisher = {Железногорск},
+  title = {Информационные технологии поддержки принятия решений в
+    чрезвычайных ситуациях},
+  date = {2023},
+  url = {https://sibpsa.ru},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2023" class="csl-entry quarto-appendix-citeas">
+<div class="">Матеров Е.Н., Бабёнышев С.В. <a href="https://sibpsa.ru">Информационные технологии поддержки принятия
+решений в чрезвычайных ситуациях</a>. Железногорск, 2023.</div>
+</div></div></section></div> ]]></description>
+  <category>учебное пособие</category>
+  <guid>https://naukaidannye.netlify.app/publications/books/IT.html</guid>
+  <pubDate>Thu, 30 Nov 2023 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/publications/books/IT.png" medium="image" type="image/png" height="127" width="144"/>
+</item>
+<item>
+  <title>Ретроспективный анализ лесных пожаров в Красноярском крае с использованием науки о данных и метод машинного обучения</title>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>Т.А. Миловидова</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2023b.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье анализируются данные о лесных пожарах в Красноярском крае за период 2011-2023 гг. с учетом их географического распределения. В работе рассмотрены: (1) разведочный анализ данных о пожарах, включая антропогенное воздействие на пожарную активность и изменений в пожарах с течением лет; (2) построение модели машинного обучения, которая предсказывает, является ли термоточка критической, т.е. находится ближе 5 км от населенного пункта или площадь пожара более 200 га. Новизна работы заключается в эффективном использовании языка программирования R, наделенного расширенными возможностями для анализа данных, моделирования методами машинного обучения и визуализации. Использование методов обработки данных, рассмотренных в статье, может повысить точность обнаружения и прогнозирования изменений пожарной активности, последующего мониторинга и крупномасштабного управления пожаротушением. Подходы, разобранные в статье, могут быть применены и к другим регионам Российской Федерации.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{бабёнышев2023,
+  author = {Бабёнышев, С.В. and Матеров, Е.Н. and Миловидова, Т.А.},
+  title = {Ретроспективный анализ лесных пожаров в Красноярском крае с
+    использованием науки о данных и метод машинного обучения},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {31},
+  number = {4},
+  pages = {148-159},
+  date = {2023},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-бабёнышев2023" class="csl-entry quarto-appendix-citeas">
+1. Бабёнышев С. В., Матеров Е. Н., Миловидова Т. А. <a href="http://vestnik.sibpsa.ru/">Ретроспективный анализ лесных пожаров в
+Красноярском крае с использованием науки о данных и метод машинного
+обучения</a> // Сибирский пожарно-спасательный вестник. 2023. (31). C.
+148–159.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2023b.html</guid>
+  <pubDate>Thu, 30 Nov 2023 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Оптимизация границ районов выезда с использованием языка программирования Python и библиотеки OSMnx</title>
+  <dc:creator>О.С. Малютин</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2023a.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье показывается способ решения задачи оптимизации границ районов выезда и качественной оценки влияния изменения границ районов выезда с использованием языка программирования Python и специальных программных решений для анализа геопространственных данных. Описывается ход работы и использованные технические решения. Перечисляются возникшие сложности и «узкие места» как реализации, так и метода в целом. Приводятся результаты расчета на примере условного пожарно-спасательного гарнизона. Даются рекомендации по применению и дальнейшему совершенствованию показанного метода.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{малютин2023,
+  author = {Малютин, О.С. and Бабёнышев, С.В. and Матеров, Е.Н.},
+  title = {Оптимизация границ районов выезда с использованием языка
+    программирования Python и библиотеки OSMnx},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {28},
+  number = {1},
+  pages = {38-55},
+  date = {2023},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-малютин2023" class="csl-entry quarto-appendix-citeas">
+1. Малютин О. С., Бабёнышев С. В., Матеров Е. Н. <a href="http://vestnik.sibpsa.ru/">Оптимизация границ районов выезда с
+использованием языка программирования Python и библиотеки OSMnx</a> //
+Сибирский пожарно-спасательный вестник. 2023. (28). C. 38–55.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>Python</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2023a.html</guid>
+  <pubDate>Sat, 31 Dec 2022 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Системный анализ и исследование операций</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/books/SA.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В пособии приведены необходимые теоретические сведения и примеры решения задач, необходимые для преподавания дисциплины «Системный анализ и исследование операций» по направлению подготовки 38.03.04 «Государственное и муниципальное управление», профиль «Управление в кризисных ситуациях». В пособии используются примеры, иллюстрирующие применение классических методов исследования операций в задачах распределения ресурсов, планирования маршрутов, эффективности вложений и других. Изложение материала направлено на понимание основ применяемых методов, что позволит адаптировать их к широкому кругу практических задач оптимизации.</p>
+<blockquote class="blockquote">
+<p><em>Допущено Министерством Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий в качестве учебного пособия для курсантов, студентов и слушателей образовательных организаций МЧС России</em></p>
+</blockquote>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@book{матеров2022,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В.},
+  publisher = {Железногорск},
+  title = {Системный анализ и исследование операций},
+  date = {2022},
+  url = {https://znanium.com/catalog/document?id=353761},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2022" class="csl-entry quarto-appendix-citeas">
+<div class="">Матеров Е.Н., Бабёнышев С.В. <a href="https://znanium.com/catalog/document?id=353761">Системный анализ и
+исследование операций</a>. Железногорск, 2022.</div>
+</div></div></section></div> ]]></description>
+  <category>учебное пособие</category>
+  <guid>https://naukaidannye.netlify.app/publications/books/SA.html</guid>
+  <pubDate>Wed, 30 Nov 2022 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/publications/books/SA.png" medium="image" type="image/png" height="126" width="144"/>
+</item>
+<item>
+  <title>Анализ пожарной и техносферной безопасности городской среды г. Красноярска с применением геопространственных инструментов</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <dc:creator>О.С. Малютин</dc:creator>
+  <dc:creator>М.В. Елфимова</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021c.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье рассмотрены возможности применения современных открытых геоинформационных инструментов к анализу географических данных в некоторых проблемах техносферной и пожарной безопасности. В частности, в вопросах связанных с оценкой зон достижимости социально-значимых объектов, оценкой влияния плотности застройки на распределение пожаров, а также анализом источников противопожарного водоснабжения в городской среде. Основные расчеты выполнены с использованием языка программирования R. Применяемые инструменты могут быть полезными для планирования надзорных мероприятий, а также при оценке сил и средств гарнизонов для организации тушения пожаров. Результаты, приведенные в работе, получены для города Красноярска, однако подобные подходы могут быть использованы для вычислений и визуализации аналогичного рода для любого населенного пункта Российской Федерации.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2021,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В. and Малютин, О.С. and
+    Елфимова, М.В.},
+  title = {Анализ пожарной и техносферной безопасности городской среды
+    г. Красноярска с применением геопространственных инструментов},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {23},
+  number = {4},
+  pages = {128-136},
+  date = {2021},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2021" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н. [и др.]. <a href="http://vestnik.sibpsa.ru/">Анализ
+пожарной и техносферной безопасности городской среды г. Красноярска с
+применением геопространственных инструментов</a> // Сибирский
+пожарно-спасательный вестник. 2021. (23). C. 128–136.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021c.html</guid>
+  <pubDate>Tue, 30 Nov 2021 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Using Tools of Intellectual Analysis in Area Safety Management</title>
+  <dc:creator>E. Materov</dc:creator>
+  <dc:creator>V. Nicheporchuk</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/CEUR.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>In this study, we explore various methods of analytical data processing employed to support information tasks in managing territory safety. Specifically, we investigate the challenge of data availability when utilizing data lakes technology for operational analytics. By leveraging Data Mining and Machine Learning techniques for processing extensive datasets encompassing monitoring data, hazard event catalogs, and territory characteristics, we are able to swiftly and effectively mitigate threats to human life. The findings of our spatial modeling of fire risks are presented, along with a novel approach for predicting time series utilizing artificial neural networks.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{materov2021,
+  author = {Materov, E. and Nicheporchuk, V.},
+  title = {Using {Tools} of {Intellectual} {Analysis} in {Area} {Safety}
+    {Management}},
+  pages = {86-92},
+  date = {2021},
+  url = {https://ceur-ws.org/Vol-3047/},
+  doi = {10.47813/sibdata-2-2021-12},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2021" class="csl-entry quarto-appendix-citeas">
+Materov, E., and V. Nicheporchuk. 2021. <span>“Using Tools of
+Intellectual Analysis in Area Safety Management.”</span> <em>SibDATA
+2021. The 2nd Siberian Scientific Workshop on Data Analysis Technologies
+with Applications 2021</em>. <a href="https://doi.org/10.47813/sibdata-2-2021-12">https://doi.org/10.47813/sibdata-2-2021-12</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/CEUR.html</guid>
+  <pubDate>Mon, 31 May 2021 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Применение геоинформационных инструментов для работы с большими данными при анализе пространственного распределения пожаров</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <dc:creator>О.С. Малютин</dc:creator>
+  <dc:creator>Г.М. Бойко</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021b.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье рассмотрены возможности языков программирования Python и R в применении к геокодингу и анализу географических данных, связанных с пожарами и их последствиями. В работе рассмотрены: нанесение на статические и интерактивные географические карты исходных данных по пожарам, графика плотности пожаров, данных по времени прибытия подразделений, а также построение зон транспортной доступности и оптимальных маршрутов. Использованные аналитические инструменты могут быть полезны при определении порядка привлечения сил и средств подразделений пожарно-спасательных гарнизонов, в частности, при разработке планов привлечения и расписаний выездов сил и средств гарнизонов для тушения пожаров. Приведенная в работе процедура анализа может быть использована, с учетом специфики, практически для любого населенного пункта Российской Федерации.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2021,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В. and Малютин, О.С. and
+    Бойко, Г.М.},
+  title = {Применение геоинформационных инструментов для работы с
+    большими данными при анализе пространственного распределения
+    пожаров},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {21},
+  number = {2},
+  pages = {70-77},
+  date = {2021},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2021" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н. [и др.]. <a href="http://vestnik.sibpsa.ru/">Применение
+геоинформационных инструментов для работы с большими данными при анализе
+пространственного распределения пожаров</a> // Сибирский
+пожарно-спасательный вестник. 2021. (21). C. 70–77.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021b.html</guid>
+  <pubDate>Mon, 31 May 2021 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Прогнозирование временных рядов на основе методов машинного обучения в вопросах обеспечения природной и техносферной безопасности</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <dc:creator>О.С. Малютин</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021a.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Основная цель статьи – сделать обзор современных возможностей анализа и моделирования временных рядов на примерах прогнозирования количества пожаров и уровня подъема воды в реках с помощью современных методов машинного обучения в среде программирования R. Особенность данного моделирования состоит в возможности использования нескольких моделей одновременно, что позволяет автоматизировано выбирать модели с наименьшими погрешностями.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2021,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В. and Малютин, О.С.},
+  title = {Прогнозирование временных рядов на основе методов машинного
+    обучения в вопросах обеспечения природной и техносферной
+    безопасности},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {20},
+  number = {1},
+  pages = {75-83},
+  date = {2021},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2021" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н., Бабёнышев С. В., Малютин О. С. <a href="http://vestnik.sibpsa.ru/">Прогнозирование временных рядов на
+основе методов машинного обучения в вопросах обеспечения природной и
+техносферной безопасности</a> // Сибирский пожарно-спасательный вестник.
+2021. (20). C. 75–83.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2021a.html</guid>
+  <pubDate>Sun, 28 Feb 2021 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Weighted Lattice Point Sums in Lattice Polytopes, Unifying Dehn–Sommerville and Ehrhart–Macdonald</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>Paul Gunnels</dc:creator>
+  <dc:creator>Matthias Beck</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Lattice.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Let <img src="https://latex.codecogs.com/png.latex?V"> be a real vector space of dimension <img src="https://latex.codecogs.com/png.latex?n"> and let <img src="https://latex.codecogs.com/png.latex?M%5Csubset%20V"> be a lattice. Let <img src="https://latex.codecogs.com/png.latex?P%5Csubset%20V"> be an <img src="https://latex.codecogs.com/png.latex?n">-dimensional polytope with vertices in <img src="https://latex.codecogs.com/png.latex?M">, and let <img src="https://latex.codecogs.com/png.latex?%5Cvarphi%5Ccolon%20V%5Crightarrow%20%5Cmathbb%7BC%7D"> be a homogeneous polynomial function of degree <img src="https://latex.codecogs.com/png.latex?d">. For <img src="https://latex.codecogs.com/png.latex?q%5Cin%20%5Cmathbb%7BZ%7D_%7B%3E0%7D"> and any face <img src="https://latex.codecogs.com/png.latex?F"> of <img src="https://latex.codecogs.com/png.latex?P">, let <img src="https://latex.codecogs.com/png.latex?D_%7B%5Cvarphi,%20F%7D(q)"> be the sum of <img src="https://latex.codecogs.com/png.latex?%5Cvarphi"> over the lattice points in the dilate <img src="https://latex.codecogs.com/png.latex?qF">. We define a generating function <img src="https://latex.codecogs.com/png.latex?G_%7B%5Cvarphi%7D(q,y)%20%5Cin%20%5Cmathbb%7BQ%7D%5Bq%5D%5By%5D"> packaging together the various <img src="https://latex.codecogs.com/png.latex?D_%7B%5Cvarphi%20,F%7D(q)">, and show that it satisfies a functional equation that simultaneously generalizes Ehrhart–Macdonald reciprocity and the Dehn–Sommerville relations. When <img src="https://latex.codecogs.com/png.latex?P"> is a simple lattice polytope (i.e., each vertex meets <img src="https://latex.codecogs.com/png.latex?n"> edges), we show how <img src="https://latex.codecogs.com/png.latex?G_%7B%5Cvarphi%7D"> can be computed using an analogue of Brion–Vergne’s Euler–Maclaurin summation formula.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2020,
+  author = {Materov, Evgeny and Gunnels, Paul and Beck, Matthias},
+  title = {Weighted {Lattice} {Point} {Sums} in {Lattice} {Polytopes,}
+    {Unifying} {Dehn–Sommerville} and {Ehrhart–Macdonald}},
+  journal = {Discrete \&amp; Computational Geometry},
+  volume = {65},
+  pages = {365–384},
+  date = {2020},
+  url = {https://link.springer.com/article/10.1007/s00454-020-00175-2},
+  doi = {10.1007/s00454-020-00175-2},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2020" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, Paul Gunnels, and Matthias Beck. 2020. <span>“Weighted
+Lattice Point Sums in Lattice Polytopes, Unifying Dehn–Sommerville and
+Ehrhart–Macdonald.”</span> <em>Discrete &amp; Computational
+Geometry</em> 65: 365–84. <a href="https://doi.org/10.1007/s00454-020-00175-2">https://doi.org/10.1007/s00454-020-00175-2</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <category>math.CO</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Lattice.html</guid>
+  <pubDate>Tue, 31 Dec 2019 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Методы оптимизации</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/books/MO.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В пособии приведены необходимые теоретические сведения и примеры решения задач по дисциплине «Методы оптимизации». Изложение материала ведется с упором на решение практических задач. В учебном пособии используются примеры, иллюстрирующие применения, связанные с задачами МЧС России.</p>
+<blockquote class="blockquote">
+<p><em>Допущено Министерством Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий в качестве учебного пособия для курсантов, студентов и слушателей образовательных организаций МЧС России</em></p>
+</blockquote>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@book{матеров2019,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В.},
+  publisher = {Железногорск},
+  title = {Методы оптимизации},
+  date = {2019},
+  url = {https://znanium.com/catalog/document?id=353761},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2019" class="csl-entry quarto-appendix-citeas">
+<div class="">Матеров Е.Н., Бабёнышев С.В. <a href="https://znanium.com/catalog/document?id=353761">Методы
+оптимизации</a>. Железногорск, 2019.</div>
+</div></div></section></div> ]]></description>
+  <category>учебное пособие</category>
+  <guid>https://naukaidannye.netlify.app/publications/books/MO.html</guid>
+  <pubDate>Sat, 30 Nov 2019 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/publications/books/MO.png" medium="image" type="image/png" height="127" width="144"/>
+</item>
+<item>
+  <title>Использование языка программирования R в вопросах пожарной безопасности: анализ главных компонент</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2019b.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье рассмотрен метод главных компонент в применении к анализу данных по пожарам в Красноярском крае, а также рассмотрены возможности реализации данного метода на языке программирования R. Этапы реализации проиллюстрированы на конкретном примере данных пожаров на автотранспорте.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2019,
+  author = {Матеров, Е.Н.},
+  title = {Использование языка программирования R в вопросах пожарной
+    безопасности: анализ главных компонент},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {13},
+  number = {2},
+  pages = {49-53},
+  date = {2019},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2019" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н. <a href="http://vestnik.sibpsa.ru/">Использование языка
+программирования R в вопросах пожарной безопасности: анализ главных
+компонент</a> // Сибирский пожарно-спасательный вестник. 2019. (13). C.
+49–53.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2019b.html</guid>
+  <pubDate>Sun, 30 Jun 2019 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Использование языка программирования R в вопросах пожарной безопасности. Анализ статистики количества пожаров на основе теории временных рядов</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2019a.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье сделан обзор основных приемов работы с временными рядами в языке программирования R на примере данных по статистике пожаров в Красноярском крае – разведочный анализ данных, разложение временных рядов на компоненты, интегрированная модель авторегрессии-скользящего среднего и некоторые другие методы.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2019,
+  author = {Матеров, Е.Н.},
+  title = {Использование языка программирования R в вопросах пожарной
+    безопасности. Анализ статистики количества пожаров на основе теории
+    временных рядов},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {12},
+  number = {1},
+  pages = {52-57},
+  date = {2019},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2019" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н. <a href="http://vestnik.sibpsa.ru/">Использование языка
+программирования R в вопросах пожарной безопасности. Анализ статистики
+количества пожаров на основе теории временных рядов</a> // Сибирский
+пожарно-спасательный вестник. 2019. (12). C. 52–57.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2019a.html</guid>
+  <pubDate>Sun, 31 Mar 2019 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Математически методы и информационные технологии в научных исследованиях</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <dc:creator>С.В. Бабёнышев</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/books/MathMeth.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Учебное пособие предназначено для адъюнктов, обучающихся в ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России. Кроме того, материал пособия может быть полезен для магистров и слушателей старших курсов. В пособии рассмотрены как классические методы анализа, так и некоторые современные инструменты. В качестве основного технического инструмента выбран язык программирования R для статистической обработки и визуализации данных.</p>
+<blockquote class="blockquote">
+<p><em>Допущено Министерством Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий в качестве учебного пособия для адъюнктов образовательных организаций МЧС России</em></p>
+</blockquote>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@book{матеров2018,
+  author = {Матеров, Е.Н. and Бабёнышев, С.В.},
+  publisher = {Железногорск},
+  title = {Математически методы и информационные технологии в научных
+    исследованиях},
+  date = {2018},
+  url = {https://znanium.com/catalog/document?id=353760},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2018" class="csl-entry quarto-appendix-citeas">
+<div class="">Матеров Е.Н., Бабёнышев С.В. <a href="https://znanium.com/catalog/document?id=353760">Математически
+методы и информационные технологии в научных исследованиях</a>.
+Железногорск, 2018.</div>
+</div></div></section></div> ]]></description>
+  <category>учебное пособие</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/books/MathMeth.html</guid>
+  <pubDate>Fri, 30 Nov 2018 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/publications/books/MM.png" medium="image" type="image/png" height="126" width="144"/>
+</item>
+<item>
+  <title>Использование языка программирования R в вопросах пожарной безопасности. Обработка и визуализация данных</title>
+  <dc:creator>Е.Н. Матеров</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Vestnik_2018.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>В статье сделан обзор языка программирования R, его возможностей для обработки и визуализации табличных данных на примерах, связанных с вопросами пожарной безопасности. Кроме того, показаны основные принципы построения графики средствами R, приведены примеры анализа данных, даны общие рекомендации по перспективным методам компьютерной обработки информации в среде R, показаны преимущества по сравнению с другими средствами обработки данных.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{матеров2018,
+  author = {Матеров, Е.Н.},
+  title = {Использование языка программирования R в вопросах пожарной
+    безопасности. Обработка и визуализация данных},
+  journal = {Сибирский пожарно-спасательный вестник},
+  volume = {11},
+  number = {4},
+  pages = {60-66},
+  date = {2018},
+  url = {http://vestnik.sibpsa.ru/},
+  langid = {ru}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2018" class="csl-entry quarto-appendix-citeas">
+1. Матеров Е. Н. <a href="http://vestnik.sibpsa.ru/">Использование языка
+программирования R в вопросах пожарной безопасности. Обработка и
+визуализация данных</a> // Сибирский пожарно-спасательный вестник. 2018.
+(11). C. 60–66.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>R</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Vestnik_2018.html</guid>
+  <pubDate>Fri, 30 Nov 2018 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Tate Resolutions and Weyman Complexes</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>David Cox</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Weyman.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>We construct generalized Weyman complexes for coherent sheaves on projective space and describe explicitly how the diﬀerential depend on the diﬀerentials in the correpsonding Tate resolution. We apply this to deﬁne the Weyman complex of a coherent sheaf on a projective variety and explain how certain Weyman complexes can be regarded as Fourier-Mukai transforms.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2011,
+  author = {Materov, Evgeny and Cox, David},
+  title = {Tate {Resolutions} and {Weyman} {Complexes}},
+  journal = {Pacific Journal of Mathematics},
+  volume = {252},
+  pages = {51-68},
+  date = {2011},
+  url = {https://msp.org/pjm/2011/252-1/p04.xhtml},
+  doi = {10.2140/pjm.2011.252.51},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2011" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, and David Cox. 2011. <span>“Tate Resolutions and Weyman
+Complexes.”</span> <em>Pacific Journal of Mathematics</em> 252: 51–68.
+<a href="https://doi.org/10.2140/pjm.2011.252.51">https://doi.org/10.2140/pjm.2011.252.51</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <category>math.AC</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Weyman.html</guid>
+  <pubDate>Fri, 30 Sep 2011 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Regularity and Segre-Veronese embeddings</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>David Cox</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Regularity.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This paper studies the regularity of certain coherent sheaves that arise naturally from Segre-Veronese embeddings of a product of projective spaces. We give an explicit formula for the regularity of these sheaves and show that their regularity is subadditive. We then apply our results to study the Tate resolutions of these sheaves.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2009,
+  author = {Materov, Evgeny and Cox, David},
+  publisher = {AMS},
+  title = {Regularity and {Segre-Veronese} Embeddings},
+  journal = {Proceedings of the American Mathematical Society},
+  volume = {137},
+  pages = {1883-1890},
+  date = {2009},
+  url = {https://www.ams.org/journals/proc/2009-137-06/S0002-9939-09-09783-4/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2009" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, and David Cox. 2009. <span>“Regularity and
+Segre-Veronese Embeddings.”</span> <em>Proceedings of the American
+Mathematical Society</em> 137: 1883–90. <a href="https://www.ams.org/journals/proc/2009-137-06/S0002-9939-09-09783-4/">https://www.ams.org/journals/proc/2009-137-06/S0002-9939-09-09783-4/</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <category>math.AC</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Regularity.html</guid>
+  <pubDate>Wed, 31 Dec 2008 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Tate resolutions for Segre embeddings</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>David Cox</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Tate.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>We give an explicit description of the terms and differentials of the Tate resolution of sheaves arising from Segre embeddings of <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BP%7D%5Ea%5Ctimes%5Cmathbb%7BP%7D%5Eb">. We prove that the maps in this Tate resolution are either coming from Sylvester-type maps, or from Bezout-type maps arising from the so-called toric Jacobian.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2008,
+  author = {Materov, Evgeny and Cox, David},
+  publisher = {MSP},
+  title = {Tate Resolutions for {Segre} Embeddings},
+  journal = {Algebra \&amp; Number Theory},
+  volume = {2},
+  number = {5},
+  pages = {523-549},
+  date = {2008},
+  url = {https://projecteuclid.org/journals/algebra-and-number-theory/volume-2/issue-5/Tate-resolutions-for-Segre-embeddings/10.2140/ant.2008.2.523.full},
+  doi = {10.2140/ant.2008.2.523},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2008" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, and David Cox. 2008. <span>“Tate Resolutions for Segre
+Embeddings.”</span> <em>Algebra &amp; Number Theory</em> 2: 523–49. <a href="https://doi.org/10.2140/ant.2008.2.523">https://doi.org/10.2140/ant.2008.2.523</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <category>math.AC</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Tate.html</guid>
+  <pubDate>Wed, 30 Apr 2008 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Mixed Toric Residues and Calabi-Yau Complete Intersections</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>Victor Batyrev</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/MTRMS.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Using Cayley trick, we define the notions of mixed toric residues and mixed Hessians associated with r Laurent polynomials <img src="https://latex.codecogs.com/png.latex?f_1,%5Cldots,f_r">. We conjecture that the values of mixed toric residues on the mixed Hessians are determined by mixed volumes of the Newton polytopes of <img src="https://latex.codecogs.com/png.latex?f_1,%5Cldots,f_r">. Using mixed toric residues, we generalize our Toric Residue Mirror Conjecture to the case of Calabi-Yau complete intersections in Gorenstein toric Fano varieties obtained from nef-partitions of reflexive polytopes.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{materov2003,
+  author = {Materov, Evgeny and Batyrev, Victor},
+  title = {Mixed {Toric} {Residues} and {Calabi-Yau} {Complete}
+    {Intersections}},
+  volume = {38},
+  date = {2003},
+  url = {http://www.ams.org/books/fic/038/},
+  doi = {http://dx.doi.org/10.1090/fic/038},
+  isbn = {978-0-8218-3355-1},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2003" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, and Victor Batyrev. 2003. <span>“Mixed Toric Residues
+and Calabi-Yau Complete Intersections.”</span> <em>Calabi-Yau Varieties
+and Mirror Symmetry</em>. https://doi.org/<a href="http://dx.doi.org/10.1090/fic/038">http://dx.doi.org/10.1090/fic/038</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/MTRMS.html</guid>
+  <pubDate>Thu, 31 Oct 2002 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Toric residues and mirror symmetry</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <dc:creator>Victor Batyrev</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/TRMS.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>We develop some ideas of Morrison and Plesser and formulate a precise mathematical conjecture which has close relations to toric mirror symmetry. Our conjecture, we call it Toric Residue Mirror Conjecture, claims that the generating functions of intersection numbers of divisors on a special sequence of simplicial toric varieties are power series expansions of some rational functions obtained as toric residues. We expect that this conjecture holds true for all Gorenstein toric Fano varieties associated with reflexive polytopes and give some evidences for that. The proposed conjecture suggests a simple method for computing Yukawa couplings for toric mirror Calabi-Yau hypersurfaces without solving systems of differential equations. We make several explicit computations for Calabi-Yau hypersurfaces in weighted projective spaces and in products of projective spaces.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2002,
+  author = {Materov, Evgeny and Batyrev, Victor},
+  title = {Toric Residues and Mirror Symmetry},
+  journal = {Moscow Mathematical Journal},
+  volume = {2},
+  number = {3},
+  pages = {435-475},
+  date = {2002},
+  url = {http://www.mathjournals.org/mmj/vol2-3-2002/abst2-3-2002.html#batyrev-materov_abstract},
+  doi = {10.17323/1609-4514-2002-2-3-435-475},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2002" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny, and Victor Batyrev. 2002. <span>“Toric Residues and
+Mirror Symmetry.”</span> <em>Moscow Mathematical Journal</em> 2: 435–75.
+<a href="https://doi.org/10.17323/1609-4514-2002-2-3-435-475">https://doi.org/10.17323/1609-4514-2002-2-3-435-475</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/TRMS.html</guid>
+  <pubDate>Thu, 31 Oct 2002 17:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The Bott Formula for Toric Varieties</title>
+  <dc:creator>Evgeny Materov</dc:creator>
+  <link>https://naukaidannye.netlify.app/publications/papers/Bott.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The purpose of this paper is to give an explicit formula which allows one to compute the dimension of the cohomology groups of the sheaf <img src="https://latex.codecogs.com/png.latex?%5COmega_%7B%5Cmathbb%7BP%7D%7D%5Ep(D)=%20%5COmega_%7B%5Cmathbb%7BP%7D%7D%5Ep%5Cotimes%20%7B%5Cmathcal%7BO%7D_%5Cmathbb%7BP%7D%7D(D)"> of <img src="https://latex.codecogs.com/png.latex?p">-th differential forms Zariski twisted by an ample invertible sheaf on a complete simplicial toric variety. The formula involves some combinatorial sums of integer points over all faces of the support polytope for <img src="https://latex.codecogs.com/png.latex?%7B%5Cmathcal%7BO%7D_%5Cmathbb%7BP%7D%7D(D)">. Comparison of two versions of the Bott formula gives some elegant corollaries in the combinatorics of simple polytopes. Also, we obtain a generalization of the reciprocity law. Some applications of the Bott formula are discussed.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{materov2002,
+  author = {Materov, Evgeny},
+  title = {The {Bott} {Formula} for {Toric} {Varieties}},
+  journal = {Moscow Mathematical Journal},
+  volume = {2},
+  number = {1},
+  pages = {161-182},
+  date = {2002},
+  url = {http://www.mathjournals.org/mmj/vol2-1-2002/abst2-1-2002.html#materov_abstract},
+  doi = {10.17323/1609-4514-2002-2-1-161-182},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-materov2002" class="csl-entry quarto-appendix-citeas">
+Materov, Evgeny. 2002. <span>“The Bott Formula for Toric
+Varieties.”</span> <em>Moscow Mathematical Journal</em> 2: 161–82. <a href="https://doi.org/10.17323/1609-4514-2002-2-1-161-182">https://doi.org/10.17323/1609-4514-2002-2-1-161-182</a>.
+</div></div></section></div> ]]></description>
+  <category>статья</category>
+  <category>math.AG</category>
+  <guid>https://naukaidannye.netlify.app/publications/papers/Bott.html</guid>
+  <pubDate>Sun, 31 Mar 2002 16:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
