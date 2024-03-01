@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Е.Н. Матеров">
+
+<title>Наука и данные - Анализ географически распределенных объектов городской инфраструктуры</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../..//images/favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/social-share.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/social-share-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/lord-icon-bundle-3.4.4/bundle.js"></script>
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1VWR791XRL"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-1VWR791XRL', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Наука и данные - Анализ географически распределенных объектов городской инфраструктуры">
+<meta property="og:description" content="Обзор возможностей языка программирования R в применении к анализу расстояний между объектами городской инфраструктуры">
+<meta property="og:image" content="https://naukaidannye.netlify.app/blog/posts/2021-11-22-reachability/spatial.png">
+<meta property="og:site_name" content="Наука и данные">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image:height" content="1454">
+<meta property="og:image:width" content="2462">
+<meta name="twitter:title" content="Наука и данные - Анализ географически распределенных объектов городской инфраструктуры">
+<meta name="twitter:description" content="Обзор возможностей языка программирования R в применении к анализу расстояний между объектами городской инфраструктуры">
+<meta name="twitter:image" content="https://naukaidannye.netlify.app/blog/posts/2021-11-22-reachability/spatial.png">
+<meta name="twitter:creator" content="@materov">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1454">
+<meta name="twitter:image-width" content="2462">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Наука и данные</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../blog/index.html"> 
+<span class="menu-text">Блог</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../publications/index.html"> 
+<span class="menu-text">Публикации</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">Об авторе</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/naukaidannye"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@materov" rel="me"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/materov"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Анализ географически распределенных объектов городской инфраструктуры</h1>
+            <p class="subtitle lead">Обзор возможностей языка программирования R в применении к анализу расстояний между объектами городской инфраструктуры</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">spatial</div>
+                <div class="quarto-category">Rstats</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Автор</div>
+      <div class="quarto-title-meta-contents">
+               <p>Е.Н. Матеров </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">22 ноября 2021 г.</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Обновлено</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">4 марта 2024 г.</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul class="collapse">
+  <li><a href="#работа-с-данными-openstreetmap" id="toc-работа-с-данными-openstreetmap" class="nav-link active" data-scroll-target="#работа-с-данными-openstreetmap">Работа с данными OpenStreetMap</a>
+  <ul class="collapse">
+  <li><a href="#создание-картографической-основы" id="toc-создание-картографической-основы" class="nav-link" data-scroll-target="#создание-картографической-основы">Создание картографической основы</a></li>
+  <li><a href="#дополнительные-данные-из-openstreetmap" id="toc-дополнительные-данные-из-openstreetmap" class="nav-link" data-scroll-target="#дополнительные-данные-из-openstreetmap">Дополнительные данные из OpenStreetMap</a></li>
+  <li><a href="#нанесение-на-карту-города-различных-объектов-и-ограниченных-зон" id="toc-нанесение-на-карту-города-различных-объектов-и-ограниченных-зон" class="nav-link" data-scroll-target="#нанесение-на-карту-города-различных-объектов-и-ограниченных-зон">Нанесение на карту города различных объектов и ограниченных зон</a></li>
+  </ul></li>
+  <li><a href="#анализ-зон-транспортной-доступности" id="toc-анализ-зон-транспортной-доступности" class="nav-link" data-scroll-target="#анализ-зон-транспортной-доступности">Анализ зон транспортной доступности</a>
+  <ul class="collapse">
+  <li><a href="#точки-исследования" id="toc-точки-исследования" class="nav-link" data-scroll-target="#точки-исследования">Точки исследования</a></li>
+  <li><a href="#достижимость-объектов-на-основе-матрицы-расстояний" id="toc-достижимость-объектов-на-основе-матрицы-расстояний" class="nav-link" data-scroll-target="#достижимость-объектов-на-основе-матрицы-расстояний">Достижимость объектов на основе матрицы расстояний</a></li>
+  <li><a href="#построение-оптимальных-маршрутов" id="toc-построение-оптимальных-маршрутов" class="nav-link" data-scroll-target="#построение-оптимальных-маршрутов">Построение оптимальных маршрутов</a></li>
+  </ul></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение">Заключение</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p><lord-icon speed="0.9" delay="1000" src="https://cdn.lordicon.com/surcxhka.json" trigger="loop"></lord-icon></p>
+<section id="работа-с-данными-openstreetmap" class="level1 page-columns page-full">
+<h1>Работа с данными OpenStreetMap</h1>
+<p>Создание картографической основы важно для многих исследований, использующих географические карты городской инфраструктуры. Одной из самых полных баз данных местоположений является некоммерческий проект <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> (сокращенно <em>OSM</em>). Здесь мы покажем, как можно самостоятельно загружать карты, отображать на картах объекты, а также изучим вопрос о степени достижимости возможных объектов пожара пожарно-спасательными подразделениями для оценки рисков. Отметим, что особое внимание при оценке расстояния и времени прибытия подразделениями должно уделяться социально значимым объектам и объектам с массовым пребыванием людей. Аналогом библиотек, использованных здесь, является библиотека <a href="https://github.com/gboeing/osmnx" target="_blank">OSMnx</a> языка <strong>Python</strong>, которую разрабатывает <a href="https://geoffboeing.com/" target="_blank">Geoff Boeing</a>.</p>
+<section id="создание-картографической-основы" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="создание-картографической-основы">Создание картографической основы</h2>
+<p>Идея создания карты такого рода рассмотрена в <a href="https://taraskaduk.com/posts/2021-01-18-print-street-maps/" target="_blank">блоге</a>, ее автор – <a href="https://twitter.com/taraskaduk" target="_blank">Taras Kaduk</a>.</p>
+<p>Загрузим необходимые для работы библиотеки. Для получения данных с <em>OpenStreetMap</em> используется библиотека <code>osmdata</code>, для работы с географическими данными на основе стандарта <a href="https://en.wikipedia.org/wiki/Simple_Features" target="_blank">Simple Features</a> – библиотека <code>sf</code>, библиотека <code>osrm</code> является связующим звеном между <strong>R</strong> и сервисом <a href="https://project-osrm.org/" target="_blank">OSRM</a> для определения расстояния между объектами, времени движения и кратчайшего пути. Следует отметить, что альтернативный подход для доступа к данным, лежащим в основе <em>OpenStreetMap</em> использует библиотека <a href="https://docs.ropensci.org/osmdata/" target="_blank">osmdata</a>, а для массовых извлечений больших наборов данных <em>OSM</em> в сжатом <code>pbf</code>-формате – библиотека <a href="https://docs.ropensci.org/osmextract/" target="_blank">osmextract</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># общие библиотеки</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># работа с географическими данными</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(osmdata)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(osrm)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># шкала масштаба на карте</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Зафиксируем географический объект, в нашем случае – город Красноярск.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># здесь можно указать любой другой город</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_place <span class="ot">&lt;-</span> <span class="st">"Krasnojarsk Russia"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-KRSK_city_roads" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_city_roads-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_city_roads.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="KRSK_city_roads.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_city_roads-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1: Пример карты дорожной сети города Красноярска в сервисе <a href="https://anvaka.github.io/city-roads/" target="_blank">city roads</a>
+</figcaption>
+</figure>
+</div>
+<p>Сделаем запрос из <em>OSM</em> для нахождения географических границ города.</p>
+<div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># загрузим все границы, связанные с объектом</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>all_boundaries <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"boundary"</span>,</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="st">"administrative"</span>) <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>() <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>osm_multipolygons</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">делает <a href="https://wiki.openstreetmap.org/wiki/Overpass_API" target="_blank">Overpass</a>-запрос; увеличение параметра <code>timeout</code> позволяет делать большие запросы, поскольку время ожидания сервера может истечь до того, как будут доставлены все данные<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>;</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2">добавляет функции в запрос <em>Overpass</em>, которые задаются парами <code>key-value</code>; подробное описание значений представлено на <a href="https://wiki.openstreetmap.org/wiki/RU:%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B_%D0%BA%D0%B0%D1%80%D1%82%D1%8B" target="_blank">wiki OSM</a>, для получения полного списка значений можно использовать команду <code>available_features()</code>, в нашем случае это административные границы: областей, районов, округов и т.д.;</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="3">возвращает <code>sf</code>-объект;</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="4">удаляет имена из <code>osmdata</code> геометрических объектов.</span>
+</dd>
+</dl>
+<p>Выясним, где могут содержаться потенциально возможные границы города.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>all_boundaries <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(osm_id, name, geom) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Красноярск"</span>, name))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 95%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  osm_id  name                                                              geom
+  &lt;chr&gt;   &lt;chr&gt;                                               &lt;MULTIPOLYGON [°]&gt;
+1 190090  Красноярский край          (((111.3179 73.85324, 111.3222 73.85231, 1…
+2 1157393 городской округ Красноярск (((93.01595 56.06642, 93.01739 56.06589, 9…</code></pre>
+</div>
+</div>
+</div>
+<p>Выделим из полученного множества границ только нужную нам, соответствующую границе городского округа.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>boundary_KRSK <span class="ot">&lt;-</span> all_boundaries <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                   dplyr<span class="sc">::</span><span class="fu">filter</span>(osm_id <span class="sc">==</span> <span class="dv">1157393</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Другой простой способ получения границы города – воспользоваться <a href="https://dieghernan.github.io/nominatimlite/" target="_blank">библиотекой</a> <code>nominatimlite</code> для (обратного) геокодирования на основе <a href="https://nominatim.org/release-docs/latest/" target="_blank">Nominatim API</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>boundary_KRSK <span class="ot">&lt;-</span> nominatimlite<span class="sc">::</span><span class="fu">geo_lite_sf</span>(my_place, <span class="at">points_only =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Теперь получим картографические данные, включающие в себя дорожную сеть улиц, железные дороги и водные объекты – реки и озера. Фиксируем значения ключа <code>highway</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Код: типы загружаемых дорог</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># типы загружаемых дорог и толщина линий на карте</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>highway_sizes <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>highway, <span class="sc">~</span>highway_group,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"motorway"</span>,      <span class="st">"large"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"trunk"</span>,         <span class="st">"large"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"motorway_link"</span>, <span class="st">"large"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"primary"</span>,       <span class="st">"large"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"primary_link"</span>,  <span class="st">"large"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"secondary"</span>,     <span class="st">"medium"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"secondary_link"</span>,<span class="st">"medium"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tertiary"</span>,      <span class="st">"medium"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tertiary_link"</span>, <span class="st">"medium"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"trunk_link"</span>,    <span class="st">"medium"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"residential"</span>,   <span class="st">"small"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"living_street"</span>, <span class="st">"small"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unclassified"</span>,  <span class="st">"small"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"service"</span>,       <span class="st">"small"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"road"</span>,          <span class="st">"small"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Загрузим дорожную сеть города.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># streets (улицы)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>streets_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> highway_sizes<span class="sc">$</span>highway) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Выделим только типы линий <code>osm_lines</code> и оставим только улицы, находящиеся внутри границы <code>boundary_KRSK</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>streets <span class="ot">&lt;-</span> streets_osm<span class="sc">$</span>osm_lines <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length =</span> <span class="fu">as.numeric</span>(<span class="fu">st_length</span>(.))) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(highway_sizes, <span class="at">by =</span> <span class="st">"highway"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_intersection</span>(boundary_KRSK)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>streets <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(osm_id, name, highway, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                maxspeed, oneway, surface) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 6 fields
+Geometry type: MULTILINESTRING
+Dimension:     XY
+Bounding box:  xmin: 92.9288 ymin: 56.0738 xmax: 92.94057 ymax: 56.08547
+Geodetic CRS:  WGS 84
+    osm_id             name highway maxspeed oneway surface
+1 17639885   Северное шоссе primary       60    yes asphalt
+2 25375023 Енисейский тракт primary       60    yes asphalt
+3 25375024      улица 9 Мая primary       60    yes asphalt
+4 25375027 Енисейский тракт primary       60    yes asphalt
+5 25375030 Енисейский тракт primary       60    yes asphalt
+                            geom
+1 MULTILINESTRING ((92.93389 ...
+2 MULTILINESTRING ((92.93911 ...
+3 MULTILINESTRING ((92.93978 ...
+4 MULTILINESTRING ((92.93999 ...
+5 MULTILINESTRING ((92.93936 ...</code></pre>
+</div>
+</div>
+<p>Загрузим данные соответствующие железным дорогам.</p>
+<details>
+<summary>
+Код: железные дороги
+</summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># railways (железные дороги)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>railways_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"railway"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="st">"rail"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>railways <span class="ot">&lt;-</span> railways_osm<span class="sc">$</span>osm_lines <span class="sc">|&gt;</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Получим данные по водным объектам.</p>
+<details>
+<summary>
+Код: водные объекты
+</summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># water (водные объекты)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>water_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"natural"</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="st">"water"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>river_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"waterway"</span>, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="fu">c</span>(<span class="st">"river"</span>, </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"riverbank"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>()</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>water <span class="ot">&lt;-</span> </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(water_osm, river_osm) <span class="sc">%&gt;%</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>osm_multipolygons <span class="sc">|&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(osm_id, name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Создадим базовую карту, нанеся на нее соответствующие объекты.</p>
+<details>
+<summary>
+Код: базовая карта
+</summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>base_map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># дорожная сеть</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> streets <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">filter</span>(highway_group <span class="sc">==</span> <span class="st">"large"</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.4</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> streets <span class="sc">|&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">filter</span>(highway_group <span class="sc">==</span> <span class="st">"medium"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.2</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"grey35"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> streets <span class="sc">|&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">filter</span>(highway_group <span class="sc">==</span> <span class="st">"small"</span>),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.1</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># железные дороги</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> railways,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"grey30"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">linetype =</span> <span class="st">"dotdash"</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># водные объекты</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> water,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">lwd =</span> <span class="dv">0</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  hrbrthemes<span class="sc">::</span><span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="st">"cm"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Карта-подложка готова, теперь можно использовать ее элементы для отображения всего города или его части. Варьируя границы, мы можем получить карту достаточно подробного масштаба.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># границы города</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> boundary_KRSK, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ограничения</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.64</span>, <span class="fl">93.19</span>), </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.90</span>, <span class="fl">56.14</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-KRSK_map" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_map.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="KRSK_map.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;2: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="дополнительные-данные-из-openstreetmap" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="дополнительные-данные-из-openstreetmap">Дополнительные данные из OpenStreetMap</h2>
+<p>Напомним, что базовая карта состоит из трех основных составляющих: <code>streets</code>, <code>railways</code> и <code>water</code>. Мы можем использовать информацию из <em>OpenStreetMap</em> для дальнейшего анализа. В частности, переменная <code>speed</code> объекта <code>streets</code> отвечает за максимальную разрешенную <a href="https://wiki.openstreetmap.org/wiki/RU:Key:maxspeed" target="_blank">скорость</a> для различных транспортных средств.</p>
+<details>
+<summary>
+Код: максимальные разрешенные скорости движения
+</summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># максимальные разрешенные скорости движения из OpenStreetMap</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>streets_speed <span class="ot">&lt;-</span> streets <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># рассмотрим только данные без пропусков</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(maxspeed)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># заменим коды значениями из OSM</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">maxspeed_new =</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">case_when</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>             maxspeed <span class="sc">==</span> <span class="st">"RU:living_street"</span> <span class="sc">~</span> <span class="st">"20"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>             maxspeed <span class="sc">==</span> <span class="st">"RU:rural"</span> <span class="sc">~</span> <span class="st">"90"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>             maxspeed <span class="sc">==</span> <span class="st">"RU:urban"</span> <span class="sc">~</span> <span class="st">"60"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">.default =</span> maxspeed</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>           ) </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># преобразуем переменные</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>streets_speed<span class="sc">$</span>maxspeed_new <span class="ot">&lt;-</span> </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(streets_speed<span class="sc">$</span>maxspeed_new)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># создадим факторную переменную для скорости</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>streets_speed<span class="sc">$</span>max_speed_factor <span class="ot">&lt;-</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(streets_speed<span class="sc">$</span>maxspeed_new,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">49</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">90</span>),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"5 км/ч"</span>, <span class="st">"8 км/ч"</span>, </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"10 км/ч"</span>, <span class="st">"20 км/ч"</span>, </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"30 км/ч"</span>, <span class="st">"40 км/ч"</span>, </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"49 км/ч"</span>, <span class="st">"50 км/ч"</span>, </span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"60 км/ч"</span>, <span class="st">"70 км/ч"</span>, </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"90 км/ч"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>streets_speed <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(., max_speed_factor, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   max_speed_factor    n
+1           60 км/ч 2556
+2           20 км/ч  394
+3           40 км/ч  357
+4            5 км/ч   83
+5           30 км/ч   26
+6           90 км/ч   22
+7           10 км/ч    6
+8           49 км/ч    1
+9           50 км/ч    1
+10          70 км/ч    1
+11           8 км/ч    1</code></pre>
+</div>
+</div>
+<details>
+<summary>
+Код: максимальные разрешенные скорости движения (карта)
+</summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># карта: максимальная разрешенная скорость движения</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># дорожная сеть</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> streets_speed,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.67</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> max_speed_factor)) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">option =</span> <span class="st">"turbo"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы части города</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.8002</span>, <span class="fl">93.0407</span>), </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.9823</span>, <span class="fl">56.1003</span>),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"максимальная </span><span class="sc">\n</span><span class="st">разрешенная </span><span class="sc">\n</span><span class="st">скорость"</span>) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_max_speed" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_max_speed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_max_speed.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="KRSK_max_speed.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_max_speed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска с данными по максимально разрешенным скоростям движения
+</figcaption>
+</figure>
+</div>
+<p>Как видно из рисунка, база <em>OpenStreetMap</em> содержит неполную информацию по каждому участку дорог. Аналогично можно рассмотреть и визуализировать другие характеристики: дороги с односторонним движением (переменная <code>oneway</code>), тип дорожного покрытия (переменная <code>surface</code>), количество полос движения (переменная <code>lanes</code>) и т.д.</p>
+</section>
+<section id="нанесение-на-карту-города-различных-объектов-и-ограниченных-зон" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="нанесение-на-карту-города-различных-объектов-и-ограниченных-зон">Нанесение на карту города различных объектов и ограниченных зон</h2>
+<p>Нанесем на карту города границы районов. Для этого нужно предварительно загрузить границы из <em>OpenStreetMap</em>, указав значение для ключа <code>admin_level</code>, в нашем случае значение равно 9 в соответствии с кодированием в <a href="https://wiki.openstreetmap.org/wiki/RU:Key:admin_level" target="_blank">таблице</a> деления на административные единицы для <em>OpenStreetMap</em>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># получение данных по районам города из OSM</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>districts_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"admin_level"</span>, <span class="at">value =</span> <span class="dv">9</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname_osmdata_sf</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Получим данные по районам, также выделив площадь каждого района.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># границы районов с площадями</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>districts <span class="ot">&lt;-</span> districts_osm <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>osm_multipolygons <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(osm_id, name) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">area =</span> <span class="fu">st_area</span>(.),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">region_area =</span> <span class="fu">as.numeric</span>(area))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Найдем центроиды районов.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># центроиды районов</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>regions <span class="ot">&lt;-</span> <span class="fu">cbind</span>(districts, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(districts))) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">c_lon =</span> X, <span class="at">c_lat =</span> Y)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># районы города</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>regions</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 7 features and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 92.62752 ymin: 55.91184 xmax: 93.16844 ymax: 56.13382
+Geodetic CRS:  WGS 84
+   osm_id                  name     area region_area    c_lon    c_lat
+1 5854088 Железнодорожный район 11472481    11472481 92.82686 56.01383
+2 5854089       Кировский район 23189104    23189104 92.96615 55.98596
+3 5854090       Ленинский район 52892774    52892774 93.02779 56.02276
+4 5854091     Октябрьский район 90609016    90609016 92.73413 56.01672
+5 5854092    Свердловский район 75824721    75824721 92.84575 55.96372
+6 5854093       Советский район 88194468    88194468 92.97927 56.07533
+7 5854094     Центральный район 34350926    34350926 92.88060 56.04314
+                            geom
+1 MULTIPOLYGON (((92.84876 56...
+2 MULTIPOLYGON (((92.96183 55...
+3 MULTIPOLYGON (((93.04703 56...
+4 MULTIPOLYGON (((92.66951 55...
+5 MULTIPOLYGON (((92.96183 55...
+6 MULTIPOLYGON (((93.09394 56...
+7 MULTIPOLYGON (((92.84994 56...</code></pre>
+</div>
+</div>
+<p>Приведем карту районов города.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<details>
+<summary>
+Код: карта районов города
+</summary>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># удалим "район" из названия</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>regions<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(regions<span class="sc">$</span>name, <span class="st">" район"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># районы города</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> regions, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> region_area <span class="sc">/</span> <span class="dv">1000000</span>), </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># цвет</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"площадь района (в кв. км):"</span>, </span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>,<span class="st">"cm"</span>),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.8</span>,<span class="st">"cm"</span>),</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># названия районов</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> regions, </span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(c_lon, c_lat,</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>                               <span class="at">label =</span> name, </span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>                               <span class="at">color =</span> <span class="fu">I</span>(<span class="st">"black"</span>)), </span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                           <span class="at">color =</span> <span class="st">"white"</span>,     </span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                           <span class="at">bg.color =</span> <span class="st">"grey30"</span>, </span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                           <span class="at">bg.r =</span> <span class="fl">0.15</span>,          </span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ограничения</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.64</span>, <span class="fl">93.19</span>), </span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.90</span>, <span class="fl">56.14</span>),</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_regions" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_regions.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="KRSK_regions.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска с районами
+</figcaption>
+</figure>
+</div>
+<p>Аналогично можно загрузить и отобразить на карте информацию по зданиям и сооружениям.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># buildings (здания)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>buildings_osm <span class="ot">&lt;-</span> <span class="fu">opq</span>(my_place, <span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"building"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>buildings_polygons <span class="ot">&lt;-</span> buildings_osm <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>osm_polygons</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>buildings_multipolygons <span class="ot">&lt;-</span> buildings_osm <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>osm_multipolygons</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>buildings <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(buildings_polygons, </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                       buildings_multipolygons)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Рассмотрим количество объектов, которые принадлежат улицам города.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(buildings <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as_tibble</span>(), </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>      addr.street, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,016 × 2
+   addr.street                                  n
+   &lt;chr&gt;                                    &lt;int&gt;
+ 1 проспект им. газеты Красноярский Рабочий   457
+ 2 Центральная улица                          401
+ 3 Советская улица                            337
+ 4 Лесная улица                               334
+ 5 улица Калинина                             310
+ 6 улица 60 лет Октября                       232
+ 7 улица Карла Маркса                         231
+ 8 Новая улица                                221
+ 9 Базайская улица                            220
+10 улица Березина                             218
+# ℹ 1,006 more rows</code></pre>
+</div>
+</div>
+<details>
+<summary>
+Код: улицы города
+</summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> buildings, <span class="at">linewidth =</span> <span class="fl">0.15</span>, </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">addr:street</span><span class="st">`</span>, </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">`</span><span class="at">addr:street</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы части города</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.8492</span>, <span class="fl">93.0487</span>), </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.9863</span>, <span class="fl">56.0603</span>),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_buildings" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_buildings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_buildings.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5"><img src="KRSK_buildings.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_buildings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5: Карта дорожной сети, а также зданий и строений города Красноярска, цвет соответствует принадлежности объектов улицам города
+</figcaption>
+</figure>
+</div>
+<p>Другой пример – построим карту, учитывающую этажность зданий.</p>
+<details>
+<summary>
+Код: этажность зданий
+</summary>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># этажность</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> buildings <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">building:levels</span><span class="st">`</span>) <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="st">`</span><span class="at">building:levels</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(<span class="st">`</span><span class="at">building:levels</span><span class="st">`</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">26</span>, <span class="dv">29</span>, <span class="dv">30</span>))), </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.1</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">building:levels</span><span class="st">`</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">`</span><span class="at">building:levels</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы города</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.88</span>, <span class="fl">92.95</span>), </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">56.02</span>, <span class="fl">56.06</span>),</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># шкала аннотаций</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"br"</span>, </span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">width_hint =</span> <span class="fl">0.5</span>, </span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">style =</span> <span class="st">"ticks"</span>) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"turbo"</span>, </span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                              <span class="at">discrete =</span> T) <span class="sc">+</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"этажность"</span>) <span class="sc">+</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  hrbrthemes<span class="sc">::</span><span class="fu">theme_ipsum</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_building_levels" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_building_levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_building_levels.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-6" data-glightbox="description: .lightbox-desc-6"><img src="KRSK_building_levels.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_building_levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6: Карта города Красноярска, цвет соответствует этажности зданий
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="анализ-зон-транспортной-доступности" class="level1 page-columns page-full">
+<h1>Анализ зон транспортной доступности</h1>
+<p>Рассмотрим транспортную достижимость объектов по времени движения по транспортной сети. Задачи, связанные с построением зон доступностей, рассмотрены, например, в главе <a href="https://tsamsonov.github.io/r-geo-course/16-NetworkAnalysis.html" target="_blank">Сетевой анализ</a> курса [<a href="https://tsamsonov.github.io/r-geo-course/" target="_blank">Т.Е. Самсонов</a>]. В частности, Федеральный закон от 22.07.2008 № 123-ФЗ (ред. от 25.12.2023) “<em>Технический регламент о требованиях пожарной безопасности</em>” в статье 76 <em>Требования пожарной безопасности по размещению зданий пожарных депо на территориях населенных пунктов</em> говорит о том, что здания пожарных депо на территориях населенных пунктов следует размещать исходя из условия, что время прибытия первого подразделения к месту вызова в городских населенных пунктах не должно превышать <strong>10 минут</strong>, в сельских населенных пунктах <strong>20 минут</strong>. В связи с этим, актуальным является вопрос достижимости объектов с массовым пребыванием людей (т.е. зданий или сооружений (кроме жилых домов), в котором может одновременно находиться 50 и более человек) из пожарно-спасательных подразделений.</p>
+<section id="точки-исследования" class="level2">
+<h2 class="anchored" data-anchor-id="точки-исследования">Точки исследования</h2>
+<p>Помимо карты-подложки нам понадобятся объекты исследования, пусть это будут <em>пожарно-спасательные подразделения</em>, дислоцируемые на территории местного пожарно-спасательного гарнизона (сокращенно ПСЧ). Сформируем точки, которые им соответствуют, это можно сделать случайным образом, например, с помощью команды <code>sf::st_sample()</code>, либо приписать заданным значениям как в нашем случае – центроидам районов города.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># пожарные части</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># точки выбраны как центроиды районов</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fire_stations <span class="ot">&lt;-</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>regions <span class="sc">|&gt;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"ПСЧ"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">sep =</span> <span class="st">"-"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(name, c_lon, c_lat) <span class="sc">|&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fire_stations</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  name  c_lon c_lat
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 ПСЧ-1  92.8  56.0
+2 ПСЧ-2  93.0  56.0
+3 ПСЧ-3  93.0  56.0
+4 ПСЧ-4  92.7  56.0
+5 ПСЧ-5  92.8  56.0
+6 ПСЧ-6  93.0  56.1
+7 ПСЧ-7  92.9  56.0</code></pre>
+</div>
+</div>
+<p>Отметим, что в картографии объекты должны рассматриваться в соответствующей <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D0%B9" target="_blank">географической проекции</a>, которая учитывает искажения Земли. В <strong>R</strong> библиотека <code>sf</code> позволяет сделать перевод в географическую систему координат <em>CRS</em> (<em>coordinate reference system</em>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CRS (coordinate reference system) проекция в EPSG:4326</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fire_stations_sf <span class="ot">&lt;-</span> fire_stations <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"c_lon"</span>, <span class="st">"c_lat"</span>), </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>fire_stations_sf</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 7 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 92.73413 ymin: 55.96372 xmax: 93.02779 ymax: 56.07533
+Geodetic CRS:  WGS 84
+# A tibble: 7 × 2
+  name             geometry
+* &lt;chr&gt;         &lt;POINT [°]&gt;
+1 ПСЧ-1 (92.82686 56.01383)
+2 ПСЧ-2 (92.96615 55.98596)
+3 ПСЧ-3 (93.02779 56.02276)
+4 ПСЧ-4 (92.73413 56.01672)
+5 ПСЧ-5 (92.84575 55.96372)
+6 ПСЧ-6 (92.97927 56.07533)
+7 ПСЧ-7  (92.8806 56.04314)</code></pre>
+</div>
+</div>
+<p>Предположим, что нам необходимо решить задачу распределения районов выезда пожарных частей в терминах евклидова расстояния, без учета движения вдоль дорог и времени движения пожарного автомобиля. Тогда задача решалась бы используя <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%BE%D0%B3%D0%BE" target="_blank">диаграммы Вороного</a>. Напомним, что диаграмма Вороного конечного множества точек <em>S</em> на плоскости представляет такое разбиение плоскости на ячейки, при котором каждая область этого разбиения образует множество точек, более близких к одному из элементов множества <em>S</em>, чем к любому другому элементу множества. Ниже показан пример такого разбиения, альтернативный вариант можно осуществить с помощью библиотеки <a href="https://ggforce.data-imaginist.com/reference/geom_delvor.html" target="_blank">ggforce</a>.</p>
+<details>
+<summary>
+Код: диаграммы Вороного
+</summary>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># диаграммы Вороного</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fire_stations_sf <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_combine</span>() <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_voronoi</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_collection_extract</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_intersection</span>(boundary_KRSK), </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.01</span>) <span class="sc">+</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># точки с ПСЧ</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fire_stations_sf,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"magenta4"</span>, </span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="dv">1</span>, </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">shape =</span> <span class="dv">8</span>, </span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">stroke =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># маркеры</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_label_repel</span>(<span class="at">data =</span> fire_stations, </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">aes</span>(c_lon, c_lat, <span class="at">label =</span> name), </span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>                            <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы части города</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.72</span>, <span class="fl">93.04</span>), </span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.96</span>, <span class="fl">56.09</span>),</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># шкала аннотаций</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"tl"</span>, </span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>                   <span class="at">width_hint =</span> <span class="fl">0.5</span>, </span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>                   <span class="at">style =</span> <span class="st">"ticks"</span>) <span class="sc">+</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_Voronoi.column-body-inset-right" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-KRSK_Voronoi.column-body-inset-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="KRSK_Voronoi.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7"><img src="KRSK_Voronoi.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_Voronoi.column-body-inset-right-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7: Пример разбиения Вороного для пожарно-спасательных подразделений города Красноярска
+</figcaption>
+</figure>
+</div>
+<p>Выберем учебные заведений города Красноярска в качестве примера объектов исследования и проанализируем, все ли из этих зданий находятся в 10-минутной зоне доступности из ПСЧ.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># школы, находящиеся внутри границы города</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>schools <span class="ot">&lt;-</span> buildings <span class="sc">|&gt;</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(building <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"school"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_intersection</span>(boundary_KRSK)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Вместо самих зданий мы выберем их центроиды.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># центроиды объектов</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>schools_points_KRSK <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(schools)) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">sch_lon =</span> X, <span class="at">sch_lat =</span> Y) <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sch_lon, sch_lat) <span class="sc">|&gt;</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"sch_lon"</span>, <span class="st">"sch_lat"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="достижимость-объектов-на-основе-матрицы-расстояний" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="достижимость-объектов-на-основе-матрицы-расстояний">Достижимость объектов на основе матрицы расстояний</h2>
+<p>Получим матрицу расстояний между ПСЧ и учебными заведениями города с использованием библиотеки <a href="https://github.com/riatelab/osrm" target="_blank">osrm</a>, являющейся интерфейсом между <strong>R</strong> и сервисом маршрутизации <a href="https://project-osrm.org/" target="_blank">OSRM</a> на основе <em>OSRM API</em>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># матрица расстояний между объектами</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>distancetable <span class="ot">=</span> <span class="fu">osrmTable</span>(<span class="at">src =</span> fire_stations_sf, </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">dst =</span> schools_points_KRSK)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Преобразуем таблицу расстояний.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>schools_distances <span class="ot">&lt;-</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  schools_points_KRSK <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mintime =</span> distancetable<span class="sc">$</span>durations <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), min)) <span class="sc">|&gt;</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as.vector</span>(.))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Отметим, что альтернативным подходом для нахождения матрицы, которая отражает расстояния либо время движения между объектами является использование <a href="https://ipeagit.github.io/r5r/" target="_blank">библиотеки</a> <code>r5r</code> – интерфейсу к сервису <span class="math inline">\(R^5\)</span>, что расшифровывается как <a href="https://github.com/conveyal/r5" target="_blank">Rapid Realistic Routing on Real-world and Reimagined networks</a> и библиотеки <a href="https://ipeagit.github.io/accessibility/" target="_blank">accessibility</a>, которые взяты в основу книги [<a href="https://ipeagit.github.io/intro_access_book/" target="_blank">R.H.M. Pereira, D. Herszenhut</a>].</p>
+</div>
+</div>
+</div>
+<p>Нанесем на карту результат, выделив цветом расчетное время прибытия и формой значка те учебные заведения, где время прибытия превысит расчетные 10 минут (треугольник).</p>
+<details>
+<summary>
+Код: достижимость объектов
+</summary>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># нанесение школ</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> schools_distances, </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> mintime, </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>              <span class="co"># форма значка</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">shape =</span> <span class="fu">I</span>(<span class="fu">ifelse</span>(mintime <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="dv">24</span>, <span class="dv">22</span>))),</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.95</span>, <span class="at">size =</span> <span class="fl">3.7</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># цвет</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"turbo"</span>, </span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>),</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1 мин"</span>, <span class="st">"5 мин"</span>, </span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"10 мин"</span>, <span class="st">"15 мин"</span>),</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(schools_distances<span class="sc">$</span>mintime))) <span class="sc">+</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># точки с ПСЧ</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fire_stations_sf,</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"magenta4"</span>, </span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="dv">1</span>, </span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">shape =</span> <span class="dv">8</span>, </span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">stroke =</span> <span class="fl">1.2</span>)  <span class="sc">+</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># маркеры</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_label_repel</span>(<span class="at">data =</span> fire_stations, </span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">aes</span>(c_lon, c_lat, <span class="at">label =</span> name), </span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы части города</span></span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.79</span>, <span class="fl">93.04</span>), </span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.97</span>, <span class="fl">56.08</span>),</span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># шкала аннотаций</span></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"tl"</span>, </span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>                   <span class="at">width_hint =</span> <span class="fl">0.5</span>, </span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>                   <span class="at">style =</span> <span class="st">"ticks"</span>)  <span class="sc">+</span></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># оформление темы</span></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>,<span class="st">"cm"</span>),</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">2</span>,<span class="st">"cm"</span>),</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"время прибытия:"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_reachability" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_reachability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_reachability.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8"><img src="KRSK_reachability.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_reachability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;8: Достижимость общеобразовательных учебных заведений из пожарно-спасательных подразделений г. Красноярска, цвет соответствует времени прибытия, значки соответствуют временному порогу &gt; 10 минут
+</figcaption>
+</figure>
+</div>
+<p>Очевидно, что не все учебные заведения города при данной условной расстановке ПСЧ являются достижимыми за отведенное время 10 минут.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>schools_distances <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">late_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>      mintime <span class="sc">&gt;</span>  <span class="dv">10</span> <span class="sc">~</span> <span class="st">"&gt; 10 мин"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>      mintime <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"&lt;= 10 мин"</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(late_category) <span class="sc">|&gt;</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">set_names</span>(<span class="st">"категория"</span>, <span class="st">"количество"</span>, <span class="st">"процент"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> категория количество процент
+ &lt;= 10 мин        154     81%
+  &gt; 10 мин         36     19%</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Несмотря на то, что мы решили задачу по анализу и визуализации доступности объектов относительно выбраанных объектов, наше решение обладает рядом существенных недостатков. Во-первых, для большого количества объектов мы не сможем осуществить большой объем запросов (максимум – <a href="https://routing.openstreetmap.de/about.html" target="_blank">один запрос в секунду</a>, никакого веб-скреппинга и т.д.). Кроме того, здесь мы не можем самостоятельно настраивать скорости движения автомобиля по различным типам дорог.</p>
+<p>Одним из оптимальных решений является упрощение дорожной сети с помощью библиотек <a href="https://luukvdmeer.github.io/sfnetworks/" target="_blank">sfnetworks</a>, <a href="https://urbananalyst.github.io/dodgr/" target="_blank">dodgr</a>, либо <a href="https://osmnx.readthedocs.io/en/stable/" target="_blank">OSMnx</a> в <strong>Python</strong> до графа дорожной сети, что делает настройки более гибкими и позволяет использовтаь алгоритмы теории графов. Этот подход будет рассмотрен в другой статье.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="построение-оптимальных-маршрутов" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="построение-оптимальных-маршрутов">Построение оптимальных маршрутов</h2>
+<p>Покажем, как можно строить оптимальные маршруты с помощью библиотеке <code>osrm</code>. Выберем две произвольных точки, которые будут соответствовать учебному заведению и пожарной части.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>fire_stations_sample <span class="ot">&lt;-</span> fire_stations_sf <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>schools_sample <span class="ot">&lt;-</span> schools_points_KRSK <span class="sc">|&gt;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Построим оптимальный маршрут движения между от первой до второй выбранной точки пользуясь командой <code>osrmRoute</code>.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>route <span class="ot">&lt;-</span> <span class="fu">osrmRoute</span>(<span class="at">src =</span> fire_stations_sample, </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dst =</span> schools_sample,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">overview =</span> <span class="st">"full"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>route</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 1 feature and 4 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: 92.78692 ymin: 55.97694 xmax: 92.96585 ymax: 56.01863
+Geodetic CRS:  WGS 84
+  src dst duration distance                           geom
+1   1   1    22.28  16.3655 LINESTRING (92.96585 55.985...</code></pre>
+</div>
+</div>
+<p>Мы видим, что команда <code>osrmRoute()</code> нашла расчетное время движения <code>duration</code> и длину<code>distance</code> маршрута. На карте ниже можно увидеть построенный маршрут.</p>
+<details>
+<summary>
+Код: построение маршрута
+</summary>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># построение маршрута</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>base_map <span class="sc">+</span> </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># здания</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> buildings, <span class="at">linewidth =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># маршрут</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> route, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"red"</span>, </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ПСЧ -- исходная точка</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fire_stations_sample,</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"magenta4"</span>, </span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="dv">1</span>, </span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">shape =</span> <span class="dv">8</span>, </span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">stroke =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># школа -- конечная точка</span></span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> schools_sample,</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"darkblue"</span>, </span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="dv">1</span>, </span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">shape =</span> <span class="dv">8</span>, </span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">stroke =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ярлык</span></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_label</span>(<span class="at">data =</span> fire_stations_sample, </span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">label =</span> name),</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">nudge_y =</span> <span class="sc">-</span><span class="fl">0.003</span>, </span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># географические границы города</span></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">92.77</span>, <span class="fl">92.99</span>), </span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">55.97</span>, <span class="fl">56.03</span>),</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-KRSK_routing" class="lightbox quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-KRSK_routing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<a href="KRSK_routing.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9"><img src="KRSK_routing.png" class="img-fluid figure-img column-body-inset-right"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-KRSK_routing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9: Пример построения оптимального маршрута
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-caution">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Заметим, что фукция <code>osrmIsochrone()</code> в <code>osrm</code> позволяет находить <em>изохроны</em> (области, ограниченные фиксированным временем движения), тем не менее, она обладает теми же недостатками, о которых говорилось выше; кроме того, область построения изохроны может быть неодносвязной, некорректно вычисляться и т.д., даже несмотря на варьирования параметра <code>res</code> отвечающего за разрешение.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="заключение" class="level1 page-columns page-full">
+<h1>Заключение</h1>
+<p>В статье были кратко рассмотрены следующие вопросы в применении к географическим данным городской инфраструктуры:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+
+<!-- add the button style & script -->
+<link rel="stylesheet" href="../../../dist/applause-button.css">
+<script src="../../../dist/applause-button.js"></script>
+
+
+<!-- add the button! -->
+<applause-button style="width: 58px; height: 58px;">
+
+</applause-button></div></div><ul>
+<li>построение <em>OpenStreetMap</em> карт городской структуры дорог, нанесение точечных объектов и ограниченных областей на карты;</li>
+<li>достижимость объектов из пожарно-спасательных подразделений по временному показателю;</li>
+<li>построение оптимальных маршрутов движения автомобиля.</li>
+</ul>
+<p>Все представленные здесь результаты являются воспроизводимыми, заменив соответствующие значения, легко рассмотреть подобные карты для других городов.</p>
+<p>Существует множество инструментов для решения такого рода задач как на языке <strong>R</strong>, так и на языке <strong>Python</strong>, и библиотека <code>osrm</code> является не единственной библиотекой в этом классе.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Session Info
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       macOS Monterey 12.1
+ system   aarch64, darwin20
+ ui       X11
+ language (EN)
+ collate  ru_RU.UTF-8
+ ctype    ru_RU.UTF-8
+ tz       Asia/Krasnoyarsk
+ date     2024-03-01
+ pandoc   2.18 @ /Users/materov/opt/miniconda3/envs/ox/bin/ (via rmarkdown)
+ quarto   1.4.550
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package     * version date (UTC) lib source
+ dplyr       * 1.1.4   2023-11-17 [1] CRAN (R 4.3.1)
+ forcats     * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2     * 3.5.0   2024-02-23 [1] CRAN (R 4.3.1)
+ ggspatial   * 1.1.9   2023-08-17 [1] CRAN (R 4.3.0)
+ lubridate   * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
+ magrittr    * 2.0.3   2022-03-30 [1] CRAN (R 4.3.0)
+ osmdata     * 0.2.5   2023-08-14 [1] CRAN (R 4.3.0)
+ osrm        * 4.1.1   2023-03-30 [1] CRAN (R 4.3.0)
+ purrr       * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
+ readr       * 2.1.5   2024-01-10 [1] CRAN (R 4.3.1)
+ sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ sf          * 1.0-15  2023-12-18 [1] CRAN (R 4.3.1)
+ stringr     * 1.5.1   2023-11-14 [1] CRAN (R 4.3.1)
+ tibble      * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr       * 1.3.1   2024-01-24 [1] CRAN (R 4.3.1)
+ tidyverse   * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+
+ [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Рисунок&nbsp;1: Пример карты дорожной сети города Красноярска в сервисе <a href="https://anvaka.github.io/city-roads/" target="_blank">city roads</a></span>
+<span class="glightbox-desc lightbox-desc-2">Рисунок&nbsp;2: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска</span>
+<span class="glightbox-desc lightbox-desc-3">Рисунок&nbsp;3: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска с данными по максимально разрешенным скоростям движения</span>
+<span class="glightbox-desc lightbox-desc-4">Рисунок&nbsp;4: <em>OpenStreetMap</em>-карта дорожной сети города Красноярска с районами</span>
+<span class="glightbox-desc lightbox-desc-5">Рисунок&nbsp;5: Карта дорожной сети, а также зданий и строений города Красноярска, цвет соответствует принадлежности объектов улицам города</span>
+<span class="glightbox-desc lightbox-desc-6">Рисунок&nbsp;6: Карта города Красноярска, цвет соответствует этажности зданий</span>
+<span class="glightbox-desc lightbox-desc-7">Рисунок&nbsp;7: Пример разбиения Вороного для пожарно-спасательных подразделений города Красноярска</span>
+<span class="glightbox-desc lightbox-desc-8">Рисунок&nbsp;8: Достижимость общеобразовательных учебных заведений из пожарно-спасательных подразделений г. Красноярска, цвет соответствует времени прибытия, значки соответствуют временному порогу &gt; 10 минут</span>
+<span class="glightbox-desc lightbox-desc-9">Рисунок&nbsp;9: Пример построения оптимального маршрута</span>
+</div>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Сноски</h2>
+
+<ol>
+<li id="fn1"><p>Можно также установить глобальную опцию <code>options(timeout = max(300, getOption("timeout")))</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Данные по дорожной сети из <em>OSM</em> могут содержать некорректные объекты, например, объектам могут соответствовать неверные координаты, что может приводит к смещениям объектов. В этом случае все неточности можно исправить с помощью функций библиотеки <code>sf</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Отметим, что для некоторых населенных пунктов также следует рассмотреть <code>.$osm_polygons</code> при нахождении границ районов.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Для некоторых городов (например, Новосибирска) районы могут быть разделены на несколько компонентов, что нужно учитывать при нахождении центроидов и нанесение их на карты.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Ссылка для цитирования</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{матеров2021,
+  author = {Матеров, Е.Н.},
+  title = {Анализ географически распределенных объектов городской
+    инфраструктуры},
+  date = {2021-11-22},
+  url = {https://www.naukaidannye.netlify.app/blog/posts/2021-11-22-spatial},
+  langid = {ru}
+}
+</code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">На публикацию можно сослаться как</div><div id="ref-матеров2021" class="csl-entry quarto-appendix-citeas" role="listitem">
+<div class="">Матеров Е.Н. Анализ географически
+распределенных объектов городской инфраструктуры [Electronic resource].
+2021. URL: <a href="https://www.naukaidannye.netlify.app/blog/posts/2021-11-22-spatial">https://www.naukaidannye.netlify.app/blog/posts/2021-11-22-spatial</a>.</div>
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="materov/materov-quarto-blog-giscus" data-repo-id="R_kgDOJLuBsA" data-category="Announcements" data-category-id="DIC_kwDOJLuBsM4CU_m7" data-mapping="pathname" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+© 2021–<span id="year"></span> ❘ Е.Н. Матеров ❘ <i class="fa-brands fa-telegram" aria-label="telegram"></i> Telegram <a href="https://t.me/naukaidannye" class="external" target="_blank">Наука и данные</a>
+<script>document.getElementById('year').innerHTML= new Date().getFullYear();</script>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Создано с помощью <i class="fa-brands fa-r-project" aria-label="r-project"></i> и <a href="https://quarto.org/">Quarto</a> | Размещено на <i class="fa-brands fa-chrome" aria-label="chrome"></i> <a href="https://www.netlify.com">Netlify</a></span></p>
+</div>
+  </div>
+</footer>
+<div class="page-columns page-rows-contents page-layout-article"><div class="social-share"><a href="https://twitter.com/share?url=https://naukaidannye.netlify.app/&amp;text=классная публикация" target="_blank" class="twitter"><i class="fab fa-twitter fa-fw fa-lg"></i></a><a href="https://t.me/share/url?url=https://naukaidannye.netlify.app/&amp;title=классная публикация" target="_blank" class="telegram"><i class="fa-brands fa-telegram fa-fw fa-lg"></i></a>  <a href="mailto:?subject=классная публикация&amp;body=Check out this link:https://naukaidannye.netlify.app/" target="_blank" class="email"><i class="fa-solid fa-envelope fa-fw fa-lg"></i></a><a href="javascript:void(0);" onclick="var mastodon_instance=prompt('Введите название сервера Mastodon'); if(typeof mastodon_instance==='string' &amp;&amp; mastodon_instance.length){this.href='https://'+mastodon_instance+'/share?text=классная публикация https://naukaidannye.netlify.app/'}else{return false;}" target="_blank" class="mastodon"><i class="fa-brands fa-mastodon fa-fw fa-lg"></i></a></div></div>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+</body></html>
