@@ -1,0 +1,80 @@
+project:
+  type: website
+  preview:
+    port: 3333
+
+website:
+  title: "Наука и данные"
+  description: "Персональный блог Евгения Матерова."
+  google-analytics: "G-1VWR791XRL"
+  twitter-card: 
+    creator: "@materov"
+    card-style: summary_large_image
+  open-graph: 
+    locale: ru_RU
+  site-url: https://naukaidannye.netlify.app
+  navbar:
+    left: 
+      - href: blog/index.qmd
+        text: Блог
+    right:
+      - href: publications/index.qmd
+        text: Публикации
+      - text: Об авторе
+        file: about.qmd
+      - icon: telegram
+        href: https://t.me/naukaidannye 
+      - icon: mastodon
+        href: https://fosstodon.org/@materov
+        rel: me               
+      - icon: github
+        href: https://github.com/materov
+  page-footer: 
+    #border: false
+    left: '© 2021--<span id=''year''></span> &#10072; Е.Н. Матеров &#10072; {{< fa brands telegram >}} Telegram [Наука и данные](https://t.me/naukaidannye){.external target="_blank"}<script>document.getElementById(''year'').innerHTML= new Date().getFullYear();</script>'
+    right: |
+      <span class="faux-block">Создано с помощью {{< fa brands r-project >}} и [Quarto](https://quarto.org/) | Размещено на {{< fa brands chrome >}} [Netlify](https://www.netlify.com)</span>
+    #background: "#234460"
+  favicon: "/images/favicon.png"
+
+format:
+  html:
+    fig-align: center
+    grid:
+      margin-width: 150px
+      body-width: 900px
+      #sidebar-width: 250px
+      #https://quarto.org/docs/output-formats/page-layout.html#grid-customization
+    fontsize: 1.1em
+    theme:
+      light: [flatly, theme.scss]
+      dark: [darkly, theme.scss]
+
+# https://stackoverflow.com/questions/75891446/how-to-change-font-size-for-code-chunks-in-quarto
+# monofont: 'JetBrains Mono'
+# monofont: 'Fira Code'
+# monofontoptions: 
+#  - Scale=0.55
+
+
+
+lang: ru
+date-format: long
+
+# https://github.com/quarto-dev/quarto-cli/blob/main/src/resources/language/_language-ru.yml 
+language:
+  listing-page-minutes-compact: "{0} мин. на чтение"
+  section-title-citation: "Ссылка для цитирования"
+  appendix-attribution-cite-as: "На публикацию можно сослаться как"
+  listing-page-order-by: "Сортировать"
+  listing-page-order-by-default: "по умолчанию"
+  listing-page-order-by-date-asc: "сначала старые"
+  listing-page-order-by-date-desc: "сначала новые"
+  title-block-affiliation-single: "Организация"
+  title-block-affiliation-plural: "Организация"
+  section-title-references: "Список литературы"
+  section-title-abstract: "Аннотация для сайта"
+  title-block-modified: "Обновлено"
+
+#highlight-style: a11y
+highlight-style: pygments

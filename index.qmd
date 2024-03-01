@@ -1,0 +1,170 @@
+---
+website: default
+page-layout: full
+title-block-banner: true
+format: 
+  html:
+    grid:
+      margin-width: 250px
+   # theme: style.css
+listing:
+  - id: projects
+    contents: "projects/posts/*.qmd"
+    sort: "date asc"
+    type: grid
+    categories: false
+    page-size: 5
+    feed: true
+    fields: [title, description, image]
+---
+
+<style>
+  .my_background{
+    background-image: url("images/gradient-minimalism-simple-blue-background-wallpaper-preview.jpg");
+  }
+
+  /* https://www.w3schools.com/howto/howto_css_parallax.asp */
+.parallax {
+  /* The image used */
+  background-image: url("images/background.jpg");
+
+  /* Set a specific height */
+  min-height: 200px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.toc {
+   list-style: none;
+   counter-reset: li;
+}
+
+.toc li {
+   margin-bottom: 12px;
+   transition: .3s linear;
+}
+
+.toc li:last-child {
+   margin-bottom: 0;
+}
+
+.toc li:before {
+   counter-increment: li;
+   content: counters(li, "");
+   margin-right: 10px;
+   font-weight: 700;
+   width: 28px;
+   height: 28px;
+   text-align: center;
+   line-height: 28px;
+   display: inline-block;
+   border: 1px solid transparent;
+   border-radius: 50%;
+   transition: .3s linear;
+}
+
+.toc li:hover:before {
+   border-color: grey;
+   color: grey;
+}
+
+.text-block-right {
+margin-left:20px;
+margin-right:50px;
+margin-bottom:10px;
+}
+
+.text-block-title {
+margin-left:20px;
+margin-bottom:10px;
+font-size: 30px;
+font-weight: bold;
+}
+
+.highlight-red {
+  border-radius: 1em 0 1em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(255, 20, 0, 0.2),
+    rgba(255, 20, 0, 0.7) 95%,
+    rgba(255, 20, 0, 0.1)
+  );
+}
+.highlight-yellow {
+  border-radius: 1em 0 1em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(255, 224, 0, 0.2),
+    rgba(255, 224, 0, 0.7) 95%,
+    rgba(255, 224, 0, 0.1)
+  );
+}
+.highlight-green {
+  border-radius: 1em 0 1em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(0, 255, 20, 0.2),
+    rgba(0, 255, 20, 0.7) 95%,
+    rgba(0, 255, 20, 0.1)
+  );
+}
+.highlight-blue {
+  border-radius: 1em 0 1em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(0, 20, 255, 0.2),
+    rgba(0, 20, 255, 0.7) 95%,
+    rgba(0, 20, 255, 0.1)
+  );
+}
+
+</style>
+
+
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+![](images/R_logo.png){width=80%}
+:::
+
+::: {.g-col-12 .g-col-md-8}
+
+:::{style="color: black; font-size: 20px; padding: 0.5em 1em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 5px; "}
+<div class="text-block-title">О сайте</div>
+<div class="text-block-right">Добро пожаловать на <span class="highlight-green">страницу</span>, которая объединяет <span class="highlight-yellow">блог</span> и <em>Data Science</em> <span class="highlight-yellow">проекты</span>, созданные с помощью <em><a href="https://quarto.org/">Quarto</a></em> и языка программирования <b><em>R</em></b>! <br>Сайт будет интересен для тех, кто интересуется различными аспектами:</div>
+
+<div>
+  <ol class="toc">
+    <li><em>воспроизводимого анализа данных</em></li>
+    <li><em>визуализации данных</em></li>
+    <li><em>моделирования и машинного обучения</em></li>
+  </ol>
+</div>
+
+:::
+
+
+
+:::
+
+:::
+
+::: {.parallax}
+
+:::
+
+# Проекты
+
+::: {#projects}
+:::
+
+```{=html}
+<!--<iframe width="1200" height="700" src="foreword.html"></iframe>-->
+```
