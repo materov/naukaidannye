@@ -1,0 +1,1175 @@
+---
+title: "Научно-издательская система Quarto"
+subtitle: "Обзор научно-издательской системы Quarto"
+author: "Е.Н. Матеров"
+date: "2022-11-13"
+date-modified: "2024-03-04"
+categories: [Quarto]
+image: "qaurto_logo.png"
+csl: "../../../gost-r-7-0-5-2008-numeric.csl"
+lang: ru
+
+filters:
+  - social-share
+
+share:
+  permalink: "https://naukaidannye.netlify.app/"
+  description: "классная публикация"
+  twitter: true
+  email: true
+  telegram: true
+  mastodon: true
+
+format:
+  html:
+    toc: false
+    #toc-depth: 2
+    number-sections: true
+
+citation: 
+  url: https://www.naukaidannye.netlify.app/blog/posts/2022-11-13-quarto
+  citation-key: Materov-quarto
+  issued: "2022-11-13"
+  language: ru 
+---
+
+{{< li ghhwiltn trigger=loop speed=0.9 delay=1000 >}}
+
+# Что такое Quarto?
+
+Многим из тех, кто работает на языке программирования **R** в области Data Science, известен такой инструмент как [R Markdown](https://rmarkdown.rstudio.com/){target="_blank"}, позволяющий объединить повествовательный текст и код для создания отформатированных выходных данных в виде веб-страниц, записей в блогах, книг, бизнес-отчетов и других документов. **R Markdown** существует уже более 10 лет и объединяет большое количество библиотек для создания и публикации научного, технического и бизнес-контента. Тем не менее, один из создателей **R Markdown** и основателей [RStudio](https://www.rstudio.com/){target="_blank"} (теперь уже [Posit](https://posit.co/){target="_blank"}) [J.J. Allaire](https://github.com/jjallaire/){target="_blank"} в своем [интервью](https://youtu.be/9jGc0TxoRco){target="_blank"} признал, что развитие **R Markdown** приходит в тупик и около трех лет тому назад (на момент написания данной статьи) они с коллегами начали проект [Quarto](https://quarto.org/){target="_blank"}, который стал попыткой обобщить экосистему **R Markdown** таким образом, чтобы все полезные функции для создания и публикации технического контента могли быть доступны более широкому миру за пределами языка **R**.
+
+
+[Quarto](https://quarto.org/){target="_blank"}® -- это научно-техническая издательская система с открытым исходным кодом, построенная на основе [Pandoc](https://pandoc.org/){target="_blank"} и использующая [Markdown](https://www.markdownguide.org/){target="_blank"} для разметки. Напомним, что [Pandoc](https://pandoc.org/){target="_blank"} -- это универсальный конвертер для работы с текстовыми документами для форматирования научных и технических текстов, поддерживающий более 40 различных форматов, написанный на языке программирования [Lua](https://www.lua.org/){target="_blank"}. [Quarto](https://quarto.org/){target="_blank"} -- это универсальный инструмент для тех, кто пишет на [R](https://www.r-project.org/){target="_blank"}, [Python](https://www.python.org/){target="_blank"}, [Julia](https://julialang.org/){target="_blank"} и [Observable JavaScript](https://observablehq.com/@observablehq/observables-not-javascript){target="_blank"} и использует **Markdown** для форматирования документов.
+
+
+Таким образом, многие из тех возможностей **R Markdown**, которые были доступны только для пользователей **R**, теперь также обобщены и для тех, кто программирует на **Python** и **Julia** и занимается анализом данных, научной и преподавательской деятельностью. В данной обзорной статье мы, в частности, попробуем разобраться, какие есть отличия **Quarto** от **R Markdown**, стоит ли полностью отказываться от **R Markdown** в пользу **Quarto**, есть ли у **Quarto** преимущества?
+
+
+
+## Название Quarto
+
+Авторы научно-технической издательской системы [хотели использовать название](https://quarto.org/docs/faq/#why-the-name-quarto){target="_blank"}, которое имело значение в истории издательского дела, и остановились на **Quarto**.
+
+**Quarto** (от латинского **quārtō**, сокращенно **Qto**, **4to** или **4**º) -- это книга или брошюра, изготовленная из полных листов, напечатанных с восемью страницами текста, по четыре на одну сторону, а затем сложенных дважды, чтобы получить четыре листа (не нужно путать с настольной абстрактной игрой [Quarto](https://www.gigamic.com/jeu/quarto){target="_blank"} или издательством [The Quarto Group](https://www.quarto.com/){target="_blank"}, которое продает иллюстрированные книги). Затем листы обрезаются, чтобы получить восемь страниц книги. [Размер](https://wiki5.ru/wiki/Book_size){target="_blank"} каждой напечатанной страницы составляет одну четвертую полного листа.
+
+::: {#fig-history-of-book-sizes-min}
+![](images/history-of-book-sizes-min.jpg){width="65%"}
+
+Сравнение форматов книг
+:::
+
+Самыми ранними из сохранившихся книг, напечатанных Гутенбергом подвижным шрифтом, являются *кварто* (примерно 1452--53 гг.), которые были напечатаны до [Библии Гутенберга](https://hmn.wiki/de/Gutenberg_Bible){target="_blank"}. Самый ранний из известных -- это фрагмент средневековой поэмы «Сибилленбух» ([Sibyllenbuch](https://hmn.wiki/de/4to){target="_blank"}).
+
+## Quarto позволяет
+
+-   Представлять анализ данных в доступном и наглядном виде.
+
+-   Иметь возможность вывода в различных форматах: HTML, pdf, ePub, Word, PowerPoint и т.д. для единого источника публикации.
+
+-   Использовать разметку, включающую формулы, цитаты, перекрестные ссылки, расширенные макеты и многое другое.
+
+-   Иметь возможность публикации веб-документов в сети Интернет через различные сервисы.
+
+-   Включать интерактивные приложения и виджеты в HTML-документы.
+
+-   Создавать документы с включением кода для воспроизводимых вычислений.
+
+## С помощью Quarto можно создавать
+
+-   Статьи как для веб-публикации, так и подготовленные для научных издательств.
+
+-   Презентации.
+
+-   Веб-страницы, включая блоги и техническую документацию.
+
+-   Интерактивные книги, которые можно переводить различные форматы, пригодные для печати и электронных носителей.
+
+## Примеры разработок на Quarto
+
+Большим источником идей для создания рабочих материалов, сайтов, презентаций, статей, документации и другого похожего содержимого может служить [Галерея примеров Quarto](https://quarto.org/docs/gallery/){target="_blank"}.
+
+::: {#fig-Gallery}
+![](images/Gallery.png){width="100%"}
+
+Галерея примеров **Quarto**
+:::
+
+Два примера мини-блогов на **Quarto** показаны ниже.
+
+1. Первый пример -- это [набор ссылок на полезные ресурсы](https://materov.github.io/R-sources/){target="_blank"} по языку программирования **R**, опубликованный как **GitHub Pages**.
+
+::: {#fig-Rесурсы}
+![](images/Rесурсы.png){width="100%"}
+
+Набор ссылок на полезные ресурсы по языку программирования **R**
+:::
+
+2. Мини-блог по визуализации данных [Графики на досуге](https://data-visualization-blog.netlify.app/){target="_blank"} также сделан на **Quarto** и опубликован через [Netlify](https://www.netlify.com/){target="_blank"}.
+
+::: {#fig-Graphs}
+![](images/Graphs.png){width="100%"}
+
+Мини-блог по визуализации данных
+
+:::
+
+
+# Как начать работу с Quarto?
+
+## Установка Quarto
+
+Для установки **Quarto**, необходимо зайти на начальную страницу проекта <https://quarto.org/> и перейти по адресу [Get Started](https://quarto.org/docs/get-started/){target="_blank"}.
+
+::: {#fig-Quarto_start}
+![](images/Quarto start.png){width="1000%"}
+
+Начальная страница Quarto
+
+:::
+
+Установка происходит в два этапа.
+
+*  **Шаг 1**. Установка интерфейса командной строки (CLI) для актуальной операционной системы (**Windows**, **Linux** или **Mac OS**). Рекомендуется устанавливать стабильную версию **Current Release** со [страницы загрузки](https://quarto.org/docs/download/){target="_blank"}, а не **Release Candidate**.
+
+*  **Шаг 2**. Установка плагина для рабочей интегрированной среды разработки (IDE). Это может быть, например, [VS Code](https://quarto.org/docs/get-started/hello/vscode.html){target="_blank"}, [RStudio](https://quarto.org/docs/get-started/hello/rstudio.html){target="_blank"}, [Jupyter](https://quarto.org/docs/get-started/hello/jupyter.html){target="_blank"} или иной [текстовый редактор](https://quarto.org/docs/get-started/hello/text-editor.html){target="_blank"}. Можно также установить **Quarto**-плагин, например, для [Sublime Text](https://github.com/quarto-dev/quarto-sublime){target="_blank"} или [Emacs](https://github.com/quarto-dev/quarto-emacs){target="_blank"}.
+
+## IDE-инструменты
+
+### RStudio
+
+Если **Quarto** CLI уже установлен, то **RStudio** обнаружит это и автоматически включит функции **Quarto**. В качестве альтернативы существует версия **Quarto** встроенная в **RStudio**, которую можно [активировать в настройках](https://quarto.org/docs/tools/rstudio.html){target="_blank"} **R Markdown**.
+
+Создание нового **Quarto**-документа в **RStudio** с расширением .qmd происходит как *File* -\> *New File* -\> *Quarto document...*, что открывает новый документ на основе шаблона.
+
+::: {#fig-pinguiny}
+![](images/pinguiny.png){width="100%"}
+
+Вид визуального редактора **Quarto** в **RStudio**
+
+:::
+
+Отметим, что переключение кнопки **Source** на **Visual** позволяет перейти в режим визуального редактирования, который близок к WYSIWYG-редактору и может быть особенно полезен для создания таблиц в документах. Подробно о работе в **RStudio** можно посмотреть на соотетствующей [странице документации](https://quarto.org/docs/tools/rstudio.html){target="_blank"}. Для остановки фонового задания необходимо перейти на панель *Background Jobs* и нажать значок *Stop*.
+
+### Visual Studio Code
+
+Альтернативно, **VS Code** предлагает возможность редактировать документы как с .qmd, так и с .ipynb-ноутбуками. Помимо предварительного просмотра документов, также работает подсветка синтаксиса для встроенных языков, автоматические подсказки, автозавершение для языков программирования, клавиатурные сочетания, сниппеты, предварительный просмотр в реальном времени для LaTeX, а также диаграмм Mermaid и Graphviz.
+
+::: {#fig-VS_Code}
+![](images/VS Code.png){width="100%"}
+
+Вид визуального редактора в **VS Code**
+
+:::
+
+Преимущество **VS Code** состоит в большом количестве полезных плагинов, которые позволяют, например, работать с Git-системой управления версиями. Удобный проводник, мини-карта и диагностика для опций YAML делает **VS Code** отличным инструментом для создания больших проектов, например, книг. Работа **VS Code** в **Quarto** описана на [странице документации](https://quarto.org/docs/tools/vscode.html){target="_blank"}.
+
+### Jupyter
+
+Для тех, кто программирует на **Julia** или **Python** более привычным инструментом является система **Jupyter**-ноутбуков. Для того, чтобы создать **Quarto**-пример в **Jupyter**, необходимо в преамбулу документа добавить YAML-вставку и затем отрендерить .ipynb-ноутбук так, как это будет показано ниже. Если вместо **Python** используется **Julia**, то в преамбуле необходимо в качестве ядра указать `jupyter: julia-1.10`.
+
+::: {#fig-Python-notebook}
+![](images/Python-notebook.png){width="65%"}
+
+Пример **Jupyter**-ноутбука в **Quarto** на языке **Python**
+
+:::
+
+::: {#fig-Python-notebook2}
+![](images/Python-notebook2.png){width="90%"}
+
+Пример результата рендеринга ноутбука
+
+:::
+
+## Работа с проектами
+
+### Создание нового проекта
+
+Есть несколько вариантов для создания проекта.
+
+1. Создание проекта из командной строки.
+
+```{.bash}
+# веб-сайт
+quarto create-project mysite --type website
+```
+
+
+```{.bash}
+# блог
+quarto create-project myblog --type website:blog
+```
+
+```{.bash}
+# книга
+quarto create-project mybook --type book
+```
+
+
+2. В **VS Code** или в **RStudio**
+
+Например, в **RStudio**: *File -> New Project... -> New Directory*.
+
+::: {#fig-new-project}
+![](images/new-project.png){width="60%"}
+
+Пример создания **Quarto**-проекта в **RStudio**
+
+:::
+
+### Как Quarto организует рендеринг документов
+
+Сначала Knitr (в **R**) или **Jupyter** (в **Pyhton** или **Julia**) выполняет все фрагменты кода .qmd-файла и создает новый markdown (.md) документ, который включает в себя код и его выходные данные.
+
+::: {#fig-working-diagram}
+![](images/working-diagram.png){width="80%"}
+
+Организация рендеринга документов в **Quarto** ([источник](https://jthomasmock.github.io/quarto-in-two-hours/materials/01-intro-quarto.html#/quarto-more-than-just-knitr){target="_blank"})
+
+:::
+
+Созданный markdown-файл затем обрабатывается **Pandoc** для преобразования в различные форматы файлов, включая HTML, PDF, Word и другие форматы.
+
+### Возможности для рендеринга
+
+1.  Можно использовать кнопку Render в **RStudio** IDE или **Visual Studio Code** для рендеринга файла и предварительного просмотра выходных данных.
+
+::: {#fig-rstudio-render}
+![](images/rstudio-render.png){width="90%"}
+
+Кнопка Render в IDE
+
+:::
+
+
+2. **Quarto** в командной строке.
+
+```{.bash filename="Terminal"}
+quarto render <input> --to <format>
+```
+
+Например:
+
+```{.bash filename="Terminal"}
+quarto render document.qmd --to docx
+```
+
+3. **Quarto** как R-библиотека.
+
+```{.r}
+quarto::quarto_render(input = ___, output_format = ___)
+```
+
+Например:
+
+```{.r}
+quarto_render("document.qmd", output_format = "pdf")
+```
+
+## Структура документов в Quarto
+
+### Общая структура документов в Quarto
+
+Условно, документ в **Quarto** состоит из трех базовых частей.
+
+1. Метаданные.
+
+2. Текст и Markdown.
+
+3. Исполняемый код.
+
+::: {#fig-structure}
+![](images/structure.png){width="75%"}
+
+Структура **Quarto**-документа ([источник](https://jthomasmock.github.io/quarto-in-two-hours/materials/02-authoring.html#/literate-programming){target="_blank"})
+
+:::
+
+### Основы синтаксиса
+
+**Quarto** основан на **Pandoc** и использует разновидность markdown в качестве базового синтаксиса документа. **Pandoc** markdown -- это расширенная и слегка переработанная версия синтаксиса markdown. [Синтаксис](https://quarto.org/docs/authoring/markdown-basics.html){target="_blank"} включает в себя форматирование текста, заголовки, ссылки и рисунки, списки и таблицы.
+
+Исполняемый код записывается в специальные блоки (ячейки), в начале которых указывается язык программирования (**Pandoc** поддерживает более 140 языков) для выделения.
+
+```{{python}}
+print("Goodbye, World!")
+```
+
+Если мы хотим сделать код неисполняемым -- нужно поставить точку перед указанием языка программирования.
+
+```` julia
+```{.julia}
+using Plots
+plot(sin, x->sin(2x), 0, 2π, leg=false, fill=(0,:lavender))
+```
+````
+
+Внутри ячейки в комментариях в верхней части блока можно указывать параметры. [Параметры ячейки](https://quarto.org/docs/reference/cells/cells-knitr.html){target="_blank"} влияют на выполнение и вывод блоков исполняемого кода. Например:
+
+```{.r}
+# метка для указания ссылки на рисунок
+#| label: fig-polar
+
+# выключение визуализированного вывода кода
+#| echo: false
+
+# подпись к рисунку
+#| fig-cap: "График функции"
+```
+
+::: {#fig-parameters}
+![](images/parameters.png){width="100%"}
+
+Пример оформления ячейки кода с параметрами
+
+:::
+
+При необходимости можно выделить элементы кода либо скрыть код, сделав развертывающийся блок.
+
+::: {#fig-highlight}
+![](images/highlight.png){width="80%"}
+
+Пример выделения элементов кода в **Quarto**
+
+:::
+
+### Расширенные макеты
+
+Одним из лучших нововведений **Quarto** стали [новые возможности для макетирования](https://quarto.org/docs/authoring/article-layout.html){target="_blank"}, например **Quarto** позволяет делать на полях сноски, библиографию, названия для рисунков, рисунки и даже таблицы. Кроме того, обновлены возможности компоновки блоков (например, рисунков или таблиц) как подэлементов (например, как подрисунков), работающих с перекрестными ссылками, а также работа с табами.
+
+::: {#fig-mult_figures}
+![](images/mult_figures.png){width="90%"}
+
+Пример компоновки рисунков в **Quarto**
+
+:::
+
+В случае, если содержимое выходит за пределы области основного текста, его [можно продолжить](https://quarto.org/docs/authoring/article-layout.html#overflowing-content){target="_blank"}, используя правую и левую версии столбцов основного текста, страницы и экрана для компоновки содержимого. Например, как ниже:
+
+```{{r}}
+#| column: screen-inset-right
+
+1 + 1
+```
+
+::: {#fig-extend_content}
+![](images/extend_content.png){width="100%"}
+
+Примеры параметров для определения содержимого, выходящего за фиксированную ширину справа
+
+:::
+
+### Выносные блоки
+
+Интересной новинкой **Quarto** являются [выносные блоки](https://quarto.org/docs/authoring/callouts.html){target="_blank"}, которые служат способом привлечения дополнительного внимания к определенным концепциям или указанием, что определенное содержимое является дополнительным или применимо только к некоторым сценариям. Выносные блоки работают в HTML, PDF, MS Word, ePub и Revealjs.
+
+::: {#fig-blocks}
+![](images/blocks.png){width="90%"}
+
+Примеры выносных блоков
+
+:::
+
+Ниже показан пример кода для оформления блока.
+
+```{.r}
+:::{.callout-tip}
+## Совет
+
+Этот элемент будет использоваться для рекомендаций и советов.
+:::
+```
+
+
+### Диаграммы
+
+[Вставка диаграмм](https://quarto.org/docs/authoring/diagrams.html){target="_blank"} -- еще одно ноу-хау в **Quarto**, имеющее встроенную поддержку [Mermaid](https://mermaid-js.github.io/mermaid/){target="_blank"} и [Graphviz](https://graphviz.org/){target="_blank"} диаграмм. Это позволяет создавать блок-схемы, диаграммы последовательностей, диаграммы состояний, диаграммы Ганта и многое другое, используя синтаксис обычного текста, мотивированный markdown.
+
+```{{mermaid}}
+flowchart LR
+  A[Прямоугольник] --> B(Скругленные края)
+  B --> C{Решение}
+  C --> D[Первый результат]
+  C --> E[Второй результат]
+```
+
+::: {#fig-Mermaid}
+![](images/Mermaid.png){width="80%"}
+
+Пример диаграммы
+
+:::
+
+### Метаданные YAML
+
+Метаданные могут быть включены в **Quarto**-документ с помощью [YAML](https://ru.wikipedia.org/wiki/YAML){target="_blank"} либо в преамбуле в начале файла, либо отдельным `_quarto.yml`-файлом. С помощью YAML мы задаем, например, название документу, дату, автора, устанавливаем те параметры, которые необходимы при рендеринге документа, чтобы не писать их в командной строке и т.д.
+
+Очень обзорно, как используется структура YAML в **Quarto**:
+
+- установите параметр как `key: value` (ключ: значение);
+
+- строки с `:` должны быть в кавычках;
+
+- включайте несколько значений в список с помощью `-`;
+
+- вкладывайте пары ключ-значение с помощью отступа;
+
+- многострочные строки следуют за `|`.
+
+Приведем простой пример YAML-части документа.
+
+```{.bash}
+---
+title: "Документ в Quarto"
+author: 
+  - И.О. Исполнитель
+  - А.М. Заместитель
+format: 
+  html:
+    toc: true
+    abstract: |
+      Это аннотация.
+    
+      Это второй параграф.
+---
+```
+
+Также, приведем пример `_quarto.yml`-файла, соответствующего книге.
+
+<details>
+  <summary>Пример YAML для книги (развернуть)</summary>
+
+```{.bash}
+# тип проекта - книга
+project:
+  type: book
+
+# язык документа
+lang: ru
+# вид подсветки кода
+highlight-style: github
+
+book:
+  # название (заголовок) книги
+  title: "Анализ и моделирование данных"
+  # подзаголовок
+  subtitle: "с использованием языка программирования R"
+  # аннотация
+  abstract: "В книге рассмотрены современные подходы к практическим задачам."
+  # URL проекта
+  site-url: "https://book.netlify.app/"
+  # URL репозитория
+  repo-url: "https://github.com/book"
+  # иесто издания
+  publisher-place: "Москва, Красноярский край"
+  # URL
+  url: "https://book.netlify.app/"
+  # имя автора
+  author:
+  - name:
+      given: Евгений
+      family: Матеров
+      literal: Е.Н. Матеров
+    # ORCID-индекс идентификации научных авторов (https://orcid.org/)
+    orcid: 0000-0001-1111-0111
+    # e-mail авторов
+    email: moskva@gmail.com
+    # организация
+    affiliation:
+      - name: МГУ имени М.В. Ломоносова
+  # дата на титульном листе проекта
+  date: today
+  # фавикон
+  favicon: "favicon.png"
+  # картинка обложки
+  cover-image: generate.png
+  # код сервиса Google Analytics
+  google-analytics: "G-XXXXXXXXXX"
+  # панель навигации
+  navbar:
+    # цвет фона панели навигации
+    background: "#2860a1"
+    collapse-below: lg
+  # боковая панель
+  sidebar:
+    collapse-level: 0
+    style: "floating"
+    background: white
+    foreground: dark
+    logo: sidebar_logo.jpg
+  # нижний колонтитул страницы
+  page-footer:
+    border: true
+    background: light
+    left: 
+      |
+      МГУ имени М.В. Ломоносова
+  # главы
+  chapters:
+    - index.qmd
+    # раздел
+    - part: "Введение"
+      chapters:
+        - Intro Chapter/intro.qmd
+    - part: "Работа с табличными данными"
+      chapters:
+        - Table data Chapter/tidy data.qmd
+        - Table data Chapter/base table.qmd
+        - Table data Chapter/deep table.qmd
+    - part: "Визуализация данных"
+      chapters:
+        - Visualization Chapter/visualization.qmd
+        - Visualization Chapter/color.qmd
+    - Conclusion Chapter/Conclusion.qmd        
+    - references.qmd
+  # приложения
+  appendices:
+    - Appendicies/R install.qmd
+    - Appendicies/Samples.qmd          
+
+# расположение сносок
+# https://quarto.org/docs/reference/formats/pdf.html#footnotes
+reference-location: margin
+
+# файл библиографии
+bibliography: references.bib
+
+format:
+  html:
+    # тема
+    theme: pulse
+    # свертка кода в HTML
+    code-fold: false
+    # содержание
+    toc: true
+
+# опции для исполняемого кода
+execute:
+  execute_notebooks: force
+  allow_errors: true
+  # разрешить кэширование
+  cache: true    
+
+# ключи перекрестных ссылок метаданных
+crossref:
+  # название приложений
+  appendix-title: "Приложение"
+  appendix-delim: ":"
+
+crossref-apx-prefix: "Приложение"
+
+# цитирование, см. также
+# https://quarto.org/docs/authoring/create-citeable-articles.html
+citation:
+  url: https://book-training.netlify.app/
+
+# переопределение перевода
+language:
+  title-block-affiliation-single: "Организация"
+```
+
+</details>
+
+
+### Формулы в Quarto
+
+[Математические формулы](https://quarto.org/docs/authoring/markdown-basics.html#equations){target="_blank"} в **Quarto** используют разделители `$` для встроенных математических элементов текста и разделители `$$` для выносной математики на основе [LaTeX](https://www.latex-project.org/){target="_blank"}-синтаксиса. Для математической обработки HTML с использованием [MathJax](https://www.mathjax.org/){target="_blank"} (по умолчанию) можно использовать команды `\def`, `\newcommand`, `\renewcommand`, `\newenvironment`, `\renewenvironment` и `\let` для создания собственных макросов и сред. Также доступны, например, [форматы](https://quarto.org/docs/output-formats/html-basics.html#latex-equations){target="_blank"} [KaTeX](https://github.com/Khan/KaTeX){target="_blank"}, [GladTeX](https://humenda.github.io/GladTeX/){target="_blank"}, [MathML](https://www.w3.org/Math/){target="_blank"} или просто `plain`-формат. В визуальном редакторе происходит автоматический предосмотр формул.
+
+::: {#fig-LaTeX}
+![](images/LaTeX.png){width="90%"}
+
+Пример оформления LaTeX-формулы в визуальном редакторе
+
+:::
+
+Форматы журнальных статей часто требуют детального контроля создаваемых выходных данных, а также возможности использования специфичных для журнала команд и директив. Это может быть достигнуто для форматов **Quarto** путем предоставления [пользовательских шаблонов](https://quarto.org/docs/journals/templates.html#templates){target="_blank"} **Pandoc** (например, LaTeX). Часто эти шаблоны представляют собой смесь специфичного для журнала стиля LaTeX и стандартных директив, требуемых **Pandoc**.
+
+Предоставляя свой собственный пользовательский шаблон, используемый при рендеринге, мы получаем полный контроль над конечным результатом. Пользовательский шаблон задается подобным образом через YAML:
+
+```{.bash}
+---
+format:
+  pdf:
+    template: mytemplate.tex
+---    
+
+```
+
+В пользу **Quarto** можно отметить то, что с уходом **MS Equation** и дороговизной [MathType](https://www.wiris.com/en/mathtype/){target="_blank"}, создание несложных документов с математическими формулами в **MS Word**, не использующими полного погружения в LaTeX, можно осуществить как связку *.qmd -> .docx*.
+
+## Локализация
+
+В **Quarto** достаточно указать в YAML-части документа нужный язык, и документ будет локализован должным образом, например, "Figure" будет заменено на "Рисунок" и т.д. Локализацию можно отнести к преимуществам **Quarto**, например, в `blogdown` уже нет такого простого подхода для перевода названия рисунков.
+
+```{.bash}
+---
+title: "Документ"
+lang: ru
+---
+```
+
+Тем не менее, бывают случаи когда нужно переопределить перевод того или иного термина. Это делается следующим образом. Скажем, пусть мы хотим, чтобы `affiliation` в YAML-фрагменте кода ниже соответствовало "ОРГАНИЗАЦИЯ" в образе документа, а не "ПРИНАДЛЕЖНОСТЬ", как это сделано по умолчанию.
+
+```{.bash}
+---
+book:
+  author:
+    affiliation:
+      - name: МГУ имени М.В.Ломоносова
+---      
+```
+
+На [странице локализации](https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/language){target="_blank"} указаны .yml-файлы с языками, например `_language-ru.yml` содержит перевод понятий на русский язык, в частности, строка `title-block-affiliation-single: "принадлежность"` содержит нужный перевод. Переопределить перевод можно добавив в конце YAML-файла строки:
+
+```{.bash}
+---
+language:
+  title-block-affiliation-single: "организация"
+---      
+```
+
+Один из способов получения .pdf-документа на локализованном (не английском) языке, это цепочка *.qmd -> .docx -> .pdf*. При этом, для создания **MS Word**-документов можно [использовать шаблоны](https://quarto.org/docs/output-formats/ms-word-templates.html){target="_blank"}. Другой способ локализации .pdf-вывода автору подсказал [Сергей Валерьевич Бабёнышев](https://sibpsa.ru/portfolio/?bx=1&idS=808){target="_blank"}. Для этого необходимо скачать [файл с TeX-заготовкой](https://github.com/materov/quarto-rus-latex){target="_blank"} и поместить в папку с проектом. Пример .qmd документа показан ниже.
+
+<details>
+  <summary>Пример документа с элементами LaTeX-формул для рендеринга в PDF (развернуть)</summary>
+
+````markdown
+---
+lang: ru
+title: "Задания"
+format:
+    pdf:
+        toc: true
+        number-sections: true
+        color-links: true
+        keep-tex: false
+        template: template.tex
+
+execute:
+    echo: false
+# jupyter: python3
+mainfont: "Times New Roman"
+---
+
+# Найти матрицу обратную к заданной
+
+$$
+\text{
+a) $\begin{pmatrix}
+  3 & -1 &  3 \\
+ -2 & -2 &  3 \\
+  4 &  0 &  1 \\
+\end{pmatrix}$;
+\ \ \ \ \ 
+б) $\begin{pmatrix}
+ -1 & -1 &  2 \\
+  2 & -2 &  2 \\
+  4 &  4 &  3 \\
+\end{pmatrix}$.
+$$
+
+# Кривые второго порядка
+
+а) Написать каноническое уравнение эллипса, если его большая полуось равна 5, а фокусы расположены в точках  $(\pm4, 0)$.
+
+# Найти наклонные асимптоты графика функции
+
+$$
+\text{
+а) $\displaystyle y=\frac{\sqrt{x}}{3+2\sqrt{x}}$.\ \ \ \ \ 
+б) $\displaystyle y=\frac{2\sqrt{x}}{1+2x}$.}
+$$
+
+# Вычислить двойной интеграл
+
+a) $\displaystyle\iint\limits_{G}{{{({{x}^{2}}+{{y}^{2}})}^{6}}dx}dy$,
+где $G$ – сектор круга радиуса 1 с центром в начале координат, лежащий во II квадранте.
+
+````
+
+</details>
+
+
+</br>
+Откройте терминал, перейдите в папку проекта и наберите команду 
+
+```{.bash filename="Terminal"}
+quarto render your_file_name.qmd --to pdf
+```
+Еще один способ локализации описан в статье [Как рендерить R Markdown в PDF на кириллице](https://habr.com/ru/articles/781136/){target="_blank"}:
+
+```{.bash}
+---
+title: "Cyrillic markdown"
+format: pdf
+pdf-engine: lualatex
+mainfont: Segoe UI
+sansfont: Segoe UI
+monofont: Cascadia Mono PL Light
+editor: visual
+---
+```
+````markdown
+```
+#| r include = F
+library(showtext)
+showtext_auto()
+```
+````
+
+# Публикация веб-документов
+
+**Quarto** поддерживает множество различных веб-сервисов для публикации: 
+
+- [GitHub Pages](https://quarto.org/docs/publishing/github-pages.html){target="_blank"}
+
+- [Netlify](https://quarto.org/docs/publishing/netlify.html){target="_blank"}
+
+- [Posit Connect](https://quarto.org/docs/publishing/rstudio-connect.html){target="_blank"}
+
+- [Firebase](https://quarto.org/docs/publishing/other.html#google-firebase){target="_blank"}
+
+- [Site44](https://quarto.org/docs/publishing/other.html#site44){target="_blank"}
+
+- [Amazon S3](https://quarto.org/docs/publishing/other.html#amazon-s3){target="_blank"}
+
+- [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/){target="_blank"}
+
+- [Quarto Pub](https://quarto.org/docs/publishing/quarto-pub.html){target="_blank"} -- новый сервис от создателей **Quarto**.
+
+1. Перед публикацией вы должны сделать рендер всего вашего **Quarto**-проекта следующей командой.
+
+```{.bash filename="Terminal"}
+quarto render
+```
+
+В результате рендеринга должна должна быть сформирована папка `_site` (либо, например, `_book`, в зависимости от назначения проекта), которая понадобится в дальнейшем.
+
+2. Создайте, например, [GitHub](https://github.com/){target="_blank"}-репозиторий, куда поместите проект.
+
+::: {#fig-git-example}
+![](images/git-example.png){width="90%"}
+
+Пример **GitHub**-репозитория
+
+:::
+
+Наиболее простыми и быстрыми способами публикации веб-документов можно считать сервисы **Netlify** и **GitHub Pages**. Рассмотрим обзор публикации документов на основе этих платформ. Создание и публикация персональных веб-сайтов на базе **Quarto** также хорошо рассмотрена на страницах авторов [Samantha Csik](https://ucsb-meds.github.io/creating-quarto-websites/){target="_blank"}, [Albert Rapp](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide){target="_blank"}, [Beatriz Milz](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/){target="_blank"}.
+
+## Этапы публикации в Netlify
+
+Удобство работы с **Netlify** состоит в автоматизации рабочего процесса путем интеграции с Git-сервисами. На главной странице [Netlify](https://netlify.app/){target="_blank"} необходимо сделать *Log in*, затем выбрать *Add new site*, где нужно выбрать *Import an existing project*.
+
+::: {#fig-Netlify}
+![](images/Netlify.png){width="100%"}
+
+Страница импорта проекта Netlify
+
+:::
+
+Затем необходимо указать репозиторий **GitHub** который был создан ранее.
+
+::: {#fig-Netlify2}
+![](images/Netlify2.png){width="100%"}
+
+Страница импорта проекта в Netlify из GitHub-репозитория
+
+:::
+
+После того, как был выбран репозиторий, нужно указать рабочую папку проекта (в нашем случае это `_site`).
+
+::: {#fig-Netlify3}
+![](images/Netlify3.png){width="70%"}
+
+Пример добавления папки проекта
+
+:::
+
+Окончательно, нужно нажать на кнопку *Deploy site* и в настройках переименовать название сайта.
+
+Теперь каждый раз, когда делается **push** командой Git (например, в терминале или в **RStudio**), через некоторый короткий промежуток времени обновляется и веб-страница.
+
+Если необходимо быстро опубликовать материал (например, презентацию), который не будет обновляться с течением времени или нет необходимости работать с Git, то достаточно воспользоваться сервисом [Netlify Drop](https://app.netlify.com/drop){target="_blank"}: перетащите папку `_site` в соответствующую область экрана, при этом переименуйте основной .html-файл в index.html.
+
+::: {#fig-Netlify_drop}
+![](images/Netlify_drop.png){width="90%"}
+
+Сервис Netlify Drop
+
+:::
+
+## Этапы публикации в GitHub Pages
+
+Подробно публикация на **GitHub Pages** описана на странице [GitHub Docs](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site){target="_blank"}. Для публикации **Quarto**-репозитория как страницы на **GitHub** достаточно зайти в раздел *Settings* и выбрать слева *Pages* для настройки.
+
+::: {#fig-github-pages}
+![](images/github-pages.png){width="90%"}
+
+Настройка GitHub Pages
+
+:::
+
+## Этапы публикации в Quarto Pub
+
+[Quarto Pub](https://quartopub.com/){target="_blank"} -- это новый сервис для публикации статических HTML-документов, который был внедрен одновременно с **Quarto**. Процесс публикации в **Quarto Pub** описан на [странице документации](https://quarto.org/docs/publishing/quarto-pub.html){target="_blank"}. Сделаем краткий обзор **Quarto Pub**. 
+
+После того, как был создан проект, необходимо открыть терминал с директорией проекта и набрать в терминале команду как написано ниже.
+
+```{.bash filename="Terminal"}
+quarto publish quarto-pub
+```
+
+Теперь в терминале необходимо ответить на вопросы, которые будут заданы в процессе публикации и сайт будет опубликован на [https://your-account.quarto.pub/site-name/](https://your-account.quarto.pub/site-name/){target="_blank"}. 
+
+
+Совет: в качестве `site-name` **Quarto Pub** будет предлагать сокращенное название блога или иного документа, которое может быть на русском языке, не используйте кириллицу для сокращенного названия сайта, замените на иное название.
+
+::: {#fig-quarto_terminal}
+![](images/quarto_terminal.png){width="90%"}
+
+Этапы публикации в Quarto Pub в терминале
+
+:::
+
+Опубликованными сайтами можно управлять на [https://quartopub.com](https://quartopub.com){target="_blank"}. Нажмите на мини-образ сайта, чтобы перейти на страницу администратора, которая позволяет вам изменить краткое название сайта, сделать сайт по умолчанию для вашей учетной записи или полностью удалить сайт.
+
+::: {#fig-quarto_pub}
+![](images/quarto_pub.png){width="90%"}
+
+Страница администрирования в **Quarto Pub**
+
+:::
+
+Сервис **Quarto Pub** публикует материалы очень быстро, поддерживает [GitHub Actions](https://quarto.org/docs/publishing/quarto-pub.html){target="_blank"}, однако у него меньше функциональных возможностей чем у **Netlify** или **GitHub Pages**.
+
+
+# Сравнение инструментов R Markdown с Quarto
+
+**Quarto** привнесло множество достоинств **R Markdown** для программистов на **Python** или **Julia**. Для пользователей **R** возникает естественный вопрос: "стоит ли полностью отказаться от **R Markdown** в пользу **Quarto**?"
+
+::: {#fig-Mike_Sulley}
+![](images/Mike_Sulley.png){width="90%"}
+
+Майк: «*Что ты думаешь*?» Салли: «*Что было не так с твоей старой машиной*?» ([*Новая машина Майка*](https://youtu.be/0ddLrw8BG-Q), Disney)
+:::
+
+**R Markdown** предлагает огромный спектр библиотек: [bookdown](https://pkgs.rstudio.com/bookdown/){target="_blank"} для написания книг и отчетов, [distill](https://rstudio.github.io/distill/){target="_blank"} и [blogdown](https://pkgs.rstudio.com/blogdown/){target="_blank"} для создания блогов, [papaja](http://frederikaust.com/papaja_man/) и [rticles](https://pkgs.rstudio.com/rticles/){target="_blank"} для публикации научных статей, [workflowr](https://cran.r-project.org/web/packages/workflowr/vignettes/wflow-01-getting-started.html){target="_blank"} для эффективного управления проектами, воспроизводимости и обмену результатами исследования, [xaringan](https://github.com/yihui/xaringan){target="_blank"} для создания презентаций и т.д. В планах авторов **Quarto** сделать аналоги для [pagedown](https://github.com/rstudio/pagedown){target="_blank"} для создания документов разбитых на страницы и [flexdashboard](https://pkgs.rstudio.com/flexdashboard/){target="_blank"}, который отлично подходит для интерактивных дэшбордов и прототипирования сайтов.[^dash_b]
+
+[^dash_b]: В настоящий момент в **Quarto** реализован [вариант интерактивных дэшбордов](https://quarto.org/docs/dashboards/){target="_blank"}.
+
+Наиболее полное сравнение инструментов в виде таблицы представлено на [странице аналогов](https://quarto.org/docs/faq/rmarkdown.html#i-use-x-bookdown-blogdown-etc..-what-is-the-quarto-equivalent){target="_blank"}. Отметим, что все документы в **R Markdown** можно компилировать в **Quarto** практически без изменений. 
+
+[Нужно ли переходить с **R Markdown** на **Quarto**?](https://quarto.org/docs/faq/rmarkdown.html#should-i-switch-from-r-markdown-to-quarto){target="_blank"} Возможно, только ради новых функций (которые в основном будут делаться для **Quarto**), расширенных макетов, Bootstrap-тем, возможности использовать редактор **VS Code** и т.д. Профессиональные пользователи отмечают некоторую разницу в подходах, где-то не в пользу **Quarto**, например, при передаче параметров переменных, рендеринге большого объема документов и т.д., однако для  непрофессионалов **Quarto** остается идеальным простым вариантом для введения в создание отчетов, интерактивных книг и блогов. Тем не менее, например, `blogdown` может обладать гораздо большим функционалом чем **Quarto**, это библиотека, в которой можно провести ряд тестовых проверок перед созданием нового поста в блоге, `xaringan` служит прекрасным и достаточно легким (обладающим небольшим размером выходного файла по отношению к [reveal.js](https://quarto.org/docs/presentations/revealjs/){target="_blank"} в **Quarto**) средством создания HTML-презентаций, поэтому пользуйтесь тем инструментом, который лучше подходит для тех или иных задач. О разнице между подходами **R Markdown** и **Quarto** можно также почитать в статьях [With Quarto Coming, is R Markdown Going Away? No.](https://yihui.org/en/2022/04/quarto-r-markdown/){target="_blank"} автора [@Yihui Xie](https://twitter.com/xieyihui){target="_blank"} и [We don't talk about Quarto / Until now!](https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/){target="_blank"}, которую написала [@Alison Hill](https://github.com/apreshill){target="_blank"}.
+
+# Расширения
+
+[Расширения](https://quarto.org/docs/extensions/){target="_blank"} -- это мощный способ изменить и расширить поведение **Quarto**. В настоящий момент для реализации расширений нужно обновить **Quarto** до версии > 1.2x. Перечислим некоторые виды расширений.
+
+## Виды расширений
+
+- [Shortcodes](https://quarto.org/docs/extensions/shortcodes.html){target="_blank"} -- это специальные директивы markdown, которые генерируют различные типы контента.
+
+- [Filters](https://quarto.org/docs/extensions/filters.html){target="_blank"} -- это гибкий инструмент для внедрения новых глобальных моделей поведения и/или новых моделей рендеринга markdown.
+
+- [Custom Formats](https://quarto.org/docs/extensions/formats.html){target="_blank"} позволяют создавать новые форматы вывода, объединяя параметры документа, шаблоны, таблицы стилей и другое содержимое.
+
+Каждый тип расширения имеет свои собственные требования к разработке: в некоторых случаях расширение может быть создано только с использованием метаданных YAML, однако во многих случаях необходимо выполнять некоторые пользовательские сценарии с использованием **Lua**. 
+
+По категориям, расширения можно отнести к следующим типам.
+
+- [Shortcodes and Filters](https://quarto.org/docs/extensions/listing-filters.html){target="_blank"} 
+
+- [Journal Articles](https://quarto.org/docs/extensions/listing-journals.html){target="_blank"}
+
+- [Custom Formats](https://quarto.org/docs/extensions/listing-formats.html){target="_blank"}
+
+- [Revealjs Extensions](https://quarto.org/docs/extensions/listing-revealjs.html){target="_blank"}
+
+Что умеют расширения? Например, создавать новые форматы вывода, объединяя параметры документа, шаблоны, таблицы стилей и другое содержимое; создавать элементы кода для вставки твитов или видео в документ или значков [Fontawesome](https://fontawesome.com/){target="_blank"}, служить шаблонами-заготовками для научных статей и т.д.
+
+## Расширение Shinylive для Quarto
+
+Большой интерес вызывает развитие нового проекта [Shiny for Python](https://shiny.rstudio.com/py/){target="_blank"}, который позволяет добавлять интерактивность в документы с помощью **Python**-кода.
+[Расширение Shinylive](https://github.com/quarto-ext/shinylive){target="_blank"} позволяет встраивать приложения **Shiny** для **Python** в документы **Quarto**, которые полностью запускаются в браузере с использованием [Pyodide](https://pyodide.org/en/stable/){target="_blank"} (**Python**, скомпилированный в **WebAssembly**).  В настоящий момент **Shinylive** (как и **Shiny for Python**) является экспериментальным проектом, для работы **Shinylive** требуется:
+
+- **Quarto** Release Candidate версии 1.2.x;
+- **Python** версии 3.8 или выше;
+- текущая версия **Python**-библиотеки `shinylive`, которая может быть установлена как:
+
+```{.python filename="Terminal"}
+pip install shinylive --upgrade
+```
+
+::: {#fig-PyShiny}
+![](images/PyShiny.png){width="75%"}
+
+Пример Shiny for Python в Quarto
+
+:::
+
+
+За дальнейшим развитием проекта можно следить на странице [Shinylive](https://github.com/quarto-ext/shinylive){target="_blank"}, автором которой является [@Winston Chang](https://twitter.com/winston_chang){target="_blank"}, см. также [статью](https://hosting.analythium.io/containerizing-shiny-for-python-and-shinylive-applications/){target="_blank"}. Также, вызывает интерес [расширение](https://github.com/coatless/quarto-webr){target="_blank"} **Quarto** для WebR.
+
+# Возможности для автоматизации
+
+## Docker и Dev Container Features
+
+[Peter Solymos](https://hosting.analythium.io/author/peter/){target="_blank"} написал две статьи касающиеся работы **Docker** с **Quarto**:
+
+1. [How to Set Up Quarto with Docker, Part 1: Static Content](https://hosting.analythium.io/how-to-set-up-quarto-with-docker-part-1-static-content/){target="_blank"}.
+
+2. [How to Set Up Quarto with Docker, Part 2: Dynamic Content](https://hosting.analythium.io/how-to-set-up-quarto-with-docker-part-2-dynamic-content/){target="_blank"}.
+
+[James Goldie](https://jamesgoldie.dev/){target="_blank"} опубликовал статью [Dev containers with R and Quarto](https://jamesgoldie.dev/writing/dev-containers-in-r/){target="_blank"}.
+
+[Dev Container Features](https://code.visualstudio.com/blogs/2022/09/15/dev-container-features){target="_blank"} -- это автономные блоки установочного кода, конфигурации контейнера и/или настроек и расширений, предназначенные для включения новых возможностей разработки в вашем dev-контейнере. Они могут быть созданы для работы с широким спектром изображений базовых контейнеров и предоставляют быстрый способ связать метаданные контейнеров с некоторыми шагами установки. Вы можете добавить их в свои контейнеры с помощью простой ссылки. Например, [Dev Container Features (for R)](https://github.com/rocker-org/devcontainer-features){target="_blank"} теперь включают в себя установку [Quarto CLI](https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md){target="_blank"}.
+
+## GitHub Actions и Continuous Integration (CI)
+
+Работа с системой контроля версий (CI) описана на [странице документации Quarto](https://quarto.org/docs/publishing/ci.html){target="_blank"} и относится к практике автоматической публикации содержимого из кода, при этом уделяется особое внимание к проверке отображаемых выходных данных в системе управления версиями, где происходит выполнение кода и рендеринг -- локально или на сервере, в зависимости от различных сценариев и записи зависимостей в **R**, **Python** или **Julia**. 
+
+- Статья [Quarto Website with GitHub Actions](https://tarleb.com/posts/quarto-with-gh-pages/){target="_blank"} рассматривает использование действий **GitHub** для рендеринга и публикации веб-сайта **Quarto**. 
+
+- [@Beatriz Milz](https://twitter.com/BeaMilz){target="_blank"} написала статью [Monitoring quarto-dev repositories: Creating a workflow with GitHub Actions for R users](https://beamilz.com/posts/series-gha/2022-series-gha-2-creating-your-first-action/en/){target="_blank"} о том, как можно создать рабочий процесс для мониторинга репозиториев на **GitHub**.
+
+- [Github Actions for Quarto](https://github.com/quarto-dev/quarto-actions){target="_blank"} -- В этом репозитории хранятся действия **GitHub**, полезные для создания и публикации документов **Quarto**.
+
+
+# Дополнительные ресурсы по Quarto
+
+Основным источником для официальных новинок, выходящих для **Quarto** можно считать блог [Quarto](https://quarto.org/docs/blog/), а для расширений **Quarto** -- публикации, которые делает [Mickaël Canouil](https://github.com/mcanouil/awesome-quarto).
+
+## Подробное руководство по использованию Quarto
+
+Для **Quarto** существует хорошее [введение](https://quarto.org/docs/get-started/hello/jupyter.html){target="_blank"} на странице документации и достаточно подробное [руководство](https://quarto.org/docs/guide/){target="_blank"}, описывающее практически все аспекты работы с **Quarto**.
+
+::: {#fig-Guide}
+![](images/Guide.png){width="100%"}
+
+Страница руководства по использованию **Quarto**
+
+:::
+
+## Советы дня по Quarto
+
+К началу конференции [rstudio::conf(2022)](https://www.rstudio.com/blog/rstudio-2022-conf-schedule/){target="_blank"} [@Mine Çetinkaya-Rundel](https://twitter.com/minebocek){target="_blank"} запустила проект [Советы дня по Quarto](https://mine-cetinkaya-rundel.github.io/quarto-tip-a-day/){target="_blank"}, включающий короткие заметки с советами по использованию **Quarto**. Здесь можно найти множество полезных идей начиная от аннотирования слайдов до включения темной темы.
+
+::: {#fig-Tip_a_day}
+![](images/Tip_a_day.png){width="100%"}
+
+Страница "Советы дня по **Quarto**"
+:::
+
+
+## Практический семинар "От R Markdown до Quarto"
+
+Также, в качестве сателлита к [rstudio::conf(2022)](https://www.rstudio.com/blog/rstudio-2022-conf-schedule/){target="_blank"}, проходил практический семинар [From R Markdown to Quarto](https://rstudio-conf-2022.github.io/rmd-to-quarto/){target="_blank"}, материалы которого доступны на [GitHub странице](https://github.com/rstudio-conf-2022/rmd-to-quarto){target="_blank"}. В частности, на странице [Materials](https://rstudio-conf-2022.github.io/rmd-to-quarto/materials/){target="_blank"} можно найти несколько подробных презентаций по введению в **Quarto**.
+
+::: {#fig-RMD_to_Quarto}
+![](images/RMD_to_Quarto.png){width="100%"}
+
+Страница практического семинара "От **R Markdown** к **Quarto**"
+
+:::
+
+## Практический семинар "Приступая к работе с Quarto"
+
+[@Tom Mock](https://twitter.com/thomas_mock){target="_blank"} провел более чем двухчасовую YouTube-презентацию [Welcome to Quarto Workshop!](https://youtu.be/yvi5uXQMvu4){target="_blank"}, слайды которой [Getting Started with Quarto](https://jthomasmock.github.io/quarto-in-two-hours/){target="_blank"} также имеются в открытом доступе.
+
+::: {#fig-getting_started}
+![](images/getting_started.png){width="100%"}
+
+Страница практического семинара "Приступая к работе с **Quarto**"
+:::
+
+## Создание блога в Quarto
+
+[@Isabella Velásquez](https://twitter.com/ivelasq3){target="_blank"} провела YouTube-презентацию [Building a Blog with Quarto](https://youtu.be/CVcvXfRyfE0){target="_blank"}, материалы которой можно найти на странице как [RStudio Enterprise Community Meetup](https://ivelasq.quarto.pub/building-a-blog-with-quarto/){target="_blank"}. Основу составила хорошо оформленная [документация по созданию блога](https://quarto.org/docs/websites/website-blog.html){target="_blank"}. 
+
+::: {#fig-blog}
+![](images/blog.png){width="90%"}
+
+Страница практического семинара "Построение блога с **Quarto**"
+
+:::
+
+Кроме того, можно порекомендовать статью [Creating your personal website using Quarto](https://ucsb-meds.github.io/creating-quarto-websites/){target="_blank"} автора [@Samantha Csik](https://twitter.com/samanthacsik){target="_blank"} по созданию собственных веб-страниц и блогов в **Quarto**.
+
+Отметим, что при создании новых записей в блогах может возникнуть вопрос о совместимости библиотек из старых сообщений с обновленными. Кроме того, нет смысла в рендеринге старых сообщений, которые уже опубликованы. Решение этих проблем в **Quarto** заключается в [замораживании вывода вычислительных сообщений](https://quarto.org/docs/websites/website-blog.html#freezing-posts){target="_blank"} в блоге. Подробно про опцию `freeze` можно почитать на [странице документации](https://quarto.org/docs/projects/code-execution.html#freeze){target="_blank"}.
+
+
+## Страница Awesome Quarto
+
+[@Mickaël Canouil](https://twitter.com/MickaelCanouil){target="_blank"} ведет страницу [Awesome Quarto](https://github.com/mcanouil/awesome-quarto){target="_blank"} на **GitHub**, где собраны список документов, инструментов, примеров и статей по **Quarto**.
+
+::: {#fig-awesome}
+![](images/awesome.png){width="100%"}
+
+Страница Awesome **Quarto**
+
+:::
+
+На данном сайте можно найти много шаблонов документов и расширений **Quarto**.
+
+## Дополнительные материалы
+
+Сейчас существует очень большое количество различных интересного содержательного материала, касающегося **Quarto**. Ниже указан лишь небольшой список, где каждый найдет что-то интересное для себя.
+
+**Видео-материалы**:
+
+- [Quarto - J.J. Allaire (интервью)](https://youtu.be/9jGc0TxoRco){target="_blank"}
+
+- [Reproducible Publications with Julia and Quarto | J.J. Allaire | JuliaCon 2022](https://youtu.be/Y1uKNO32H_I){target="_blank"}
+
+- [Mine Çetinkaya-Rundel & Julia Stewart Lowndes | Hello Quarto: Share, Collaborate, Teach, Reimagine](https://youtu.be/p7Hxu4coDl8){target="_blank"}
+
+- [Quarto | Posit PBS](https://youtube.com/playlist?list=PL9HYL-VRX0oRupficE2l5DGgVIzpypTHs){target="_blank"}
+
+- [Reproducible Medical Research with Quarto (Thomas Mock)](https://youtu.be/KnwQFph3s94){target="_blank"}
+
+- [Tom Mock | Quarto for the Curious | RStudio (2022)](https://youtu.be/mrvhk2XUfWo){target="_blank"}
+
+- [Hamel Husain | Literate Programming With Jupyter Notebooks and Quarto | RStudio (2022)](https://youtu.be/C8kDPmb_IKU){target="_blank"}
+
+- [Blogging with Quarto: a 10 minute getting started tutorial](https://youtu.be/YoKjBcuUP0s){target="_blank"}
+
+- [R-Ladies Freiburg (English) - Getting to know Quarto](https://youtu.be/shVSmYna3GM){target="_blank"}
+
+- [Quarto | Dr Lyndon Walker](https://youtube.com/playlist?list=PL4Brb3wh2n0wbAONByKD6mfGihKoTk6kf){target="_blank"}
+
+- [How to style your Quarto blog without knowing a lot of HTML/CSS](https://youtu.be/ErRX8plZpQE){target="_blank"}
+
+- [Openscapes Community Call 06: Hello Quarto! Co-hosted with RLadies Santa Barbara](https://youtu.be/azVAl343CIU){target="_blank"}
+
+
+**Презентации**:
+
+- [Quarto as reveal.js Slides](https://jeremy-allen.github.io/quarto-demo/#/section){target="_blank"}
+
+- [Quarto for the curious](https://thomasmock.quarto.pub/quarto-curious/#/TitleSlide){target="_blank"}
+
+- [Democratizing Data Science Teams / With Quarto](https://hrbrmstr.github.io/2022-10-nycdh/2022-10-nydh.html#/title-slide){target="_blank"}
+
+**Веб-материалы**:
+
+- [6 Productivity Hacks for Quarto](https://www.rstudio.com/blog/6-productivity-hacks-for-quarto/){target="_blank"}
+
+- [Quarto experiments](https://jimjam-slam.github.io/quarto-experiments/){target="_blank"}
+
+
+
+# Некоторые преимущества и недостатки Quarto
+
+Отметим некоторые интересные возможности **Quarto**.
+
+- Простота локализации: необходима одна строка в YAML-части документа для русификации HTML-документов. Недоработки перевода можно легко исправить самостоятельно.
+
+- Простота перехода от одного формата вывода документа к другому: имея единый источник, можно быстро указать тип документа (.docx, .pdf или даже [собственный формат](https://quarto.org/docs/extensions/formats.html){target="_blank"}). Тем не менее, если явно указать шрифты в .html-документе, а затем сменить формат на .docx, не стоит ожидать что семейство шрифтов также будет изменено.
+
+```{.bash}
+---
+title: "Мой документ"
+format:
+   html: 
+     mainfont: cursive
+---
+```
+
+- Работа с большими проектами (например, книгами), кэширование. Теперь при повторном рендеринге больших проектов (книг) с воспроизводимыми элементами кода, результат предыдущего вычисления сохраняется в кэше. Однако, при некоторых незначительных изменениях кода изменения могут не сработать, поэтому рекомендуется удалять кэш при чистовом прогоне проекта. Также, необходимо не забывать о кэше в папках `_freeze` при [*заморозке* кэша](https://quarto.org/docs/projects/code-execution.html#freeze){target="_blank"} при размещении проекта на Git или на сайте.
+
+::: {#fig-cache}
+![](images/cache.png){width="100%"}
+
+Кэширование в Quarto
+
+:::
+
+- Лучшая организация цитирования (как в визуальном редакторе в **RStudio**, так и организация ссылок через [BibTEX](http://www.bibtex.org/){target="_blank"}, [CiteDrive](https://www.citedrive.com/){target="_blank"}, [Zotero](https://www.zotero.org/){target="_blank"} и т.д.). Например, в статье [How to Format Citations and Bibliographies in RStudio with CiteDrive and Quarto](https://bibtex.eu/blog/how-to-format-citations-and-bibliographies-in-rstudio-with-citedrive-and-quarto/){target="_blank"} описано, как правильно создать отформатированное цитирование и библиографии. [BibTeX](http://www.bibtex.org/){target="_blank"} использует метаданные для автоматической организации цитирования с помощью ключей, однако результат рендеринга не всегда работает корректно.
+
+::: {#fig-bibtex}
+![](images/bibtex.png){width="100%"}
+
+Пример BibTeX-файла
+:::
+
+- [Расширенные макеты](https://quarto.org/docs/authoring/article-layout.html){target="_blank"} для размещения элементов документа на странице для регулировки ширины объекта, размещения объектов на полях, размещение рисунков рядом и т.д. Некоторые проблемы возникали при указании форматов ширины рисунков из воспроизводимых ячеек кода в блогах, возможно, это уже поправлено на сегодняшний момент. Для размещения, например, двух рисунков разных исходных размеров так, чтобы они имели одну высоту, необходимо гораздо больше действий, как если бы редактирование происходило в MS Word, описание такого случая в документации или примера нужно хорошо поискать.
+
+- [Темы на основе Bootstrap 5](https://quarto.org/docs/output-formats/html-themes.html){target="_blank"} выглядят отлично. Простой и легкий стиль документов понравится большинству. Использование CSS и [Sass](https://sass-scss.ru/){target="_blank"} для [создания стилей документа](https://quarto.org/docs/presentations/revealjs/themes.html#creating-themes){target="_blank"} можно отнести как к преимуществам (гибкой кастомизации), так и к недостаткам, поскольку, скажем, для изменения шрифтов в `reveal.js`-презентации потребуется создать свой стилевой файл.
+
+```{.bash}
+# пример указания Sass-стиля в YAML 
+---
+theme:
+  light: theme.scss
+---
+```
+
+::: {#fig-Sass}
+![](images/Sass.png){width="80%"}
+
+Пример Sass-файла для кастомизации презентации
+:::
+
+- Создание презентаций на основе [reveal.js](https://revealjs.com/){target="_blank"} представляет новинку **Quarto**. Большим плюсом является наличие режима, аналогичного *Режиму докладчика* в MS Power Point с указанием времени с начала презентации, заметок и следующих слайдов. Также, презентации **Quarto** включает в себя встроенную версию [Reveal Multiplex plugin](https://github.com/reveal/multiplex){target="_blank"}. Плагин позволяет вашей аудитории следить за слайдами презентации, которой вы управляете, со своего телефона, планшета или ноутбука.
+
+::: {#fig-reveal_js}
+![](images/reveal_js.png){width="90%"}
+
+Пример режима докладчика в **Quarto**-презентации
+
+:::
+
+- Встраивание [LearningApps.org](https://learningapps.org/){target="_blank"}-приложений, которое работает не только в **Quarto**, но и в **R Markdown**. Такого рода приложения, включенные как HTML-фреймы в учебные материалы или интерактивные книги, позволяют делать простые тесты для самопроверки усвоения учебного материала.
+
+::: {#fig-learningapps}
+![](images/learningapps.png){width="90%"}
+
+Пример LearningApps-[теста](https://learningapps.org/16015431)
+
+:::
+
+
+# Заключение
+
+В статье был дан обзор научно-издательской системы **Quarto**: базовые возможности **Quarto**, основы работы с **Quarto**, сравнение с **R Markdown**, возможности для публикации веб-документов. Кроме того, были рассмотрены некоторые эксклюзивные функции **Quarto** и недостатки. Даже очень поверхностное знакомство с **Quarto** получилось очень объемным. 
+
+::: {.column-margin}
+
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="../../../dist/applause-button.css" />
+  <script src="../../../dist/applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>
+
+:::
+
+Система не лишена недостатков. Например, поскольку **Quarto** написан с использованием фреймвока [Deno](https://deno.land/){target="_blank"}, в одно время **Quarto** не компилировал документы у пользователей *Apple Silicon*-компьютеров. [Возможные баги](https://github.com/quarto-dev/quarto-cli/issues){target="_blank"} авторы стараются оперативно исправлять, идеи новых возможностей можно предлагать в [разделе *дискуссии*](https://github.com/quarto-dev/quarto-cli/discussions){target="_blank"}. 
+
+Будем надеяться, что проект **Quarto** будет успешно развиваться, например, будут добавлены другие языки программирования кроме присутствующих, это могут быть любые другие языки поддерживающие *Jupyter kernels* (возможно **Mojo**), при этом хотелось бы, чтобы **Quarto** не превратится в неповоротливый медиакомбайн аналогичный тому, что представлял из себя когда-то **iTunes**.
+
+Автор благодарит С.В. Бабёнышева и О.С. Малютина за полезные обсуждения по **Quarto**.
+
+:::{.callout-tip collapse="true"}
+## Session Info
+```{r}
+#| echo: false
+
+library(sessioninfo)
+
+pkg_sesh <- session_info(pkgs = "attached")
+
+quarto_version <- system("quarto --version", intern = TRUE)
+
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE)
+  )
+
+pkg_sesh
+```
+
+:::
