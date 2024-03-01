@@ -1,0 +1,56 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/projects/posts/Rsources.html",
+      "/projects/posts/Graphs.html",
+      "/projects/posts/Quarto_meetups.html"
+    ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/posts/2024-02-02 rayvista/index.html",
+      "/blog/posts/2024-01-26 ggplot2/index.html",
+      "/blog/posts/2022-11-13-quarto/index.html",
+      "/blog/posts/2022-03-16-highcharter/index.html",
+      "/blog/posts/2022-02-21-sfnetworks/index.html",
+      "/blog/posts/2021-11-22-reachability/index.html",
+      "/blog/posts/2021-07-20-reactable/index.html",
+      "/blog/posts/2021-02-19-modeltime/index.html"
+    ]
+  },
+  {
+    "listing": "/publications/index.html",
+    "items": [
+      "/publications/books/IT.html",
+      "/publications/books/SA.html",
+      "/publications/books/MO.html",
+      "/publications/books/MathMeth.html",
+      "/publications/papers/Vestnik_2023b.html",
+      "/publications/papers/Vestnik_2023a.html",
+      "/publications/papers/Vestnik_2021c.html",
+      "/publications/papers/CEUR.html",
+      "/publications/papers/Vestnik_2021b.html",
+      "/publications/papers/Vestnik_2021a.html",
+      "/publications/papers/Lattice.html",
+      "/publications/papers/Vestnik_2019b.html",
+      "/publications/papers/Vestnik_2019a.html",
+      "/publications/papers/Vestnik_2018.html",
+      "/publications/papers/Weyman.html",
+      "/publications/papers/Regularity.html",
+      "/publications/papers/Tate.html",
+      "/publications/papers/MTRMS.html",
+      "/publications/papers/TRMS.html",
+      "/publications/papers/Bott.html"
+    ]
+  },
+  {
+    "listing": "/projects/index.html",
+    "items": [
+      "/projects/posts/Rsources.html",
+      "/projects/posts/Graphs.html",
+      "/projects/posts/Quarto_meetups.html"
+    ]
+  }
+]

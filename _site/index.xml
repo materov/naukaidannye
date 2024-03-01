@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Наука и данные</title>
+<link>https://naukaidannye.netlify.app/</link>
+<atom:link href="https://naukaidannye.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
+<description>Персональный блог Евгения Матерова.</description>
+<generator>quarto-1.4.550</generator>
+<lastBuildDate>Mon, 27 Feb 2023 17:00:00 GMT</lastBuildDate>
+<item>
+  <title>Введение в Quarto</title>
+  <link>https://naukaidannye.netlify.app/projects/posts/Quarto_meetups.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="column-page">
+<p><a href="https://quarto-meetup-begin.netlify.app/" target="_blank" data-fig-align="center"><img src="https://naukaidannye.netlify.app/projects/posts/images/Quarto_meetup.png" class="img-fluid"></a></p>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://naukaidannye.netlify.app/projects/posts/Quarto_meetups.html</guid>
+  <pubDate>Mon, 27 Feb 2023 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/projects/posts/quarto.png" medium="image" type="image/png" height="60" width="144"/>
+</item>
+<item>
+  <title>Графики на досуге</title>
+  <link>https://naukaidannye.netlify.app/projects/posts/Graphs.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="column-page">
+<p><a href="https://data-visualization-blog.netlify.app/" target="_blank" data-fig-align="center"><img src="https://naukaidannye.netlify.app/projects/posts/images/grafiki.png" class="img-fluid"></a></p>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://naukaidannye.netlify.app/projects/posts/Graphs.html</guid>
+  <pubDate>Sat, 09 Jul 2022 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/projects/posts/Elbrus.png" medium="image" type="image/png" height="69" width="144"/>
+</item>
+<item>
+  <title>Rесурсы</title>
+  <link>https://naukaidannye.netlify.app/projects/posts/Rsources.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="column-page">
+<p><a href="https://materov.github.io/R-sources/" target="_blank" data-fig-align="center"><img src="https://naukaidannye.netlify.app/projects/posts/images/resursy.png" class="img-fluid"></a></p>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://naukaidannye.netlify.app/projects/posts/Rsources.html</guid>
+  <pubDate>Fri, 01 Apr 2022 17:00:00 GMT</pubDate>
+  <media:content url="https://naukaidannye.netlify.app/projects/posts/intro.png" medium="image" type="image/png" height="62" width="144"/>
+</item>
+</channel>
+</rss>
