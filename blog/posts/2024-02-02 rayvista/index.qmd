@@ -1,0 +1,507 @@
+---
+title: "Визуализация трехмерных моделей земной поверхности"
+subtitle: "Примеры 3D-визуализаций цифровой модели рельефа местности средствами библиотеки rayvista"
+author: "Е.Н. Матеров"
+date: "2024-03-04"
+categories: [rayvista, spatial, Rstats]
+image: "rayvista.png"
+csl: "../../../gost-r-7-0-5-2008-numeric.csl"
+lang: ru
+
+filters:
+  - social-share
+
+share:
+  permalink: "https://naukaidannye.netlify.app/"
+  description: "классная публикация"
+  twitter: true
+  email: true
+  telegram: true
+  mastodon: true
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    toc-location: left
+
+citation: 
+  url: https://www.naukaidannye.netlify.app/blog/posts/2024-02-02-rayvista
+  citation-key: Materov-rayvista
+  issued: "2024-02-02"
+  language: ru
+---
+
+{{< li pbbsmkso trigger=loop speed=0.9 delay=1000 >}}
+
+# Библиотека rayvista
+
+В **R** есть множество совершенно изумительных библиотек с открытым кодом, одна из них -- [rayshader](https://github.com/tylermorganwall/rayshader){target="_blank"}, которая позволяет делать потрясающие 3D-изображения на основе матрицы высот и различных алгоритмов отмывки теней и трассировки лучей. Помимо создания 3D-картографических моделей, в `rayshader` можно  преобразовывать объекты `ggplot2` в красивые трехмерные визуализации данных. Полученные **модели можно вращать и исследовать в интерактивном режиме**, а движение камеры можно запрограммировать для создания анимации. Подробно работу с `rayshader`, функции, руководства и результаты работы можно посмотреть на [сайте библиотеки](https://www.rayshader.com/){target="_blank"}, на персональном сайте автора библиотеки [Rayverse Blog](https://www.tylermw.com/){target="_blank"} и в главе [Трехмерные модели](https://tsamsonov.github.io/r-geo-course/12-3DModels.html){target="_blank"} интерактивной книги [Визуализация и анализ географических данных на языке R](https://tsamsonov.github.io/r-geo-course/){target="_blank"}.
+
+Библиотека [rayvista](https://github.com/h-a-graham/rayvista){target="_blank"} создана как плагин к `rayshader` и содержит основную функцию `plot_3d_vista()` для создания 3D-визуализации практически любого местоположения на Земле по географическим координатам. Так были созданы альбомы [Горы России](https://data-visualization-blog.netlify.app/posts/mountains%20russia/){target="_blank"} и [Непокоренные вершины мира](https://data-visualization-blog.netlify.app/posts/peaks/){target="_blank"}. Для создания цифровой модели рельефа местности на основе высот над уровнем моря в `rayvista` используется библиотека [elevatr](https://github.com/jhollist/elevatr){target="_blank"}. Для создания карт, которые накладываются на 3D-основу высот, используется библиотека [maptiles](https://github.com/riatelab/maptiles){target="_blank"}, которая позволяет загружать, комбинировать и отображать карты различных провайдеров (по умолчанию это *Esri*, а также *OpenStreetMap*, *CARTO* и *Thunderforest*).
+
+Полученные модели можно комбинировать с командами `rayshader`, накладывать объекты *OpenStreetMap*, и т.д. Установить библиотеку можно с помощью команды
+
+```{.r}
+# install.packages("devtools")
+devtools::install_github("h-a-graham/rayvista", dependencies=TRUE)
+```
+При создании модели открывается **RGL**-окно, например, в **macOS** необходимо установить [XQuartz](https://www.xquartz.org/){target="_blank"}.
+
+## Базовая работа с 3D-моделями
+
+Создадим простейшую 3D-модель. В качестве исходной визуализации выберем модель вершины [Амадаблам](https://ru.wikipedia.org/wiki/%D0%90%D0%BC%D0%B0%D0%B4%D0%B0%D0%B1%D0%BB%D0%B0%D0%BC){target="_blank"} -- вершины в Гималаях, высота главного пика которой равна 6 814 м.
+
+::: {#fig-Amadablam .column-body-inset-right}
+
+![](Amadablam.png){.lightbox}
+
+Пример 3D-модели в `rayvista` -- вершина Амадаблам
+:::
+
+```{.r}
+Amadablam <- plot_3d_vista(lat = 27.8599,  # <1>
+                           long = 86.8614, 
+                           zscale = 6, # <2>
+                           zoom = 0.6, # <3>
+                           soliddepth = 4000,
+                           radius = 5000, # <4>
+                           overlay_detail = 14, # <5>
+                           theta = -65, phi = 25, # <6>
+                           windowsize = 1200, # <7>
+                           background = "grey10")
+```
+1. широта и долгота, выраженная в *WGS84*;
+2. при условии, что *x* = *y*, `zscale` показывает соотношение между *x* и *z* (либо *y* и *z*), по умолчанию `zscale` = 2;
+3. коэффициент масштабирования, по умолчанию равен 1;
+4. радиус, определяющий ограничивающую область;
+5. число между 0 и 20, отвечающее за масштаб в `maptiles::get_tiles()`, уровни масштабирования можно посмотреть в [OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels){target="_blank"}, по умолчанию значение равно 13;
+6. угол вращения и азимутальный угол соответственно;
+7. положение, ширина и высота устройства **RGL**, отображающего модель.
+
+В библиотеке `rayvista` возможно использовать карты-подложки различных провайдеров (например, *OpenStreetMap*, *Esri*, *CARTO* или *Thunderforest*, также, см. [статью](https://stamen.com/here-comes-the-future-of-stamen-maps/){target="_blank"} по поводу доступности карт *Stamen*). Все возможные слои показывает команда 
+
+```{.r}
+?maptiles::get_tiles 
+```
+
+В примере ниже покажем различные варианты для визуализации острова Татышев, г. Красноярск.
+
+```{.r}
+Krasnoyarsk <- plot_3d_vista(lat = 56.01986, 
+                             long = 92.932413, 
+                             zscale = 3, 
+                             zoom = 0.5,
+                             img_provider = "Thunderforest.Landscape", # <1>
+                             api_key = "your_api_key_value", # <2>
+                             overlay_detail = 14,
+                             theta = -40,  
+                             phi = 25,
+                             windowsize = 1300,
+                             soliddepth = 50,
+                             # outlier_filter = 0.0001, # <3>
+                             fill_holes = TRUE) # <4>
+```
+1. вид картографической подолжки;
+2. значение API-ключа для [Thunderforest](https://www.thunderforest.com/maps/){target="_blank"}-карт, можно получить [на сайте](https://www.thunderforest.com/docs/apikeys/){target="_blank"}, для других карт API-ключ не требуется;
+3. если в модели появляются артефакты, это значит что возвращаемые данные о рельефе имеют ошибочно низкие значения, тогда нужно выставить значение от 0 до 1, ближе к 0;
+4. заполняет значения `NA` полученные в цифровой модели рельефа местности.
+
+::: {#fig-Thunderforest.Landscape .column-body-inset-right}
+
+![](Thunderforest.Landscape.png){.lightbox}
+
+Пример 3D-модели с картой `Thunderforest.Landscape`, где показаны топографические особенности
+:::
+
+Отметим, что если в предыдущем коде, который формирует 3D-изображение, добавить `show_vista = FALSE` (в команде `plot_3d_vista()`), то мы не увидим **RGL**-окно, а сохраним объект, у которого будут атрибуты `dem_matrix` и `texture`. Теперь восстановить изображение на рисунке (см. [рис. @fig-Thunderforest.Landscape]) можно так:
+
+```{.r}
+Krasnoyarsk$dem_matrix |>
+  height_shade() %>% 
+  add_overlay(., Krasnoyarsk$texture,
+              rescale_original = TRUE) %>%
+  plot_3d(., Krasnoyarsk$dem_matrix, zscale = 3,
+          windowsize = 1300, 
+          soliddepth = 50,
+          zoom = 0.5, phi = 25, theta = -40)
+```
+
+
+Сравним предыдущую карту с другими картами-подложками.
+
+::: {#fig-Thunderforest.Outdoors .column-body-inset-right}
+
+![](Thunderforest.Outdoors.png){.lightbox}
+
+Пример 3D-модели с картой `Thunderforest.Outdoors`
+:::
+
+::: {#fig-OpenTopoMap .column-body-inset-right}
+
+![](OpenTopoMap.png){.lightbox}
+
+Пример 3D-модели с картой `OpenTopoMap`
+:::
+
+::: {#fig-OSM .column-body-inset-right}
+
+![](OSM.png){.lightbox}
+
+Пример 3D-модели с картой `OpenStreetMap`
+:::
+
+Для лучшего восприятия можно оставить только 3D-поверхность модели, указав `solid = FALSE` как в следующем примере.
+
+<details>
+<summary>Код</summary>
+
+```{.r}
+MalySemyachik <- plot_3d_vista(lat  = 54.119, 
+                               long = 159.656, 
+                               zscale = 3, 
+                               zoom = 0.6,
+                               radius = 5000,
+                               overlay_detail = 14,
+                               theta = -50,
+                               phi = 30,
+                               windowsize = 1100, 
+                               solid = FALSE,
+                               fill_holes = TRUE)
+```
+</details>
+
+::: {#fig-MalySemyachik .column-body-inset-right}
+
+![](MalySemyachik.png){.lightbox}
+
+Стратовулкан [Малый Семячик](https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D1%8B%D0%B9_%D0%A1%D0%B5%D0%BC%D1%8F%D1%87%D0%B8%D0%BA){target="_blank"} с горным озером на Камчатке
+
+:::
+
+Для имитации эффекта размытия можно использовать функцию `render_depth()`.
+
+<details>
+<summary>Код</summary>
+
+```{.r}
+HopkinsNZ <- plot_3d_vista(lat = -44.042238, 
+                           long = 169.860985, 
+                           radius = 5000, 
+                           overlay_detail = 14,
+                           elevation_detail = 13, 
+                           zscale = 5, 
+                           theta = 25, phi=25, zoom = 0.6,
+                           windowsize = 1200, 
+                           solid = T, 
+                           background = 'white')
+
+render_depth(focus = 0.6, focallength = 15, clear=TRUE)
+```
+
+</details>
+
+::: {#fig-HopkinsNZ .column-body-inset-right}
+
+![](HopkinsNZ.png){.lightbox}
+
+Mount Hopkins (Новая Зеландия)
+
+:::
+
+
+## Нанесение дополнительных географических данных на 3D-визуализации
+
+### Поднятие плоскости воды
+
+Одна из интересных возможностей, для которой может быть полезна библиотека `rayvista` -- это *оценка природных рисков наводнений локальных территорий путем параллельного поднятия плоскости воды*. В качестве примера рассмотрим г. Улан-Удэ. Выберем точку внутри города с определенными географическими координатами и найдем оценочную высоту над уровнем моря с помощью сервиса [Elevation Finder](https://www.freemaptools.com/elevation-finder.htm){target="_blank"}, в нашем случае это 490 м (в `rayshader` также существует команда `detect_water()`). Получим модель местности и поднимем уровень на 20 м до 510 м, чтобы сделать оценку риска затопления.
+
+::: {#fig-OSM .column-body-inset-right}
+
+![](UlanUde.png){.lightbox}
+
+Оценка риска затопления с помощью 3D-моделирования для г. Улан-Удэ увеличением уровня воды на +20 м, возможный уровень затопления показан красным цветом
+:::
+
+```{.r}
+UlanUde <- plot_3d_vista(lat  = 51.834, 
+                         long = 107.5696, 
+                         zscale = 2, 
+                         zoom = 0.5,
+                         overlay_detail = 14,
+                         theta = -65, 
+                         radius = 5500,
+                         img_provider = "Thunderforest.Outdoors",
+                         api_key = "your_api_key",
+                         windowsize = 1400, 
+                         soliddepth = 300,
+                         phi = 25,
+                         water = TRUE, # <1>
+                         waterdepth = 510, # <2>
+                         wateralpha = 0.3, # <3>
+                         watercolor = "red", # <4>
+                         waterlinecolor = "white", # <5>
+                         fill_holes = TRUE)
+```
+1. добавление слоя воды;
+2. уровень воды;
+3. прозрачность слоя воды;
+4. цвет слоя воды;
+5. цвет линий по краям слоя воды.
+
+Код ниже добавляет маркеры и метки к текущему 3D-образу.
+
+<details>
+<summary>Код</summary>
+
+```{.r}
+render_label(heightmap = UlanUde,
+             lat  = 51.824, 
+             long = 107.525,
+             altitude = 140, 
+             text = "Улан-Удэ (+20 метров)",
+             extent = attr(UlanUde, 'extent'),
+             textsize = 1.6, linewidth = 4,
+             textcolor = "grey20", linecolor = "grey20")
+```
+
+</details>
+
+### Нанеcение данных *OpenStreetMap*
+
+На 3D-образы можно наносить помимо маркеров, например, растровые данные или данные из *OpenStreetMap*.
+
+```{r}
+#| include: false
+# Transform result of `st_bbox()` to other CRS
+# https://stackoverflow.com/questions/55050684/transform-result-of-st-bbox-to-other-crs
+
+# How to properly combine a polygon map on top of a raster map in r?
+# https://stackoverflow.com/questions/75214294/how-to-properly-combine-a-polygon-map-on-top-of-a-raster-map-in-r
+```
+
+::: {.callout-important}
+## Предостережение
+
+Практически все сервисы стандарта *Web Map Tile Service*, такие как *OSM*, *Stamen*, *GoogleMaps* и т.д., предоставляют тайлы в системе координат (CRS) EPSG:3857 (WebMercator). Это означает, что если объект нового слоя находится в другой проекции CRS, который не является EPSG:3857 (например, EPSG:4326), необходимо привести наносимый объект (**sf** или растр) и подложку к единой проекции путем перепроектирования, иначе модель будет будет выглядеть деформированной.
+
+:::
+
+В качестве примера покажем, как сделать дополнительный слой на 3D-модели, который представляет собой данные по дорогам, загруженным из сервиса *OpenStreetMap*. Выберем Сан-Франциско (Калифорния, США), для которого характерен сложный рельеф местности; по некоторым сведениям в Сан-Франциско насчитывают около пятидесяти возвышенностей.
+
+Загрузим 3D-модель.
+
+::: {#fig-SanFrancisco1 .column-body-inset-right}
+
+![](SanFrancisco1.png){.lightbox}
+
+Модель Сан-Франциско
+:::
+
+```{.r}
+SanFrancisco <- plot_3d_vista(lat = 37.75, 
+                              long = -122.45,
+                              zscale = 3, 
+                              zoom = 0.5,
+                              img_provider = "Thunderforest.Outdoors",
+                              api_key = "your_api_key",
+                              overlay_detail = 14,
+                              theta = -40, 
+                              phi = 25,
+                              windowsize = 1300,
+                              show_vista = FALSE)
+```
+
+Определим прямоугольник, ограничивающий область.
+
+```{r}
+#| warning: false
+#| message: false
+library(sf)
+
+bbox <- st_bbox(c(xmin = -122.5129, 
+                  ymin = 37.70026, 
+                  xmax = -122.3871, 
+                  ymax = 37.79975),  
+                crs = st_crs(4326))
+```
+
+Теперь загрузим дорожную сеть из *OpenStreetMap*.
+
+```{.r}
+library(osmdata)
+
+SanFrancisco_highway <- opq(bbox) |>
+  add_osm_feature("highway") |>
+  osmdata_sf()
+```
+
+Следующий этап -- определение новых проекций, без этого график будет искажен.
+
+```{.r}
+SanFrancisco_lines = 
+  st_transform(SanFrancisco_highway$osm_lines, 3857)
+
+bbox_transformed = st_bbox(
+  st_transform(
+    st_as_sfc(bbox), 
+    3857
+  )
+)
+
+librarary(raster)
+
+extent_zoomed = extent(bbox_transformed)
+```
+
+Окончательно:
+
+```{.r}
+SanFrancisco$dem_matrix |>
+  height_shade() %>% 
+  add_overlay(., SanFrancisco$texture,
+              rescale_original = TRUE) %>%
+  # дороги
+  add_overlay(
+    generate_line_overlay(
+      SanFrancisco_lines, 
+      extent = extent_zoomed,
+      linewidth = 1.2, color = "black",
+      heightmap = SanFrancisco$dem_matrix)) %>%
+  plot_3d(., SanFrancisco$dem_matrix, 
+          zscale = 3,
+          windowsize = 1300, 
+          zoom = 0.5, phi = 25, theta = -40)
+```
+
+Теперь можно сравнить модель после нанесения дорожной сети на образ.
+
+::: {#fig-SanFrancisco2 .column-body-inset-right}
+
+![](SanFrancisco2.png){.lightbox}
+
+Модель Сан-Франциско с нанесенными OSM-дорогами
+:::
+
+### Нанесение дополнительных слоев на 3D-модели
+
+Несомненно, на модели можно накладывать и другие слои с исходными данными или результатами моделирования, что делает технологию весьма привлекательной (см., например, статью [Adding Open Street Map Data to Rayshader Maps](https://rpubs.com/Linh-LTP/891261){target="_blank"}). Приведем еще один пример, сделаем слой на 3D-модели, показывающий происшествия, на которые отреагировала пожарная служба Сан-Франциско. Отметим, соответствующий [набор данных](https://data.sfgov.org/Public-Safety/Fire-Incidents/wr8u-xric/about_data){target="_blank"} также содержит географические координаты.
+
+```{r}
+#| include: false
+#| echo: false
+#| message: false
+#| warning: false
+library(magrittr)
+library(tidyverse)
+
+data_sf <- data.table::fread("/Users/materov/@данные/@блог_naukaidannye/2024-02-02 rayvista/Fire_Incidents.csv")
+data_sf %<>% as_tibble()
+data_sf <- data_sf |>
+  mutate(coordinates = point)
+```
+
+```{r}
+data_sf |>
+  dplyr::select(`Incident Date`, point)
+```
+
+Сделаем небольшую предобработку данных.
+
+```{r}
+library(magrittr)
+
+data_sf$coordinates <- 
+  str_extract(data_sf$point, 
+    "(?<=\\()([^()]*?)(?=\\)[^()]*$)")
+
+data_sf <- data_sf |> 
+  separate_wider_delim(coordinates, " ", 
+    names = c("lon", "lat"))
+
+data_sf$lat %<>% as.numeric()
+data_sf$lon %<>% as.numeric()
+```
+
+В качестве примера, выделим точки вызовов, отвечающие 2022 году.
+
+```{r}
+points_sf <- data_sf |>
+  dplyr::select(`Incident Date`, lat, lon) |>
+  mutate(year = lubridate::year(`Incident Date`)) |> 
+  dplyr::filter(year == 2022) |>
+  na.omit() |>
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) %>% 
+  st_transform(., 3857)
+```
+
+```{r}
+points_sf
+```
+
+```{.r}
+SanFrancisco$dem_matrix |>
+  height_shade() %>% 
+  add_overlay(., SanFrancisco$texture,
+              rescale_original = TRUE) %>%
+  # пожары
+  add_overlay(
+    generate_point_overlay(
+      points_sf, extent = extent_zoomed,
+      size = 0.8, color = "#C11317",
+      heightmap = SanFrancisco$dem_matrix)) %>%
+  plot_3d(., SanFrancisco$dem_matrix, 
+          zscale = 3,
+          windowsize = 1300, 
+          zoom = 0.5, phi = 25, theta = -40)
+```
+
+::: {#fig-SanFrancisco_fire .column-body-inset-right}
+
+![](SanFrancisco_fires.png){.lightbox}
+
+3D-модель с нанесенными происшествиями, на которые отреагировала пожарная служба Сан-Франциско в 2022 году
+:::
+
+Как видно на рисунке (см. [рис. @fig-SanFrancisco_fire]), наибольшее количество происшествий приходится на деловой центр северо-востока города.
+
+# Заключение
+
+Библиотека `rayvista` позволяет довольно легко формировать 3D-визуализацию для различных мест планеты Земля и, при необходимости, моделировать различные физические процессы, что делает ее весьма перспективным решением. Мы рассмотрели некоторые примеры применения библиотеки, дополнительные возможности и нанесение дополнительной географической информации на слои.
+
+::: {.column-margin}
+
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="../../../dist/applause-button.css" />
+  <script src="../../../dist/applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>
+
+:::
+
+Хорошим руководством по `rayvista` может также стать видео [3D digital elevation maps with elevatr, rayshader and rayvista in R](https://www.youtube.com/watch?v=kGadI6_ZIR4&t=1s&ab_channel=MilosMakesMaps){target="_blank"}, в котором **Milos Popovic** рассказывает этапы создания реалистичных цифровых 3D-карт высот любого местоположения, области или страны в мире с использованием библиотек `elevatr`, `rayshader` и `rayvista` в **R**. 
+
+:::{.callout-tip collapse="true"}
+## Session Info
+```{r}
+#| echo: false
+
+library(sessioninfo)
+
+pkg_sesh <- session_info(pkgs = "attached")
+
+quarto_version <- system("quarto --version", intern = TRUE)
+
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE)
+  )
+
+pkg_sesh
+```
+
+:::
