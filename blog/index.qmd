@@ -1,0 +1,17 @@
+---
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  sort-ui: [title, date, file-modified]
+  categories: true
+  max-items: 10
+  feed: true
+  fields: [image, date, title, subtitle, categories, author]
+page-layout: full
+title-block-banner: true
+comments: false
+lang: ru
+---
+
+
